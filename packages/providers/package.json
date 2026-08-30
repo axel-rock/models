@@ -1,0 +1,48 @@
+{
+  "name": "@models/providers",
+  "version": "0.1.0",
+  "description": "Live model discovery adapters for AI gateways and direct providers.",
+  "keywords": [
+    "ai",
+    "anthropic",
+    "google",
+    "models",
+    "openai",
+    "openrouter",
+    "vercel"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axel-rock/models.git",
+    "directory": "packages/providers"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@models/core": "workspace:*",
+    "zod": "^4.3.6"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

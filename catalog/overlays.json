@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-08-30T22:22:03.445Z",
+  "sources": {
+    "https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=en": {
+      "digest": "last-updated:2026-08-17"
+    },
+    "https://ai.google.dev/gemini-api/docs/optimization?hl=en": {
+      "digest": "last-updated:2026-04-28"
+    },
+    "https://developers.openai.com/api/reference/resources/responses/methods/create": {
+      "digest": "c543564af45c0cfffe1e943663c8e58a3f08ab6dac54f1b0f94638f3402fbc55"
+    },
+    "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens": {
+      "digest": "1056ae400bd20f8ddaee810a4e031efda535352c813f3d644233c8edb550a00c"
+    },
+    "https://platform.claude.com/docs/en/api/beta-headers": {
+      "digest": "3a7cdf2f0aae8461ef2f1cbadb05710d49280a527f42e3eca9459b07649ad6ab"
+    },
+    "https://platform.claude.com/docs/en/build-with-claude/effort": {
+      "digest": "029921ad728b15c2f4a9ec8cb2d55a21bcff9dd62c177c1b34357598e8eeb5c5"
+    },
+    "https://platform.claude.com/docs/en/build-with-claude/extended-thinking": {
+      "digest": "ead61a163cfd9e41a0f05aebede16934041d7d4074837b35d54905c01c617015"
+    },
+    "https://platform.claude.com/docs/en/build-with-claude/fast-mode": {
+      "digest": "f0a533c066d3091635c7ab7af85e5e601034c991044b3ac7efef72aaa6982466"
+    },
+    "https://platform.claude.com/docs/en/build-with-claude/prompt-caching": {
+      "digest": "dab0bf35558b7160f608bfdc9fcc606de909288a6a420062e579b56ebef968ce"
+    },
+    "https://vercel.com/docs/ai-gateway/models-and-providers/provider-options": {
+      "digest": "e59a73ba3ec672492796e6a2e4f31c891e64d13da46cb2c08d72b8d3f704c2a2"
+    }
+  }
+}

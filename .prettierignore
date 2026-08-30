@@ -1,0 +1,2 @@
+catalog/snapshots/*.json
+packages/providers/src/generated/modelIds.ts

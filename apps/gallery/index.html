@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Browse framework-neutral model selector examples backed by live provider catalogs."
+    />
+    <title>Models gallery</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to examples</a>
+    <div class="shell">
+      <aside class="sidebar">
+        <a class="brand" href="#top"><span class="brand-mark">M</span> Models</a>
+        <nav aria-label="Examples">
+          <span class="nav-label">Examples</span>
+          <a href="#model-only">Model only</a>
+          <a href="#reasoning">Model + reasoning</a>
+          <a href="#advanced">Advanced picker</a>
+          <a href="#freshness">Catalog freshness</a>
+        </nav>
+        <div class="sidebar-note">
+          <span class="pulse" aria-hidden="true"></span>
+          <span id="sidebar-status">Loading live catalogs</span>
+        </div>
+      </aside>
+
+      <main id="main">
+        <header class="hero" id="top">
+          <p class="eyebrow">Provider-neutral model controls</p>
+          <h1>Pick a model without hiding what it can do.</h1>
+          <p class="lede">
+            Live discovery, reviewed capability evidence, type-safe options, and small components
+            that work without a framework.
+          </p>
+          <div class="catalog-summary" id="catalog-summary" aria-live="polite"></div>
+        </header>
+
+        <section class="example" id="model-only">
+          <div class="example-copy">
+            <p class="eyebrow">01 · Compact</p>
+            <h2>Model only</h2>
+            <p>Use one native select when the product should choose everything else.</p>
+            <code>&lt;models-select&gt;</code>
+          </div>
+          <div class="demo compact-demo">
+            <models-select id="simple-select" label="Default model"></models-select>
+            <p class="selection-line" id="simple-output">No model selected</p>
+          </div>
+        </section>
+
+        <section class="example" id="reasoning">
+          <div class="example-copy">
+            <p class="eyebrow">02 · Focused</p>
+            <h2>Model + reasoning</h2>
+            <p>Show only reasoning controls. Provider defaults remain visible and safe.</p>
+            <code>picker.groups = ["reasoning"]</code>
+          </div>
+          <div class="demo wide-demo">
+            <models-picker id="reasoning-picker"></models-picker>
+          </div>
+        </section>
+
+        <section class="example stacked" id="advanced">
+          <div class="example-copy">
+            <p class="eyebrow">03 · Complete</p>
+            <h2>Advanced picker</h2>
+            <p>
+              Reasoning, speed, service tiers, caching, beta notes, evidence, and prices stay close
+              to the selected model.
+            </p>
+          </div>
+          <div class="demo wide-demo">
+            <models-picker id="advanced-picker"></models-picker>
+          </div>
+          <details class="output-panel">
+            <summary>Selection output</summary>
+            <pre id="selection-output">Choose a model or option to inspect the typed value.</pre>
+          </details>
+        </section>
+
+        <section class="example" id="freshness">
+          <div class="example-copy">
+            <p class="eyebrow">04 · Maintenance</p>
+            <h2>Catalog freshness</h2>
+            <p>
+              Public catalogs are checked against reviewed snapshots. Direct-provider options use
+              dated documentation overlays.
+            </p>
+            <code>pnpm catalog:check</code>
+          </div>
+          <div class="demo freshness-demo" id="freshness-grid"></div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

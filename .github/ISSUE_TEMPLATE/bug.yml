@@ -1,0 +1,26 @@
+name: Bug report
+description: Report a reproducible problem without secrets.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Package versions
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: Provider and model ID
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Remove API keys, authorization headers, and account data.
+    validations:
+      required: true
