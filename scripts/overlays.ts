@@ -13,7 +13,9 @@ interface OverlaySnapshot {
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const path = resolve(root, "catalog", "overlays.json");
 const shouldWrite = process.argv.includes("--write");
-const urls = [...new Set(optionSources().map((source) => source.url))].sort();
+const urls = [...new Set(optionSources().map((source) => source.url))].sort((left, right) =>
+  left.localeCompare(right),
+);
 const sources = Object.fromEntries(
   await Promise.all(
     urls.map(async (url) => {
