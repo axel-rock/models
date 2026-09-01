@@ -349,6 +349,7 @@ export const knownVercelModelIds = [
   "voyage/voyage-law-2",
   "xiaomi/mimo-v2.5",
   "xiaomi/mimo-v2.5-pro",
+  "xiaomi/mimo-v2.5-pro-ultraspeed",
   "zai/glm-4.5",
   "zai/glm-4.5-air",
   "zai/glm-4.5v",
@@ -375,6 +376,12 @@ export const knownOpenRouterModelIds = [
   "aion-labs/aion-3.0",
   "aion-labs/aion-3.0-mini",
   "aion-labs/aion-rp-llama-3.1-8b",
+  "alibaba/happyhorse-1.0",
+  "alibaba/happyhorse-1.1",
+  "alibaba/wan-2.6",
+  "alibaba/wan-2.7",
+  "alibaba/wan-3.0",
+  "alibaba/wan-3.0-prime",
   "amazon/nova-2-lite-v1",
   "amazon/nova-lite-v1",
   "amazon/nova-micro-v1",
@@ -410,20 +417,44 @@ export const knownOpenRouterModelIds = [
   "anthropic/claude-sonnet-5",
   "anthropic/claude-sonnet-5:batch",
   "arcee-ai/trinity-large-thinking",
+  "baai/bge-base-en-v1.5",
+  "baai/bge-large-en-v1.5",
+  "baai/bge-m3",
   "baidu/ernie-4.5-vl-424b-a47b",
+  "black-forest-labs/flux-3-video",
+  "black-forest-labs/flux-video-upscale",
+  "black-forest-labs/flux.2-flex",
+  "black-forest-labs/flux.2-klein-4b",
+  "black-forest-labs/flux.2-max",
+  "black-forest-labs/flux.2-pro",
   "bytedance-seed/seed-1.6",
   "bytedance-seed/seed-1.6-flash",
   "bytedance-seed/seed-2-1-turbo",
   "bytedance-seed/seed-2.0-code",
   "bytedance-seed/seed-2.0-lite",
   "bytedance-seed/seed-2.0-mini",
+  "bytedance-seed/seedream-4.5",
+  "bytedance-seed/seedream-5-0-lite",
+  "bytedance-seed/seedream-5-0-pro",
+  "bytedance/seedance-1-5-pro",
+  "bytedance/seedance-2.0",
+  "bytedance/seedance-2.0-fast",
+  "bytedance/seedance-2.0-mini",
+  "bytedance/seedance-2.5",
   "bytedance/ui-tars-1.5-7b",
+  "canopylabs/orpheus-3b-0.1-ft",
   "cognitivecomputations/dolphin-mistral-24b-venice-edition",
   "cohere/command-a",
   "cohere/command-r-08-2024",
   "cohere/command-r-plus-08-2024",
   "cohere/command-r7b-12-2024",
   "cohere/north-mini-code:free",
+  "cohere/rerank-4-fast",
+  "cohere/rerank-4-pro",
+  "cohere/rerank-v3.5",
+  "deepgram/aura-2",
+  "deepgram/flux-tts:free",
+  "deepgram/nova-3",
   "deepseek/deepseek-chat",
   "deepseek/deepseek-chat-v3-0324",
   "deepseek/deepseek-chat-v3.1",
@@ -441,6 +472,12 @@ export const knownOpenRouterModelIds = [
   "deepseek/deepseek-v4-pro-0813",
   "deepseek/deepseek-v4-pro-0813:batch",
   "dots-studio/dots-3-note-preview:free",
+  "fish-audio/s1",
+  "fish-audio/s2-pro",
+  "fish-audio/s2.1-pro",
+  "fish-audio/s2.1-pro-free:free",
+  "fish-audio/transcribe-1",
+  "google/chirp-3",
   "google/gemini-2.5-flash",
   "google/gemini-2.5-flash-image",
   "google/gemini-2.5-flash-lite",
@@ -460,6 +497,7 @@ export const knownOpenRouterModelIds = [
   "google/gemini-3.1-flash-lite-image",
   "google/gemini-3.1-flash-lite-preview",
   "google/gemini-3.1-flash-lite:batch",
+  "google/gemini-3.1-flash-tts-preview",
   "google/gemini-3.1-pro-preview",
   "google/gemini-3.1-pro-preview-customtools",
   "google/gemini-3.1-pro-preview:batch",
@@ -471,6 +509,10 @@ export const knownOpenRouterModelIds = [
   "google/gemini-3.6-flash:batch",
   "google/gemini-3.7-flash",
   "google/gemini-3.7-flash:batch",
+  "google/gemini-embedding-001",
+  "google/gemini-embedding-2",
+  "google/gemini-embedding-2-preview",
+  "google/gemini-embedding-2:batch",
   "google/gemma-2-27b-it",
   "google/gemma-3-12b-it",
   "google/gemma-3-27b-it",
@@ -482,15 +524,31 @@ export const knownOpenRouterModelIds = [
   "google/gemma-4-31b-it:free",
   "google/lyria-3-clip-preview",
   "google/lyria-3-pro-preview",
+  "google/veo-3.1",
+  "google/veo-3.1-fast",
+  "google/veo-3.1-lite",
   "gryphe/mythomax-l2-13b",
+  "hexgrad/kokoro-82m",
+  "heygen/avatar-iv",
   "ibm-granite/granite-4.0-h-micro",
   "ibm-granite/granite-4.1-8b",
+  "ibm-granite/granite-4.2-8b",
   "inception/mercury-2",
   "inclusionai/ling-3.0-flash",
   "inclusionai/ling-3.0-flash-fin:free",
+  "intfloat/e5-base-v2",
+  "intfloat/e5-large-v2",
+  "intfloat/multilingual-e5-large",
+  "krea/krea-2-large",
+  "krea/krea-2-medium",
+  "krea/krea-2-medium-turbo",
   "kwaipilot/kat-coder-pro-v2",
   "kwaipilot/kat-coder-pro-v2.5",
+  "kwaivgi/kling-v3.0-pro",
+  "kwaivgi/kling-v3.0-std",
+  "kwaivgi/kling-video-o1",
   "liquid/lfm-2.5-2.6b:free",
+  "liquid/lfm-2.5-embedding-350m:free",
   "mancer/weaver",
   "meituan/longcat-2.0",
   "meta-llama/llama-3.1-70b-instruct",
@@ -503,11 +561,19 @@ export const knownOpenRouterModelIds = [
   "meta-llama/llama-guard-4-12b",
   "meta/muse-glimmer-30b",
   "meta/muse-glimmer-30b:batch",
+  "meta/muse-image",
   "meta/muse-spark-1.1",
   "meta/muse-spark-1.2",
   "meta/muse-spark-1.2-contributor",
+  "microsoft/mai-image-2.5",
+  "microsoft/mai-image-2.5-pro",
+  "microsoft/mai-transcribe-1.5",
+  "microsoft/mai-voice-2",
+  "microsoft/mai-voice-2-flash",
   "microsoft/phi-4",
   "microsoft/wizardlm-2-8x22b",
+  "minimax/hailuo-2.3",
+  "minimax/hailuo-3",
   "minimax/minimax-01",
   "minimax/minimax-m1",
   "minimax/minimax-m2",
@@ -519,31 +585,34 @@ export const knownOpenRouterModelIds = [
   "minimax/minimax-m3",
   "minimax/minimax-m3:batch",
   "minimax/minimax-m3:free",
+  "minimax/speech-2.8-hd",
+  "minimax/speech-2.8-turbo",
   "mistralai/codestral-2508",
-  "mistralai/codestral-2508:batch",
+  "mistralai/codestral-embed-2505",
   "mistralai/devstral-2512",
   "mistralai/ministral-14b-2512",
   "mistralai/ministral-3b-2512",
   "mistralai/ministral-8b-2512",
-  "mistralai/ministral-8b-2512:batch",
+  "mistralai/mistral-embed-2312",
   "mistralai/mistral-large",
   "mistralai/mistral-large-2407",
   "mistralai/mistral-large-2512",
-  "mistralai/mistral-large-2512:batch",
   "mistralai/mistral-medium-3",
   "mistralai/mistral-medium-3-5",
   "mistralai/mistral-medium-3-5:batch",
   "mistralai/mistral-medium-3.1",
-  "mistralai/mistral-medium-3.1:batch",
   "mistralai/mistral-nemo",
   "mistralai/mistral-saba",
   "mistralai/mistral-small-24b-instruct-2501",
   "mistralai/mistral-small-2603",
-  "mistralai/mistral-small-2603:batch",
   "mistralai/mistral-small-3.1-24b-instruct",
   "mistralai/mistral-small-3.2-24b-instruct",
   "mistralai/mixtral-8x22b-instruct",
+  "mistralai/voxtral-mini-3b-2507",
+  "mistralai/voxtral-mini-transcribe",
+  "mistralai/voxtral-mini-tts-2603",
   "mistralai/voxtral-small-24b-2507",
+  "mistralai/voxtral-small-24b-2507-stt",
   "moonshotai/kimi-k2",
   "moonshotai/kimi-k2-0905",
   "moonshotai/kimi-k2-thinking",
@@ -560,6 +629,9 @@ export const knownOpenRouterModelIds = [
   "nousresearch/hermes-3-llama-3.1-70b",
   "nousresearch/hermes-4-405b",
   "nousresearch/hermes-4-70b",
+  "nvidia/llama-nemotron-embed-vl-1b-v2:free",
+  "nvidia/llama-nemotron-rerank-vl-1b-v2:free",
+  "nvidia/nemotron-3-embed-1b:free",
   "nvidia/nemotron-3-nano-30b-a3b",
   "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
   "nvidia/nemotron-3-super-120b-a12b",
@@ -567,69 +639,116 @@ export const knownOpenRouterModelIds = [
   "nvidia/nemotron-3-ultra-550b-a55b",
   "nvidia/nemotron-3-ultra-550b-a55b:batch",
   "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "nvidia/nemotron-3.5-asr-streaming-multilingual-0.6b",
   "nvidia/nemotron-3.5-content-safety:free",
   "nvidia/nemotron-3.5-lightning",
   "nvidia/nemotron-3.5-lightning:free",
+  "nvidia/parakeet-tdt-0.6b-v3",
   "openai/gpt-3.5-turbo",
   "openai/gpt-3.5-turbo-0613",
   "openai/gpt-3.5-turbo-16k",
   "openai/gpt-3.5-turbo-instruct",
+  "openai/gpt-3.5-turbo:batch",
   "openai/gpt-4",
   "openai/gpt-4-turbo",
   "openai/gpt-4-turbo-preview",
+  "openai/gpt-4-turbo:batch",
   "openai/gpt-4.1",
   "openai/gpt-4.1-mini",
+  "openai/gpt-4.1-mini:batch",
   "openai/gpt-4.1-nano",
+  "openai/gpt-4.1-nano:batch",
+  "openai/gpt-4.1:batch",
   "openai/gpt-4o",
   "openai/gpt-4o-2024-05-13",
   "openai/gpt-4o-2024-08-06",
   "openai/gpt-4o-2024-11-20",
   "openai/gpt-4o-mini",
   "openai/gpt-4o-mini-2024-07-18",
+  "openai/gpt-4o-mini-transcribe",
+  "openai/gpt-4o-mini:batch",
+  "openai/gpt-4o-transcribe",
+  "openai/gpt-4o:batch",
   "openai/gpt-5",
   "openai/gpt-5-image",
   "openai/gpt-5-image-mini",
   "openai/gpt-5-mini",
+  "openai/gpt-5-mini:batch",
   "openai/gpt-5-nano",
+  "openai/gpt-5-nano:batch",
   "openai/gpt-5-pro",
+  "openai/gpt-5-pro:batch",
   "openai/gpt-5.1",
   "openai/gpt-5.1-codex",
   "openai/gpt-5.1-codex-max",
   "openai/gpt-5.1-codex-mini",
+  "openai/gpt-5.1:batch",
   "openai/gpt-5.2",
   "openai/gpt-5.2-chat",
   "openai/gpt-5.2-codex",
   "openai/gpt-5.2-pro",
+  "openai/gpt-5.2-pro:batch",
+  "openai/gpt-5.2:batch",
   "openai/gpt-5.3-codex",
   "openai/gpt-5.4",
   "openai/gpt-5.4-image-2",
   "openai/gpt-5.4-mini",
+  "openai/gpt-5.4-mini:batch",
   "openai/gpt-5.4-nano",
+  "openai/gpt-5.4-nano:batch",
   "openai/gpt-5.4-pro",
+  "openai/gpt-5.4-pro:batch",
+  "openai/gpt-5.4:batch",
   "openai/gpt-5.5",
   "openai/gpt-5.5-pro",
+  "openai/gpt-5.5-pro:batch",
+  "openai/gpt-5.5:batch",
   "openai/gpt-5.6-luna",
   "openai/gpt-5.6-luna-pro",
+  "openai/gpt-5.6-luna-pro:batch",
+  "openai/gpt-5.6-luna:batch",
   "openai/gpt-5.6-sol",
   "openai/gpt-5.6-sol-pro",
+  "openai/gpt-5.6-sol-pro:batch",
+  "openai/gpt-5.6-sol:batch",
   "openai/gpt-5.6-terra",
   "openai/gpt-5.6-terra-pro",
+  "openai/gpt-5.6-terra-pro:batch",
+  "openai/gpt-5.6-terra:batch",
+  "openai/gpt-5:batch",
   "openai/gpt-audio",
   "openai/gpt-audio-mini",
   "openai/gpt-chat-latest",
+  "openai/gpt-image-1",
+  "openai/gpt-image-1-mini",
+  "openai/gpt-image-2",
   "openai/gpt-oss-120b",
   "openai/gpt-oss-120b:batch",
   "openai/gpt-oss-20b",
   "openai/gpt-oss-20b:batch",
   "openai/gpt-oss-safeguard-20b",
+  "openai/gpt-transcribe",
   "openai/o1",
   "openai/o1-pro",
   "openai/o3",
   "openai/o3-mini",
   "openai/o3-mini-high",
+  "openai/o3-mini:batch",
   "openai/o3-pro",
+  "openai/o3:batch",
   "openai/o4-mini",
   "openai/o4-mini-high",
+  "openai/o4-mini:batch",
+  "openai/sora-2-pro",
+  "openai/text-embedding-3-large",
+  "openai/text-embedding-3-large:batch",
+  "openai/text-embedding-3-small",
+  "openai/text-embedding-3-small:batch",
+  "openai/text-embedding-ada-002",
+  "openai/text-embedding-ada-002:batch",
+  "openai/whisper-1",
+  "openai/whisper-large-v3",
+  "openai/whisper-large-v3-turbo",
   "openrouter/auto",
   "openrouter/auto-beta",
   "openrouter/bodybuilder",
@@ -637,6 +756,8 @@ export const knownOpenRouterModelIds = [
   "openrouter/fusion",
   "openrouter/pareto-code",
   "perceptron/perceptron-mk1",
+  "perplexity/pplx-embed-v1-0.6b",
+  "perplexity/pplx-embed-v1-4b",
   "perplexity/sonar",
   "perplexity/sonar-deep-research",
   "perplexity/sonar-pro",
@@ -649,6 +770,10 @@ export const knownOpenRouterModelIds = [
   "qwen/qwen-2.5-72b-instruct",
   "qwen/qwen-2.5-7b-instruct",
   "qwen/qwen-2.5-coder-32b-instruct",
+  "qwen/qwen-audio-3.0-tts-flash",
+  "qwen/qwen-audio-3.0-tts-plus",
+  "qwen/qwen-image-3",
+  "qwen/qwen-image-3-pro",
   "qwen/qwen-plus",
   "qwen/qwen-plus-2025-07-28",
   "qwen/qwen2.5-vl-72b-instruct",
@@ -661,15 +786,21 @@ export const knownOpenRouterModelIds = [
   "qwen/qwen3-30b-a3b-thinking-2507",
   "qwen/qwen3-32b",
   "qwen/qwen3-8b",
+  "qwen/qwen3-asr-0.6b",
+  "qwen/qwen3-asr-1.7b",
+  "qwen/qwen3-asr-flash-2026-02-10",
   "qwen/qwen3-coder",
   "qwen/qwen3-coder-30b-a3b-instruct",
   "qwen/qwen3-coder-flash",
   "qwen/qwen3-coder-next",
   "qwen/qwen3-coder-plus",
+  "qwen/qwen3-embedding-4b",
+  "qwen/qwen3-embedding-8b",
   "qwen/qwen3-max",
   "qwen/qwen3-max-thinking",
   "qwen/qwen3-next-80b-a3b-instruct",
   "qwen/qwen3-next-80b-a3b-thinking",
+  "qwen/qwen3-reranker-8b",
   "qwen/qwen3-vl-235b-a22b-instruct",
   "qwen/qwen3-vl-235b-a22b-thinking",
   "qwen/qwen3-vl-30b-a3b-instruct",
@@ -699,15 +830,42 @@ export const knownOpenRouterModelIds = [
   "qwen/qwen3.8-27b",
   "qwen/qwen3.8-flash",
   "qwen/qwen3.8-max",
+  "recraft/recraft-v3",
+  "recraft/recraft-v4",
+  "recraft/recraft-v4-pro",
+  "recraft/recraft-v4-pro-vector",
+  "recraft/recraft-v4-styles",
+  "recraft/recraft-v4-styles-pro",
+  "recraft/recraft-v4-styles-pro-vector",
+  "recraft/recraft-v4-styles-vector",
+  "recraft/recraft-v4-vector",
+  "recraft/recraft-v4.1",
+  "recraft/recraft-v4.1-pro",
+  "recraft/recraft-v4.1-pro-vector",
+  "recraft/recraft-v4.1-utility",
+  "recraft/recraft-v4.1-utility-pro",
+  "recraft/recraft-v4.1-vector",
   "rekaai/reka-edge",
   "rekaai/reka-flash-3",
   "relace/relace-apply-3",
   "relace/relace-search",
+  "runway/aleph-2",
+  "runway/gen-4.5",
   "sakana/fugu-ultra",
   "sakana/sakana-namazu",
   "sao10k/l3-lunaris-8b",
   "sao10k/l3.1-euryale-70b",
   "sao10k/l3.3-euryale-70b",
+  "sentence-transformers/all-minilm-l12-v2",
+  "sentence-transformers/all-minilm-l6-v2",
+  "sentence-transformers/all-mpnet-base-v2",
+  "sentence-transformers/multi-qa-mpnet-base-dot-v1",
+  "sentence-transformers/paraphrase-minilm-l6-v2",
+  "sesame/csm-1b",
+  "sourceful/riverflow-v2-fast",
+  "sourceful/riverflow-v2-pro",
+  "sourceful/riverflow-v2.5-fast",
+  "sourceful/riverflow-v2.5-pro",
   "stepfun/step-3.5-flash",
   "stepfun/step-3.7-flash",
   "tencent/hunyuan-a13b-instruct",
@@ -720,6 +878,8 @@ export const knownOpenRouterModelIds = [
   "thedrummer/cydonia-24b-v4.1",
   "thedrummer/skyfall-36b-v2",
   "thedrummer/unslopnemo-12b",
+  "thenlper/gte-base",
+  "thenlper/gte-large",
   "thinkingmachines/inkling",
   "thinkingmachines/inkling-small",
   "thinkingmachines/inkling-small:batch",
@@ -729,6 +889,13 @@ export const knownOpenRouterModelIds = [
   "undi95/remm-slerp-l2-13b",
   "upstage/solar-pro-3",
   "upstage/solar-pro4",
+  "voyageai/rerank-2.5",
+  "voyageai/rerank-2.5-lite",
+  "voyageai/voyage-4",
+  "voyageai/voyage-4-large",
+  "voyageai/voyage-4-lite",
+  "voyageai/voyage-code-4",
+  "voyageai/voyage-multimodal-3.5",
   "writer/palmyra-x5",
   "x-ai/grok-4.20",
   "x-ai/grok-4.20-multi-agent",
@@ -736,6 +903,12 @@ export const knownOpenRouterModelIds = [
   "x-ai/grok-4.5",
   "x-ai/grok-4.6",
   "x-ai/grok-build-0.1",
+  "x-ai/grok-imagine-image-2.0",
+  "x-ai/grok-imagine-image-quality",
+  "x-ai/grok-imagine-video",
+  "x-ai/grok-imagine-video-1.5",
+  "x-ai/grok-stt-1.0",
+  "x-ai/grok-voice-tts-1.0",
   "xiaomi/mimo-v2.5",
   "xiaomi/mimo-v2.5-pro",
   "z-ai/glm-4.5",
@@ -792,6 +965,12 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:aion-labs/aion-3.0": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:aion-labs/aion-3.0-mini": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:aion-labs/aion-rp-llama-3.1-8b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:alibaba/happyhorse-1.0": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:alibaba/happyhorse-1.1": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:alibaba/wan-2.6": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:alibaba/wan-2.7": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:alibaba/wan-3.0": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:alibaba/wan-3.0-prime": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:amazon/nova-2-lite-v1": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:amazon/nova-lite-v1": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:amazon/nova-micro-v1": Readonly<{ readonly [key: string]: never }>;
@@ -827,20 +1006,44 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:anthropic/claude-sonnet-5": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:anthropic/claude-sonnet-5:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:arcee-ai/trinity-large-thinking": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:baai/bge-base-en-v1.5": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:baai/bge-large-en-v1.5": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:baai/bge-m3": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:baidu/ernie-4.5-vl-424b-a47b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:black-forest-labs/flux-3-video": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:black-forest-labs/flux-video-upscale": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:black-forest-labs/flux.2-flex": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:black-forest-labs/flux.2-klein-4b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:black-forest-labs/flux.2-max": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:black-forest-labs/flux.2-pro": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:bytedance-seed/seed-1.6": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:bytedance-seed/seed-1.6-flash": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:bytedance-seed/seed-2-1-turbo": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:bytedance-seed/seed-2.0-code": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:bytedance-seed/seed-2.0-lite": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:bytedance-seed/seed-2.0-mini": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:bytedance-seed/seedream-4.5": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:bytedance-seed/seedream-5-0-lite": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:bytedance-seed/seedream-5-0-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:bytedance/seedance-1-5-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:bytedance/seedance-2.0": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:bytedance/seedance-2.0-fast": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:bytedance/seedance-2.0-mini": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:bytedance/seedance-2.5": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:bytedance/ui-tars-1.5-7b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:canopylabs/orpheus-3b-0.1-ft": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:cognitivecomputations/dolphin-mistral-24b-venice-edition": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:cohere/command-a": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:cohere/command-r-08-2024": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:cohere/command-r-plus-08-2024": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:cohere/command-r7b-12-2024": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:cohere/north-mini-code:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:cohere/rerank-4-fast": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:cohere/rerank-4-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:cohere/rerank-v3.5": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:deepgram/aura-2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:deepgram/flux-tts:free": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:deepgram/nova-3": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:deepseek/deepseek-chat": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:deepseek/deepseek-chat-v3-0324": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:deepseek/deepseek-chat-v3.1": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
@@ -858,6 +1061,12 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:deepseek/deepseek-v4-pro-0813": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "high" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:deepseek/deepseek-v4-pro-0813:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "high" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:dots-studio/dots-3-note-preview:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:fish-audio/s1": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:fish-audio/s2-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:fish-audio/s2.1-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:fish-audio/s2.1-pro-free:free": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:fish-audio/transcribe-1": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:google/chirp-3": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:google/gemini-2.5-flash": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:google/gemini-2.5-flash-image": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:google/gemini-2.5-flash-lite": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
@@ -877,6 +1086,7 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:google/gemini-3.1-flash-lite-image": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:google/gemini-3.1-flash-lite-preview": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:google/gemini-3.1-flash-lite:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:google/gemini-3.1-flash-tts-preview": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:google/gemini-3.1-pro-preview": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:google/gemini-3.1-pro-preview-customtools": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:google/gemini-3.1-pro-preview:batch": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
@@ -888,6 +1098,10 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:google/gemini-3.6-flash:batch": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:google/gemini-3.7-flash": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:google/gemini-3.7-flash:batch": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:google/gemini-embedding-001": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:google/gemini-embedding-2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:google/gemini-embedding-2-preview": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:google/gemini-embedding-2:batch": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:google/gemma-2-27b-it": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:google/gemma-3-12b-it": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:google/gemma-3-27b-it": Readonly<{ readonly [key: string]: never }>;
@@ -899,15 +1113,31 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:google/gemma-4-31b-it:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:google/lyria-3-clip-preview": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:google/lyria-3-pro-preview": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:google/veo-3.1": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:google/veo-3.1-fast": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:google/veo-3.1-lite": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:gryphe/mythomax-l2-13b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:hexgrad/kokoro-82m": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:heygen/avatar-iv": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:ibm-granite/granite-4.0-h-micro": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:ibm-granite/granite-4.1-8b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:ibm-granite/granite-4.2-8b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:inception/mercury-2": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:inclusionai/ling-3.0-flash": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:inclusionai/ling-3.0-flash-fin:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:intfloat/e5-base-v2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:intfloat/e5-large-v2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:intfloat/multilingual-e5-large": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:krea/krea-2-large": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:krea/krea-2-medium": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:krea/krea-2-medium-turbo": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:kwaipilot/kat-coder-pro-v2": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:kwaipilot/kat-coder-pro-v2.5": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:kwaivgi/kling-v3.0-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:kwaivgi/kling-v3.0-std": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:kwaivgi/kling-video-o1": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:liquid/lfm-2.5-2.6b:free": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:liquid/lfm-2.5-embedding-350m:free": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mancer/weaver": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:meituan/longcat-2.0": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.maxTokens"?: number; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:meta-llama/llama-3.1-70b-instruct": Readonly<{ readonly [key: string]: never }>;
@@ -920,11 +1150,19 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:meta-llama/llama-guard-4-12b": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:meta/muse-glimmer-30b": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:meta/muse-glimmer-30b:batch": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:meta/muse-image": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:meta/muse-spark-1.1": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:meta/muse-spark-1.2": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:meta/muse-spark-1.2-contributor": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:microsoft/mai-image-2.5": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:microsoft/mai-image-2.5-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:microsoft/mai-transcribe-1.5": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:microsoft/mai-voice-2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:microsoft/mai-voice-2-flash": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:microsoft/phi-4": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:microsoft/wizardlm-2-8x22b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:minimax/hailuo-2.3": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:minimax/hailuo-3": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:minimax/minimax-01": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:minimax/minimax-m1": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:minimax/minimax-m2": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
@@ -936,31 +1174,34 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:minimax/minimax-m3": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:minimax/minimax-m3:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:minimax/minimax-m3:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:minimax/speech-2.8-hd": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:minimax/speech-2.8-turbo": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/codestral-2508": Readonly<{ readonly [key: string]: never }>;
-  readonly "openrouter:mistralai/codestral-2508:batch": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:mistralai/codestral-embed-2505": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/devstral-2512": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/ministral-14b-2512": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/ministral-3b-2512": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/ministral-8b-2512": Readonly<{ readonly [key: string]: never }>;
-  readonly "openrouter:mistralai/ministral-8b-2512:batch": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:mistralai/mistral-embed-2312": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-large": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-large-2407": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-large-2512": Readonly<{ readonly [key: string]: never }>;
-  readonly "openrouter:mistralai/mistral-large-2512:batch": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-medium-3": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-medium-3-5": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:mistralai/mistral-medium-3-5:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:mistralai/mistral-medium-3.1": Readonly<{ readonly [key: string]: never }>;
-  readonly "openrouter:mistralai/mistral-medium-3.1:batch": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-nemo": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-saba": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-small-24b-instruct-2501": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-small-2603": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "none"; readonly "reasoning.exclude"?: boolean }>;
-  readonly "openrouter:mistralai/mistral-small-2603:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:mistralai/mistral-small-3.1-24b-instruct": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mistral-small-3.2-24b-instruct": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/mixtral-8x22b-instruct": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:mistralai/voxtral-mini-3b-2507": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:mistralai/voxtral-mini-transcribe": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:mistralai/voxtral-mini-tts-2603": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:mistralai/voxtral-small-24b-2507": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:mistralai/voxtral-small-24b-2507-stt": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:moonshotai/kimi-k2": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:moonshotai/kimi-k2-0905": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:moonshotai/kimi-k2-thinking": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
@@ -977,6 +1218,9 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:nousresearch/hermes-3-llama-3.1-70b": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:nousresearch/hermes-4-405b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:nousresearch/hermes-4-70b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:nvidia/llama-nemotron-embed-vl-1b-v2:free": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:nvidia/llama-nemotron-rerank-vl-1b-v2:free": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:nvidia/nemotron-3-embed-1b:free": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:nvidia/nemotron-3-nano-30b-a3b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.maxTokens"?: number; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:nvidia/nemotron-3-super-120b-a12b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "medium" | "low"; readonly "reasoning.maxTokens"?: number; readonly "reasoning.exclude"?: boolean }>;
@@ -984,69 +1228,116 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:nvidia/nemotron-3-ultra-550b-a55b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium"; readonly "reasoning.maxTokens"?: number; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:nvidia/nemotron-3-ultra-550b-a55b:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium"; readonly "reasoning.maxTokens"?: number; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:nvidia/nemotron-3-ultra-550b-a55b:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium"; readonly "reasoning.maxTokens"?: number; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:nvidia/nemotron-3.5-asr-streaming-multilingual-0.6b": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:nvidia/nemotron-3.5-content-safety:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:nvidia/nemotron-3.5-lightning": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:nvidia/nemotron-3.5-lightning:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:nvidia/parakeet-tdt-0.6b-v3": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-3.5-turbo": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-3.5-turbo-0613": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-3.5-turbo-16k": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-3.5-turbo-instruct": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-3.5-turbo:batch": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4-turbo": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4-turbo-preview": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-4-turbo:batch": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4.1": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4.1-mini": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-4.1-mini:batch": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4.1-nano": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-4.1-nano:batch": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-4.1:batch": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4o": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4o-2024-05-13": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4o-2024-08-06": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4o-2024-11-20": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4o-mini": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-4o-mini-2024-07-18": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-4o-mini-transcribe": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-4o-mini:batch": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-4o-transcribe": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-4o:batch": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-5": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5-image": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5-image-mini": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5-mini": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5-mini:batch": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5-nano": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5-nano:batch": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5-pro": Readonly<{ readonly "reasoning.effort"?: "high"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5-pro:batch": Readonly<{ readonly "reasoning.effort"?: "high"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5:batch": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.1": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.1-codex": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.1-codex-max": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.1-codex-mini": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.1:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.2": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.2-chat": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-5.2-codex": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.2-pro": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.2-pro:batch": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.2:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.3-codex": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.4": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.4-image-2": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.4-mini": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.4-mini:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.4-nano": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.4-nano:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.4-pro": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.4-pro:batch": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.4:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.5": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.5-pro": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.5-pro:batch": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.5:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.6-luna": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.6-luna-pro": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.6-luna-pro:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.6-luna:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.6-sol": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.6-sol-pro": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.6-sol-pro:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.6-sol:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.6-terra": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-5.6-terra-pro": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.6-terra-pro:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-5.6-terra:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "xhigh" | "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-audio": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-audio-mini": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-chat-latest": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-image-1": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-image-1-mini": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/gpt-image-2": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/gpt-oss-120b": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-oss-120b:batch": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-oss-20b": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-oss-20b:batch": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/gpt-oss-safeguard-20b": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/gpt-transcribe": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openai/o1": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/o1-pro": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/o3": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/o3-mini": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/o3-mini-high": Readonly<{ readonly "reasoning.effort"?: "high"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/o3-mini:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/o3-pro": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/o3:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/o4-mini": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:openai/o4-mini-high": Readonly<{ readonly "reasoning.effort"?: "high"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/o4-mini:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:openai/sora-2-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/text-embedding-3-large": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/text-embedding-3-large:batch": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/text-embedding-3-small": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/text-embedding-3-small:batch": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/text-embedding-ada-002": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/text-embedding-ada-002:batch": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/whisper-1": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/whisper-large-v3": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:openai/whisper-large-v3-turbo": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openrouter/auto": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openrouter/auto-beta": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openrouter/bodybuilder": Readonly<{ readonly [key: string]: never }>;
@@ -1054,6 +1345,8 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:openrouter/fusion": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:openrouter/pareto-code": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:perceptron/perceptron-mk1": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:perplexity/pplx-embed-v1-0.6b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:perplexity/pplx-embed-v1-4b": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:perplexity/sonar": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:perplexity/sonar-deep-research": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:perplexity/sonar-pro": Readonly<{ readonly [key: string]: never }>;
@@ -1066,6 +1359,10 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:qwen/qwen-2.5-72b-instruct": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen-2.5-7b-instruct": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen-2.5-coder-32b-instruct": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:qwen/qwen-audio-3.0-tts-flash": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:qwen/qwen-audio-3.0-tts-plus": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:qwen/qwen-image-3": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:qwen/qwen-image-3-pro": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen-plus": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen-plus-2025-07-28": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:qwen/qwen2.5-vl-72b-instruct": Readonly<{ readonly [key: string]: never }>;
@@ -1078,15 +1375,21 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:qwen/qwen3-30b-a3b-thinking-2507": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:qwen/qwen3-32b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:qwen/qwen3-8b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:qwen/qwen3-asr-0.6b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:qwen/qwen3-asr-1.7b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:qwen/qwen3-asr-flash-2026-02-10": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen3-coder": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen3-coder-30b-a3b-instruct": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen3-coder-flash": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen3-coder-next": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen3-coder-plus": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:qwen/qwen3-embedding-4b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:qwen/qwen3-embedding-8b": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen3-max": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:qwen/qwen3-max-thinking": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:qwen/qwen3-next-80b-a3b-instruct": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen3-next-80b-a3b-thinking": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:qwen/qwen3-reranker-8b": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen3-vl-235b-a22b-instruct": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:qwen/qwen3-vl-235b-a22b-thinking": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:qwen/qwen3-vl-30b-a3b-instruct": Readonly<{ readonly [key: string]: never }>;
@@ -1116,15 +1419,42 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:qwen/qwen3.8-27b": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "xhigh" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:qwen/qwen3.8-flash": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.maxTokens"?: number; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:qwen/qwen3.8-max": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low" | "minimal"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:recraft/recraft-v3": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4-pro-vector": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4-styles": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4-styles-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4-styles-pro-vector": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4-styles-vector": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4-vector": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4.1": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4.1-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4.1-pro-vector": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4.1-utility": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4.1-utility-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:recraft/recraft-v4.1-vector": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:rekaai/reka-edge": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:rekaai/reka-flash-3": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:relace/relace-apply-3": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:relace/relace-search": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:runway/aleph-2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:runway/gen-4.5": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:sakana/fugu-ultra": Readonly<{ readonly "reasoning.effort"?: "max" | "xhigh" | "high"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:sakana/sakana-namazu": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:sao10k/l3-lunaris-8b": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:sao10k/l3.1-euryale-70b": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:sao10k/l3.3-euryale-70b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:sentence-transformers/all-minilm-l12-v2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:sentence-transformers/all-minilm-l6-v2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:sentence-transformers/all-mpnet-base-v2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:sentence-transformers/multi-qa-mpnet-base-dot-v1": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:sentence-transformers/paraphrase-minilm-l6-v2": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:sesame/csm-1b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:sourceful/riverflow-v2-fast": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:sourceful/riverflow-v2-pro": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:sourceful/riverflow-v2.5-fast": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:sourceful/riverflow-v2.5-pro": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:stepfun/step-3.5-flash": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:stepfun/step-3.7-flash": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:tencent/hunyuan-a13b-instruct": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
@@ -1137,6 +1467,8 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:thedrummer/cydonia-24b-v4.1": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:thedrummer/skyfall-36b-v2": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:thedrummer/unslopnemo-12b": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:thenlper/gte-base": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:thenlper/gte-large": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:thinkingmachines/inkling": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "high" | "medium" | "low" | "minimal" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:thinkingmachines/inkling-small": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "high" | "medium" | "low" | "minimal" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:thinkingmachines/inkling-small:batch": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "max" | "high" | "medium" | "low" | "minimal" | "none"; readonly "reasoning.exclude"?: boolean }>;
@@ -1146,6 +1478,13 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:undi95/remm-slerp-l2-13b": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:upstage/solar-pro-3": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:upstage/solar-pro4": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:voyageai/rerank-2.5": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:voyageai/rerank-2.5-lite": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:voyageai/voyage-4": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:voyageai/voyage-4-large": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:voyageai/voyage-4-lite": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:voyageai/voyage-code-4": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:voyageai/voyage-multimodal-3.5": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:writer/palmyra-x5": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:x-ai/grok-4.20": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:x-ai/grok-4.20-multi-agent": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
@@ -1153,6 +1492,12 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:x-ai/grok-4.5": Readonly<{ readonly "reasoning.effort"?: "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:x-ai/grok-4.6": Readonly<{ readonly "reasoning.effort"?: "xhigh" | "high" | "medium" | "low"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:x-ai/grok-build-0.1": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
+  readonly "openrouter:x-ai/grok-imagine-image-2.0": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:x-ai/grok-imagine-image-quality": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:x-ai/grok-imagine-video": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:x-ai/grok-imagine-video-1.5": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:x-ai/grok-stt-1.0": Readonly<{ readonly [key: string]: never }>;
+  readonly "openrouter:x-ai/grok-voice-tts-1.0": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:xiaomi/mimo-v2.5": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:xiaomi/mimo-v2.5-pro": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:z-ai/glm-4.5": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
@@ -1518,6 +1863,7 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "vercel:voyage/voyage-law-2": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:xiaomi/mimo-v2.5": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean }>;
   readonly "vercel:xiaomi/mimo-v2.5-pro": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean }>;
+  readonly "vercel:xiaomi/mimo-v2.5-pro-ultraspeed": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:zai/glm-4.5": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean }>;
   readonly "vercel:zai/glm-4.5-air": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean }>;
   readonly "vercel:zai/glm-4.5v": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean }>;

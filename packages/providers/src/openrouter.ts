@@ -53,10 +53,10 @@ const responseSchema = z.object({
 export const openRouterAdapter: ProviderAdapter<"openrouter"> = {
   id: "openrouter",
   name: "OpenRouter",
-  catalogEndpoint: DEFAULT_ENDPOINT,
+  catalogEndpoint: withAllOutputModalities(DEFAULT_ENDPOINT),
   requiresAuthentication: false,
   async discover(context = {}) {
-    const endpoint = context.baseUrl ?? DEFAULT_ENDPOINT;
+    const endpoint = withAllOutputModalities(context.baseUrl ?? DEFAULT_ENDPOINT);
     const response = await fetchProviderJson(endpoint, context);
     const parsed = responseSchema.parse(response.value);
     const source = { ...liveApiSource(endpoint, response.fetchedAt), scope: "endpoint" as const };
@@ -151,7 +151,16 @@ function openRouterKind(outputModalities: readonly string[]): ModelDescriptor["k
       return kind;
     }
   }
+  if (outputModalities.includes("embeddings")) {
+    return "embedding";
+  }
   return "system";
+}
+
+function withAllOutputModalities(endpoint: string): string {
+  const url = new URL(endpoint);
+  url.searchParams.set("output_modalities", "all");
+  return url.toString();
 }
 
 function openRouterPrices(

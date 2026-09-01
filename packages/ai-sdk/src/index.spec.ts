@@ -106,4 +106,33 @@ describe("prepareAiSdkCall", () => {
     const result = prepareAiSdkCall(adapter, selectModel(gatewayModel, {}), (id) => ({ id }));
     expect(result.callOptions).toEqual({ reasoning: "high" });
   });
+
+  it("warns when a catalog effort is newer than the portable AI SDK union", () => {
+    const gatewayModel = defineModel({
+      ...model,
+      key: "vercel:reasoner",
+      provider: "vercel",
+    } as const);
+    const adapter = {
+      id: "vercel" as const,
+      name: "Gateway",
+      catalogEndpoint: source.url,
+      requiresAuthentication: false,
+      discover: async () => ({
+        schemaVersion: 1 as const,
+        provider: "vercel" as const,
+        fetchedAt: source.retrievedAt,
+        source,
+        models: [],
+      }),
+      mapOptions: () => ({
+        providerOptions: {},
+        requestOptions: { reasoning: { effort: "max" } },
+        warnings: [],
+      }),
+    };
+    const result = prepareAiSdkCall(adapter, selectModel(gatewayModel, {}), (id) => ({ id }));
+    expect(result.callOptions).toEqual({});
+    expect(result.warnings).toEqual(["AI SDK cannot apply the max portable reasoning effort."]);
+  });
 });

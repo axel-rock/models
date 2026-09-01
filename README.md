@@ -146,6 +146,7 @@ browser.
 ```sh
 pnpm catalog:check
 pnpm catalog:refresh
+pnpm catalog:audit
 ```
 
 `catalog:check` compares current public gateway responses with reviewed
@@ -154,6 +155,11 @@ snapshots and fingerprints the official documents behind option overlays.
 It does not publish or merge anything. Direct-provider option overlays are
 reviewed from official documentation because their availability can depend on
 the account, endpoint, model, and region.
+
+`catalog:audit` also compares raw public response shapes and live enums. It
+catches new provider fields that the normalized adapter does not understand
+yet. Use the repository `update-model-catalog` skill to review a reported
+change; scripts detect facts, while the skill guides the human-reviewed update.
 
 See [architecture](docs/architecture.md), [provider coverage](docs/providers.md),
 and [maintenance](docs/maintenance.md) for the boundaries behind these choices.

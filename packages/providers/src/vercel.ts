@@ -343,19 +343,19 @@ function vercelPrices(
   if (pricing === undefined) {
     return [];
   }
-  const fields: ReadonlyArray<readonly [string, PriceRate["unit"]]> = [
-    ["input", "input-token"],
-    ["output", "output-token"],
-    ["input_cache_read", "cache-read-token"],
-    ["input_cache_write", "cache-write-token"],
-    ["image", "image"],
-    ["web_search", "request"],
+  const fields: ReadonlyArray<readonly [string, PriceRate["unit"], number]> = [
+    ["input", "input-token", 1],
+    ["output", "output-token", 1],
+    ["input_cache_read", "cache-read-token", 1],
+    ["input_cache_write", "cache-write-token", 1],
+    ["image", "image", 1],
+    ["web_search", "request", 1_000],
   ];
-  return fields.flatMap(([field, unit]) => {
+  return fields.flatMap(([field, unit, per]) => {
     const usd = pricing[field];
     return typeof usd !== "string" || !/^\d+(?:\.\d+)?$/.test(usd)
       ? []
-      : [{ unit, usd, per: 1, evidence: [source] }];
+      : [{ unit, usd, per, evidence: [source] }];
   });
 }
 

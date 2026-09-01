@@ -111,7 +111,7 @@ export function anthropicOptions(
       : supportedCapabilityKeys(asRecord(capabilities["thinking"])?.["types"], [
           "adaptive",
           "enabled",
-        ]);
+        ]).filter((mode) => documentedAnthropicThinking(modelId).includes(mode));
   const canDisable = !/(?:fable-5|mythos-5|mythos-preview)/.test(modelId);
   const options: OptionDefinition[] = [];
   if (effortValues.length > 0) {

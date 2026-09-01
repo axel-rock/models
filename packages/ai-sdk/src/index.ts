@@ -70,7 +70,10 @@ function normalizeAiSdkOptions(
     const effort = rawReasoning["effort"];
     const enabled = rawReasoning["enabled"];
     if (isAiSdkReasoning(effort)) reasoning = effort;
-    else if (enabled === false) reasoning = "none";
+    else if (effort !== undefined) {
+      const label = typeof effort === "string" ? effort : "selected";
+      warnings.push(`AI SDK cannot apply the ${label} portable reasoning effort.`);
+    } else if (enabled === false) reasoning = "none";
     else if (enabled === true) reasoning = "provider-default";
     for (const key of Object.keys(rawReasoning)) {
       if (key !== "effort" && key !== "enabled") {

@@ -20,8 +20,8 @@ const responseSchema = z.object({
         id: z.string(),
         display_name: z.string().optional(),
         created_at: z.string().optional(),
-        max_input_tokens: z.number().optional(),
-        max_tokens: z.number().optional(),
+        max_input_tokens: z.number().nullable().optional(),
+        max_tokens: z.number().nullable().optional(),
         capabilities: z.record(z.string(), z.unknown()).nullable().optional(),
       })
       .passthrough(),
@@ -76,7 +76,7 @@ export const anthropicAdapter: ProviderAdapter<"anthropic"> = {
       return {
         ...model,
         ...(raw.created_at === undefined ? {} : { releasedAt: raw.created_at }),
-        ...(raw.max_input_tokens === undefined
+        ...(typeof raw.max_input_tokens !== "number"
           ? {}
           : {
               contextWindow: {
@@ -85,7 +85,7 @@ export const anthropicAdapter: ProviderAdapter<"anthropic"> = {
                 sources: [source],
               },
             }),
-        ...(raw.max_tokens === undefined
+        ...(typeof raw.max_tokens !== "number"
           ? {}
           : {
               maxOutputTokens: {

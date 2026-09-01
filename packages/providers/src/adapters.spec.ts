@@ -8,30 +8,42 @@ import { vercelGatewayAdapter } from "./vercel.ts";
 
 describe("public gateway adapters", () => {
   it("normalizes OpenRouter capabilities, prices, and reasoning options", async () => {
+    let requestedUrl = "";
     const catalog = await openRouterAdapter.discover({
-      fetch: jsonFetch({
-        data: [
-          {
-            id: "author/reasoner",
-            name: "Reasoner",
-            context_length: 128_000,
-            architecture: {
-              input_modalities: ["text", "image"],
-              output_modalities: ["text"],
+      fetch: async (input) => {
+        requestedUrl = requestUrl(input);
+        return Response.json({
+          data: [
+            {
+              id: "author/reasoner",
+              name: "Reasoner",
+              context_length: 128_000,
+              architecture: {
+                input_modalities: ["text", "image"],
+                output_modalities: ["text"],
+              },
+              pricing: { prompt: "0.000001", completion: "0.000004" },
+              supported_parameters: ["reasoning", "tools", "structured_outputs"],
+              reasoning: {
+                mandatory: true,
+                default_enabled: true,
+                supported_efforts: ["high", "low", "none"],
+                default_effort: "high",
+              },
+              future_field: "preserved",
             },
-            pricing: { prompt: "0.000001", completion: "0.000004" },
-            supported_parameters: ["reasoning", "tools", "structured_outputs"],
-            reasoning: {
-              mandatory: true,
-              default_enabled: true,
-              supported_efforts: ["high", "low", "none"],
-              default_effort: "high",
+            {
+              id: "author/embedder",
+              architecture: {
+                input_modalities: ["text"],
+                output_modalities: ["embeddings"],
+              },
             },
-            future_field: "preserved",
-          },
-        ],
-      }),
+          ],
+        });
+      },
     });
+    expect(requestedUrl).toContain("output_modalities=all");
     const model = catalog.models[0];
     expect(model).toMatchObject({
       key: "openrouter:author/reasoner",
@@ -52,6 +64,7 @@ describe("public gateway adapters", () => {
     });
     expect(model?.options.some((option) => option.key === "reasoning.enabled")).toBe(false);
     expect(model?.raw).toMatchObject({ future_field: "preserved" });
+    expect(catalog.models[1]?.kind).toBe("embedding");
   });
 
   it("combines Vercel gateway and upstream provider controls", async () => {
@@ -66,7 +79,7 @@ describe("public gateway adapters", () => {
             supported_parameters: ["tools", "structured_outputs"],
             modalities: { input: ["text", "image"], output: ["text"] },
             reasoning_options: [{ type: "effort", values: ["low", "high"] }],
-            pricing: { input: "0.0000002", output: "0.0000012" },
+            pricing: { input: "0.0000002", output: "0.0000012", web_search: "10" },
             endpoints: [
               {
                 name: "openai",
@@ -86,6 +99,9 @@ describe("public gateway adapters", () => {
       values: ["low", "high"],
     });
     expect(model?.capabilities.input.image?.status).toBe("supported");
+    expect(model?.prices).toContainEqual(
+      expect.objectContaining({ unit: "request", usd: "10", per: 1_000 }),
+    );
     expect(model?.routes[0]).toMatchObject({
       id: "openai",
       provider: "OpenAI",
@@ -201,6 +217,8 @@ describe("direct provider adapters", () => {
         data: [
           {
             id: "claude-opus-5",
+            max_input_tokens: null,
+            max_tokens: null,
             capabilities: {
               effort: {
                 low: { supported: true },
@@ -213,7 +231,7 @@ describe("direct provider adapters", () => {
                 supported: true,
                 types: {
                   adaptive: { supported: true },
-                  enabled: { supported: false },
+                  enabled: { supported: true },
                 },
               },
             },
