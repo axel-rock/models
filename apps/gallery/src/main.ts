@@ -1,4 +1,17 @@
-import type { ModelCatalog, ModelDescriptor, ModelSelection, ProviderId } from "@models/core";
+import {
+  defineModelPolicy,
+  findLowestPricedModel,
+  resolveModelPolicy,
+  resolvePolicyDefaults,
+  validateOptions,
+  type ModelCatalog,
+  type ModelDescriptor,
+  type ModelRecommendation,
+  type ModelSelection,
+  type OptionValues,
+  type ProviderId,
+  type ResolvedModelPolicy,
+} from "@models/core";
 import {
   defineModelsElements,
   ModelsComposerElement,
@@ -6,9 +19,11 @@ import {
   ModelsPickerElement,
   ModelsSelectElement,
   MODEL_CLEAR_EVENT,
+  OPTIONS_CHANGE_EVENT,
   SELECTION_CHANGE_EVENT,
   type ModelGrouping,
   type ModelIconMode,
+  type VisibleOptionGroup,
 } from "@models/elements";
 import { openRouterAdapter, vercelGatewayAdapter } from "@models/providers";
 import { directProviderExamples } from "./demoCatalogs.ts";
@@ -24,7 +39,28 @@ interface ProviderView {
   readonly category: "direct" | "gateway";
 }
 
-type ExampleTab = "composer" | "inspector" | "model" | "reasoning";
+type ExampleTab = "composer" | "inline" | "inspector" | "minimal";
+type SelectionOptions = OptionValues<ModelDescriptor["options"]>;
+
+const COMPANY_MODEL_IDS = [
+  "anthropic/claude-opus-5",
+  "openai/gpt-5.6-sol",
+  "moonshotai/kimi-k3",
+] as const;
+
+const DIRECT_APPROVED_IDS: Readonly<Record<string, readonly string[]>> = {
+  anthropic: ["claude-opus-5"],
+  google: ["gemini-3.5-flash"],
+  openai: ["gpt-5.6-luna"],
+};
+const ALL_OPTION_GROUPS: readonly VisibleOptionGroup[] = [
+  "reasoning",
+  "speed",
+  "routing",
+  "caching",
+  "beta",
+  "generation",
+];
 
 const publicResults = await Promise.allSettled([
   vercelGatewayAdapter.discover(),
@@ -37,49 +73,52 @@ const catalogs: readonly ModelCatalog[] = [...liveCatalogs, ...directProviderExa
 const providerViews = catalogs.map(providerView);
 let selectedProvider = providerViews.find((view) => view.id === "vercel") ?? providerViews[0];
 let selectedModel: ModelDescriptor | undefined;
+let selectedOptions: SelectionOptions = {};
+let draftOptions: SelectionOptions = {};
 let grouping: ModelGrouping = "author";
 let iconMode: ModelIconMode = "model-maker";
+let activeCatalog: ModelCatalog | undefined;
+let activePolicy: ResolvedModelPolicy | undefined;
+let activeModels = new Map<string, ModelDescriptor>();
 
-const simpleSelect = document.querySelector("#simple-select");
-const reasoningSelect = document.querySelector("#reasoning-select");
-const reasoningOptions = document.querySelector("#reasoning-options");
+const minimalSelect = document.querySelector("#simple-select");
+const inlineSelect = document.querySelector("#inline-select");
+const inlineOptions = document.querySelector("#inline-options");
 const advancedPicker = document.querySelector("#advanced-picker");
 const composerMenu = document.querySelector("#composer-menu");
 
-if (simpleSelect instanceof ModelsSelectElement) {
-  simpleSelect.density = "compact";
-  simpleSelect.addEventListener("models-model-change", (event) => {
-    syncModel((event as CustomEvent<ModelDescriptor>).detail);
+for (const select of [minimalSelect, inlineSelect]) {
+  if (!(select instanceof ModelsSelectElement)) continue;
+  select.density = "compact";
+  select.addEventListener("models-model-change", (event) => {
+    syncSelection((event as CustomEvent<ModelDescriptor>).detail, draftOptions);
   });
-  simpleSelect.addEventListener(MODEL_CLEAR_EVENT, clearModel);
+  select.addEventListener(MODEL_CLEAR_EVENT, clearSelection);
 }
-if (reasoningOptions instanceof ModelsOptionsElement) {
-  reasoningOptions.groups = ["reasoning"];
-  reasoningOptions.layout = "inline";
-}
-if (reasoningSelect instanceof ModelsSelectElement) {
-  reasoningSelect.density = "compact";
-  reasoningSelect.addEventListener("models-model-change", (event) => {
-    syncModel((event as CustomEvent<ModelDescriptor>).detail);
+
+if (inlineOptions instanceof ModelsOptionsElement) {
+  inlineOptions.layout = "inline";
+  inlineOptions.addEventListener(OPTIONS_CHANGE_EVENT, (event) => {
+    if (selectedModel !== undefined) {
+      syncSelection(selectedModel, (event as CustomEvent<SelectionOptions>).detail);
+    }
   });
-  reasoningSelect.addEventListener(MODEL_CLEAR_EVENT, clearModel);
 }
-if (advancedPicker instanceof ModelsPickerElement) {
-  advancedPicker.groups = ["reasoning", "speed", "caching", "beta"];
-  advancedPicker.optionsLayout = "inline";
-  advancedPicker.addEventListener(SELECTION_CHANGE_EVENT, (event) => {
+
+for (const element of [advancedPicker, composerMenu]) {
+  element?.addEventListener(SELECTION_CHANGE_EVENT, (event) => {
     const selection = (event as CustomEvent<ModelSelection>).detail;
-    syncModel(selection.model);
-    setText(
-      "#selection-output",
-      JSON.stringify({ model: selection.model.id, options: selection.options }, null, 2),
+    syncSelection(
+      selection.model,
+      selection.model.key === selectedModel?.key ? selection.options : draftOptions,
     );
   });
 }
-if (composerMenu instanceof ModelsComposerElement) {
-  composerMenu.addEventListener(SELECTION_CHANGE_EVENT, (event) => {
-    syncModel((event as CustomEvent<ModelSelection>).detail.model);
-  });
+
+if (advancedPicker instanceof ModelsPickerElement) advancedPicker.optionsLayout = "inline";
+
+for (const control of document.querySelectorAll<HTMLInputElement>(".policy-controls input")) {
+  control.addEventListener("change", () => renderSelectedSource(false));
 }
 
 for (const tab of document.querySelectorAll<HTMLButtonElement>("button[data-tab]")) {
@@ -115,9 +154,7 @@ function renderSourceOptions(): void {
 
 function renderSourceGroup(selector: string, views: readonly ProviderView[]): void {
   const options = document.querySelector(selector);
-  if (options === null) {
-    return;
-  }
+  if (options === null) return;
   options.innerHTML = views
     .map(
       (view) =>
@@ -127,9 +164,7 @@ function renderSourceGroup(selector: string, views: readonly ProviderView[]): vo
   for (const button of options.querySelectorAll<HTMLButtonElement>("button[data-provider]")) {
     button.addEventListener("click", () => {
       const next = providerViews.find((view) => view.id === button.dataset.provider);
-      if (next === undefined || next.id === selectedProvider?.id) {
-        return;
-      }
+      if (next === undefined || next.id === selectedProvider?.id) return;
       selectedProvider = next;
       renderSourceOptions();
       renderSelectedSource(true);
@@ -139,111 +174,234 @@ function renderSourceGroup(selector: string, views: readonly ProviderView[]): vo
 }
 
 function renderSelectedSource(chooseDefault: boolean): void {
-  if (selectedProvider === undefined) {
-    return;
+  if (selectedProvider === undefined) return;
+  const sourceCatalog = withSortedLanguageModels(selectedProvider.catalog);
+  const isApproved = isChecked("#policy-approved");
+  const include = isApproved ? approvedIds(sourceCatalog) : undefined;
+  const groups = selectedGroups();
+  const policy = defineModelPolicy({
+    models: {
+      ...(include === undefined ? {} : { include }),
+      recommendations:
+        include?.[0] === undefined
+          ? []
+          : [{ model: include[0], label: "Recommended for this app" }],
+    },
+    options: {
+      groups,
+      ...(isApproved
+        ? {
+            values: {
+              "reasoning.effort": ["low", "medium", "high"],
+              "service.tier": ["default", "flex", "fast"],
+              "speed.mode": ["standard", "fast"],
+            },
+            defaults: {
+              "reasoning.effort": "medium",
+              "service.tier": "default",
+              "speed.mode": "standard",
+            },
+          }
+        : {}),
+    },
+  });
+  const resolved = resolveModelPolicy([sourceCatalog], policy);
+  activePolicy = resolved;
+  activeCatalog = resolved.catalogs[0] ?? { ...sourceCatalog, models: [] };
+  activeModels = new Map(activeCatalog.models.map((model) => [model.key, model]));
+
+  const previous = selectedModel === undefined ? undefined : activeModels.get(selectedModel.key);
+  if (chooseDefault || previous === undefined) {
+    selectedModel = preferredModel(activeCatalog.models);
+    draftOptions =
+      selectedModel === undefined ? {} : resolvePolicyDefaults(selectedModel, resolved);
+  } else {
+    selectedModel = previous;
   }
-  const catalog = withSortedLanguageModels(selectedProvider.catalog);
-  const grouped: ModelGrouping = isGateway(catalog) ? grouping : "none";
-  if (
-    chooseDefault ||
-    selectedModel === undefined ||
-    !catalog.models.some((model) => model.key === selectedModel?.key)
-  ) {
-    selectedModel = preferredModel(catalog.models);
-  }
-  configureSelect(simpleSelect, catalog, grouped);
-  configureSelect(reasoningSelect, catalog, grouped);
-  if (reasoningOptions instanceof ModelsOptionsElement) {
-    reasoningOptions.model = selectedModel;
-    reasoningOptions.value = {};
-  }
+  selectedOptions =
+    selectedModel === undefined ? {} : retainValidOptions(selectedModel, draftOptions, groups);
+
+  const recommendations = recommendationsFor(activeCatalog, resolved.recommendations);
+  const grouped: ModelGrouping =
+    isChecked("#policy-approved") || !isGateway(sourceCatalog) ? "none" : grouping;
+  configureSelect(minimalSelect, activeCatalog, grouped, recommendations);
+  configureSelect(inlineSelect, activeCatalog, grouped, recommendations);
+
+  if (inlineOptions instanceof ModelsOptionsElement) inlineOptions.groups = groups;
   if (advancedPicker instanceof ModelsPickerElement) {
     advancedPicker.groupBy = grouped;
     advancedPicker.iconMode = iconMode;
-    advancedPicker.catalogs = [catalog];
-    advancedPicker.value =
-      selectedModel === undefined ? undefined : { model: selectedModel, options: {} };
+    advancedPicker.groups = groups;
+    advancedPicker.recommendations = recommendations;
+    advancedPicker.catalogs = [activeCatalog];
   }
   if (composerMenu instanceof ModelsComposerElement) {
     composerMenu.groupBy = grouped;
     composerMenu.iconMode = iconMode;
-    composerMenu.catalogs = [catalog];
-    composerMenu.value =
-      selectedModel === undefined ? undefined : { model: selectedModel, options: {} };
+    composerMenu.groups = groups;
+    composerMenu.recommendations = recommendations;
+    composerMenu.catalogs = [activeCatalog];
   }
-  const sourceKind = catalog.source.kind === "live-api" ? "live catalog" : "documented example";
+  applySelection();
+
+  const sourceKind =
+    sourceCatalog.source.kind === "live-api" ? "live catalog" : "documented example";
+  const total = sourceCatalog.models.length;
+  const shown = activeCatalog.models.length;
   setText(
     "#source-summary",
-    `${catalog.models.length} model${catalog.models.length === 1 ? "" : "s"} · ${sourceKind}`,
+    `${shown}${shown === total ? "" : ` of ${total}`} model${shown === 1 ? "" : "s"} · ${sourceKind}`,
   );
   const toggle = document.querySelector<HTMLElement>(".group-toggle");
-  if (toggle !== null) {
-    toggle.hidden = !isGateway(catalog);
-  }
-  renderFreshness(catalog);
+  if (toggle !== null) toggle.hidden = !isGateway(sourceCatalog);
+  renderFreshness(sourceCatalog);
 }
 
 function configureSelect(
   element: Element | null,
   catalog: ModelCatalog,
   grouped: ModelGrouping,
+  recommendations: readonly ModelRecommendation[],
 ): void {
-  if (!(element instanceof ModelsSelectElement)) {
-    return;
-  }
+  if (!(element instanceof ModelsSelectElement)) return;
   element.groupBy = grouped;
   element.iconMode = iconMode;
+  element.recommendations = recommendations;
   element.catalogs = [catalog];
-  element.value = selectedModel?.key ?? "";
 }
 
-function syncModel(model: ModelDescriptor): void {
-  if (selectedModel?.key === model.key) {
-    return;
-  }
-  selectedModel = model;
-  if (simpleSelect instanceof ModelsSelectElement && simpleSelect.value !== model.key) {
-    simpleSelect.value = model.key;
-  }
-  if (reasoningSelect instanceof ModelsSelectElement && reasoningSelect.value !== model.key) {
-    reasoningSelect.value = model.key;
-  }
-  if (reasoningOptions instanceof ModelsOptionsElement) {
-    reasoningOptions.model = model;
-    reasoningOptions.value = {};
-  }
-  if (
-    advancedPicker instanceof ModelsPickerElement &&
-    advancedPicker.value?.model.key !== model.key
-  ) {
-    advancedPicker.value = { model, options: {} };
-  }
-  if (
-    composerMenu instanceof ModelsComposerElement &&
-    composerMenu.value?.model.key !== model.key
-  ) {
-    composerMenu.value = { model, options: {} };
-  }
+function syncSelection(model: ModelDescriptor, options: SelectionOptions): void {
+  const current = activeModels.get(model.key);
+  if (current === undefined) return;
+  const isSameModel = current.key === selectedModel?.key;
+  selectedModel = current;
+  draftOptions = isSameModel
+    ? updateVisibleDraft(current, draftOptions, options, selectedGroups())
+    : {
+        ...(activePolicy === undefined ? {} : resolvePolicyDefaults(current, activePolicy)),
+        ...retainValidOptions(current, options, ALL_OPTION_GROUPS),
+      };
+  selectedOptions = retainValidOptions(current, draftOptions, selectedGroups());
+  applySelection();
 }
 
-function clearModel(): void {
+function applySelection(): void {
+  const selection =
+    selectedModel === undefined
+      ? undefined
+      : ({ model: selectedModel, options: selectedOptions } satisfies ModelSelection);
+  for (const select of [minimalSelect, inlineSelect]) {
+    if (select instanceof ModelsSelectElement) select.value = selectedModel?.key ?? "";
+  }
+  if (inlineOptions instanceof ModelsOptionsElement) {
+    inlineOptions.model = selectedModel;
+    inlineOptions.value = selectedOptions;
+  }
+  if (advancedPicker instanceof ModelsPickerElement) advancedPicker.value = selection;
+  if (composerMenu instanceof ModelsComposerElement) composerMenu.value = selection;
+  setText(
+    "#selection-output",
+    selection === undefined
+      ? "Choose a model or option to inspect the value."
+      : JSON.stringify({ model: selection.model.id, options: selection.options }, null, 2),
+  );
+}
+
+function clearSelection(): void {
   selectedModel = undefined;
-  if (simpleSelect instanceof ModelsSelectElement) {
-    simpleSelect.value = "";
+  selectedOptions = {};
+  draftOptions = {};
+  applySelection();
+}
+
+function updateVisibleDraft(
+  model: ModelDescriptor,
+  previous: SelectionOptions,
+  visible: SelectionOptions,
+  groups: readonly VisibleOptionGroup[],
+): SelectionOptions {
+  const hidden = Object.fromEntries(
+    Object.entries(previous).filter(([key]) => {
+      const option = model.options.find((candidate) => candidate.key === key);
+      return option !== undefined && !groups.includes(option.group);
+    }),
+  );
+  return { ...hidden, ...visible };
+}
+
+function retainValidOptions(
+  model: ModelDescriptor,
+  values: SelectionOptions,
+  groups: readonly VisibleOptionGroup[],
+): SelectionOptions {
+  const next: Record<string, string | number | boolean | readonly string[]> = {};
+  for (const option of model.options) {
+    const value = values[option.key];
+    if (!groups.includes(option.group) || value === undefined) continue;
+    const candidate = { [option.key]: value };
+    if (validateOptions([option], candidate).ok) next[option.key] = value;
   }
-  if (reasoningSelect instanceof ModelsSelectElement) {
-    reasoningSelect.value = "";
+  reconcileConstraints(model, next);
+  return next;
+}
+
+function reconcileConstraints(
+  model: ModelDescriptor,
+  values: Record<string, string | number | boolean | readonly string[]>,
+): void {
+  for (const constraint of model.constraints ?? []) {
+    if (constraint.kind === "less-than") {
+      const left = values[constraint.leftKey];
+      const right = values[constraint.rightKey];
+      if (typeof left === "number" && typeof right === "number" && left >= right) {
+        delete values[constraint.leftKey];
+      }
+      continue;
+    }
+    if (values[constraint.when.key] !== constraint.when.equals) continue;
+    if (constraint.kind === "requires" && values[constraint.key] === undefined) {
+      delete values[constraint.when.key];
+    }
+    if (constraint.kind === "forbids" && values[constraint.key] !== undefined) {
+      delete values[constraint.key];
+    }
   }
-  if (reasoningOptions instanceof ModelsOptionsElement) {
-    reasoningOptions.model = undefined;
-    reasoningOptions.value = {};
-  }
-  if (advancedPicker instanceof ModelsPickerElement) {
-    advancedPicker.value = undefined;
-  }
-  if (composerMenu instanceof ModelsComposerElement) {
-    composerMenu.value = undefined;
-  }
+}
+
+function recommendationsFor(
+  catalog: ModelCatalog,
+  declared: readonly ModelRecommendation[],
+): readonly ModelRecommendation[] {
+  const lowestInput = findLowestPricedModel([catalog], "input-token");
+  const recommendations = [
+    ...declared,
+    ...(lowestInput === undefined
+      ? []
+      : [{ model: lowestInput.key, label: "Lowest listed input price" }]),
+  ];
+  return recommendations.filter(
+    (recommendation, index) =>
+      recommendations.findIndex(
+        (candidate) =>
+          candidate.model === recommendation.model && candidate.label === recommendation.label,
+      ) === index,
+  );
+}
+
+function approvedIds(catalog: ModelCatalog): readonly string[] {
+  return isGateway(catalog) ? COMPANY_MODEL_IDS : (DIRECT_APPROVED_IDS[catalog.provider] ?? []);
+}
+
+function selectedGroups(): readonly VisibleOptionGroup[] {
+  return [
+    ...(isChecked("#policy-reasoning") ? (["reasoning"] as const) : []),
+    ...(isChecked("#policy-speed") ? (["speed"] as const) : []),
+    ...(isChecked("#policy-more") ? (["routing", "caching", "beta", "generation"] as const) : []),
+  ];
+}
+
+function isChecked(selector: string): boolean {
+  return document.querySelector<HTMLInputElement>(selector)?.checked ?? false;
 }
 
 function setActiveTab(active: ExampleTab): void {
@@ -257,9 +415,7 @@ function setActiveTab(active: ExampleTab): void {
 }
 
 function onTabKeydown(event: KeyboardEvent, current: HTMLButtonElement): void {
-  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
-    return;
-  }
+  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
   event.preventDefault();
   const tabs = [...document.querySelectorAll<HTMLButtonElement>("button[data-tab]")];
   const index = tabs.indexOf(current);
@@ -323,18 +479,14 @@ function isGateway(catalog: ModelCatalog): boolean {
 
 function renderFreshness(catalog: ModelCatalog): void {
   const grid = document.querySelector("#freshness-grid");
-  if (grid === null || selectedProvider === undefined) {
-    return;
-  }
+  if (grid === null || selectedProvider === undefined) return;
   const source = catalog.source;
   grid.innerHTML = `<dl><div><dt>Source</dt><dd>${escapeHtml(selectedProvider.name)}</dd></div><div><dt>Evidence</dt><dd>${escapeHtml(source.kind)}</dd></div><div><dt>Checked</dt><dd><time datetime="${escapeHtml(catalog.fetchedAt)}">${escapeHtml(catalog.fetchedAt.slice(0, 10))}</time></dd></div></dl>`;
 }
 
 function setText(selector: string, value: string): void {
   const element = document.querySelector(selector);
-  if (element !== null) {
-    element.textContent = value;
-  }
+  if (element !== null) element.textContent = value;
 }
 
 function escapeHtml(value: string): string {

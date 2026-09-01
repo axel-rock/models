@@ -72,7 +72,7 @@ export function openAiOptions(modelId: string): readonly OptionDefinition[] {
       kind: "enum",
       label: "Service tier",
       description: "Chooses standard, lower-cost flex, or faster processing when available.",
-      group: "speed",
+      group: "routing",
       support: capability(
         "supported",
         [OPENAI_RESPONSES],
@@ -289,7 +289,7 @@ export function googleOptions(modelId: string): readonly OptionDefinition[] {
       kind: "enum",
       label: "Service tier",
       description: "Chooses standard, lower-cost flex, or priority inference.",
-      group: "speed",
+      group: "routing",
       support: capability(
         "supported",
         [GOOGLE_TIERS],

@@ -121,6 +121,22 @@ describe("models elements", () => {
     );
   });
 
+  it("composes model, reasoning, and speed as independent groups", () => {
+    const composer = document.createElement("models-composer") as ModelsComposerElement;
+    composer.groups = ["speed"];
+    composer.catalogs = [composerCatalog()];
+    document.body.append(composer);
+    composer.shadowRoot?.querySelector<HTMLButtonElement>(".trigger")?.click();
+    expect(composer.shadowRoot?.querySelector('[data-section="model"]')).not.toBeNull();
+    expect(composer.shadowRoot?.querySelector('[data-section="effort"]')).toBeNull();
+    expect(composer.shadowRoot?.querySelector('[data-section="speed"]')).not.toBeNull();
+    expect(composer.shadowRoot?.querySelector('[data-section="advanced"]')).toBeNull();
+
+    composer.groups = [];
+    expect(composer.shadowRoot?.querySelector('[data-section="model"]')).not.toBeNull();
+    expect(composer.shadowRoot?.querySelector('[data-section="speed"]')).toBeNull();
+  });
+
   it("places a left-edge composer below and toward available space", () => {
     const composer = document.createElement("models-composer") as ModelsComposerElement;
     composer.catalogs = [composerCatalog()];
@@ -512,6 +528,62 @@ describe("models elements", () => {
     );
     expect(new Set(values).size).toBe(2);
     expect(values).toEqual(["Shared· same · openai:first", "Shared· same · anthropic:first"]);
+  });
+
+  it("shows app-owned recommendations once above ordinary model groups", () => {
+    const select = document.createElement("models-select") as ModelsSelectElement;
+    select.catalogs = [catalog()];
+    select.recommendations = [
+      { model: "openai:second", label: "Recommended for this app" },
+      { model: "second", label: "Lowest input price" },
+    ];
+    document.body.append(select);
+    select.shadowRoot?.querySelector<HTMLInputElement>("input")?.click();
+    const groups = [...(select.shadowRoot?.querySelectorAll(".group") ?? [])].map(
+      (group) => group.textContent,
+    );
+    expect(groups).toEqual(["Recommended", "All models"]);
+    const recommended = select.shadowRoot?.querySelector('[data-key="openai:second"]');
+    expect(recommended?.textContent).toContain("Recommended for this app");
+    expect(recommended?.textContent).toContain("Lowest input price");
+    expect(select.shadowRoot?.querySelectorAll('[data-key="openai:second"]')).toHaveLength(1);
+  });
+
+  it("shows shared recommendation labels in composer and inspector model lists", () => {
+    const recommendation = [
+      { model: "openai:second", label: "Recommended for this app" },
+      { model: "second", label: "Lowest input price" },
+    ];
+    const composer = document.createElement("models-composer") as ModelsComposerElement;
+    composer.catalogs = [catalog()];
+    composer.recommendations = recommendation;
+    document.body.append(composer);
+    composer.shadowRoot?.querySelector<HTMLButtonElement>(".trigger")?.click();
+    composer.shadowRoot?.querySelector<HTMLButtonElement>('[data-section="model"]')?.click();
+    expect(
+      composer.shadowRoot?.querySelector('[data-model="openai:second"]')?.textContent,
+    ).toContain("Recommended for this app");
+    expect(
+      composer.shadowRoot?.querySelector('[data-model="openai:second"]')?.textContent,
+    ).toContain("Lowest input price");
+    const search = composer.shadowRoot?.querySelector<HTMLInputElement>(".search");
+    if (search === undefined || search === null) {
+      throw new TypeError("Expected a composer search input.");
+    }
+    search.value = "recommended";
+    search.dispatchEvent(new Event("input"));
+    expect(composer.shadowRoot?.querySelectorAll("[data-model]")).toHaveLength(1);
+
+    const picker = document.createElement("models-picker") as ModelsPickerElement;
+    picker.catalogs = [catalog()];
+    picker.recommendations = recommendation;
+    document.body.append(picker);
+    expect(picker.shadowRoot?.querySelector('[data-key="openai:second"]')?.textContent).toContain(
+      "Recommended for this app",
+    );
+    expect(picker.shadowRoot?.querySelector('[data-key="openai:second"]')?.textContent).toContain(
+      "Lowest input price",
+    );
   });
 
   it("groups non-adjacent picker models into one author section", () => {

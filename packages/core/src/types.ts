@@ -74,6 +74,9 @@ export type ModelLifecycle = "deprecated" | "preview" | "production" | "unknown"
 /** The broad product kind exposed by a provider model record. */
 export type ModelKind = "audio" | "embedding" | "image" | "language" | "system" | "video";
 
+/** A provider-neutral family of model options that a host can choose to expose. */
+export type OptionGroup = "beta" | "caching" | "generation" | "reasoning" | "routing" | "speed";
+
 /** A gateway route or hosting endpoint that can materially change behavior. */
 export interface ModelRoute {
   readonly id: string;
@@ -177,7 +180,7 @@ export interface OptionDefinitionBase<TKey extends string = string, TKind extend
   readonly kind: TKind;
   readonly label: string;
   readonly description: string;
-  readonly group: "beta" | "caching" | "generation" | "reasoning" | "speed";
+  readonly group: OptionGroup;
   readonly support: CapabilitySupport;
   readonly target?: OptionTarget;
   readonly visibleWhen?: OptionCondition;

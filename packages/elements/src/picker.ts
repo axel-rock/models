@@ -3,6 +3,7 @@ import {
   validateOptions,
   type ModelCatalog,
   type ModelDescriptor,
+  type ModelRecommendation,
   type ModelSelection,
   type OptionValues,
 } from "@models/core";
@@ -20,11 +21,19 @@ export class ModelsPickerElement extends ModelsHTMLElement {
   #catalogs: readonly ModelCatalog[] = [];
   #selected: ModelDescriptor | undefined;
   #options: OptionValues<ModelDescriptor["options"]> = {};
-  #groups: readonly VisibleOptionGroup[] = ["reasoning", "speed", "caching", "beta"];
+  #groups: readonly VisibleOptionGroup[] = [
+    "reasoning",
+    "speed",
+    "routing",
+    "caching",
+    "beta",
+    "generation",
+  ];
   #query = "";
   #groupBy: ModelGrouping = "none";
   #optionsLayout: OptionsLayout = "stacked";
   #iconMode: ModelIconMode = "none";
+  #recommendations: readonly ModelRecommendation[] = [];
   readonly #root: ShadowRoot;
 
   constructor() {
@@ -91,6 +100,16 @@ export class ModelsPickerElement extends ModelsHTMLElement {
     this.render();
   }
 
+  /** App-owned recommendation labels shown beside matching models. */
+  get recommendations(): readonly ModelRecommendation[] {
+    return this.#recommendations;
+  }
+
+  set recommendations(value: readonly ModelRecommendation[]) {
+    this.#recommendations = value;
+    this.render();
+  }
+
   /** The current complete selection. */
   get value(): ModelSelection | undefined {
     return this.#selected === undefined
@@ -127,6 +146,7 @@ export class ModelsPickerElement extends ModelsHTMLElement {
         .model-icon { flex: 0 0 16px; width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .model-icon svg { display: block; width: 100%; height: 100%; }
         .model-qualifier { overflow: hidden; color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; text-overflow: ellipsis; white-space: nowrap; }
+        .model-recommendation { color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; }
         .no-results { margin: 16px 8px; color: var(--models-muted, #646464); font-size: 12px; text-align: center; }
         .detail { display: grid; align-content: start; gap: 14px; padding: 16px; min-width: 0; }
         .detail h3 { margin: 0; font-size: 17px; }
@@ -141,7 +161,7 @@ export class ModelsPickerElement extends ModelsHTMLElement {
       <div class="picker" part="picker">
         <section class="models" part="models">
           <div class="search"><label class="field"><span class="label">Find a model</span><input class="control" type="search" value="${escapeHtml(this.#query)}" placeholder="Search models" aria-controls="models-list"></label></div>
-          <div class="list" id="models-list" role="listbox" aria-label="Models">${renderModels(models, selected?.key, this.#groupBy, this.#iconMode)}<p class="no-results" role="status" hidden>No matching models</p></div>
+          <div class="list" id="models-list" role="listbox" aria-label="Models">${renderModels(models, selected?.key, this.#groupBy, this.#iconMode, this.#recommendations)}<p class="no-results" role="status" hidden>No matching models</p></div>
         </section>
         <section class="detail" part="detail">
           ${selected === undefined ? '<p class="muted">No models are available.</p>' : renderDetailHead(selected)}
@@ -262,6 +282,7 @@ function renderModel(
   selected: boolean,
   isDuplicate: boolean,
   iconMode: ModelIconMode,
+  recommendations: readonly ModelRecommendation[],
 ): string {
   const badges = [
     model.capabilities.reasoning.status === "supported" ? "reasoning" : "",
@@ -273,7 +294,11 @@ function renderModel(
   const search =
     `${model.name} ${model.provider} ${model.id} ${badges.join(" ")}`.toLocaleLowerCase();
   const icon = modelIcon(model, iconMode);
-  return `<button class="model" part="model${selected ? " selected-model" : ""}" role="option" aria-selected="${selected}" tabindex="${selected ? "0" : "-1"}" data-key="${escapeHtml(model.key)}" data-search="${escapeHtml(search)}"><span class="model-name">${icon === "" ? "" : `<span class="model-icon">${icon}</span>`}<span>${escapeHtml(model.name)}</span>${isDuplicate ? `<span class="model-qualifier">· ${escapeHtml(model.id)}</span>` : ""}</span></button>`;
+  const recommendationLabels = recommendations
+    .filter((candidate) => candidate.model === model.key || candidate.model === model.id)
+    .map((candidate) => candidate.label)
+    .join(" · ");
+  return `<button class="model" part="model${selected ? " selected-model" : ""}" role="option" aria-selected="${selected}" tabindex="${selected ? "0" : "-1"}" data-key="${escapeHtml(model.key)}" data-search="${escapeHtml(`${search} ${recommendationLabels}`)}"><span class="model-name">${icon === "" ? "" : `<span class="model-icon">${icon}</span>`}<span>${escapeHtml(model.name)}</span>${recommendationLabels === "" ? "" : `<span class="model-recommendation">${escapeHtml(recommendationLabels)}</span>`}${isDuplicate ? `<span class="model-qualifier">· ${escapeHtml(model.id)}</span>` : ""}</span></button>`;
 }
 
 function renderModels(
@@ -281,13 +306,20 @@ function renderModels(
   selectedKey: string | undefined,
   grouping: ModelGrouping,
   iconMode: ModelIconMode,
+  recommendations: readonly ModelRecommendation[],
 ): string {
   const nameCounts = new Map<string, number>();
   for (const model of models) {
     nameCounts.set(model.name, (nameCounts.get(model.name) ?? 0) + 1);
   }
   const render = (model: ModelDescriptor): string =>
-    renderModel(model, selectedKey === model.key, (nameCounts.get(model.name) ?? 0) > 1, iconMode);
+    renderModel(
+      model,
+      selectedKey === model.key,
+      (nameCounts.get(model.name) ?? 0) > 1,
+      iconMode,
+      recommendations,
+    );
   if (grouping === "none") {
     return models.map(render).join("");
   }

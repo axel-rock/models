@@ -19,7 +19,14 @@ export type OptionsLayout = "inline" | "stacked";
 export class ModelsOptionsElement extends ModelsHTMLElement {
   #model: ModelDescriptor | undefined;
   #values: Readonly<Record<string, unknown>> = {};
-  #groups: readonly VisibleOptionGroup[] = ["reasoning", "speed", "caching", "beta", "generation"];
+  #groups: readonly VisibleOptionGroup[] = [
+    "reasoning",
+    "speed",
+    "routing",
+    "caching",
+    "beta",
+    "generation",
+  ];
   #excludedKeys: readonly string[] = [];
   #layout: OptionsLayout = "stacked";
   readonly #root: ShadowRoot;
@@ -93,6 +100,12 @@ export class ModelsOptionsElement extends ModelsHTMLElement {
           !this.#excludedKeys.includes(option.key) &&
           isOptionVisible(option, model.options, this.#values),
       ) ?? [];
+    if (this.#layout === "inline" && options.length === 0) {
+      this.hidden = true;
+      this.#root.innerHTML = "";
+      return;
+    }
+    this.hidden = false;
     this.#root.innerHTML = `
       <style>
         ${elementStyles}

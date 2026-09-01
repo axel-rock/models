@@ -67,21 +67,21 @@
               type="button"
               role="tab"
               aria-selected="false"
-              aria-controls="panel-model"
-              id="tab-model"
-              data-tab="model"
+              aria-controls="panel-minimal"
+              id="tab-minimal"
+              data-tab="minimal"
             >
-              Model
+              Minimal
             </button>
             <button
               type="button"
               role="tab"
               aria-selected="false"
-              aria-controls="panel-reasoning"
-              id="tab-reasoning"
-              data-tab="reasoning"
+              aria-controls="panel-inline"
+              id="tab-inline"
+              data-tab="inline"
             >
-              Reasoning
+              Inline
             </button>
             <button
               type="button"
@@ -104,15 +104,33 @@
               Inspector
             </button>
           </div>
+          <div class="policy-controls" role="group" aria-label="Shared selector policy">
+            <label title="Limit every selector to this app's approved models">
+              <input id="policy-approved" type="checkbox" checked />
+              <span>Approved</span>
+            </label>
+            <label title="Show reasoning controls when the selected model supports them">
+              <input id="policy-reasoning" type="checkbox" checked />
+              <span>Reasoning</span>
+            </label>
+            <label title="Show true fast-mode controls when supported">
+              <input id="policy-speed" type="checkbox" checked />
+              <span>Speed</span>
+            </label>
+            <label title="Show routing, caching, beta, and generation controls when supported">
+              <input id="policy-more" type="checkbox" />
+              <span>More</span>
+            </label>
+          </div>
         </div>
 
         <div class="panels">
           <section
             class="panel"
             role="tabpanel"
-            id="panel-model"
-            aria-labelledby="tab-model"
-            data-panel="model"
+            id="panel-minimal"
+            aria-labelledby="tab-minimal"
+            data-panel="minimal"
             hidden
           >
             <div class="panel-copy">
@@ -127,18 +145,18 @@
           <section
             class="panel"
             role="tabpanel"
-            id="panel-reasoning"
-            aria-labelledby="tab-reasoning"
-            data-panel="reasoning"
+            id="panel-inline"
+            aria-labelledby="tab-inline"
+            data-panel="inline"
             hidden
           >
             <div class="panel-copy">
-              <h3>Model + reasoning</h3>
-              <p>Only the reasoning controls confirmed for the selected model.</p>
+              <h3>Inline details</h3>
+              <p>The same model list, plus the enabled settings this model supports.</p>
             </div>
-            <div class="demo reasoning-demo">
-              <models-select id="reasoning-select" label="Model"></models-select>
-              <models-options id="reasoning-options"></models-options>
+            <div class="demo inline-demo">
+              <models-select id="inline-select" label="Model"></models-select>
+              <models-options id="inline-options"></models-options>
             </div>
           </section>
 
@@ -148,6 +166,7 @@
             id="panel-composer"
             aria-labelledby="tab-composer"
             data-panel="composer"
+            hidden
           >
             <div class="panel-copy">
               <h3>Composer</h3>
@@ -168,7 +187,7 @@
           >
             <div class="panel-copy">
               <h3>Inspector</h3>
-              <p>Search, pricing, evidence, and every supported model option.</p>
+              <p>Search, pricing, evidence, and every enabled model option.</p>
             </div>
             <div class="demo wide-demo"><models-picker id="advanced-picker"></models-picker></div>
             <details class="output-panel">

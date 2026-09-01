@@ -1,4 +1,4 @@
-import type { ModelCatalog, ModelDescriptor } from "@models/core";
+import type { ModelCatalog, ModelDescriptor, ModelRecommendation } from "@models/core";
 import { ModelsHTMLElement } from "./base.ts";
 import { emitModelChange, emitModelClear } from "./events.ts";
 import { modelGroup, type ModelGrouping } from "./grouping.ts";
@@ -17,6 +17,7 @@ export class ModelsSelectElement extends ModelsHTMLElement {
   #groupBy: ModelGrouping = "none";
   #density: SelectDensity = "default";
   #iconMode: ModelIconMode = "none";
+  #recommendations: readonly ModelRecommendation[] = [];
   #isOpen = false;
   #ignoreNextFocus = false;
   #query = "";
@@ -109,6 +110,16 @@ export class ModelsSelectElement extends ModelsHTMLElement {
     this.render();
   }
 
+  /** Application-owned labels shown above the ordinary model groups. */
+  get recommendations(): readonly ModelRecommendation[] {
+    return this.#recommendations;
+  }
+
+  set recommendations(value: readonly ModelRecommendation[]) {
+    this.#recommendations = value;
+    this.render();
+  }
+
   connectedCallback(): void {
     document.addEventListener("pointerdown", this.#onDocumentPointerDown);
     window.addEventListener("resize", this.#onWindowResize);
@@ -122,7 +133,7 @@ export class ModelsSelectElement extends ModelsHTMLElement {
 
   private render(): void {
     const models = languageModels(this.#catalogs);
-    const suggestions = modelSuggestions(models, this.#listId);
+    const suggestions = modelSuggestions(models, this.#listId, this.#recommendations);
     const selected = models.find((model) => model.key === this.#value);
     const selectedSuggestion = suggestions.find(
       (suggestion) => suggestion.model.key === this.#value,
@@ -155,7 +166,7 @@ export class ModelsSelectElement extends ModelsHTMLElement {
         .option-icon { width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .option-icon svg { display: block; width: 100%; height: 100%; }
         .option-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .option-meta { margin-left: 5px; color: var(--models-muted, #646464); font-size: 11px; }
+        .option-meta { margin-left: 5px; color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; }
         .check { color: var(--models-muted, #646464); }
         .empty { margin: 18px 10px; color: var(--models-muted, #646464); font-size: 12px; text-align: center; }
       </style>
@@ -367,6 +378,7 @@ export class ModelsSelectElement extends ModelsHTMLElement {
 interface ModelSuggestion {
   readonly model: ModelDescriptor;
   readonly optionId: string;
+  readonly recommendationLabels: readonly string[];
   readonly value: string;
   readonly qualifier: string | undefined;
 }
@@ -378,6 +390,7 @@ function languageModels(catalogs: readonly ModelCatalog[]): readonly ModelDescri
 function modelSuggestions(
   models: readonly ModelDescriptor[],
   listId: string,
+  recommendations: readonly ModelRecommendation[],
 ): readonly ModelSuggestion[] {
   const nameCounts = new Map<string, number>();
   for (const model of models) {
@@ -400,6 +413,9 @@ function modelSuggestions(
     return {
       model,
       optionId: `${listId}-option-${index}`,
+      recommendationLabels: recommendations
+        .filter((recommendation) => [model.key, model.id].includes(recommendation.model))
+        .map((recommendation) => recommendation.label),
       value,
       qualifier: value === model.name ? undefined : value.slice(model.name.length + 3),
     };
@@ -414,17 +430,29 @@ function renderSuggestions(
   iconMode: ModelIconMode,
 ): string {
   const empty = '<p class="empty" role="status" hidden>No matching models</p>';
+  const recommended = suggestions.filter(
+    (suggestion) => suggestion.recommendationLabels.length > 0,
+  );
+  const ordinary = suggestions.filter((suggestion) => suggestion.recommendationLabels.length === 0);
+  const recommendationGroup =
+    recommended.length === 0
+      ? ""
+      : `<div data-model-group><div class="group">Recommended</div>${recommended.map((suggestion) => renderSuggestion(suggestion, selectedKey, activeKey, iconMode)).join("")}</div>`;
   if (grouping === "none") {
-    return `${suggestions.map((suggestion) => renderSuggestion(suggestion, selectedKey, activeKey, iconMode)).join("")}${empty}`;
+    const ordinaryGroup =
+      ordinary.length === 0
+        ? ""
+        : `<div data-model-group>${recommended.length === 0 ? "" : '<div class="group">All models</div>'}${ordinary.map((suggestion) => renderSuggestion(suggestion, selectedKey, activeKey, iconMode)).join("")}</div>`;
+    return `${recommendationGroup}${ordinaryGroup}${empty}`;
   }
   const groups = new Map<string, ModelSuggestion[]>();
-  for (const suggestion of suggestions) {
+  for (const suggestion of ordinary) {
     const group = modelGroup(suggestion.model, grouping) ?? "Other";
     const values = groups.get(group) ?? [];
     values.push(suggestion);
     groups.set(group, values);
   }
-  return `${[...groups]
+  return `${recommendationGroup}${[...groups]
     .map(
       ([group, values]) =>
         `<div data-model-group><div class="group">${escapeHtml(group)}</div>${values.map((suggestion) => renderSuggestion(suggestion, selectedKey, activeKey, iconMode)).join("")}</div>`,
@@ -440,7 +468,10 @@ function renderSuggestion(
 ): string {
   const icon = modelIcon(suggestion.model, iconMode);
   const isSelected = suggestion.model.key === selectedKey;
-  return `<button class="option ${icon === "" ? "no-icon" : ""} ${suggestion.model.key === activeKey ? "active" : ""}" id="${escapeHtml(suggestion.optionId)}" type="button" role="option" aria-selected="${isSelected}" data-key="${escapeHtml(suggestion.model.key)}" data-search="${escapeHtml(`${suggestion.model.name} ${suggestion.model.id} ${suggestion.model.author ?? ""}`.toLocaleLowerCase())}">${icon === "" ? "" : `<span class="option-icon" aria-hidden="true">${icon}</span>`}<span class="option-label">${escapeHtml(suggestion.model.name)}${suggestion.qualifier === undefined ? "" : `<span class="option-meta">· ${escapeHtml(suggestion.qualifier)}</span>`}</span><span class="check" aria-hidden="true">${isSelected ? "✓" : ""}</span></button>`;
+  const metadata = [suggestion.qualifier, ...suggestion.recommendationLabels].filter(
+    (value): value is string => value !== undefined,
+  );
+  return `<button class="option ${icon === "" ? "no-icon" : ""} ${suggestion.model.key === activeKey ? "active" : ""}" id="${escapeHtml(suggestion.optionId)}" type="button" role="option" aria-selected="${isSelected}" data-key="${escapeHtml(suggestion.model.key)}" data-search="${escapeHtml(`${suggestion.model.name} ${suggestion.model.id} ${suggestion.model.author ?? ""} ${suggestion.recommendationLabels.join(" ")}`.toLocaleLowerCase())}">${icon === "" ? "" : `<span class="option-icon" aria-hidden="true">${icon}</span>`}<span class="option-label">${escapeHtml(suggestion.model.name)}${metadata.length === 0 ? "" : `<span class="option-meta">· ${escapeHtml(metadata.join(" · "))}</span>`}</span><span class="check" aria-hidden="true">${isSelected ? "✓" : ""}</span></button>`;
 }
 
 function escapeHtml(value: string): string {

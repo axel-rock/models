@@ -3,6 +3,7 @@ import {
   validateOptions,
   type ModelCatalog,
   type ModelDescriptor,
+  type ModelRecommendation,
   type ModelSelection,
   type OptionDefinition,
   type OptionValues,
@@ -12,7 +13,7 @@ import { emitSelectionChange, OPTIONS_CHANGE_EVENT } from "./events.ts";
 import { modelGroup } from "./grouping.ts";
 import type { ModelGrouping } from "./grouping.ts";
 import { modelIcon, type ModelIconMode } from "./icons.ts";
-import { ModelsOptionsElement } from "./options.ts";
+import { ModelsOptionsElement, type VisibleOptionGroup } from "./options.ts";
 import { elementStyles } from "./styles.ts";
 
 type ComposerSection = "advanced" | "effort" | "model" | "speed";
@@ -27,6 +28,15 @@ export class ModelsComposerElement extends ModelsHTMLElement {
   #query = "";
   #groupBy: ModelGrouping = "author";
   #iconMode: ModelIconMode = "none";
+  #recommendations: readonly ModelRecommendation[] = [];
+  #groups: readonly VisibleOptionGroup[] = [
+    "reasoning",
+    "speed",
+    "routing",
+    "caching",
+    "beta",
+    "generation",
+  ];
   readonly #root: ShadowRoot;
   readonly #onDocumentPointerDown = (event: Event): void => {
     if (this.#isOpen && !event.composedPath().includes(this)) {
@@ -121,6 +131,27 @@ export class ModelsComposerElement extends ModelsHTMLElement {
     this.render();
   }
 
+  /** App-owned recommendation labels shown beside matching models. */
+  get recommendations(): readonly ModelRecommendation[] {
+    return this.#recommendations;
+  }
+
+  set recommendations(value: readonly ModelRecommendation[]) {
+    this.#recommendations = value;
+    this.render();
+  }
+
+  /** Option groups available inside the composer. Use an empty list for model-only mode. */
+  get groups(): readonly VisibleOptionGroup[] {
+    return this.#groups;
+  }
+
+  set groups(value: readonly VisibleOptionGroup[]) {
+    this.#groups = value;
+    this.#section = undefined;
+    this.render();
+  }
+
   connectedCallback(): void {
     document.addEventListener("pointerdown", this.#onDocumentPointerDown);
     window.addEventListener("resize", this.#onWindowResize);
@@ -134,9 +165,14 @@ export class ModelsComposerElement extends ModelsHTMLElement {
 
   private render(): void {
     const selected = this.#selected;
-    const effort = selected === undefined ? undefined : findReasoningOption(selected);
+    const effort =
+      selected === undefined || !this.#groups.includes("reasoning")
+        ? undefined
+        : findReasoningOption(selected);
     const speed =
-      selected === undefined ? undefined : findOption(selected, ["speed.mode", "service.tier"]);
+      selected === undefined || !this.#groups.includes("speed")
+        ? undefined
+        : findOption(selected, ["speed.mode", "service.tier"]);
     this.#root.innerHTML = `
       <style>${elementStyles}</style>
       <style>
@@ -174,12 +210,13 @@ export class ModelsComposerElement extends ModelsHTMLElement {
         .choice:hover { background: var(--models-hover, #f5f5f5); }
         .choice-icon { width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .choice-icon svg { display: block; width: 100%; height: 100%; }
+        .choice-meta { margin-left: 5px; color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; }
         .checkmark { color: var(--models-muted, #646464); }
         .group { padding: 10px 9px 3px; color: var(--models-muted, #646464); font-size: 10px; font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
         .empty { margin: 18px 10px; color: var(--models-muted, #646464); text-align: center; }
       </style>
       <div class="composer" part="composer">
-        ${this.#isOpen ? `<div class="popover" part="popover" role="dialog" aria-label="Model settings">${this.#section === undefined ? renderMainPanel(selected, effort, speed, this.#options, this.#section) : renderSubmenu(this.#section, this.#catalogs, selected, effort, speed, this.#options, this.#query, this.#groupBy, this.#iconMode)}</div>` : ""}
+        ${this.#isOpen ? `<div class="popover" part="popover" role="dialog" aria-label="Model settings">${this.#section === undefined ? renderMainPanel(selected, effort, speed, this.#options, this.#section, this.#groups) : renderSubmenu(this.#section, this.#catalogs, selected, effort, speed, this.#options, this.#query, this.#groupBy, this.#iconMode, this.#recommendations)}</div>` : ""}
         <button class="trigger" part="trigger" type="button" aria-haspopup="dialog" aria-expanded="${this.#isOpen}">
           ${selected === undefined ? "" : renderModelIcon(selected, this.#iconMode, "trigger-icon")}
           <span class="summary">${renderSummary(selected, effort, speed, this.#options)}</span>
@@ -287,7 +324,7 @@ export class ModelsComposerElement extends ModelsHTMLElement {
       return;
     }
     options.model = selected;
-    options.groups = ["reasoning", "speed", "caching", "beta", "generation"];
+    options.groups = this.#groups;
     options.excludedKeys = excludedKeys;
     options.value = this.#options;
     options.addEventListener(OPTIONS_CHANGE_EVENT, (event) => {
@@ -383,12 +420,13 @@ function renderMainPanel(
   speed: OptionDefinition | undefined,
   values: Readonly<Record<string, unknown>>,
   section: ComposerSection | undefined,
+  groups: readonly VisibleOptionGroup[],
 ): string {
   return `<div class="panel" part="panel">
     ${renderRow("model", "Model", model?.name ?? "Choose", section)}
     ${effort === undefined ? "" : renderRow("effort", quickOptionLabel(effort, "Reasoning"), optionValue(effort, values), section)}
-    ${speed === undefined ? "" : renderRow("speed", "Run speed", optionValue(speed, values), section)}
-    ${model === undefined || !hasAdvancedOptions(model, [effort?.key, speed?.key]) ? "" : renderRow("advanced", "Advanced", "", section)}
+    ${speed === undefined ? "" : renderRow("speed", quickOptionLabel(speed, "Run speed"), optionValue(speed, values), section)}
+    ${model === undefined || !hasAdvancedOptions(model, [effort?.key, speed?.key], groups) ? "" : renderRow("advanced", "Advanced", "", section)}
   </div>`;
 }
 
@@ -411,6 +449,7 @@ function renderSubmenu(
   query: string,
   grouping: ModelGrouping,
   iconMode: ModelIconMode,
+  recommendations: readonly ModelRecommendation[],
 ): string {
   if (section === undefined) {
     return "";
@@ -421,10 +460,18 @@ function renderSubmenu(
   if (section === "model") {
     const words = query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
     const models = languageModels(catalogs).filter((model) => {
-      const search = `${model.name} ${model.id} ${model.author ?? ""}`.toLocaleLowerCase();
+      const labels = recommendations
+        .filter(
+          (recommendation) =>
+            recommendation.model === model.key || recommendation.model === model.id,
+        )
+        .map((recommendation) => recommendation.label)
+        .join(" ");
+      const search =
+        `${model.name} ${model.id} ${model.author ?? ""} ${labels}`.toLocaleLowerCase();
       return words.every((word) => search.includes(word));
     });
-    return `<div class="submenu" part="submenu"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings">‹</button><input class="control search" part="search" type="search" aria-label="Search models" placeholder="Search models" value="${escapeHtml(query)}"></div><div class="submenu-list">${models.length === 0 ? '<p class="empty">No matching models</p>' : renderModelChoices(models, selected?.key, grouping, iconMode)}</div></div>`;
+    return `<div class="submenu" part="submenu"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings">‹</button><input class="control search" part="search" type="search" aria-label="Search models" placeholder="Search models" value="${escapeHtml(query)}"></div><div class="submenu-list">${models.length === 0 ? '<p class="empty">No matching models</p>' : renderModelChoices(models, selected?.key, grouping, iconMode, recommendations)}</div></div>`;
   }
   const option = section === "effort" ? effort : speed;
   if (option === undefined || (option.kind !== "boolean" && option.kind !== "enum")) {
@@ -445,9 +492,12 @@ function renderModelChoices(
   selectedKey: string | undefined,
   grouping: ModelGrouping,
   iconMode: ModelIconMode,
+  recommendations: readonly ModelRecommendation[],
 ): string {
   if (grouping === "none") {
-    return models.map((model) => renderModelChoice(model, selectedKey, iconMode)).join("");
+    return models
+      .map((model) => renderModelChoice(model, selectedKey, iconMode, recommendations))
+      .join("");
   }
   const groups = new Map<string, ModelDescriptor[]>();
   for (const model of models) {
@@ -459,7 +509,7 @@ function renderModelChoices(
   return [...groups]
     .map(
       ([group, values]) =>
-        `<div class="group">${escapeHtml(group)}</div>${values.map((model) => renderModelChoice(model, selectedKey, iconMode)).join("")}`,
+        `<div class="group">${escapeHtml(group)}</div>${values.map((model) => renderModelChoice(model, selectedKey, iconMode, recommendations)).join("")}`,
     )
     .join("");
 }
@@ -468,9 +518,16 @@ function renderModelChoice(
   model: ModelDescriptor,
   selectedKey: string | undefined,
   iconMode: ModelIconMode,
+  recommendations: readonly ModelRecommendation[],
 ): string {
   const icon = renderModelIcon(model, iconMode, "choice-icon");
-  return `<button class="choice ${icon === "" ? "no-icon" : ""}" part="option" type="button" aria-pressed="${model.key === selectedKey}" data-model="${escapeHtml(model.key)}">${icon}<span>${escapeHtml(model.name)}</span><span class="checkmark">${model.key === selectedKey ? "✓" : ""}</span></button>`;
+  const labels = recommendations
+    .filter(
+      (recommendation) => recommendation.model === model.key || recommendation.model === model.id,
+    )
+    .map((recommendation) => recommendation.label)
+    .join(" · ");
+  return `<button class="choice ${icon === "" ? "no-icon" : ""}" part="option" type="button" aria-pressed="${model.key === selectedKey}" data-model="${escapeHtml(model.key)}">${icon}<span>${escapeHtml(model.name)}${labels === "" ? "" : ` <span class="choice-meta">${escapeHtml(labels)}</span>`}</span><span class="checkmark">${model.key === selectedKey ? "✓" : ""}</span></button>`;
 }
 
 function renderModelIcon(model: ModelDescriptor, mode: ModelIconMode, className: string): string {
@@ -532,14 +589,24 @@ function findReasoningOption(model: ModelDescriptor): OptionDefinition | undefin
 function hasAdvancedOptions(
   model: ModelDescriptor,
   excludedKeys: readonly (string | undefined)[],
+  groups: readonly VisibleOptionGroup[],
 ): boolean {
   return model.options.some(
-    (option) => option.support.status === "supported" && !excludedKeys.includes(option.key),
+    (option) =>
+      option.support.status === "supported" &&
+      groups.includes(option.group) &&
+      !excludedKeys.includes(option.key),
   );
 }
 
 function quickOptionLabel(option: OptionDefinition, fallback: string): string {
-  return option.key === "reasoning.effort" ? "Effort" : option.label || fallback;
+  if (option.key === "reasoning.effort") {
+    return "Effort";
+  }
+  if (option.key === "speed.mode") {
+    return "Run speed";
+  }
+  return option.label || fallback;
 }
 
 function selectedOptionSummary(option: OptionDefinition, value: unknown): string | undefined {

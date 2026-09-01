@@ -128,6 +128,87 @@ for cost context, or `<models-picker>` for the complete inspector. CSS custom
 properties and `::part()` hooks provide styling without making the package
 framework-specific.
 
+### Curate an application model list
+
+Use exact provider model IDs or provider-qualified keys to keep the available
+set explicit and easy to review in code.
+
+```ts
+import {
+  defineModelPolicy,
+  defineModelPolicyFor,
+  findLowestPricedModel,
+  resolveModelPolicy,
+  resolvePolicyDefaults,
+} from "@models/core";
+
+const policy = defineModelPolicy({
+  models: {
+    include: ["anthropic/claude-opus-5", "openai/gpt-5.6-sol", "moonshotai/kimi-k3"],
+  },
+  options: {
+    groups: ["reasoning", "speed", "routing"],
+    values: {
+      "reasoning.effort": ["low", "medium", "high"],
+      "service.tier": ["default", "flex", "fast"],
+      "speed.mode": ["standard", "fast"],
+    },
+    defaults: {
+      "reasoning.effort": "medium",
+      "service.tier": "default",
+      "speed.mode": "standard",
+    },
+  },
+});
+const curated = resolveModelPolicy(catalogs, policy);
+const lowestInput = findLowestPricedModel(curated.catalogs, "input-token");
+
+selector.catalogs = curated.catalogs;
+composer.catalogs = curated.catalogs;
+composer.groups = curated.groups;
+const defaults = selectedModel && resolvePolicyDefaults(selectedModel, curated);
+selector.recommendations = [
+  {
+    model: "anthropic/claude-opus-5",
+    label: "Recommended for this app",
+  },
+  ...(lowestInput === undefined
+    ? []
+    : [{ model: lowestInput.key, label: "Lowest listed input price" }]),
+];
+
+if (curated.diagnostics.length > 0) {
+  console.warn(curated.diagnostics);
+}
+```
+
+Use `defineModelPolicyFor(generatedCatalogs, policy)` when catalog model IDs and
+options are known at build time. It rejects misspelled IDs, option keys, values,
+and defaults in TypeScript. Live runtime catalogs use `defineModelPolicy` plus
+the resolver diagnostics shown above.
+
+The input-price helper compares only unconditional model-level rates for the
+requested unit. It does not guess route prices, conditional tiers, or a blended
+workload, so the UI never presents a broad `Cheapest` claim without evidence.
+
+Model curation and option visibility are separate axes. Resolve one policy,
+then pass the same result to each presentation:
+
+```ts
+minimal.catalogs = curated.catalogs;
+inline.catalogs = curated.catalogs;
+inlineOptions.groups = curated.groups;
+composer.catalogs = curated.catalogs;
+composer.groups = curated.groups;
+```
+
+Curated enum values are intersected with each model's evidence-backed values.
+Curated defaults are app-owned initial values, not changes to provider facts.
+An empty value intersection removes that option, and runtime validation rejects
+a value excluded by the application policy. Diagnostics report model IDs,
+option keys, values, defaults, and recommendations that do not match the supplied
+catalogs, so dynamic policies do not fail silently.
+
 ## Run the gallery
 
 ```sh
@@ -135,11 +216,12 @@ pnpm install
 pnpm dev
 ```
 
-The gallery presents model-only, reasoning, composer, and inspector shapes in
-one tabbed surface. Catalog-source controls and evidence stay in a separate
-developer disclosure. The page loads public gateway catalogs live and uses
-documented demo records for direct providers, so no credential can enter the
-browser.
+The gallery presents Minimal, Inline, Composer, and Inspector shapes in one
+tabbed surface. A shared policy controls approved models and optional detail
+groups across every shape. Catalog-source controls and evidence stay in a
+separate developer disclosure. The page loads public gateway catalogs live and
+uses documented demo records for direct providers, so no credential can enter
+the browser.
 
 ## Detect catalog changes
 
