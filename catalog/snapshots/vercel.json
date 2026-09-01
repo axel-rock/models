@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "provider": "vercel",
-  "fetchedAt": "2026-08-30T22:20:45.525Z",
+  "fetchedAt": "2026-08-31T17:10:44.111Z",
   "source": {
     "kind": "live-api",
     "url": "https://ai-gateway.vercel.sh/v1/models",
-    "retrievedAt": "2026-08-30T22:20:45.525Z",
+    "retrievedAt": "2026-08-31T17:10:44.111Z",
     "scope": "endpoint"
   },
   "models": [
@@ -3249,6 +3249,101 @@
       }
     },
     {
+      "key": "vercel:alibaba/qwen3.8-flash-next",
+      "provider": "vercel",
+      "id": "alibaba/qwen3.8-flash-next",
+      "name": "Qwen 3.8 Flash Next",
+      "kind": "language",
+      "lifecycle": "unknown",
+      "capabilities": {
+        "input": {
+          "text": {
+            "status": "supported",
+            "evidence": []
+          },
+          "image": {
+            "status": "supported",
+            "evidence": []
+          }
+        },
+        "output": {
+          "text": {
+            "status": "supported",
+            "evidence": []
+          }
+        },
+        "reasoning": {
+          "status": "supported",
+          "evidence": []
+        },
+        "tools": {
+          "status": "supported",
+          "evidence": []
+        },
+        "structuredOutput": {
+          "status": "unknown",
+          "evidence": []
+        },
+        "promptCaching": {
+          "status": "supported",
+          "evidence": []
+        }
+      },
+      "interfaces": [
+        "openai-chat-completions",
+        "openai-responses"
+      ],
+      "prices": [
+        {
+          "unit": "input-token",
+          "usd": "0.00000012",
+          "per": 1,
+          "evidence": []
+        },
+        {
+          "unit": "output-token",
+          "usd": "0.0000004",
+          "per": 1,
+          "evidence": []
+        },
+        {
+          "unit": "cache-read-token",
+          "usd": "0.00000001",
+          "per": 1,
+          "evidence": []
+        }
+      ],
+      "routes": [],
+      "options": [
+        {
+          "key": "caching.auto",
+          "kind": "boolean",
+          "label": "Automatic caching",
+          "description": "Lets AI Gateway apply provider-appropriate cache markers.",
+          "group": "caching",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          }
+        }
+      ],
+      "requirements": [],
+      "sources": [],
+      "description": "Qwen3.8-Flash-Next is Qwen’s experimental open-weight multimodal language model, pairing 125B parameters with just 6B activated for efficient reasoning and generation. With native 262K-token context extensible to 1M, vision support, and an architecture optimized for lower long-context latency, it is built for demanding agentic coding, tool use, visual reasoning, and multimodal automation.",
+      "author": "alibaba",
+      "releasedAt": "2026-08-26T00:00:00.000Z",
+      "contextWindow": {
+        "value": 1048576,
+        "confidence": "provider-confirmed",
+        "sources": []
+      },
+      "maxOutputTokens": {
+        "value": 1048576,
+        "confidence": "provider-confirmed",
+        "sources": []
+      }
+    },
+    {
       "key": "vercel:alibaba/qwen3.8-max",
       "provider": "vercel",
       "id": "alibaba/qwen3.8-max",
@@ -4730,24 +4825,6 @@
           }
         },
         {
-          "key": "reasoning.enabled",
-          "kind": "boolean",
-          "label": "Reasoning",
-          "description": "Enables or disables reasoning for this model.",
-          "group": "reasoning",
-          "support": {
-            "status": "supported",
-            "evidence": []
-          },
-          "target": {
-            "kind": "request-option",
-            "path": [
-              "reasoning",
-              "enabled"
-            ]
-          }
-        },
-        {
           "key": "reasoning.effort",
           "kind": "enum",
           "label": "Reasoning effort",
@@ -4770,6 +4847,20 @@
               "effort"
             ]
           }
+        },
+        {
+          "key": "reasoning.mode",
+          "kind": "enum",
+          "label": "Thinking",
+          "description": "Uses only the thinking modes supported by this model.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "values": [
+            "adaptive"
+          ]
         },
         {
           "key": "caching.ttl",
@@ -6757,24 +6848,6 @@
           }
         },
         {
-          "key": "reasoning.enabled",
-          "kind": "boolean",
-          "label": "Reasoning",
-          "description": "Enables or disables reasoning for this model.",
-          "group": "reasoning",
-          "support": {
-            "status": "supported",
-            "evidence": []
-          },
-          "target": {
-            "kind": "request-option",
-            "path": [
-              "reasoning",
-              "enabled"
-            ]
-          }
-        },
-        {
           "key": "reasoning.effort",
           "kind": "enum",
           "label": "Reasoning effort",
@@ -6797,6 +6870,21 @@
               "effort"
             ]
           }
+        },
+        {
+          "key": "reasoning.mode",
+          "kind": "enum",
+          "label": "Thinking",
+          "description": "Uses only the thinking modes supported by this model.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "values": [
+            "adaptive",
+            "disabled"
+          ]
         },
         {
           "key": "caching.ttl",
@@ -10825,6 +10913,28 @@
           }
         },
         {
+          "key": "reasoning.budgetTokens",
+          "kind": "integer",
+          "label": "Thinking budget",
+          "description": "Guides the number of thinking tokens for Gemini 2.5 models.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "min": 0,
+          "max": 24576,
+          "step": 1,
+          "target": {
+            "kind": "provider-option",
+            "namespace": "google",
+            "path": [
+              "thinkingConfig",
+              "thinkingBudget"
+            ]
+          }
+        },
+        {
           "key": "reasoning.enabled",
           "kind": "boolean",
           "label": "Reasoning",
@@ -11086,6 +11196,28 @@
           }
         },
         {
+          "key": "reasoning.budgetTokens",
+          "kind": "integer",
+          "label": "Thinking budget",
+          "description": "Guides the number of thinking tokens for Gemini 2.5 models.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "min": 512,
+          "max": 24576,
+          "step": 1,
+          "target": {
+            "kind": "provider-option",
+            "namespace": "google",
+            "path": [
+              "thinkingConfig",
+              "thinkingBudget"
+            ]
+          }
+        },
+        {
           "key": "reasoning.enabled",
           "kind": "boolean",
           "label": "Reasoning",
@@ -11226,6 +11358,28 @@
           }
         },
         {
+          "key": "reasoning.budgetTokens",
+          "kind": "integer",
+          "label": "Thinking budget",
+          "description": "Guides the number of thinking tokens for Gemini 2.5 models.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "min": 128,
+          "max": 32768,
+          "step": 1,
+          "target": {
+            "kind": "provider-option",
+            "namespace": "google",
+            "path": [
+              "thinkingConfig",
+              "thinkingBudget"
+            ]
+          }
+        },
+        {
           "key": "reasoning.maxTokens",
           "kind": "integer",
           "label": "Reasoning token budget",
@@ -11348,10 +11502,10 @@
           }
         },
         {
-          "key": "reasoning.effort",
+          "key": "reasoning.level",
           "kind": "enum",
-          "label": "Reasoning effort",
-          "description": "Uses only the effort levels advertised by AI Gateway.",
+          "label": "Thinking level",
+          "description": "Balances latency and reasoning depth for Gemini 3 models.",
           "group": "reasoning",
           "support": {
             "status": "supported",
@@ -11364,10 +11518,11 @@
             "high"
           ],
           "target": {
-            "kind": "request-option",
+            "kind": "provider-option",
+            "namespace": "google",
             "path": [
-              "reasoning",
-              "effort"
+              "thinkingConfig",
+              "thinkingLevel"
             ]
           }
         },
@@ -11392,6 +11547,30 @@
             "namespace": "google",
             "path": [
               "serviceTier"
+            ]
+          }
+        },
+        {
+          "key": "reasoning.effort",
+          "kind": "enum",
+          "label": "Reasoning effort",
+          "description": "Uses only the effort levels advertised by AI Gateway.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "target": {
+            "kind": "request-option",
+            "path": [
+              "reasoning",
+              "effort"
             ]
           }
         }
@@ -11903,6 +12082,31 @@
           }
         },
         {
+          "key": "reasoning.level",
+          "kind": "enum",
+          "label": "Thinking level",
+          "description": "Balances latency and reasoning depth for Gemini 3 models.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "target": {
+            "kind": "provider-option",
+            "namespace": "google",
+            "path": [
+              "thinkingConfig",
+              "thinkingLevel"
+            ]
+          }
+        },
+        {
           "key": "reasoning.effort",
           "kind": "enum",
           "label": "Reasoning effort",
@@ -12156,6 +12360,30 @@
           }
         },
         {
+          "key": "reasoning.level",
+          "kind": "enum",
+          "label": "Thinking level",
+          "description": "Balances latency and reasoning depth for Gemini 3 models.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "target": {
+            "kind": "provider-option",
+            "namespace": "google",
+            "path": [
+              "thinkingConfig",
+              "thinkingLevel"
+            ]
+          }
+        },
+        {
           "key": "reasoning.effort",
           "kind": "enum",
           "label": "Reasoning effort",
@@ -12284,10 +12512,10 @@
           }
         },
         {
-          "key": "reasoning.effort",
+          "key": "reasoning.level",
           "kind": "enum",
-          "label": "Reasoning effort",
-          "description": "Uses only the effort levels advertised by AI Gateway.",
+          "label": "Thinking level",
+          "description": "Balances latency and reasoning depth for Gemini 3 models.",
           "group": "reasoning",
           "support": {
             "status": "supported",
@@ -12300,10 +12528,11 @@
             "high"
           ],
           "target": {
-            "kind": "request-option",
+            "kind": "provider-option",
+            "namespace": "google",
             "path": [
-              "reasoning",
-              "effort"
+              "thinkingConfig",
+              "thinkingLevel"
             ]
           }
         },
@@ -12328,6 +12557,30 @@
             "namespace": "google",
             "path": [
               "serviceTier"
+            ]
+          }
+        },
+        {
+          "key": "reasoning.effort",
+          "kind": "enum",
+          "label": "Reasoning effort",
+          "description": "Uses only the effort levels advertised by AI Gateway.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "values": [
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "target": {
+            "kind": "request-option",
+            "path": [
+              "reasoning",
+              "effort"
             ]
           }
         }
@@ -12925,10 +13178,10 @@
           }
         },
         {
-          "key": "reasoning.effort",
+          "key": "reasoning.level",
           "kind": "enum",
-          "label": "Reasoning effort",
-          "description": "Uses only the effort levels advertised by AI Gateway.",
+          "label": "Thinking level",
+          "description": "Balances latency and reasoning depth for Gemini 3 models.",
           "group": "reasoning",
           "support": {
             "status": "supported",
@@ -12940,10 +13193,11 @@
             "high"
           ],
           "target": {
-            "kind": "request-option",
+            "kind": "provider-option",
+            "namespace": "google",
             "path": [
-              "reasoning",
-              "effort"
+              "thinkingConfig",
+              "thinkingLevel"
             ]
           }
         },
@@ -12968,6 +13222,29 @@
             "namespace": "google",
             "path": [
               "serviceTier"
+            ]
+          }
+        },
+        {
+          "key": "reasoning.effort",
+          "kind": "enum",
+          "label": "Reasoning effort",
+          "description": "Uses only the effort levels advertised by AI Gateway.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "target": {
+            "kind": "request-option",
+            "path": [
+              "reasoning",
+              "effort"
             ]
           }
         }

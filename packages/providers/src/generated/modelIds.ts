@@ -33,6 +33,7 @@ export const knownVercelModelIds = [
   "alibaba/qwen3.8-2.4t-a95b",
   "alibaba/qwen3.8-27b",
   "alibaba/qwen3.8-flash",
+  "alibaba/qwen3.8-flash-next",
   "alibaba/qwen3.8-max",
   "alibaba/wan-v2.5-t2v-preview",
   "alibaba/wan-v2.6-i2v",
@@ -487,7 +488,6 @@ export const knownOpenRouterModelIds = [
   "inception/mercury-2",
   "inclusionai/ling-3.0-flash",
   "inclusionai/ling-3.0-flash-fin:free",
-  "kwaipilot/kat-coder-air-v2.5",
   "kwaipilot/kat-coder-pro-v2",
   "kwaipilot/kat-coder-pro-v2.5",
   "liquid/lfm-2.5-2.6b:free",
@@ -905,7 +905,6 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "openrouter:inception/mercury-2": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "high" | "medium" | "low" | "none"; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:inclusionai/ling-3.0-flash": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
   readonly "openrouter:inclusionai/ling-3.0-flash-fin:free": Readonly<{ readonly "reasoning.enabled"?: boolean; readonly "reasoning.exclude"?: boolean }>;
-  readonly "openrouter:kwaipilot/kat-coder-air-v2.5": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:kwaipilot/kat-coder-pro-v2": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:kwaipilot/kat-coder-pro-v2.5": Readonly<{ readonly [key: string]: never }>;
   readonly "openrouter:liquid/lfm-2.5-2.6b:free": Readonly<{ readonly "reasoning.exclude"?: boolean }>;
@@ -1203,6 +1202,7 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "vercel:alibaba/qwen3.8-2.4t-a95b": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:alibaba/qwen3.8-27b": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:alibaba/qwen3.8-flash": Readonly<{ readonly "caching.auto"?: boolean }>;
+  readonly "vercel:alibaba/qwen3.8-flash-next": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:alibaba/qwen3.8-max": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:alibaba/wan-v2.5-t2v-preview": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:alibaba/wan-v2.6-i2v": Readonly<{ readonly "caching.auto"?: boolean }>;
@@ -1220,7 +1220,7 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "vercel:amazon/nova-pro": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:amazon/titan-embed-text-v2": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:anthropic/claude-3-haiku": Readonly<{ readonly "caching.auto"?: boolean }>;
-  readonly "vercel:anthropic/claude-fable-5": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "low" | "medium" | "high" | "xhigh"; readonly "caching.ttl"?: "5m" | "1h"; readonly "beta.features"?: readonly string[] }>;
+  readonly "vercel:anthropic/claude-fable-5": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.effort"?: "low" | "medium" | "high" | "xhigh"; readonly "reasoning.mode"?: "adaptive"; readonly "caching.ttl"?: "5m" | "1h"; readonly "beta.features"?: readonly string[] }>;
   readonly "vercel:anthropic/claude-haiku-4.5": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean; readonly "reasoning.maxTokens"?: number }>;
   readonly "vercel:anthropic/claude-opus-4": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:anthropic/claude-opus-4.5": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean; readonly "reasoning.maxTokens"?: number }>;
@@ -1233,7 +1233,7 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "vercel:anthropic/claude-sonnet-4": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:anthropic/claude-sonnet-4.5": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.maxTokens"?: number }>;
   readonly "vercel:anthropic/claude-sonnet-4.6": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "low" | "medium" | "high"; readonly "reasoning.maxTokens"?: number }>;
-  readonly "vercel:anthropic/claude-sonnet-5": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean; readonly "reasoning.effort"?: "low" | "medium" | "high" | "xhigh"; readonly "caching.ttl"?: "5m" | "1h"; readonly "beta.features"?: readonly string[] }>;
+  readonly "vercel:anthropic/claude-sonnet-5": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.effort"?: "low" | "medium" | "high" | "xhigh"; readonly "reasoning.mode"?: "adaptive" | "disabled"; readonly "caching.ttl"?: "5m" | "1h"; readonly "beta.features"?: readonly string[] }>;
   readonly "vercel:arcee-ai/trinity-large-thinking": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:bfl/flux-2-flex": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:bfl/flux-2-klein-4b": Readonly<{ readonly "caching.auto"?: boolean }>;
@@ -1283,23 +1283,23 @@ export interface KnownGatewayOptionValuesByKey {
   readonly "vercel:fish-audio/s2.1-pro-free": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:fish-audio/transcribe-1": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:fish-audio/transcribe-1-free": Readonly<{ readonly "caching.auto"?: boolean }>;
-  readonly "vercel:google/gemini-2.5-flash": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean; readonly "reasoning.maxTokens"?: number }>;
+  readonly "vercel:google/gemini-2.5-flash": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.budgetTokens"?: number; readonly "reasoning.enabled"?: boolean; readonly "reasoning.maxTokens"?: number }>;
   readonly "vercel:google/gemini-2.5-flash-image": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.budgetTokens"?: number }>;
-  readonly "vercel:google/gemini-2.5-flash-lite": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.enabled"?: boolean; readonly "reasoning.maxTokens"?: number }>;
-  readonly "vercel:google/gemini-2.5-pro": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.maxTokens"?: number }>;
-  readonly "vercel:google/gemini-3-flash": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.effort"?: "minimal" | "low" | "medium" | "high"; readonly "service.tier"?: "standard" | "flex" | "priority" }>;
+  readonly "vercel:google/gemini-2.5-flash-lite": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.budgetTokens"?: number; readonly "reasoning.enabled"?: boolean; readonly "reasoning.maxTokens"?: number }>;
+  readonly "vercel:google/gemini-2.5-pro": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.budgetTokens"?: number; readonly "reasoning.maxTokens"?: number }>;
+  readonly "vercel:google/gemini-3-flash": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.level"?: "minimal" | "low" | "medium" | "high"; readonly "service.tier"?: "standard" | "flex" | "priority"; readonly "reasoning.effort"?: "minimal" | "low" | "medium" | "high" }>;
   readonly "vercel:google/gemini-3-pro-image": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.level"?: "low" | "high"; readonly "service.tier"?: "standard" | "flex" | "priority" }>;
   readonly "vercel:google/gemini-3.1-flash-image": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.effort"?: "minimal" | "high" }>;
   readonly "vercel:google/gemini-3.1-flash-image-preview": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.effort"?: "minimal" | "high" }>;
-  readonly "vercel:google/gemini-3.1-flash-lite": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.effort"?: "minimal" | "low" | "medium" | "high" }>;
+  readonly "vercel:google/gemini-3.1-flash-lite": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.level"?: "minimal" | "low" | "medium" | "high"; readonly "reasoning.effort"?: "minimal" | "low" | "medium" | "high" }>;
   readonly "vercel:google/gemini-3.1-flash-lite-image": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.level"?: "minimal" | "high" }>;
-  readonly "vercel:google/gemini-3.1-pro-preview": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.effort"?: "low" | "medium" | "high" }>;
-  readonly "vercel:google/gemini-3.5-flash": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.effort"?: "minimal" | "low" | "medium" | "high"; readonly "service.tier"?: "standard" | "flex" | "priority" }>;
+  readonly "vercel:google/gemini-3.1-pro-preview": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.level"?: "low" | "medium" | "high"; readonly "reasoning.effort"?: "low" | "medium" | "high" }>;
+  readonly "vercel:google/gemini-3.5-flash": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.level"?: "minimal" | "low" | "medium" | "high"; readonly "service.tier"?: "standard" | "flex" | "priority"; readonly "reasoning.effort"?: "minimal" | "low" | "medium" | "high" }>;
   readonly "vercel:google/gemini-3.5-flash-lite": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.level"?: "minimal" | "low" | "medium" | "high"; readonly "service.tier"?: "standard" | "flex" | "priority" }>;
   readonly "vercel:google/gemini-3.5-transcribe": Readonly<{ readonly "caching.auto"?: boolean; readonly "service.tier"?: "standard" | "flex" | "priority" }>;
   readonly "vercel:google/gemini-3.5-transcribe-live": Readonly<{ readonly "caching.auto"?: boolean; readonly "service.tier"?: "standard" | "flex" | "priority" }>;
   readonly "vercel:google/gemini-3.6-flash": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.level"?: "minimal" | "low" | "medium" | "high"; readonly "service.tier"?: "standard" | "flex" | "priority" }>;
-  readonly "vercel:google/gemini-3.7-flash": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.effort"?: "low" | "medium" | "high"; readonly "service.tier"?: "standard" | "flex" | "priority" }>;
+  readonly "vercel:google/gemini-3.7-flash": Readonly<{ readonly "caching.auto"?: boolean; readonly "reasoning.level"?: "low" | "medium" | "high"; readonly "service.tier"?: "standard" | "flex" | "priority"; readonly "reasoning.effort"?: "low" | "medium" | "high" }>;
   readonly "vercel:google/gemini-embedding-001": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:google/gemini-embedding-2": Readonly<{ readonly "caching.auto"?: boolean }>;
   readonly "vercel:google/gemini-omni-flash-preview": Readonly<{ readonly "caching.auto"?: boolean }>;

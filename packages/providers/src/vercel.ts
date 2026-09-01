@@ -90,10 +90,10 @@ export const vercelGatewayAdapter: ProviderAdapter<"vercel"> = {
       const [upstream = "", ...modelParts] = raw.id.split("/");
       const upstreamId = modelParts.join("/");
       const liveReasoningOptions = vercelReasoningOptions(raw.reasoning_options, source);
-      const overlayOptions = upstreamOptions(upstream, upstreamId).filter(
-        (option) => liveReasoningOptions.length === 0 || option.group !== "reasoning",
+      const options = mergeOptions(
+        [...vercelGatewayOptions(), ...upstreamOptions(upstream, upstreamId)],
+        liveReasoningOptions,
       );
-      const options = [...vercelGatewayOptions(), ...liveReasoningOptions, ...overlayOptions];
       const model = baseModel({
         provider: "vercel",
         id: raw.id,
@@ -179,17 +179,77 @@ export const vercelGatewayAdapter: ProviderAdapter<"vercel"> = {
   mapOptions(model, values) {
     const mapped = mapModelOptions(model, values);
     const autoCaching = values["caching.auto"];
-    if (autoCaching !== true) {
-      return mapped;
-    }
+    const upstream = model.id.split("/")[0];
+    const providerOptions =
+      upstream === "anthropic"
+        ? mapAnthropicOptions(mapped.providerOptions, values)
+        : mapped.providerOptions;
     return {
       ...mapped,
-      providerOptions: mergeNested(mapped.providerOptions, {
-        gateway: { caching: "auto" },
-      }),
+      providerOptions:
+        autoCaching === true
+          ? mergeNested(providerOptions, { gateway: { caching: "auto" } })
+          : providerOptions,
+      warnings:
+        upstream === "anthropic"
+          ? mapped.warnings.filter(
+              (warning) =>
+                !["reasoning.mode", "reasoning.budgetTokens"].some((key) =>
+                  warning.startsWith(`${key} `),
+                ),
+            )
+          : mapped.warnings,
     } satisfies MappedModelOptions;
   },
 };
+
+function mergeOptions(
+  documented: readonly OptionDefinition[],
+  live: readonly OptionDefinition[],
+): readonly OptionDefinition[] {
+  const normalizedLive = live.filter(
+    (option) =>
+      option.key !== "reasoning.enabled" ||
+      !documented.some((candidate) => candidate.key === "reasoning.mode"),
+  );
+  const liveByKey = new Map(normalizedLive.map((option) => [option.key, option]));
+  return [
+    ...documented.map((option) => liveByKey.get(option.key) ?? option),
+    ...normalizedLive.filter(
+      (option) => !documented.some((candidate) => candidate.key === option.key),
+    ),
+  ];
+}
+
+function mapAnthropicOptions(
+  providerOptions: Readonly<Record<string, unknown>>,
+  values: Readonly<Record<string, unknown>>,
+): Readonly<Record<string, unknown>> {
+  const anthropic = {
+    ...(providerOptions.anthropic as Record<string, unknown> | undefined),
+  };
+  const mode = values["reasoning.mode"];
+  if (mode === "adaptive" || mode === "disabled") {
+    anthropic.thinking = { type: mode };
+  } else if (mode === "enabled") {
+    anthropic.thinking = {
+      type: "enabled",
+      ...(typeof values["reasoning.budgetTokens"] === "number"
+        ? { budgetTokens: values["reasoning.budgetTokens"] }
+        : {}),
+    };
+  }
+  if (typeof values["caching.ttl"] === "string") {
+    anthropic.cacheControl = { type: "ephemeral", ttl: values["caching.ttl"] };
+  }
+  if (values["speed.mode"] === "fast") {
+    const betaFeatures = Array.isArray(anthropic.anthropicBeta)
+      ? anthropic.anthropicBeta.filter((value): value is string => typeof value === "string")
+      : [];
+    anthropic.anthropicBeta = [...new Set([...betaFeatures, "fast-mode-2026-02-01"])];
+  }
+  return { ...providerOptions, anthropic };
+}
 
 function upstreamOptions(provider: string, modelId: string): readonly OptionDefinition[] {
   switch (provider) {

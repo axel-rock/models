@@ -86,6 +86,7 @@ function model(
     provider,
     id,
     name,
+    author: provider,
     kind: "language",
     lifecycle: "production",
     capabilities: {

@@ -5,96 +5,180 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Browse framework-neutral model selector examples backed by live provider catalogs."
+      content="Framework-neutral model selectors backed by provider catalogs."
     />
     <title>Models gallery</title>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to examples</a>
-    <div class="shell">
-      <aside class="sidebar">
-        <a class="brand" href="#top"><span class="brand-mark">M</span> Models</a>
-        <nav aria-label="Examples">
-          <span class="nav-label">Examples</span>
-          <a href="#model-only">Model only</a>
-          <a href="#reasoning">Model + reasoning</a>
-          <a href="#advanced">Advanced picker</a>
-          <a href="#freshness">Catalog freshness</a>
-        </nav>
-        <div class="sidebar-note">
-          <span class="pulse" aria-hidden="true"></span>
-          <span id="sidebar-status">Loading live catalogs</span>
-        </div>
-      </aside>
-
-      <main id="main">
-        <header class="hero" id="top">
-          <p class="eyebrow">Provider-neutral model controls</p>
-          <h1>Pick a model without hiding what it can do.</h1>
-          <p class="lede">
-            Live discovery, reviewed capability evidence, type-safe options, and small components
-            that work without a framework.
-          </p>
-          <div class="catalog-summary" id="catalog-summary" aria-live="polite"></div>
-        </header>
-
-        <section class="example" id="model-only">
-          <div class="example-copy">
-            <p class="eyebrow">01 · Compact</p>
-            <h2>Model only</h2>
-            <p>Use one native select when the product should choose everything else.</p>
-            <code>&lt;models-select&gt;</code>
+    <a class="skip-link" href="#showcase">Skip to examples</a>
+    <header class="site-header">
+      <a class="brand" href="#top"><span class="brand-mark">M</span> Models</a>
+      <details class="source-menu" id="source-menu">
+        <summary>Data source</summary>
+        <div class="source-popover">
+          <div class="source-section">
+            <span class="source-kicker">Gateways</span>
+            <div
+              class="source-options"
+              id="gateway-options"
+              role="group"
+              aria-label="Gateway catalog"
+            ></div>
           </div>
-          <div class="demo compact-demo">
-            <models-select id="simple-select" label="Default model"></models-select>
-            <p class="selection-line" id="simple-output">No model selected</p>
+          <div class="source-section">
+            <span class="source-kicker">Direct API examples</span>
+            <div
+              class="source-options"
+              id="direct-options"
+              role="group"
+              aria-label="Direct provider catalog"
+            ></div>
           </div>
-        </section>
-
-        <section class="example" id="reasoning">
-          <div class="example-copy">
-            <p class="eyebrow">02 · Focused</p>
-            <h2>Model + reasoning</h2>
-            <p>Show only reasoning controls. Provider defaults remain visible and safe.</p>
-            <code>picker.groups = ["reasoning"]</code>
+          <div class="source-preferences">
+            <label title="Show model-maker logos in every selector">
+              <input id="show-icons" type="checkbox" checked />
+              <span>Model logos</span>
+            </label>
+            <label class="group-toggle" title="Group gateway models by their maker">
+              <input id="group-models" type="checkbox" checked />
+              <span>Group by maker</span>
+            </label>
           </div>
-          <div class="demo wide-demo">
-            <models-picker id="reasoning-picker"></models-picker>
-          </div>
-        </section>
-
-        <section class="example stacked" id="advanced">
-          <div class="example-copy">
-            <p class="eyebrow">03 · Complete</p>
-            <h2>Advanced picker</h2>
-            <p>
-              Reasoning, speed, service tiers, caching, beta notes, evidence, and prices stay close
-              to the selected model.
-            </p>
-          </div>
-          <div class="demo wide-demo">
-            <models-picker id="advanced-picker"></models-picker>
-          </div>
-          <details class="output-panel">
-            <summary>Selection output</summary>
-            <pre id="selection-output">Choose a model or option to inspect the typed value.</pre>
+          <p class="source-summary" id="source-summary">Loading available models</p>
+          <details class="source-evidence">
+            <summary>Catalog details</summary>
+            <div id="freshness-grid"></div>
           </details>
-        </section>
+        </div>
+      </details>
+    </header>
 
-        <section class="example" id="freshness">
-          <div class="example-copy">
-            <p class="eyebrow">04 · Maintenance</p>
-            <h2>Catalog freshness</h2>
-            <p>
-              Public catalogs are checked against reviewed snapshots. Direct-provider options use
-              dated documentation overlays.
-            </p>
-            <code>pnpm catalog:check</code>
+    <main id="top">
+      <section class="hero">
+        <h1>Model selectors</h1>
+        <p>Pick a model. Show only the controls it supports.</p>
+      </section>
+
+      <section class="showcase" id="showcase" aria-labelledby="showcase-title">
+        <div class="showcase-heading">
+          <h2 class="visually-hidden" id="showcase-title">Selector examples</h2>
+          <div class="tabs" role="tablist" aria-label="Selector examples">
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-model"
+              id="tab-model"
+              data-tab="model"
+            >
+              Model
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-reasoning"
+              id="tab-reasoning"
+              data-tab="reasoning"
+            >
+              Reasoning
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-composer"
+              id="tab-composer"
+              data-tab="composer"
+            >
+              Composer
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-inspector"
+              id="tab-inspector"
+              data-tab="inspector"
+            >
+              Inspector
+            </button>
           </div>
-          <div class="demo freshness-demo" id="freshness-grid"></div>
-        </section>
-      </main>
-    </div>
+        </div>
+
+        <div class="panels">
+          <section
+            class="panel"
+            role="tabpanel"
+            id="panel-model"
+            aria-labelledby="tab-model"
+            data-panel="model"
+            hidden
+          >
+            <div class="panel-copy">
+              <h3>Model only</h3>
+              <p>A compact searchable combobox with model-maker grouping and logos.</p>
+            </div>
+            <div class="demo compact-demo">
+              <models-select id="simple-select" label="Model"></models-select>
+            </div>
+          </section>
+
+          <section
+            class="panel"
+            role="tabpanel"
+            id="panel-reasoning"
+            aria-labelledby="tab-reasoning"
+            data-panel="reasoning"
+            hidden
+          >
+            <div class="panel-copy">
+              <h3>Model + reasoning</h3>
+              <p>Only the reasoning controls confirmed for the selected model.</p>
+            </div>
+            <div class="demo reasoning-demo">
+              <models-select id="reasoning-select" label="Model"></models-select>
+              <models-options id="reasoning-options"></models-options>
+            </div>
+          </section>
+
+          <section
+            class="panel"
+            role="tabpanel"
+            id="panel-composer"
+            aria-labelledby="tab-composer"
+            data-panel="composer"
+          >
+            <div class="panel-copy">
+              <h3>Composer</h3>
+              <p>One quiet summary. Model and supported details open in a single surface.</p>
+            </div>
+            <div class="demo composer-demo">
+              <models-composer id="composer-menu"></models-composer>
+            </div>
+          </section>
+
+          <section
+            class="panel inspector-panel"
+            role="tabpanel"
+            id="panel-inspector"
+            aria-labelledby="tab-inspector"
+            data-panel="inspector"
+            hidden
+          >
+            <div class="panel-copy">
+              <h3>Inspector</h3>
+              <p>Search, pricing, evidence, and every supported model option.</p>
+            </div>
+            <div class="demo wide-demo"><models-picker id="advanced-picker"></models-picker></div>
+            <details class="output-panel">
+              <summary>Typed value</summary>
+              <pre id="selection-output">Choose a model or option to inspect the value.</pre>
+            </details>
+          </section>
+        </div>
+      </section>
+    </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

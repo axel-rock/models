@@ -32,23 +32,28 @@ export class ModelsPriceElement extends ModelsHTMLElement {
     const output = model === undefined ? undefined : pricePerMillion(model.prices, "output-token");
     const cache =
       model === undefined ? undefined : pricePerMillion(model.prices, "cache-read-token");
+    const items = [
+      ["Input", input],
+      ["Output", output],
+      ["Cached", cache],
+    ] as const;
+    const listed = items.flatMap(([label, value]) =>
+      value === undefined ? [] : [{ label, value }],
+    );
     this.#root.innerHTML = `
       <style>
         ${elementStyles}
-        dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; }
-        div { min-width: 0; }
+        dl { display: flex; flex-wrap: wrap; gap: 7px 14px; margin: 0; }
+        div { display: flex; gap: 4px; min-width: 0; }
         dt { color: var(--models-muted, #646464); font-size: 11px; }
-        dd { margin: 2px 0 0; font-weight: 650; }
+        dd { margin: 0; font-size: 11px; font-weight: 650; }
+        p { margin: 0; color: var(--models-muted, #646464); font-size: 11px; }
       </style>
-      <dl part="prices">
-        ${priceItem("Input", input)}
-        ${priceItem("Output", output)}
-        ${priceItem("Cached", cache)}
-      </dl>
+      ${listed.length === 0 ? '<p part="prices">No public token price</p>' : `<dl part="prices">${listed.map(({ label, value }) => priceItem(label, value)).join("")}</dl>`}
     `;
   }
 }
 
-function priceItem(label: string, value: string | undefined): string {
-  return `<div part="price"><dt>${label} / 1M</dt><dd>${value === undefined ? "Not listed" : formatUsd(value)}</dd></div>`;
+function priceItem(label: string, value: string): string {
+  return `<div part="price"><dt>${label}</dt><dd>${formatUsd(value)} / 1M</dd></div>`;
 }

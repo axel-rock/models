@@ -3,6 +3,9 @@ import type { ModelDescriptor, ModelSelection } from "@models/core";
 /** The event name emitted when a model changes. */
 export const MODEL_CHANGE_EVENT = "models-model-change";
 
+/** The event name emitted when a model selection is cleared. */
+export const MODEL_CLEAR_EVENT = "models-model-clear";
+
 /** The event name emitted when a complete selection changes. */
 export const SELECTION_CHANGE_EVENT = "models-selection-change";
 
@@ -18,6 +21,11 @@ export function emitModelChange(target: EventTarget, model: ModelDescriptor): vo
       composed: true,
     }),
   );
+}
+
+/** Emit a standard bubbling, composed model-clear event. */
+export function emitModelClear(target: EventTarget): void {
+  target.dispatchEvent(new CustomEvent(MODEL_CLEAR_EVENT, { bubbles: true, composed: true }));
 }
 
 /** Emit a complete model and option selection. */

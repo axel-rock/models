@@ -12,6 +12,7 @@ export type {
 export { openAiAdapter } from "./openai.ts";
 export { openRouterAdapter } from "./openrouter.ts";
 export { selectKnownGatewayModel } from "./known.ts";
+export type { KnownGatewayModel, KnownGatewaySelection } from "./known.ts";
 export {
   anthropicConstraints,
   anthropicOptions,

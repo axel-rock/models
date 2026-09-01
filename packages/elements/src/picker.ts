@@ -8,7 +8,9 @@ import {
 } from "@models/core";
 import { ModelsHTMLElement } from "./base.ts";
 import { emitSelectionChange, OPTIONS_CHANGE_EVENT } from "./events.ts";
-import type { VisibleOptionGroup } from "./options.ts";
+import { modelGroup, type ModelGrouping } from "./grouping.ts";
+import { modelIcon, type ModelIconMode } from "./icons.ts";
+import type { OptionsLayout, VisibleOptionGroup } from "./options.ts";
 import { ModelsOptionsElement } from "./options.ts";
 import { ModelsPriceElement } from "./price.ts";
 import { elementStyles } from "./styles.ts";
@@ -20,6 +22,9 @@ export class ModelsPickerElement extends ModelsHTMLElement {
   #options: OptionValues<ModelDescriptor["options"]> = {};
   #groups: readonly VisibleOptionGroup[] = ["reasoning", "speed", "caching", "beta"];
   #query = "";
+  #groupBy: ModelGrouping = "none";
+  #optionsLayout: OptionsLayout = "stacked";
+  #iconMode: ModelIconMode = "none";
   readonly #root: ShadowRoot;
 
   constructor() {
@@ -34,8 +39,14 @@ export class ModelsPickerElement extends ModelsHTMLElement {
 
   set catalogs(value: readonly ModelCatalog[]) {
     this.#catalogs = value;
-    if (this.#selected === undefined) {
-      this.#selected = value.flatMap((catalog) => catalog.models)[0];
+    const models = value.flatMap((catalog) => catalog.models);
+    if (
+      this.#selected === undefined ||
+      !models.some((model) => model.key === this.#selected?.key)
+    ) {
+      this.#selected = models[0];
+      this.#options = {};
+      this.#query = "";
     }
     this.render();
   }
@@ -47,6 +58,36 @@ export class ModelsPickerElement extends ModelsHTMLElement {
 
   set groups(value: readonly VisibleOptionGroup[]) {
     this.#groups = value;
+    this.render();
+  }
+
+  /** How the model list is grouped. Author grouping is useful for gateways. */
+  get groupBy(): ModelGrouping {
+    return this.#groupBy;
+  }
+
+  set groupBy(value: ModelGrouping) {
+    this.#groupBy = value;
+    this.render();
+  }
+
+  /** Layout used for the selected model's option controls. */
+  get optionsLayout(): OptionsLayout {
+    return this.#optionsLayout;
+  }
+
+  set optionsLayout(value: OptionsLayout) {
+    this.#optionsLayout = value;
+    this.render();
+  }
+
+  /** Which optional brand identity is shown in model rows. */
+  get iconMode(): ModelIconMode {
+    return this.#iconMode;
+  }
+
+  set iconMode(value: ModelIconMode) {
+    this.#iconMode = value;
     this.render();
   }
 
@@ -73,25 +114,34 @@ export class ModelsPickerElement extends ModelsHTMLElement {
     this.#root.innerHTML = `
       <style>
         ${elementStyles}
-        .picker { display: grid; grid-template-columns: minmax(240px, .9fr) minmax(280px, 1.1fr); border: 1px solid var(--models-border, #d6d6d6); border-radius: var(--models-panel-radius, 10px); overflow: hidden; background: var(--models-surface, #fff); }
+        .picker { display: grid; grid-template-columns: minmax(230px, .8fr) minmax(280px, 1.2fr); border: 1px solid var(--models-border, #d6d6d6); border-radius: var(--models-panel-radius, 9px); overflow: hidden; background: var(--models-surface, #fff); }
         .models { min-width: 0; border-right: 1px solid var(--models-border, #d6d6d6); }
-        .search { padding: 12px; border-bottom: 1px solid var(--models-border, #d6d6d6); }
-        .list { max-height: var(--models-list-height, 390px); overflow: auto; padding: 6px; }
-        .model { width: 100%; border: 0; border-radius: 6px; background: transparent; padding: 9px; text-align: left; cursor: pointer; }
+        .search { padding: 7px; border-bottom: 1px solid var(--models-border, #d6d6d6); }
+        .search .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        .list { max-height: var(--models-list-height, 390px); overflow: auto; padding: 5px; }
+        .group { padding: 10px 8px 4px; color: var(--models-muted, #646464); font-size: 10px; font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
+        .model { width: 100%; border: 0; border-radius: 6px; background: transparent; padding: 6px 8px; text-align: left; cursor: pointer; }
         .model:hover { background: var(--models-hover, #f5f5f5); }
         .model[aria-selected="true"] { background: var(--models-selected, #eef4ff); }
-        .model-name { display: flex; justify-content: space-between; gap: 8px; font-weight: 650; }
-        .meta { display: flex; gap: 5px; margin-top: 4px; overflow: hidden; }
-        .detail { display: grid; align-content: start; gap: 18px; padding: 18px; min-width: 0; }
+        .model-name { display: flex; align-items: center; gap: 8px; min-width: 0; font-weight: 620; }
+        .model-icon { flex: 0 0 16px; width: 16px; height: 16px; color: var(--models-muted, #646464); }
+        .model-icon svg { display: block; width: 100%; height: 100%; }
+        .model-qualifier { overflow: hidden; color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; text-overflow: ellipsis; white-space: nowrap; }
+        .no-results { margin: 16px 8px; color: var(--models-muted, #646464); font-size: 12px; text-align: center; }
+        .detail { display: grid; align-content: start; gap: 14px; padding: 16px; min-width: 0; }
         .detail h3 { margin: 0; font-size: 17px; }
-        .detail-head { display: grid; gap: 5px; }
-        .source { font-size: 11px; color: var(--models-muted, #646464); }
+        .detail-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+        .detail-name { display: grid; gap: 2px; min-width: 0; }
+        .facts { position: relative; }
+        .facts summary { list-style: none; cursor: help; color: var(--models-muted, #646464); }
+        .facts summary::-webkit-details-marker { display: none; }
+        .facts p { position: absolute; right: 0; z-index: 2; width: min(260px, 70vw); margin: 8px 0 0; border: 1px solid var(--models-border, #d6d6d6); border-radius: 6px; padding: 9px; background: var(--models-surface, #fff); box-shadow: 0 8px 24px #0001; color: var(--models-muted, #646464); font-size: 11px; }
         @media (max-width: 640px) { .picker { grid-template-columns: 1fr; } .models { border-right: 0; border-bottom: 1px solid var(--models-border, #d6d6d6); } .list { max-height: 260px; } }
       </style>
       <div class="picker" part="picker">
         <section class="models" part="models">
-          <div class="search"><label class="field"><span class="label">Find a model</span><input class="control" type="search" value="${escapeHtml(this.#query)}" placeholder="Name, provider, capability" aria-controls="models-list"></label></div>
-          <div class="list" id="models-list" role="listbox" aria-label="Models">${models.map((model) => renderModel(model, selected?.key === model.key)).join("")}</div>
+          <div class="search"><label class="field"><span class="label">Find a model</span><input class="control" type="search" value="${escapeHtml(this.#query)}" placeholder="Search models" aria-controls="models-list"></label></div>
+          <div class="list" id="models-list" role="listbox" aria-label="Models">${renderModels(models, selected?.key, this.#groupBy, this.#iconMode)}<p class="no-results" role="status" hidden>No matching models</p></div>
         </section>
         <section class="detail" part="detail">
           ${selected === undefined ? '<p class="muted">No models are available.</p>' : renderDetailHead(selected)}
@@ -134,6 +184,7 @@ export class ModelsPickerElement extends ModelsHTMLElement {
     if (options instanceof ModelsOptionsElement) {
       options.model = selected;
       options.groups = this.#groups;
+      options.layout = this.#optionsLayout;
       options.value = this.#options;
       options.addEventListener(OPTIONS_CHANGE_EVENT, (event) => {
         this.#options = (event as CustomEvent<OptionValues<ModelDescriptor["options"]>>).detail;
@@ -148,6 +199,20 @@ export class ModelsPickerElement extends ModelsHTMLElement {
     for (const button of this.#root.querySelectorAll<HTMLButtonElement>("button[data-key]")) {
       const haystack = button.dataset.search ?? "";
       button.hidden = !words.every((word) => haystack.includes(word));
+    }
+    for (const group of this.#root.querySelectorAll<HTMLElement>("[data-model-group]")) {
+      group.hidden = ![...group.querySelectorAll<HTMLButtonElement>("button[data-key]")].some(
+        (button) => !button.hidden,
+      );
+    }
+    const hasMatches = this.visibleButtons().length > 0;
+    const noResults = this.#root.querySelector<HTMLElement>(".no-results");
+    if (noResults !== null) {
+      noResults.hidden = hasMatches;
+    }
+    const detail = this.#root.querySelector<HTMLElement>(".detail");
+    if (detail !== null) {
+      detail.hidden = !hasMatches;
     }
   }
 
@@ -192,7 +257,12 @@ export class ModelsPickerElement extends ModelsHTMLElement {
   }
 }
 
-function renderModel(model: ModelDescriptor, selected: boolean): string {
+function renderModel(
+  model: ModelDescriptor,
+  selected: boolean,
+  isDuplicate: boolean,
+  iconMode: ModelIconMode,
+): string {
   const badges = [
     model.capabilities.reasoning.status === "supported" ? "reasoning" : "",
     model.capabilities.tools.status === "supported" ? "tools" : "",
@@ -202,12 +272,47 @@ function renderModel(model: ModelDescriptor, selected: boolean): string {
   ].filter(Boolean);
   const search =
     `${model.name} ${model.provider} ${model.id} ${badges.join(" ")}`.toLocaleLowerCase();
-  return `<button class="model" part="model${selected ? " selected-model" : ""}" role="option" aria-selected="${selected}" tabindex="${selected ? "0" : "-1"}" data-key="${escapeHtml(model.key)}" data-search="${escapeHtml(search)}"><span class="model-name"><span>${escapeHtml(model.name)}</span><span class="muted">${escapeHtml(model.provider)}</span></span><span class="meta">${badges.map((badge) => `<span class="badge">${escapeHtml(badge)}</span>`).join("")}</span></button>`;
+  const icon = modelIcon(model, iconMode);
+  return `<button class="model" part="model${selected ? " selected-model" : ""}" role="option" aria-selected="${selected}" tabindex="${selected ? "0" : "-1"}" data-key="${escapeHtml(model.key)}" data-search="${escapeHtml(search)}"><span class="model-name">${icon === "" ? "" : `<span class="model-icon">${icon}</span>`}<span>${escapeHtml(model.name)}</span>${isDuplicate ? `<span class="model-qualifier">· ${escapeHtml(model.id)}</span>` : ""}</span></button>`;
+}
+
+function renderModels(
+  models: readonly ModelDescriptor[],
+  selectedKey: string | undefined,
+  grouping: ModelGrouping,
+  iconMode: ModelIconMode,
+): string {
+  const nameCounts = new Map<string, number>();
+  for (const model of models) {
+    nameCounts.set(model.name, (nameCounts.get(model.name) ?? 0) + 1);
+  }
+  const render = (model: ModelDescriptor): string =>
+    renderModel(model, selectedKey === model.key, (nameCounts.get(model.name) ?? 0) > 1, iconMode);
+  if (grouping === "none") {
+    return models.map(render).join("");
+  }
+  const groups = new Map<string, ModelDescriptor[]>();
+  for (const model of models) {
+    const group = modelGroup(model, grouping) ?? "Other";
+    const values = groups.get(group) ?? [];
+    values.push(model);
+    groups.set(group, values);
+  }
+  return [...groups]
+    .map(
+      ([group, values]) =>
+        `<div data-model-group role="group" aria-label="${escapeHtml(group)}"><div class="group" role="presentation">${escapeHtml(group)}</div>${values.map(render).join("")}</div>`,
+    )
+    .join("");
 }
 
 function renderDetailHead(model: ModelDescriptor): string {
   const source = model.sources[0];
-  return `<header class="detail-head" part="detail-heading"><h3>${escapeHtml(model.name)}</h3><span class="muted">${escapeHtml(model.id)}</span><span class="source">${source === undefined ? "No source" : `${source.kind} · ${source.retrievedAt.slice(0, 10)} · ${source.scope ?? "provider"}`}</span></header>`;
+  const evidence =
+    source === undefined
+      ? "No source is listed."
+      : `${source.kind} · ${source.retrievedAt.slice(0, 10)} · ${source.scope ?? "provider"}`;
+  return `<header class="detail-head" part="detail-heading"><span class="detail-name"><h3>${escapeHtml(model.name)}</h3><span class="muted">${escapeHtml(model.id)}</span></span><details class="facts"><summary aria-label="Model evidence" title="Model evidence">ⓘ</summary><p>${escapeHtml(evidence)}</p></details></header>`;
 }
 
 function escapeHtml(value: string): string {

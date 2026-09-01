@@ -27,8 +27,6 @@ Models keeps those facts explicit:
 - native custom elements, with no React dependency;
 - deterministic snapshots and a scheduled drift check.
 
-![The Models advanced selector with a filtered OpenAI model, reasoning effort, and flex service tier](docs/images/gallery-selector.png)
-
 ## Packages
 
 | Package             | Purpose                                                             |
@@ -89,6 +87,10 @@ reviewed snapshots. `selectKnownGatewayModel(catalogs, key, options)` connects a
 reviewed provider-qualified key to its exact generated option type. Live IDs
 can be newer, so discovered records still use runtime validation.
 
+A catalog entry whose provider ID includes `fast` is a distinct model or route.
+A `speed.mode` or `service.tier` control is a runtime option on one model. The
+library preserves that difference and never invents one from the other.
+
 The optional AI SDK bridge returns `callOptions` that can be spread directly:
 
 ```ts
@@ -110,6 +112,7 @@ defineModelsElements();
 const picker = document.querySelector("models-picker");
 picker.catalogs = [catalog];
 picker.groups = ["reasoning", "speed", "caching"];
+picker.groupBy = "author"; // Optional for multi-provider gateways.
 picker.addEventListener("models-selection-change", (event) => {
   console.log(event.detail);
 });
@@ -119,10 +122,11 @@ picker.addEventListener("models-selection-change", (event) => {
 progress. `models-selection-change` emits only after all option and cross-field
 rules pass.
 
-Use `<models-select>` for model-only selection, `<models-options>` for a detail
-panel, `<models-price>` for cost context, or `<models-picker>` for the complete
-experience. CSS custom properties and `::part()` hooks provide styling without
-making the package framework-specific.
+Use `<models-select>` for a compact branded combobox, `<models-options>` for a
+detail panel, `<models-composer>` for progressive disclosure, `<models-price>`
+for cost context, or `<models-picker>` for the complete inspector. CSS custom
+properties and `::part()` hooks provide styling without making the package
+framework-specific.
 
 ## Run the gallery
 
@@ -131,9 +135,11 @@ pnpm install
 pnpm dev
 ```
 
-The gallery has model-only, reasoning, advanced, and catalog-freshness examples.
-It loads the public gateway catalogs live and uses documented demo records for
-direct providers so no credential can enter the browser.
+The gallery presents model-only, reasoning, composer, and inspector shapes in
+one tabbed surface. Catalog-source controls and evidence stay in a separate
+developer disclosure. The page loads public gateway catalogs live and uses
+documented demo records for direct providers, so no credential can enter the
+browser.
 
 ## Detect catalog changes
 

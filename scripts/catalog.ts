@@ -41,11 +41,11 @@ for (const adapter of adapters) {
   console.error(
     `${adapter.id} drift: +${drift.added.length} -${drift.removed.length} ~${drift.changed.length}`,
   );
-  for (const model of drift.added.slice(0, 20)) {
-    console.error(`  added: ${model.key}`);
+  for (const key of drift.added.slice(0, 20)) {
+    console.error(`  added: ${key}`);
   }
-  for (const model of drift.removed.slice(0, 20)) {
-    console.error(`  removed: ${model.key}`);
+  for (const key of drift.removed.slice(0, 20)) {
+    console.error(`  removed: ${key}`);
   }
   for (const change of drift.changed.slice(0, 20)) {
     console.error(`  ${change.key}: ${change.fields.join(", ")}`);

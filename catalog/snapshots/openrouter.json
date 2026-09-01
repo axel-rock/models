@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "provider": "openrouter",
-  "fetchedAt": "2026-08-30T22:20:45.642Z",
+  "fetchedAt": "2026-08-31T17:10:44.224Z",
   "source": {
     "kind": "live-api",
     "url": "https://openrouter.ai/api/v1/models",
-    "retrievedAt": "2026-08-30T22:20:45.642Z",
+    "retrievedAt": "2026-08-31T17:10:44.224Z",
     "scope": "endpoint"
   },
   "models": [
@@ -135,6 +135,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "tencent",
       "description": "Tencent: Hy4 preview is a mixture-of-experts model from Tencent, with 49B active parameters out of 770B total. It is designed for coding agents, complex tool-use workflows, and productivity tasks that...",
       "releasedAt": "2026-08-28T06:09:35.000Z",
       "contextWindow": {
@@ -239,6 +240,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "inclusionai",
       "description": "Ling 3.0 Flash Fin is a finance-focused mixture-of-experts model from InclusionAI, built on Ling 3.0 Flash with 5.1B active parameters out of 124B total. It is designed for real-world investment...",
       "releasedAt": "2026-08-27T15:58:10.000Z",
       "contextWindow": {
@@ -383,6 +385,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.8 Flash is a multimodal reasoning model from Alibaba. It is suited for coding assistance, agentic workflows, visual understanding, document and codebase analysis, desktop interaction, chart analysis, and long-video analysis.",
       "releasedAt": "2026-08-26T19:37:40.000Z",
       "contextWindow": {
@@ -506,6 +509,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
       "releasedAt": "2026-08-26T13:59:01.000Z",
       "contextWindow": {
@@ -629,6 +633,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-5.3-Flash is a native multimodal model from Z.ai. It is suited for efficient coding and long-horizon agent tasks. Its hybrid sparse and linear attention architecture maintains accurate long-context behavior while...",
       "releasedAt": "2026-08-26T13:59:01.000Z",
       "contextWindow": {
@@ -762,6 +767,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "meta",
       "description": "Muse Spark 1.2 contributor tier is a reasoning model from Meta designed for developers who want to start building at an even lower cost. It’s meaningfully cheaper than Muse Spark...",
       "releasedAt": "2026-08-21T18:21:16.000Z",
       "contextWindow": {
@@ -900,6 +906,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of [DeepSeek V4 Flash 0731](https://openrouter.ai/deepseek/deepseek-v4-flash-0731) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents,...",
       "releasedAt": "2026-08-21T11:26:03.000Z",
       "contextWindow": {
@@ -966,6 +973,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "tencent",
       "description": "Hy-MT2-1.8B is a compact 1.8B-parameter translation model from Tencent. It supports 33 language pairs and five Chinese dialect and minority-language pairs, with workflows for structured, delimiter-based, contextual, glossary-based, and style-guided...",
       "releasedAt": "2026-08-20T13:13:01.000Z",
       "contextWindow": {
@@ -1032,6 +1040,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "tencent",
       "description": "Hy-MT2-30B-A3B is Tencent's flagship translation model in the Hy-MT2 family. It supports 33 language pairs and five Chinese dialect and minority-language pairs, with workflows for structured, delimiter-based, contextual, glossary-based, and...",
       "releasedAt": "2026-08-20T13:12:41.000Z",
       "contextWindow": {
@@ -1147,6 +1156,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~z-ai",
       "description": "This model always redirects to the latest GLM model from Z.ai.",
       "releasedAt": "2026-08-19T14:50:53.000Z",
       "contextWindow": {
@@ -1213,6 +1223,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "tencent",
       "description": "Hy-MT2-7B is a 7B-parameter translation model from Tencent. It supports 33 language pairs and five Chinese dialect and minority-language pairs, with workflows for structured, delimiter-based, contextual, glossary-based, and style-guided translation.",
       "releasedAt": "2026-08-19T14:13:17.000Z",
       "contextWindow": {
@@ -1328,6 +1339,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-5.3 is a large-scale reasoning model from Z.ai, built for complex software engineering and long-horizon agent tasks. It supports text input and output with a 1M-token context window, and improves...",
       "releasedAt": "2026-08-18T20:57:35.000Z",
       "contextWindow": {
@@ -1476,6 +1488,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
       "releasedAt": "2026-08-14T15:55:10.000Z",
       "contextWindow": {
@@ -1583,6 +1596,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "dots-studio",
       "description": "Dots3-Note Preview is an open-weight mixture-of-experts model from Dots Studio, with 16B active parameters out of 280B total. It is the lightest model in the Dots 3 family and is...",
       "releasedAt": "2026-08-14T04:06:01.000Z",
       "contextWindow": {
@@ -1726,6 +1740,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.7 Flash is a multimodal model from Google for fast agentic workflows, coding, and complex multi-step reasoning. It is designed for tasks that require responsive performance and reliable multi-step...",
       "releasedAt": "2026-08-13T17:03:01.000Z",
       "contextWindow": {
@@ -1869,6 +1884,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.7 Flash is a multimodal model from Google for fast agentic workflows, coding, and complex multi-step reasoning. It is designed for tasks that require responsive performance and reliable multi-step...",
       "releasedAt": "2026-08-13T17:03:01.000Z",
       "contextWindow": {
@@ -1980,6 +1996,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "bytedance-seed",
       "description": "Seed 2.1 Turbo is a multimodal model from ByteDance Seed for coding and long-horizon agent workflows. It is suited for end-to-end software delivery, multi-step task execution, and understanding visual and...",
       "releasedAt": "2026-08-12T16:29:36.000Z",
       "contextWindow": {
@@ -1993,6 +2010,122 @@
       "provider": "openrouter",
       "id": "qwen/qwen3.8-2.4t-a95b",
       "name": "Qwen: Qwen3.8 2.4T A95B",
+      "kind": "language",
+      "lifecycle": "unknown",
+      "capabilities": {
+        "input": {
+          "text": {
+            "status": "supported",
+            "evidence": []
+          }
+        },
+        "output": {
+          "text": {
+            "status": "supported",
+            "evidence": []
+          }
+        },
+        "reasoning": {
+          "status": "supported",
+          "evidence": []
+        },
+        "tools": {
+          "status": "supported",
+          "evidence": []
+        },
+        "structuredOutput": {
+          "status": "supported",
+          "evidence": []
+        },
+        "promptCaching": {
+          "status": "supported",
+          "evidence": []
+        }
+      },
+      "interfaces": [
+        "openai-chat-completions"
+      ],
+      "prices": [
+        {
+          "unit": "input-token",
+          "usd": "0.000002",
+          "per": 1,
+          "evidence": []
+        },
+        {
+          "unit": "output-token",
+          "usd": "0.000006",
+          "per": 1,
+          "evidence": []
+        },
+        {
+          "unit": "cache-read-token",
+          "usd": "0.0000002",
+          "per": 1,
+          "evidence": []
+        }
+      ],
+      "routes": [],
+      "options": [
+        {
+          "key": "reasoning.effort",
+          "kind": "enum",
+          "label": "Reasoning effort",
+          "description": "Uses only the effort levels advertised for this model.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "values": [
+            "xhigh",
+            "medium",
+            "low"
+          ],
+          "defaultValue": "xhigh",
+          "target": {
+            "kind": "request-option",
+            "path": [
+              "reasoning",
+              "effort"
+            ]
+          }
+        },
+        {
+          "key": "reasoning.exclude",
+          "kind": "boolean",
+          "label": "Hide reasoning output",
+          "description": "Keeps reasoning active but excludes its trace from the response.",
+          "group": "reasoning",
+          "support": {
+            "status": "supported",
+            "evidence": []
+          },
+          "target": {
+            "kind": "request-option",
+            "path": [
+              "reasoning",
+              "exclude"
+            ]
+          }
+        }
+      ],
+      "requirements": [],
+      "sources": [],
+      "author": "qwen",
+      "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
+      "releasedAt": "2026-08-12T16:21:42.000Z",
+      "contextWindow": {
+        "value": 1048576,
+        "confidence": "provider-confirmed",
+        "sources": []
+      }
+    },
+    {
+      "key": "openrouter:qwen/qwen3.8-2.4t-a95b:batch",
+      "provider": "openrouter",
+      "id": "qwen/qwen3.8-2.4t-a95b:batch",
+      "name": "Qwen: Qwen3.8 2.4T A95B (batch)",
       "kind": "language",
       "lifecycle": "unknown",
       "capabilities": {
@@ -2095,121 +2228,7 @@
       ],
       "requirements": [],
       "sources": [],
-      "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
-      "releasedAt": "2026-08-12T16:21:42.000Z",
-      "contextWindow": {
-        "value": 1048576,
-        "confidence": "provider-confirmed",
-        "sources": []
-      }
-    },
-    {
-      "key": "openrouter:qwen/qwen3.8-2.4t-a95b:batch",
-      "provider": "openrouter",
-      "id": "qwen/qwen3.8-2.4t-a95b:batch",
-      "name": "Qwen: Qwen3.8 2.4T A95B (batch)",
-      "kind": "language",
-      "lifecycle": "unknown",
-      "capabilities": {
-        "input": {
-          "text": {
-            "status": "supported",
-            "evidence": []
-          }
-        },
-        "output": {
-          "text": {
-            "status": "supported",
-            "evidence": []
-          }
-        },
-        "reasoning": {
-          "status": "supported",
-          "evidence": []
-        },
-        "tools": {
-          "status": "supported",
-          "evidence": []
-        },
-        "structuredOutput": {
-          "status": "supported",
-          "evidence": []
-        },
-        "promptCaching": {
-          "status": "supported",
-          "evidence": []
-        }
-      },
-      "interfaces": [
-        "openai-chat-completions"
-      ],
-      "prices": [
-        {
-          "unit": "input-token",
-          "usd": "0.0000025",
-          "per": 1,
-          "evidence": []
-        },
-        {
-          "unit": "output-token",
-          "usd": "0.00000625",
-          "per": 1,
-          "evidence": []
-        },
-        {
-          "unit": "cache-read-token",
-          "usd": "0.0000005",
-          "per": 1,
-          "evidence": []
-        }
-      ],
-      "routes": [],
-      "options": [
-        {
-          "key": "reasoning.effort",
-          "kind": "enum",
-          "label": "Reasoning effort",
-          "description": "Uses only the effort levels advertised for this model.",
-          "group": "reasoning",
-          "support": {
-            "status": "supported",
-            "evidence": []
-          },
-          "values": [
-            "xhigh",
-            "medium",
-            "low"
-          ],
-          "defaultValue": "xhigh",
-          "target": {
-            "kind": "request-option",
-            "path": [
-              "reasoning",
-              "effort"
-            ]
-          }
-        },
-        {
-          "key": "reasoning.exclude",
-          "kind": "boolean",
-          "label": "Hide reasoning output",
-          "description": "Keeps reasoning active but excludes its trace from the response.",
-          "group": "reasoning",
-          "support": {
-            "status": "supported",
-            "evidence": []
-          },
-          "target": {
-            "kind": "request-option",
-            "path": [
-              "reasoning",
-              "exclude"
-            ]
-          }
-        }
-      ],
-      "requirements": [],
-      "sources": [],
+      "author": "qwen",
       "description": "Qwen3.8 2.4T A95B is an open-weight sparse mixture-of-experts model from Qwen and the open-weight variant of [Qwen3.8 Max](/qwen/qwen3.8-max), with 95 billion active parameters out of 2.4 trillion total. It is...",
       "releasedAt": "2026-08-12T16:21:42.000Z",
       "contextWindow": {
@@ -2345,6 +2364,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "bytedance-seed",
       "description": "Seed 2.0 Code is a model from ByteDance Seed optimized for agentic coding. It is suited for frontend development, multilingual programming tasks, and coding-agent workflows in tools such as Claude...",
       "releasedAt": "2026-08-12T16:05:01.000Z",
       "contextWindow": {
@@ -2478,6 +2498,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
       "releasedAt": "2026-08-12T15:42:44.000Z",
       "contextWindow": {
@@ -2611,6 +2632,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek V4 Pro 0813 is a large-scale mixture-of-experts model from DeepSeek. This is the GA release of DeepSeek V4 Pro.",
       "releasedAt": "2026-08-12T15:42:44.000Z",
       "contextWindow": {
@@ -2735,6 +2757,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "x-ai",
       "description": "Grok 4.6 is SpaceXAI's smartest model with frontier performance on coding, knowledge work, and STEM.",
       "releasedAt": "2026-08-12T15:35:57.000Z",
       "contextWindow": {
@@ -2820,6 +2843,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "liquid",
       "description": "LFM2.5-2.6B is a compact reasoning model from Liquid AI. It is suited for agent workflows, data extraction, RAG, and long-context processing. Liquid advises against using it for agentic coding or...",
       "releasedAt": "2026-08-11T17:48:39.000Z",
       "contextWindow": {
@@ -2929,6 +2953,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
       "releasedAt": "2026-08-11T12:52:31.000Z",
       "contextWindow": {
@@ -3032,6 +3057,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron 3.5 Lightning is an open mixture-of-experts model from NVIDIA, with 3B active parameters out of 30B total. It is suited for high-throughput agentic workloads and specialized tasks that...",
       "releasedAt": "2026-08-11T12:52:31.000Z",
       "contextWindow": {
@@ -3173,6 +3199,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "sakana",
       "description": "Sakana Namazu is a Japanese-specialized reasoning model from Sakana AI, based on Kimi K2.6 with additional training for Japanese language and business contexts. It is suited for Japanese instruction following,...",
       "releasedAt": "2026-08-11T01:02:09.000Z",
       "contextWindow": {
@@ -3282,6 +3309,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "upstage",
       "description": "Solar Pro 4 is Upstage's cost-efficient large language model, featuring a 524K context window. It is built for long-horizon tasks and agentic workflows, with strong capabilities in office productivity, document-intensive...",
       "releasedAt": "2026-08-10T14:20:36.000Z",
       "contextWindow": {
@@ -3402,6 +3430,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "meta",
       "description": "Muse Glimmer 30B is a dense, open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark and optimized for autonomous agents on consumer hardware. It is suited for long-horizon...",
       "releasedAt": "2026-08-09T19:06:34.000Z",
       "contextWindow": {
@@ -3522,6 +3551,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "meta",
       "description": "Muse Glimmer 30B is a dense, open-weight multimodal model from Meta Superintelligence Labs, distilled from Muse Spark and optimized for autonomous agents on consumer hardware. It is suited for long-horizon...",
       "releasedAt": "2026-08-09T19:06:34.000Z",
       "contextWindow": {
@@ -3655,6 +3685,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "meta",
       "description": "Muse Spark 1.2 is a reasoning model from Meta, designed for complex agentic tasks. It accepts text, images, video, audio, and PDF documents, returns text, and offers a 1M-token context...",
       "releasedAt": "2026-08-05T19:48:07.000Z",
       "contextWindow": {
@@ -3786,6 +3817,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.8 Max is the flagship model in Alibaba's Qwen3.8 series, the general-availability successor to the Qwen3.8 Max Preview. It is a multimodal reasoning model intended for complex reasoning, visual understanding,...",
       "releasedAt": "2026-08-03T04:33:32.000Z",
       "contextWindow": {
@@ -3920,6 +3952,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~deepseek",
       "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
       "releasedAt": "2026-08-01T17:40:09.000Z",
       "contextWindow": {
@@ -4054,6 +4087,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
       "releasedAt": "2026-07-31T06:21:48.000Z",
       "contextWindow": {
@@ -4188,6 +4222,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
       "releasedAt": "2026-07-31T06:21:48.000Z",
       "contextWindow": {
@@ -4333,6 +4368,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "thinkingmachines",
       "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
       "releasedAt": "2026-07-30T20:25:17.000Z",
       "contextWindow": {
@@ -4478,6 +4514,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "thinkingmachines",
       "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
       "releasedAt": "2026-07-30T20:25:17.000Z",
       "contextWindow": {
@@ -4617,6 +4654,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "thinkingmachines",
       "description": "Inkling Small is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 12B active parameters out of 276B total. It is positioned as the smaller, more efficient member of...",
       "releasedAt": "2026-07-30T20:25:17.000Z",
       "contextWindow": {
@@ -4761,6 +4799,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.7 Flash is a vision-language reasoning model from Alibaba. It is suited for multimodal agents, visual coding, search, and computer interaction, with strengths in object recognition, spatial understanding, and real-world...",
       "releasedAt": "2026-07-27T22:16:01.000Z",
       "contextWindow": {
@@ -4911,6 +4950,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Fast-mode variant of [Opus 5](/anthropic/claude-opus-5) - identical capabilities with higher output speed at 2x pricing relative to regular Opus 5.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
       "releasedAt": "2026-07-24T17:02:26.000Z",
       "contextWindow": {
@@ -5061,6 +5101,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Opus 5 is Anthropic’s flagship model for demanding reasoning, coding, and long-horizon agentic work. It is particularly strong at end-to-end software tasks, code review and bug finding, visual analysis...",
       "releasedAt": "2026-07-24T17:02:24.000Z",
       "contextWindow": {
@@ -5211,6 +5252,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Opus 5 is Anthropic’s flagship model for demanding reasoning, coding, and long-horizon agentic work. It is particularly strong at end-to-end software tasks, code review and bug finding, visual analysis...",
       "releasedAt": "2026-07-24T17:02:24.000Z",
       "contextWindow": {
@@ -5321,6 +5363,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "inclusionai",
       "description": "*Ling-3.0-flash* is a *124B-parameter Mixture-of-Experts (MoE) model*, with approximately *5.1B parameters activated per token*. The model is designed with *token efficiency and production-scale agentic inference* as key priorities, enabling developers...",
       "releasedAt": "2026-07-23T14:56:20.000Z",
       "contextWindow": {
@@ -5431,6 +5474,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "poolside",
       "description": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and...",
       "releasedAt": "2026-07-21T16:51:23.000Z",
       "contextWindow": {
@@ -5535,6 +5579,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "poolside",
       "description": "Laguna S 2.1 is the latest coding agent model from [Poolside](<https://poolside.ai/>). Laguna S 2.1 is a 118B total parameter model with 8B active parameters, scoring 70.2% on Terminal-Bench 2.1 and...",
       "releasedAt": "2026-07-21T16:51:23.000Z",
       "contextWindow": {
@@ -5679,6 +5724,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.6 Flash is a high-efficiency model from Google for coding, agentic workflows, and web and app development. It is designed to produce polished outputs with fewer unnecessary edits and...",
       "releasedAt": "2026-07-21T15:12:13.000Z",
       "contextWindow": {
@@ -5823,6 +5869,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.6 Flash is a high-efficiency model from Google for coding, agentic workflows, and web and app development. It is designed to produce polished outputs with fewer unnecessary edits and...",
       "releasedAt": "2026-07-21T15:12:13.000Z",
       "contextWindow": {
@@ -5967,6 +6014,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.5 Flash Lite is a high-efficiency model from Google with upgraded agentic capabilities. It is suited for subagents that execute focused tasks within complex, multi-agent workflows.",
       "releasedAt": "2026-07-21T15:12:06.000Z",
       "contextWindow": {
@@ -6105,6 +6153,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.5 Flash Lite is a high-efficiency model from Google with upgraded agentic capabilities. It is suited for subagents that execute focused tasks within complex, multi-agent workflows.",
       "releasedAt": "2026-07-21T15:12:06.000Z",
       "contextWindow": {
@@ -6235,6 +6284,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "meituan",
       "description": "LongCat 2.0 is a sparse mixture-of-experts language model from Meituan, with 48B active parameters out of 1.6T total. It is suited for coding, repository-level changes, long-horizon problem solving, and agentic...",
       "releasedAt": "2026-07-20T13:37:38.000Z",
       "contextWindow": {
@@ -6380,6 +6430,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "thinkingmachines",
       "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
       "releasedAt": "2026-07-17T22:05:56.000Z",
       "contextWindow": {
@@ -6525,6 +6576,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "thinkingmachines",
       "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
       "releasedAt": "2026-07-17T22:05:56.000Z",
       "contextWindow": {
@@ -6664,6 +6716,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "thinkingmachines",
       "description": "Inkling is an open-weight multimodal mixture-of-experts model from Thinking Machines Lab, with 41B active parameters out of 975B total. It is designed for general-purpose reasoning, coding, agentic and tool-use systems,...",
       "releasedAt": "2026-07-17T22:05:56.000Z",
       "contextWindow": {
@@ -6737,6 +6790,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openrouter",
       "description": "Auto Router (Beta) is a task-aware router from OpenRouter. It classifies each request, then routes it the [most popular model](/rankings#task-spend) for that task based on aggregate spend, filtered by your...",
       "releasedAt": "2026-07-17T17:59:25.000Z",
       "contextWindow": {
@@ -6879,6 +6933,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "moonshotai",
       "description": "Kimi K3 is a 2.8T parameter open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at...",
       "releasedAt": "2026-07-16T15:30:58.000Z",
       "contextWindow": {
@@ -7021,6 +7076,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "moonshotai",
       "description": "Kimi K3 is a 2.8T parameter open-weight multimodal reasoning model from Moonshot AI. It is suited for complex coding, knowledge work, and long-horizon agentic workflows, and is particularly strong at...",
       "releasedAt": "2026-07-16T15:30:58.000Z",
       "contextWindow": {
@@ -7154,82 +7210,11 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "meta",
       "description": "Muse Spark 1.1 is a multimodal reasoning model from Meta, built for agentic tasks. It accepts text, images, video, audio, and PDF documents and returns text, with a 1M-token context...",
       "releasedAt": "2026-07-16T15:29:01.000Z",
       "contextWindow": {
         "value": 1048576,
-        "confidence": "provider-confirmed",
-        "sources": []
-      }
-    },
-    {
-      "key": "openrouter:kwaipilot/kat-coder-air-v2.5",
-      "provider": "openrouter",
-      "id": "kwaipilot/kat-coder-air-v2.5",
-      "name": "Kwaipilot: KAT-Coder-Air V2.5",
-      "kind": "language",
-      "lifecycle": "unknown",
-      "capabilities": {
-        "input": {
-          "text": {
-            "status": "supported",
-            "evidence": []
-          }
-        },
-        "output": {
-          "text": {
-            "status": "supported",
-            "evidence": []
-          }
-        },
-        "reasoning": {
-          "status": "unknown",
-          "evidence": []
-        },
-        "tools": {
-          "status": "supported",
-          "evidence": []
-        },
-        "structuredOutput": {
-          "status": "supported",
-          "evidence": []
-        },
-        "promptCaching": {
-          "status": "supported",
-          "evidence": []
-        }
-      },
-      "interfaces": [
-        "openai-chat-completions"
-      ],
-      "prices": [
-        {
-          "unit": "input-token",
-          "usd": "0.00000015",
-          "per": 1,
-          "evidence": []
-        },
-        {
-          "unit": "output-token",
-          "usd": "0.0000006",
-          "per": 1,
-          "evidence": []
-        },
-        {
-          "unit": "cache-read-token",
-          "usd": "0.00000003",
-          "per": 1,
-          "evidence": []
-        }
-      ],
-      "routes": [],
-      "options": [],
-      "requirements": [],
-      "sources": [],
-      "description": "KAT-Coder-Air V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make...",
-      "releasedAt": "2026-07-10T20:16:30.000Z",
-      "contextWindow": {
-        "value": 256000,
         "confidence": "provider-confirmed",
         "sources": []
       }
@@ -7298,6 +7283,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "kwaipilot",
       "description": "KAT-Coder-Pro V2.5 is a flagship-level Agentic Coding model that can directly hand over an entire issue or an entire business workflow to it, allowing it to autonomously locate and make...",
       "releasedAt": "2026-07-10T20:16:29.000Z",
       "contextWindow": {
@@ -7449,6 +7435,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.6 Luna Pro is the same underlying model as [GPT-5.6 Luna](https://openrouter.ai/openai/gpt-5.6-luna), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
       "releasedAt": "2026-07-09T09:54:27.000Z",
       "contextWindow": {
@@ -7600,6 +7587,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.6 Luna is a fast, cost-efficient model in OpenAI's GPT-5.6 series. It is suited for high-volume, latency-sensitive tasks such as chat, classification, and lightweight agentic workflows, providing capable reasoning for...",
       "releasedAt": "2026-07-09T09:54:24.000Z",
       "contextWindow": {
@@ -7751,6 +7739,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.6 Terra Pro is the same underlying model as [GPT-5.6 Terra](https://openrouter.ai/openai/gpt-5.6-terra), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
       "releasedAt": "2026-07-09T09:54:21.000Z",
       "contextWindow": {
@@ -7902,6 +7891,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.6 Terra is a balanced model in OpenAI's GPT-5.6 series, positioned between the flagship Sol tier and the cost-efficient Luna tier. It is suited for everyday coding, reasoning, and agentic...",
       "releasedAt": "2026-07-09T09:54:17.000Z",
       "contextWindow": {
@@ -8053,6 +8043,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.6 Sol Pro is the same underlying model as [GPT-5.6 Sol](https://openrouter.ai/openai/gpt-5.6-sol), served with `reasoning.mode` set to `pro` for higher-quality responses on complex tasks.\n\nLearn more in OpenAI's docs: https://developers.openai.com/api/docs/guides/reasoning#reasoning-mode",
       "releasedAt": "2026-07-09T09:54:14.000Z",
       "contextWindow": {
@@ -8204,6 +8195,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.6 Sol is the flagship model in OpenAI's GPT-5.6 series. It is suited for complex reasoning, coding, and agentic workflows, and is particularly strong at command-line and multi-step coding tasks...",
       "releasedAt": "2026-07-09T09:54:10.000Z",
       "contextWindow": {
@@ -8327,6 +8319,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "x-ai",
       "description": "Grok 4.5 is a model from SpaceXAI with frontier performance on coding, knowledge work, and STEM.",
       "releasedAt": "2026-07-08T15:05:54.000Z",
       "contextWindow": {
@@ -8451,6 +8444,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~x-ai",
       "description": "This model always redirects to the latest Grok model from xAI.",
       "releasedAt": "2026-07-08T14:02:40.000Z",
       "contextWindow": {
@@ -8542,6 +8536,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "aion-labs",
       "description": "Aion-3.0 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the DeepSeek family of models. It uses a collaborative generation process in which multiple specialized models each...",
       "releasedAt": "2026-07-07T16:51:36.000Z",
       "contextWindow": {
@@ -8633,6 +8628,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "aion-labs",
       "description": "Aion-3.0 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It uses a collaborative generation process in which multiple specialized models each contribute...",
       "releasedAt": "2026-07-07T16:51:35.000Z",
       "contextWindow": {
@@ -8767,6 +8763,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "tencent",
       "description": "Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports a configurable reasoning effort:...",
       "releasedAt": "2026-07-06T13:20:48.000Z",
       "contextWindow": {
@@ -8877,6 +8874,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "poolside",
       "description": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines...",
       "releasedAt": "2026-07-02T14:27:09.000Z",
       "contextWindow": {
@@ -8981,6 +8979,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "poolside",
       "description": "Laguna XS 2.1 is the latest coding agent model in the 33B-A3B category from [Poolside](https://poolside.ai/) and a step forward from their Laguna XS.2 model (released in April 2026). It combines...",
       "releasedAt": "2026-07-02T14:27:09.000Z",
       "contextWindow": {
@@ -9131,6 +9130,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Sonnet 5 is Anthropic's most capable Sonnet-class model, with frontier performance across coding, agents, and professional work. It supports adaptive thinking with selectable reasoning effort levels (low, medium, high, max,...",
       "releasedAt": "2026-06-30T18:11:23.000Z",
       "contextWindow": {
@@ -9281,6 +9281,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Sonnet 5 is Anthropic's most capable Sonnet-class model, with frontier performance across coding, agents, and professional work. It supports adaptive thinking with selectable reasoning effort levels (low, medium, high, max,...",
       "releasedAt": "2026-06-30T18:11:23.000Z",
       "contextWindow": {
@@ -9416,6 +9417,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) is Google's fastest, most cost-efficient Gemini image model, built for high-velocity developer pipelines and rapid-fire visual exploration. It delivers text-to-image generation...",
       "releasedAt": "2026-06-30T16:33:45.000Z",
       "contextWindow": {
@@ -9529,6 +9531,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nex-agi",
       "description": "Nex-N2-Mini is an open-source agentic mixture-of-experts model from Nex AGI, the smaller sibling in the Nex-N2 series. It accepts text and image input and is built for coding, tool use,...",
       "releasedAt": "2026-06-24T14:56:04.000Z",
       "contextWindow": {
@@ -9648,6 +9651,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "sakana",
       "description": "Fugu Ultra is the higher-performance model in Sakana AI's Fugu family. Rather than a single monolithic model, Fugu is a learned multi-agent orchestration system: a language model trained to route...",
       "releasedAt": "2026-06-24T04:45:03.000Z",
       "contextWindow": {
@@ -9783,6 +9787,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced...",
       "releasedAt": "2026-06-18T03:41:05.000Z",
       "contextWindow": {
@@ -9894,6 +9899,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Nano Banana Pro is Google’s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and...",
       "releasedAt": "2026-06-18T03:40:54.000Z",
       "contextWindow": {
@@ -9997,6 +10003,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "cohere",
       "description": "North Mini Code is Cohere's first agentic coding model and the debut of its North family. A sparse mixture-of-experts model with 30B total parameters and 3B active, it is optimized...",
       "releasedAt": "2026-06-17T19:15:48.000Z",
       "contextWindow": {
@@ -10130,6 +10137,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
       "releasedAt": "2026-06-16T17:45:30.000Z",
       "contextWindow": {
@@ -10257,6 +10265,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM 5.2 is a large-scale reasoning model from Z.ai. It supports text input and output with a 1M-token context window, and is suited for long-horizon agent workflows, project-level software engineering,...",
       "releasedAt": "2026-06-16T17:45:30.000Z",
       "contextWindow": {
@@ -10310,6 +10319,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openrouter",
       "description": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a...",
       "releasedAt": "2026-06-13T17:27:27.000Z",
       "contextWindow": {
@@ -10405,6 +10415,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "moonshotai",
       "description": "MoonshotAI: Kimi K2.7 Code is a coding-focused model in Moonshot AI's Kimi K2 family, built to complete end-to-end programming tasks reliably over long contexts. It uses a native multimodal mixture-of-experts...",
       "releasedAt": "2026-06-12T12:12:41.000Z",
       "contextWindow": {
@@ -10536,6 +10547,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~anthropic",
       "description": "This model always redirects to the latest model in the Claude Fable family.",
       "releasedAt": "2026-06-09T18:32:24.000Z",
       "contextWindow": {
@@ -10667,6 +10679,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
       "releasedAt": "2026-06-09T12:18:35.000Z",
       "contextWindow": {
@@ -10798,6 +10811,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
       "releasedAt": "2026-06-09T12:18:35.000Z",
       "contextWindow": {
@@ -10911,6 +10925,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nex-agi",
       "description": "Nex-N2-Pro is an agentic mixture-of-experts model from Nex AGI, with 17B active parameters out of 397B total. Built on the Qwen3.5 architecture, it accepts text and image input and produces...",
       "releasedAt": "2026-06-08T16:45:40.000Z",
       "contextWindow": {
@@ -11019,6 +11034,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron 3.5 Content Safety is a compact 4B-parameter multimodal guardrail model from NVIDIA, fine-tuned from Google Gemma-3-4B. It moderates both inputs to and responses from LLMs and VLMs, accepting...",
       "releasedAt": "2026-06-04T14:04:24.000Z",
       "contextWindow": {
@@ -11172,6 +11188,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
       "releasedAt": "2026-06-04T05:33:28.000Z",
       "contextWindow": {
@@ -11325,6 +11342,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
       "releasedAt": "2026-06-04T05:33:28.000Z",
       "contextWindow": {
@@ -11472,6 +11490,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron 3 Ultra is an open frontier-reasoning and orchestration model from NVIDIA, with 55B active parameters out of 550B total (MoE). Built on a hybrid Transformer-Mamba mixture-of-experts architecture, it...",
       "releasedAt": "2026-06-04T05:33:28.000Z",
       "contextWindow": {
@@ -11592,6 +11611,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.7-Plus is a cost-effective model in Alibaba's Qwen3.7 series. It supports text and image input with text output, building on the series' text capabilities with a comprehensive upgrade to its...",
       "releasedAt": "2026-06-03T13:03:03.000Z",
       "contextWindow": {
@@ -11709,6 +11729,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
       "releasedAt": "2026-05-31T16:36:14.000Z",
       "contextWindow": {
@@ -11826,6 +11847,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
       "releasedAt": "2026-05-31T16:36:14.000Z",
       "contextWindow": {
@@ -11937,6 +11959,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
       "releasedAt": "2026-05-31T16:36:14.000Z",
       "contextWindow": {
@@ -12060,6 +12083,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "stepfun",
       "description": "Step 3.7 Flash is StepFun's latest high-efficiency multimodal Mixture-of-Experts model. It pairs a 196B-parameter language backbone with a vision encoder for native image and video understanding, activating roughly 11B parameters...",
       "releasedAt": "2026-05-28T16:17:49.000Z",
       "contextWindow": {
@@ -12210,6 +12234,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Fast-mode variant of [Opus 4.8](/anthropic/claude-opus-4.8) - identical capabilities with higher output speed at 2x pricing relative to regular Opus 4.8.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
       "releasedAt": "2026-05-27T20:28:23.000Z",
       "contextWindow": {
@@ -12360,6 +12385,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
       "releasedAt": "2026-05-27T18:04:51.000Z",
       "contextWindow": {
@@ -12510,6 +12536,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
       "releasedAt": "2026-05-27T18:04:51.000Z",
       "contextWindow": {
@@ -12626,6 +12653,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.7-Max is the flagship model in Alibaba's Qwen3.7 series. It supports text input and output and is designed for agent-centric workloads, with particular strengths in coding, office and productivity tasks,...",
       "releasedAt": "2026-05-21T15:21:01.000Z",
       "contextWindow": {
@@ -12725,6 +12753,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "x-ai",
       "description": "Grok Build 0.1 is SpaceXAI’s fast coding model trained specifically for agentic software engineering workflows. It supports text and image inputs with text output, and is optimized for interactive coding...",
       "releasedAt": "2026-05-20T17:28:43.000Z",
       "contextWindow": {
@@ -12869,6 +12898,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution...",
       "releasedAt": "2026-05-19T12:30:00.000Z",
       "contextWindow": {
@@ -13007,6 +13037,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.5 Flash is Google's high-efficiency multimodal model, bringing near-Pro level coding and reasoning at Flash-tier cost and speed. It is highly optimized for coding proficiency and parallel agentic execution...",
       "releasedAt": "2026-05-19T12:30:00.000Z",
       "contextWindow": {
@@ -13157,6 +13188,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Fast-mode variant of [Opus 4.7](/anthropic/claude-opus-4.7) - identical capabilities with higher output speed at premium 6x pricing.\n\nLearn more in Anthropic's docs: https://platform.claude.com/docs/en/build-with-claude/fast-mode",
       "releasedAt": "2026-05-12T19:10:11.000Z",
       "contextWindow": {
@@ -13268,6 +13300,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "perceptron",
       "description": "Perceptron Mk1 (Mark One) is Perceptron's highest-quality vision-language model for video and embodied reasoning.** It accepts image and video inputs paired with natural language queries, and produces detailed visual understanding...",
       "releasedAt": "2026-05-12T14:43:49.000Z",
       "contextWindow": {
@@ -13431,6 +13464,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic...",
       "releasedAt": "2026-05-07T15:47:08.000Z",
       "contextWindow": {
@@ -13588,6 +13622,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic...",
       "releasedAt": "2026-05-07T15:47:08.000Z",
       "contextWindow": {
@@ -13668,6 +13703,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT Chat Latest points to OpenAI's stable API alias `chat-latest` that always resolves to the latest Instant chat model used in ChatGPT. As OpenAI rolls out new Instant model updates...",
       "releasedAt": "2026-05-05T16:56:52.000Z",
       "contextWindow": {
@@ -13811,6 +13847,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "x-ai",
       "description": "Grok 4.3 is a reasoning model from SpaceXAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
       "releasedAt": "2026-04-30T23:30:21.000Z",
       "contextWindow": {
@@ -13883,6 +13920,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "ibm-granite",
       "description": "Granite 4.1 8B is a dense, decoder-only 8-billion-parameter language model from IBM, part of the Granite 4.1 family. It supports a 131K-token context window and is designed for enterprise tasks...",
       "releasedAt": "2026-04-30T19:24:31.000Z",
       "contextWindow": {
@@ -14017,6 +14055,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex...",
       "releasedAt": "2026-04-30T17:33:59.000Z",
       "contextWindow": {
@@ -14151,6 +14190,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Medium 3.5 is a dense 128B instruction-following model from Mistral AI. It supports text and image inputs with text output, and is designed for agentic workflows, coding, and complex...",
       "releasedAt": "2026-04-30T17:33:59.000Z",
       "contextWindow": {
@@ -14287,6 +14327,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron™ 3 Nano Omni is a 30B-A3B open multimodal model designed to function as a perception and context sub-agent in enterprise agent systems. It accepts text, image, video, and...",
       "releasedAt": "2026-04-28T16:18:15.000Z",
       "contextWindow": {
@@ -14410,6 +14451,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~anthropic",
       "description": "This model always redirects to the latest model in the Anthropic Claude Haiku family.",
       "releasedAt": "2026-04-27T19:34:52.000Z",
       "contextWindow": {
@@ -14554,6 +14596,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~openai",
       "description": "This model always redirects to the latest model in the OpenAI GPT Mini family.",
       "releasedAt": "2026-04-27T19:34:31.000Z",
       "contextWindow": {
@@ -14697,6 +14740,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~google",
       "description": "This model always redirects to the latest model in the Google Gemini Pro family.",
       "releasedAt": "2026-04-27T19:34:11.000Z",
       "contextWindow": {
@@ -14839,6 +14883,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~moonshotai",
       "description": "This model always redirects to the latest model in the MoonshotAI Kimi family.",
       "releasedAt": "2026-04-27T19:33:48.000Z",
       "contextWindow": {
@@ -14982,6 +15027,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~google",
       "description": "This model always redirects to the latest model in the Google Gemini Flash family.",
       "releasedAt": "2026-04-27T19:33:18.000Z",
       "contextWindow": {
@@ -15132,6 +15178,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~anthropic",
       "description": "This model always redirects to the latest model in the Anthropic Claude Sonnet family.",
       "releasedAt": "2026-04-27T19:32:48.000Z",
       "contextWindow": {
@@ -15283,6 +15330,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~openai",
       "description": "This model always redirects to the latest model in the OpenAI GPT family.",
       "releasedAt": "2026-04-27T19:32:14.000Z",
       "contextWindow": {
@@ -15400,6 +15448,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.5 Plus (April 2026) is a large-scale multimodal language model from Alibaba. It accepts text, image, and video input and produces text output, with a 1M token context window. This...",
       "releasedAt": "2026-04-27T03:42:48.000Z",
       "contextWindow": {
@@ -15517,6 +15566,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.6 Flash is a fast, efficient language model from Alibaba's Qwen 3.6 series. It supports text, image, and video input with a 1M token context window. Tiered pricing kicks in...",
       "releasedAt": "2026-04-27T03:42:42.000Z",
       "contextWindow": {
@@ -15635,6 +15685,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.6-35B-A3B is an open-weight multimodal model from Alibaba Cloud with 35 billion total parameters and 3 billion active parameters per token. It uses a hybrid sparse mixture-of-experts architecture combining Gated...",
       "releasedAt": "2026-04-27T03:24:15.000Z",
       "contextWindow": {
@@ -15745,6 +15796,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.6-Max-Preview is a proprietary frontier model from Alibaba Cloud built on a sparse mixture-of-experts architecture with approximately 1 trillion total parameters. It is optimized for agentic coding, tool use, and...",
       "releasedAt": "2026-04-27T03:24:02.000Z",
       "contextWindow": {
@@ -15863,6 +15915,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
       "releasedAt": "2026-04-27T01:57:44.000Z",
       "contextWindow": {
@@ -15980,6 +16033,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.5 Pro is OpenAI’s high-capability model optimized for deep reasoning and accuracy on complex, high-stakes workloads. It features a 1M+ token context window (922K input, 128K output) with support for...",
       "releasedAt": "2026-04-24T17:31:36.000Z",
       "contextWindow": {
@@ -16124,6 +16178,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.5 is OpenAI’s frontier model designed for complex professional workloads, building on GPT-5.4 with stronger reasoning, higher reliability, and improved token efficiency on hard tasks. It features a 1M+ token...",
       "releasedAt": "2026-04-24T17:31:33.000Z",
       "contextWindow": {
@@ -16175,19 +16230,19 @@
       "prices": [
         {
           "unit": "input-token",
-          "usd": "0.000000417252",
+          "usd": "0.000001035996",
           "per": 1,
           "evidence": []
         },
         {
           "unit": "output-token",
-          "usd": "0.000000834504",
+          "usd": "0.000002071992",
           "per": 1,
           "evidence": []
         },
         {
           "unit": "cache-read-token",
-          "usd": "0.000000034771",
+          "usd": "0.000000086333",
           "per": 1,
           "evidence": []
         }
@@ -16256,6 +16311,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek V4 Pro is a large-scale Mixture-of-Experts model from DeepSeek with 1.6T total parameters and 49B activated parameters, supporting a 1M-token context window. It is designed for advanced reasoning, coding,...",
       "releasedAt": "2026-04-24T03:17:59.000Z",
       "contextWindow": {
@@ -16307,19 +16363,19 @@
       "prices": [
         {
           "unit": "input-token",
-          "usd": "0.00000007868",
+          "usd": "0.000000084",
           "per": 1,
           "evidence": []
         },
         {
           "unit": "output-token",
-          "usd": "0.00000015736",
+          "usd": "0.000000168",
           "per": 1,
           "evidence": []
         },
         {
           "unit": "cache-read-token",
-          "usd": "0.000000015736",
+          "usd": "0.0000000168",
           "per": 1,
           "evidence": []
         }
@@ -16388,6 +16444,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek V4 Flash is an efficiency-optimized Mixture-of-Experts model from DeepSeek with 284B total parameters and 13B activated parameters, supporting a 1M-token context window. It is designed for fast inference and...",
       "releasedAt": "2026-04-24T03:17:46.000Z",
       "contextWindow": {
@@ -16522,6 +16579,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "tencent",
       "description": "Hy3 preview is a high-efficiency Mixture-of-Experts model from Tencent designed for agentic workflows and production use. It supports configurable reasoning levels across disabled, low, and high modes, allowing it to...",
       "releasedAt": "2026-04-22T17:15:50.000Z",
       "contextWindow": {
@@ -16631,6 +16689,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "xiaomi",
       "description": "MiMo-V2.5-Pro is Xiaomi’s flagship model, delivering strong performance in general agentic capabilities, complex software engineering, and long-horizon tasks, with top rankings on benchmarks such as ClawEval, GDPVal, and SWE-bench Pro....",
       "releasedAt": "2026-04-22T16:11:13.000Z",
       "contextWindow": {
@@ -16752,6 +16811,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "xiaomi",
       "description": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding...",
       "releasedAt": "2026-04-22T16:11:09.000Z",
       "contextWindow": {
@@ -16900,6 +16960,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "[GPT-5.4](https://openrouter.ai/openai/gpt-5.4) Image 2 combines OpenAI's GPT-5.4 model with state-of-the-art image generation capabilities from GPT Image 2. It enables rich multimodal workflows, allowing users to seamlessly move between reasoning, coding, and...",
       "releasedAt": "2026-04-21T18:52:08.000Z",
       "contextWindow": {
@@ -17050,6 +17111,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "~anthropic",
       "description": "This model always redirects to the latest model in the Claude Opus family.",
       "releasedAt": "2026-04-21T18:16:01.000Z",
       "contextWindow": {
@@ -17103,6 +17165,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openrouter",
       "description": "The Pareto Router maintains a tiered shortlist of strong coding models, ranked by [Artificial Analysis](https://artificialanalysis.ai/) coding percentiles. Set min_coding_score between 0 and 1 on the [pareto-router plugin](https://openrouter.ai/docs/guides/routing/routers/pareto-router#the-min_coding_score-parameter) to control how...",
       "releasedAt": "2026-04-21T05:05:00.000Z",
       "contextWindow": {
@@ -17217,6 +17280,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "moonshotai",
       "description": "Kimi K2.6 is Moonshot AI's next-generation multimodal model, designed for long-horizon coding, coding-driven UI/UX generation, and multi-agent orchestration. It handles complex end-to-end coding tasks across Python, Rust, and Go, and...",
       "releasedAt": "2026-04-20T15:36:42.000Z",
       "contextWindow": {
@@ -17367,6 +17431,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
       "releasedAt": "2026-04-16T14:51:40.000Z",
       "contextWindow": {
@@ -17517,6 +17582,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Opus 4.7 is the next generation of Anthropic's Opus family, built for long-running, asynchronous agents. Building on the coding and agentic strengths of Opus 4.6, it delivers stronger performance on...",
       "releasedAt": "2026-04-16T14:51:40.000Z",
       "contextWindow": {
@@ -17627,6 +17693,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-5.1 delivers a major leap in coding capability, with particularly significant gains in handling long-horizon tasks. Unlike previous models built around minute-level interactions, GLM-5.1 can work independently and continuously on...",
       "releasedAt": "2026-04-07T16:07:05.000Z",
       "contextWindow": {
@@ -17739,6 +17806,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference — delivering near-31B quality at...",
       "releasedAt": "2026-04-03T14:53:09.000Z",
       "contextWindow": {
@@ -17851,6 +17919,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemma 4 26B A4B IT is an instruction-tuned Mixture-of-Experts (MoE) model from Google DeepMind. Despite 25.2B total parameters, only 3.8B activate per token during inference — delivering near-31B quality at...",
       "releasedAt": "2026-04-03T14:53:09.000Z",
       "contextWindow": {
@@ -17969,6 +18038,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
       "releasedAt": "2026-04-02T16:48:06.000Z",
       "contextWindow": {
@@ -18081,6 +18151,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
       "releasedAt": "2026-04-02T16:48:06.000Z",
       "contextWindow": {
@@ -18193,6 +18264,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
       "releasedAt": "2026-04-02T16:48:06.000Z",
       "contextWindow": {
@@ -18310,6 +18382,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen 3.6 Plus builds on a hybrid architecture that combines efficient linear attention with sparse mixture-of-experts routing, enabling strong scalability and high-performance inference. Compared to the 3.5 series, it delivers...",
       "releasedAt": "2026-04-02T12:39:17.000Z",
       "contextWindow": {
@@ -18428,6 +18501,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-5V-Turbo is Z.ai’s first native multimodal agent foundation model, built for vision-based coding and agent-driven tasks. It natively handles image, video, and text inputs, excels at long-horizon planning, complex coding,...",
       "releasedAt": "2026-04-01T16:37:38.000Z",
       "contextWindow": {
@@ -18519,6 +18593,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "arcee-ai",
       "description": "Trinity Large Thinking is a powerful open source reasoning model from the team at Arcee AI. It shows strong performance in PinchBench, agentic workloads, and reasoning tasks. Launch video: https://youtu.be/Gc82AXLa0Rg?si=4RLn6WBz33qT--B7...",
       "releasedAt": "2026-04-01T15:45:18.000Z",
       "contextWindow": {
@@ -18643,6 +18718,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "x-ai",
       "description": "Grok 4.20 Multi-Agent is a variant of SpaceXAI’s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information...",
       "releasedAt": "2026-03-31T17:45:58.000Z",
       "contextWindow": {
@@ -18761,6 +18837,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "x-ai",
       "description": "Grok 4.20 is a reasoning model from SpaceXAI with industry-leading speed and agentic tool calling capabilities. It combines the lowest hallucination rate on the market with strict prompt adherance, delivering...",
       "releasedAt": "2026-03-31T17:43:39.000Z",
       "contextWindow": {
@@ -18835,6 +18912,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Full-length songs are priced at $0.08 per song. Lyria 3 is Google's family of music generation models, available through the Gemini API. With Lyria 3, you can generate high-quality, 48kHz...",
       "releasedAt": "2026-03-30T21:48:06.000Z",
       "contextWindow": {
@@ -18909,6 +18987,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "30 second duration clips are priced at $0.04 per clip. Lyria 3 is Google's family of music generation models, available through the Gemini API. With Lyria 3, you can generate...",
       "releasedAt": "2026-03-30T21:47:35.000Z",
       "contextWindow": {
@@ -18981,6 +19060,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "kwaipilot",
       "description": "KAT-Coder-Pro V2 is the latest high-performance model in KwaiKAT’s KAT-Coder series, designed for complex enterprise-grade software engineering and SaaS integration. It builds on the agentic coding strengths of earlier versions,...",
       "releasedAt": "2026-03-27T22:08:30.000Z",
       "contextWindow": {
@@ -19092,6 +19172,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "rekaai",
       "description": "Reka Edge is an extremely efficient 7B multimodal vision-language model that accepts image/video+text inputs and generates text outputs. This model is optimized specifically to deliver industry-leading performance in image understanding,...",
       "releasedAt": "2026-03-20T17:16:05.000Z",
       "contextWindow": {
@@ -19183,6 +19264,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
       "releasedAt": "2026-03-18T12:24:57.000Z",
       "contextWindow": {
@@ -19268,6 +19350,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
       "releasedAt": "2026-03-18T12:24:57.000Z",
       "contextWindow": {
@@ -19412,6 +19495,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.4 nano is the most lightweight and cost-efficient variant of the GPT-5.4 family, optimized for speed-critical and high-volume tasks. It supports text and image inputs and is designed for low-latency...",
       "releasedAt": "2026-03-17T11:49:47.000Z",
       "contextWindow": {
@@ -19556,6 +19640,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
       "releasedAt": "2026-03-17T11:49:38.000Z",
       "contextWindow": {
@@ -19693,6 +19778,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Small 4 is the next major release in the Mistral Small family, unifying the capabilities of several flagship Mistral models into a single system. It combines strong reasoning from...",
       "releasedAt": "2026-03-16T21:14:45.000Z",
       "contextWindow": {
@@ -19830,6 +19916,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Small 4 is the next major release in the Mistral Small family, unifying the capabilities of several flagship Mistral models into a single system. It combines strong reasoning from...",
       "releasedAt": "2026-03-16T21:14:45.000Z",
       "contextWindow": {
@@ -19940,6 +20027,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-5 Turbo is a new model from Z.ai designed for fast inference and strong performance in agent-driven environments such as OpenClaw scenarios. It is deeply optimized for real-world agent workflows...",
       "releasedAt": "2026-03-15T14:06:13.000Z",
       "contextWindow": {
@@ -20087,6 +20175,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
       "releasedAt": "2026-03-11T16:07:19.000Z",
       "contextWindow": {
@@ -20234,6 +20323,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
       "releasedAt": "2026-03-11T16:07:19.000Z",
       "contextWindow": {
@@ -20370,6 +20460,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "bytedance-seed",
       "description": "Seed-2.0-Lite is a versatile, cost‑efficient enterprise workhorse that delivers strong multimodal and agent capabilities while offering noticeably lower latency, making it a practical default choice for most production workloads across...",
       "releasedAt": "2026-03-10T15:40:31.000Z",
       "contextWindow": {
@@ -20481,6 +20572,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...",
       "releasedAt": "2026-03-10T14:19:56.000Z",
       "contextWindow": {
@@ -20592,6 +20684,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...",
       "releasedAt": "2026-03-10T14:19:56.000Z",
       "contextWindow": {
@@ -20709,6 +20802,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.4 Pro is OpenAI's most advanced model, building on GPT-5.4's unified architecture with enhanced reasoning capabilities for complex, high-stakes tasks. It features a 1M+ token context window (922K input, 128K...",
       "releasedAt": "2026-03-05T18:12:46.000Z",
       "contextWindow": {
@@ -20853,6 +20947,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.4 is OpenAI’s latest frontier model, unifying the Codex and GPT lines into a single system. It features a 1M+ token context window (922K input, 128K output) with support for...",
       "releasedAt": "2026-03-05T18:12:32.000Z",
       "contextWindow": {
@@ -20988,6 +21083,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "inception",
       "description": "Mercury 2 is an extremely fast reasoning LLM, and the first reasoning diffusion LLM (dLLM). Instead of generating tokens sequentially, Mercury 2 produces and refines multiple tokens in parallel, achieving...",
       "releasedAt": "2026-03-04T14:57:55.000Z",
       "contextWindow": {
@@ -21151,6 +21247,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.1 Flash Lite Preview is Google's high-efficiency model optimized for high-volume use cases. It outperforms Gemini 2.5 Flash Lite on overall quality and approaches Gemini 2.5 Flash performance across...",
       "releasedAt": "2026-03-03T04:37:53.000Z",
       "contextWindow": {
@@ -21287,6 +21384,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "bytedance-seed",
       "description": "Seed-2.0-mini targets latency-sensitive, high-concurrency, and cost-sensitive scenarios, emphasizing fast response and flexible inference deployment. It delivers performance comparable to ByteDance-Seed-1.6, supports 256k context, four reasoning effort modes (minimal/low/medium/high), multimodal understanding,...",
       "releasedAt": "2026-02-26T18:38:27.000Z",
       "contextWindow": {
@@ -21422,6 +21520,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.1 Flash Image Preview, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines...",
       "releasedAt": "2026-02-26T15:25:58.000Z",
       "contextWindow": {
@@ -21539,6 +21638,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
       "releasedAt": "2026-02-25T21:10:22.000Z",
       "contextWindow": {
@@ -21650,6 +21750,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of...",
       "releasedAt": "2026-02-25T21:10:10.000Z",
       "contextWindow": {
@@ -21761,6 +21862,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
       "releasedAt": "2026-02-25T21:09:49.000Z",
       "contextWindow": {
@@ -21872,6 +21974,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "The Qwen3.5 native vision-language Flash models are built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. Compared to the...",
       "releasedAt": "2026-02-25T21:09:36.000Z",
       "contextWindow": {
@@ -22015,6 +22118,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.1 Pro Preview Custom Tools is a variant of Gemini 3.1 Pro that improves tool selection behavior by preventing overuse of a general bash tool when more efficient third-party...",
       "releasedAt": "2026-02-25T18:58:43.000Z",
       "contextWindow": {
@@ -22158,6 +22262,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.3-Codex is OpenAI’s most advanced agentic coding model, combining the frontier software engineering performance of GPT-5.2-Codex with the broader reasoning and professional knowledge capabilities of GPT-5.2. It achieves state-of-the-art results...",
       "releasedAt": "2026-02-24T18:52:44.000Z",
       "contextWindow": {
@@ -22249,6 +22354,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "aion-labs",
       "description": "Aion-2.0 is a variant of DeepSeek V3.2 optimized for immersive roleplaying and storytelling. It is particularly strong at introducing tension, crises, and conflict into stories, making narratives feel more engaging....",
       "releasedAt": "2026-02-23T21:15:06.000Z",
       "contextWindow": {
@@ -22392,6 +22498,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.1 Pro Preview is Google’s frontier reasoning model, delivering enhanced software engineering performance, improved agentic reliability, and more efficient token usage across complex workflows. Building on the multimodal foundation...",
       "releasedAt": "2026-02-19T14:00:27.000Z",
       "contextWindow": {
@@ -22523,6 +22630,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3.1 Pro Preview is Google’s frontier reasoning model, delivering enhanced software engineering performance, improved agentic reliability, and more efficient token usage across complex workflows. Building on the multimodal foundation...",
       "releasedAt": "2026-02-19T14:00:27.000Z",
       "contextWindow": {
@@ -22671,6 +22779,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with...",
       "releasedAt": "2026-02-17T15:43:10.000Z",
       "contextWindow": {
@@ -22819,6 +22928,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Sonnet 4.6 is Anthropic's most capable Sonnet-class model yet, with frontier performance across coding, agents, and professional work. It excels at iterative development, complex codebase navigation, end-to-end project management with...",
       "releasedAt": "2026-02-17T15:43:10.000Z",
       "contextWindow": {
@@ -22930,6 +23040,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "The Qwen3.5 native vision-language series Plus models are built on a hybrid architecture that integrates linear attention mechanisms with sparse mixture-of-experts models, achieving higher inference efficiency. In a variety of...",
       "releasedAt": "2026-02-16T08:10:16.000Z",
       "contextWindow": {
@@ -23041,6 +23152,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
       "releasedAt": "2026-02-16T06:23:38.000Z",
       "contextWindow": {
@@ -23132,6 +23244,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-M2.5 is a SOTA large language model designed for real-world productivity. Trained in a diverse range of complex real-world digital working environments, M2.5 builds upon the coding expertise of M2.1...",
       "releasedAt": "2026-02-12T15:01:42.000Z",
       "contextWindow": {
@@ -23242,6 +23355,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-5 is Z.ai’s flagship open-source foundation model engineered for complex systems design and long-horizon agent workflows. Built for expert developers, it delivers production-grade performance on large-scale programming tasks, rivaling leading...",
       "releasedAt": "2026-02-11T16:59:42.000Z",
       "contextWindow": {
@@ -23345,6 +23459,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-Max-Thinking is the flagship reasoning model in the Qwen3 series, designed for high-stakes cognitive tasks that require deep, multi-step reasoning. By significantly scaling model capacity and reinforcement learning compute, it...",
       "releasedAt": "2026-02-09T21:18:21.000Z",
       "contextWindow": {
@@ -23514,6 +23629,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Opus 4.6 is Anthropic’s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective...",
       "releasedAt": "2026-02-04T15:30:50.000Z",
       "contextWindow": {
@@ -23683,6 +23799,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Opus 4.6 is Anthropic’s strongest model for coding and long-running professional tasks. It is built for agents that operate across entire workflows rather than single prompts, making it especially effective...",
       "releasedAt": "2026-02-04T15:30:50.000Z",
       "contextWindow": {
@@ -23755,6 +23872,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-Coder-Next is an open-weight causal language model optimized for coding agents and local development workflows. It uses a sparse MoE design with 80B total parameters and only 3B activated per...",
       "releasedAt": "2026-02-04T00:15:01.000Z",
       "contextWindow": {
@@ -23825,6 +23943,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openrouter",
       "description": "The simplest way to get free inference. openrouter/free is a router that selects free models at random from the models available on OpenRouter. The router smartly filters for models that...",
       "releasedAt": "2026-02-01T03:43:47.000Z",
       "contextWindow": {
@@ -23910,6 +24029,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "stepfun",
       "description": "Step 3.5 Flash is StepFun's most capable open-source foundation model. Built on a sparse Mixture of Experts (MoE) architecture, it selectively activates only 11B of its 196B parameters per token....",
       "releasedAt": "2026-01-29T23:12:17.000Z",
       "contextWindow": {
@@ -23965,19 +24085,19 @@
       "prices": [
         {
           "unit": "input-token",
-          "usd": "0.0000006",
+          "usd": "0.00000045",
           "per": 1,
           "evidence": []
         },
         {
           "unit": "output-token",
-          "usd": "0.000003",
+          "usd": "0.00000225",
           "per": 1,
           "evidence": []
         },
         {
           "unit": "cache-read-token",
-          "usd": "0.0000001",
+          "usd": "0.00000007",
           "per": 1,
           "evidence": []
         }
@@ -24024,6 +24144,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "moonshotai",
       "description": "Kimi K2.5 is Moonshot AI's native multimodal model, delivering state-of-the-art visual coding capability and a self-directed agent swarm paradigm. Built on Kimi K2 with continued pretraining over approximately 15T mixed...",
       "releasedAt": "2026-01-27T04:11:16.000Z",
       "contextWindow": {
@@ -24133,6 +24254,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "upstage",
       "description": "Solar Pro 3 is Upstage's powerful Mixture-of-Experts (MoE) language model. With 102B total parameters and 12B active parameters per forward pass, it delivers exceptional performance while maintaining computational efficiency. Optimized...",
       "releasedAt": "2026-01-27T02:33:20.000Z",
       "contextWindow": {
@@ -24205,6 +24327,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax M2-her is a dialogue-first large language model built for immersive roleplay, character-driven chat, and expressive multi-turn conversations. Designed to stay consistent in tone and personality, it supports rich message...",
       "releasedAt": "2026-01-23T14:07:19.000Z",
       "contextWindow": {
@@ -24271,6 +24394,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "writer",
       "description": "Palmyra X5 is Writer's most advanced model, purpose-built for building and scaling AI agents across the enterprise. It delivers industry-leading speed and efficiency on context windows up to 1 million...",
       "releasedAt": "2026-01-21T13:57:03.000Z",
       "contextWindow": {
@@ -24345,6 +24469,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "The gpt-audio model is OpenAI's first generally available audio model. The new snapshot features an upgraded decoder for more natural sounding voices and maintains better voice consistency. Audio is priced...",
       "releasedAt": "2026-01-19T22:42:49.000Z",
       "contextWindow": {
@@ -24419,6 +24544,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "A cost-efficient version of GPT Audio. The new snapshot features an upgraded decoder for more natural sounding voices and maintains better voice consistency. Input is priced at $0.60 per million...",
       "releasedAt": "2026-01-19T21:50:19.000Z",
       "contextWindow": {
@@ -24529,6 +24655,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "As a 30B-class SOTA model, GLM-4.7-Flash offers a new option that balances performance and efficiency. It is further optimized for agentic coding use cases, strengthening coding capabilities, long-horizon task planning,...",
       "releasedAt": "2026-01-19T14:45:13.000Z",
       "contextWindow": {
@@ -24649,6 +24776,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.2-Codex is an upgraded version of GPT-5.1-Codex optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
       "releasedAt": "2026-01-14T16:48:35.000Z",
       "contextWindow": {
@@ -24760,6 +24888,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "bytedance-seed",
       "description": "Seed 1.6 Flash is an ultra-fast multimodal deep thinking model by ByteDance Seed, supporting both text and visual understanding. It features a 256k context window and can generate outputs of...",
       "releasedAt": "2025-12-23T15:50:11.000Z",
       "contextWindow": {
@@ -24871,6 +25000,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "bytedance-seed",
       "description": "Seed 1.6 is a general-purpose model released by the ByteDance Seed team. It incorporates multimodal capabilities and adaptive deep thinking with a 256K context window.",
       "releasedAt": "2025-12-23T15:49:57.000Z",
       "contextWindow": {
@@ -24962,6 +25092,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-M2.1 is a lightweight, state-of-the-art large language model optimized for coding, agentic workflows, and modern application development. With only 10 billion activated parameters, it delivers a major jump in real-world...",
       "releasedAt": "2025-12-23T01:56:37.000Z",
       "contextWindow": {
@@ -25072,6 +25203,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-4.7 is Z.ai’s latest flagship model, featuring upgrades in two key areas: enhanced programming capabilities and more stable multi-step reasoning/execution. It demonstrates significant improvements in executing complex agent tasks while...",
       "releasedAt": "2025-12-22T04:33:34.000Z",
       "contextWindow": {
@@ -25234,6 +25366,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool...",
       "releasedAt": "2025-12-17T15:57:58.000Z",
       "contextWindow": {
@@ -25384,6 +25517,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 3 Flash Preview is a high speed, high value thinking model designed for agentic workflows, multi turn chat, and coding assistance. It delivers near Pro level reasoning and tool...",
       "releasedAt": "2025-12-17T15:57:58.000Z",
       "contextWindow": {
@@ -25493,6 +25627,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nvidia",
       "description": "NVIDIA Nemotron 3 Nano 30B A3B is a small language MoE model with highest compute efficiency and accuracy for developers to build specialized agentic AI systems. The model is fully...",
       "releasedAt": "2025-12-14T16:54:35.000Z",
       "contextWindow": {
@@ -25573,6 +25708,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.2 Chat (AKA Instant) is the fast, lightweight member of the 5.2 family, optimized for low-latency chat while retaining strong general intelligence. It uses adaptive reasoning to selectively “think” on...",
       "releasedAt": "2025-12-10T18:03:03.000Z",
       "contextWindow": {
@@ -25690,6 +25826,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.2 Pro is OpenAI’s most advanced model, offering major improvements in agentic coding and long context performance over GPT-5 Pro. It is optimized for complex tasks that require step-by-step reasoning,...",
       "releasedAt": "2025-12-10T18:03:00.000Z",
       "contextWindow": {
@@ -25833,6 +25970,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.2 is the latest frontier-grade model in the GPT-5 series, offering stronger agentic and long context perfomance compared to GPT-5.1. It uses adaptive reasoning to allocate computation dynamically, responding quickly...",
       "releasedAt": "2025-12-10T18:02:55.000Z",
       "contextWindow": {
@@ -25909,6 +26047,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Devstral 2 is a state-of-the-art open-source model by Mistral AI specializing in agentic coding. It is a 123B-parameter dense transformer model supporting a 256K context window. Devstral 2 supports exploring...",
       "releasedAt": "2025-12-09T13:03:39.000Z",
       "contextWindow": {
@@ -25975,6 +26114,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "relace",
       "description": "The relace-search model uses 4-12 `view_file` and `grep` tools in parallel to explore a codebase and return relevant files to the user request. In contrast to RAG, relace-search performs agentic...",
       "releasedAt": "2025-12-08T17:06:00.000Z",
       "contextWindow": {
@@ -26092,6 +26232,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-4.6V is a large multimodal model designed for high-fidelity visual understanding and long-context reasoning across images, documents, and mixed media. It supports up to 128K tokens, processes complex page layouts...",
       "releasedAt": "2025-12-08T15:24:22.000Z",
       "contextWindow": {
@@ -26145,6 +26286,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openrouter",
       "description": "Transform your natural language requests into structured OpenRouter API request objects. Describe what you want to accomplish with AI models, and Body Builder will construct the appropriate API calls. Example:...",
       "releasedAt": "2025-12-05T03:00:53.000Z",
       "contextWindow": {
@@ -26265,6 +26407,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.1-Codex-Max is OpenAI’s latest agentic coding model, designed for long-running, high-context software development tasks. It is based on an updated version of the 5.1 reasoning stack and trained on agentic...",
       "releasedAt": "2025-12-04T20:08:54.000Z",
       "contextWindow": {
@@ -26380,6 +26523,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "amazon",
       "description": "Nova 2 Lite is a fast, cost-effective reasoning model for everyday workloads that can process text, images, and videos to generate text. Nova 2 Lite demonstrates standout capabilities in processing...",
       "releasedAt": "2025-12-02T17:31:12.000Z",
       "contextWindow": {
@@ -26456,6 +26600,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "The largest model in the Ministral 3 family, Ministral 3 14B offers frontier capabilities and performance comparable to its larger Mistral Small 3.2 24B counterpart. A powerful and efficient language...",
       "releasedAt": "2025-12-02T13:22:15.000Z",
       "contextWindow": {
@@ -26532,6 +26677,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "A balanced model in the Ministral 3 family, Ministral 3 8B is a powerful, efficient tiny language model with vision capabilities.",
       "releasedAt": "2025-12-02T13:20:54.000Z",
       "contextWindow": {
@@ -26608,6 +26754,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "A balanced model in the Ministral 3 family, Ministral 3 8B is a powerful, efficient tiny language model with vision capabilities.",
       "releasedAt": "2025-12-02T13:20:54.000Z",
       "contextWindow": {
@@ -26684,6 +26831,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "The smallest model in the Ministral 3 family, Ministral 3 3B is a powerful, efficient tiny language model with vision capabilities.",
       "releasedAt": "2025-12-02T13:19:20.000Z",
       "contextWindow": {
@@ -26764,6 +26912,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
       "releasedAt": "2025-12-01T21:27:52.000Z",
       "contextWindow": {
@@ -26844,6 +26993,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Large 3 2512 is Mistral’s most capable model to date, featuring a sparse mixture-of-experts architecture with 41B active parameters (675B total), and released under the Apache 2.0 license.",
       "releasedAt": "2025-12-01T21:27:52.000Z",
       "contextWindow": {
@@ -26954,6 +27104,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek-V3.2 is a large language model designed to harmonize high computational efficiency with strong reasoning and agentic tool-use performance. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
       "releasedAt": "2025-12-01T13:10:42.000Z",
       "contextWindow": {
@@ -27077,6 +27228,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and...",
       "releasedAt": "2025-11-24T18:56:20.000Z",
       "contextWindow": {
@@ -27200,6 +27352,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Opus 4.5 is Anthropic’s frontier reasoning model optimized for complex software engineering, agentic workflows, and long-horizon computer use. It offers strong multimodal capabilities, competitive performance across real-world coding and...",
       "releasedAt": "2025-11-24T18:56:20.000Z",
       "contextWindow": {
@@ -27311,6 +27464,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Nano Banana Pro is Google’s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and...",
       "releasedAt": "2025-11-20T15:49:57.000Z",
       "contextWindow": {
@@ -27454,6 +27608,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.1 is the latest frontier-grade model in the GPT-5 series, offering stronger general-purpose reasoning, improved instruction adherence, and a more natural conversational style compared to GPT-5. It uses adaptive reasoning...",
       "releasedAt": "2025-11-13T18:58:25.000Z",
       "contextWindow": {
@@ -27573,6 +27728,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.1-Codex is a specialized version of GPT-5.1 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks....",
       "releasedAt": "2025-11-13T18:58:18.000Z",
       "contextWindow": {
@@ -27710,6 +27866,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5.1-Codex-Mini is a smaller and faster version of GPT-5.1-Codex",
       "releasedAt": "2025-11-13T18:17:00.000Z",
       "contextWindow": {
@@ -27801,6 +27958,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "moonshotai",
       "description": "Kimi K2 Thinking is Moonshot AI’s most advanced open reasoning model to date, extending the K2 series into agentic, long-horizon reasoning. Built on the trillion-parameter Mixture-of-Experts (MoE) architecture introduced in...",
       "releasedAt": "2025-11-06T14:50:22.000Z",
       "contextWindow": {
@@ -27877,6 +28035,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "amazon",
       "description": "Amazon Nova Premier is the most capable of Amazon’s multimodal models for complex reasoning tasks and for use as the best teacher for distilling custom models.",
       "releasedAt": "2025-10-31T22:38:52.000Z",
       "contextWindow": {
@@ -27966,6 +28125,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "perplexity",
       "description": "Exclusively available on the OpenRouter API, Sonar Pro's new Pro Search mode is Perplexity's most advanced agentic search system. It is designed for deeper reasoning and analysis. Pricing is based...",
       "releasedAt": "2025-10-30T19:59:26.000Z",
       "contextWindow": {
@@ -28046,6 +28206,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Voxtral Small is an enhancement of Mistral Small 3, incorporating state-of-the-art audio input capabilities while retaining best-in-class text performance. It excels at speech transcription, translation and audio understanding. Input audio...",
       "releasedAt": "2025-10-30T14:39:04.000Z",
       "contextWindow": {
@@ -28137,6 +28298,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "gpt-oss-safeguard-20b is a safety reasoning model from OpenAI built upon gpt-oss-20b. This open-weight, 21B-parameter Mixture-of-Experts (MoE) model offers lower latency for safety tasks like content classification, LLM filtering, and trust...",
       "releasedAt": "2025-10-29T15:47:16.000Z",
       "contextWindow": {
@@ -28222,6 +28384,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-M2 is a compact, high-efficiency large language model optimized for end-to-end coding and agentic workflows. With 10 billion activated parameters (230 billion total), it delivers near-frontier intelligence across general reasoning,...",
       "releasedAt": "2025-10-23T20:41:33.000Z",
       "contextWindow": {
@@ -28292,6 +28455,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-VL-32B-Instruct is a large-scale multimodal vision-language model designed for high-precision understanding and reasoning across text, images, and video. With 32 billion parameters, it combines deep visual perception with advanced text...",
       "releasedAt": "2025-10-23T14:55:32.000Z",
       "contextWindow": {
@@ -28358,6 +28522,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "ibm-granite",
       "description": "Granite-4.0-H-Micro is a 3B parameter from the Granite 4 family of models. These models are the latest in a series of models released by IBM. They are fine-tuned for long...",
       "releasedAt": "2025-10-20T02:34:55.000Z",
       "contextWindow": {
@@ -28461,6 +28626,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5 Image Mini combines OpenAI's advanced language capabilities, powered by [GPT-5 Mini](https://openrouter.ai/openai/gpt-5-mini), with GPT Image 1 Mini for efficient image generation. This natively multimodal model features superior instruction following, text...",
       "releasedAt": "2025-10-16T14:23:03.000Z",
       "contextWindow": {
@@ -28584,6 +28750,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance...",
       "releasedAt": "2025-10-15T17:00:38.000Z",
       "contextWindow": {
@@ -28707,6 +28874,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Haiku 4.5 is Anthropic’s fastest and most efficient model, delivering near-frontier intelligence at a fraction of the cost and latency of larger Claude models. Matching Claude Sonnet 4’s performance...",
       "releasedAt": "2025-10-15T17:00:38.000Z",
       "contextWindow": {
@@ -28796,6 +28964,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-VL-8B-Thinking is the reasoning-optimized variant of the Qwen3-VL-8B multimodal model, designed for advanced visual and textual reasoning across complex scenes, documents, and temporal sequences. It integrates enhanced multimodal alignment and...",
       "releasedAt": "2025-10-14T17:42:26.000Z",
       "contextWindow": {
@@ -28866,6 +29035,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-VL-8B-Instruct is a multimodal vision-language model from the Qwen3-VL series, built for high-fidelity understanding and reasoning across text, images, and video. It features improved multimodal fusion with Interleaved-MRoPE for long-horizon...",
       "releasedAt": "2025-10-14T17:35:08.000Z",
       "contextWindow": {
@@ -28969,6 +29139,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "[GPT-5](https://openrouter.ai/openai/gpt-5) Image combines OpenAI's GPT-5 model with state-of-the-art image generation capabilities. It offers major improvements in reasoning, code quality, and user experience while incorporating GPT Image 1's superior instruction following,...",
       "releasedAt": "2025-10-14T13:19:46.000Z",
       "contextWindow": {
@@ -29061,6 +29232,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,...",
       "releasedAt": "2025-10-07T20:53:51.000Z",
       "contextWindow": {
@@ -29150,6 +29322,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-VL-30B-A3B-Thinking is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Thinking variant enhances reasoning in STEM, math, and complex tasks. It excels...",
       "releasedAt": "2025-10-06T23:47:59.000Z",
       "contextWindow": {
@@ -29220,6 +29393,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-VL-30B-A3B-Instruct is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Instruct variant optimizes instruction-following for general multimodal tasks. It excels in perception...",
       "releasedAt": "2025-10-06T23:47:56.000Z",
       "contextWindow": {
@@ -29335,6 +29509,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5 Pro is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and...",
       "releasedAt": "2025-10-06T18:51:03.000Z",
       "contextWindow": {
@@ -29444,6 +29619,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "Compared with GLM-4.5, this generation brings several key improvements: Longer context window: The context window has been expanded from 128K to 200K tokens, enabling the model to handle more complex...",
       "releasedAt": "2025-09-30T12:32:56.000Z",
       "contextWindow": {
@@ -29567,6 +29743,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Sonnet 4.5 is Anthropic’s most advanced Sonnet model to date, optimized for real-world agents and coding workflows. It delivers state-of-the-art performance on coding benchmarks such as SWE-bench Verified, with...",
       "releasedAt": "2025-09-29T16:01:16.000Z",
       "contextWindow": {
@@ -29690,6 +29867,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Sonnet 4.5 is Anthropic’s most advanced Sonnet model to date, optimized for real-world agents and coding workflows. It delivers state-of-the-art performance on coding benchmarks such as SWE-bench Verified, with...",
       "releasedAt": "2025-09-29T16:01:16.000Z",
       "contextWindow": {
@@ -29793,6 +29971,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek-V3.2-Exp is an experimental large language model released by DeepSeek as an intermediate step between V3.1 and future architectures. It introduces DeepSeek Sparse Attention (DSA), a fine-grained sparse attention mechanism...",
       "releasedAt": "2025-09-29T12:54:41.000Z",
       "contextWindow": {
@@ -29865,6 +30044,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "thedrummer",
       "description": "Uncensored and creative writing model based on Mistral Small 3.2 24B with good recall, prompt adherence, and intelligence.",
       "releasedAt": "2025-09-27T00:11:18.000Z",
       "contextWindow": {
@@ -29931,6 +30111,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "relace",
       "description": "Relace Apply 3 is a specialized code-patching LLM that merges AI-suggested edits straight into your source files. It can apply updates from GPT-4o, Claude, and others into your files at...",
       "releasedAt": "2025-09-26T12:59:32.000Z",
       "contextWindow": {
@@ -30020,6 +30201,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong text generation with visual understanding across images and video. The Thinking model is optimized for multimodal reasoning in STEM and math....",
       "releasedAt": "2025-09-23T23:04:50.000Z",
       "contextWindow": {
@@ -30096,6 +30278,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-VL-235B-A22B Instruct is an open-weight multimodal model that unifies strong text generation with visual understanding across images and video. The Instruct model targets general vision-language use (VQA, document parsing, chart/table...",
       "releasedAt": "2025-09-23T23:04:47.000Z",
       "contextWindow": {
@@ -30211,6 +30394,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-Max is an updated release built on the Qwen3 series, offering major improvements in reasoning, instruction following, multilingual support, and long-tail knowledge coverage compared to the January 2025 version. It...",
       "releasedAt": "2025-09-23T21:26:48.000Z",
       "contextWindow": {
@@ -30326,6 +30510,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3 Coder Plus is Alibaba's proprietary version of the Open Source Qwen3 Coder 480B A35B. It is a powerful coding agent model specializing in autonomous programming via tool calling and...",
       "releasedAt": "2025-09-23T21:25:07.000Z",
       "contextWindow": {
@@ -30435,6 +30620,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's...",
       "releasedAt": "2025-09-22T13:37:55.000Z",
       "contextWindow": {
@@ -30513,6 +30699,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3 Coder Flash is Alibaba's fast and cost efficient version of their proprietary Qwen3 Coder Plus. It is a powerful coding agent model specializing in autonomous programming via tool calling...",
       "releasedAt": "2025-09-17T13:25:36.000Z",
       "contextWindow": {
@@ -30598,6 +30785,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-Next-80B-A3B-Thinking is a reasoning-first chat model in the Qwen3-Next line that outputs structured “thinking” traces by default. It’s designed for hard multi-step problems; math proofs, code synthesis/debugging, logic, and agentic...",
       "releasedAt": "2025-09-11T17:38:04.000Z",
       "contextWindow": {
@@ -30664,6 +30852,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-Next-80B-A3B-Instruct is an instruction-tuned chat model in the Qwen3-Next series optimized for fast, stable responses without “thinking” traces. It targets complex tasks across reasoning, code generation, knowledge QA, and multilingual...",
       "releasedAt": "2025-09-11T17:36:53.000Z",
       "contextWindow": {
@@ -30767,6 +30956,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen Plus 0728, based on the Qwen3 foundation model, is a 1 million context hybrid reasoning model with a balanced performance, speed, and cost combination.",
       "releasedAt": "2025-09-08T16:06:39.000Z",
       "contextWindow": {
@@ -30833,6 +31023,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "moonshotai",
       "description": "Kimi K2 0905 is the September update of [Kimi K2 0711](moonshotai/kimi-k2). It is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32...",
       "releasedAt": "2025-09-04T21:25:47.000Z",
       "contextWindow": {
@@ -30918,6 +31109,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-30B-A3B-Thinking-2507 is a 30B parameter Mixture-of-Experts reasoning model optimized for complex tasks requiring extended multi-step thinking. The model is designed specifically for “thinking mode,” where internal reasoning traces are separated...",
       "releasedAt": "2025-08-28T16:39:52.000Z",
       "contextWindow": {
@@ -31021,6 +31213,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nousresearch",
       "description": "Hermes 4 70B is a hybrid reasoning model from Nous Research, built on Meta-Llama-3.1-70B. It introduces the same hybrid mode as the larger 405B release, allowing the model to either...",
       "releasedAt": "2025-08-26T19:23:02.000Z",
       "contextWindow": {
@@ -31124,6 +31317,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "nousresearch",
       "description": "Hermes 4 is a large-scale reasoning model built on Meta-Llama-3.1-405B and released by Nous Research. It introduces a hybrid reasoning mode, where the model can choose to deliberate internally with...",
       "releasedAt": "2025-08-26T19:11:03.000Z",
       "contextWindow": {
@@ -31233,6 +31427,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek-V3.1 is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes via prompt templates. It extends the DeepSeek-V3 base with a two-phase long-context...",
       "releasedAt": "2025-08-21T12:33:48.000Z",
       "contextWindow": {
@@ -31313,6 +31508,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances...",
       "releasedAt": "2025-08-13T14:33:59.000Z",
       "contextWindow": {
@@ -31393,6 +31589,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Medium 3.1 is an updated version of Mistral Medium 3, which is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances...",
       "releasedAt": "2025-08-13T14:33:59.000Z",
       "contextWindow": {
@@ -31506,6 +31703,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-4.5V is a vision-language foundation model for multimodal agent applications. Built on a Mixture-of-Experts (MoE) architecture with 106B parameters and 12B activated parameters, it achieves state-of-the-art results in video understanding,...",
       "releasedAt": "2025-08-11T14:24:48.000Z",
       "contextWindow": {
@@ -31630,6 +31828,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5 is OpenAI’s most advanced model, offering major improvements in reasoning, code quality, and user experience. It is optimized for complex tasks that require step-by-step reasoning, instruction following, and accuracy...",
       "releasedAt": "2025-08-07T17:23:33.000Z",
       "contextWindow": {
@@ -31754,6 +31953,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5 Mini is a compact version of GPT-5, designed to handle lighter-weight reasoning tasks. It provides the same instruction-following and safety-tuning benefits as GPT-5, but with reduced latency and cost....",
       "releasedAt": "2025-08-07T17:23:27.000Z",
       "contextWindow": {
@@ -31878,6 +32078,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-5-Nano is the smallest and fastest variant in the GPT-5 system, optimized for developer tools, rapid interactions, and ultra-low latency environments. While limited in reasoning depth compared to its larger...",
       "releasedAt": "2025-08-07T17:23:22.000Z",
       "contextWindow": {
@@ -31987,6 +32188,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
       "releasedAt": "2025-08-05T17:17:11.000Z",
       "contextWindow": {
@@ -32096,6 +32298,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "gpt-oss-120b is an open-weight, 117B-parameter Mixture-of-Experts (MoE) language model from OpenAI designed for high-reasoning, agentic, and general-purpose production use cases. It activates 5.1B parameters per forward pass and is optimized...",
       "releasedAt": "2025-08-05T17:17:11.000Z",
       "contextWindow": {
@@ -32211,6 +32414,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
       "releasedAt": "2025-08-05T17:17:09.000Z",
       "contextWindow": {
@@ -32320,6 +32524,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "gpt-oss-20b is an open-weight 21B parameter model released by OpenAI under the Apache 2.0 license. It uses a Mixture-of-Experts (MoE) architecture with 3.6B active parameters per forward pass, optimized for...",
       "releasedAt": "2025-08-05T17:17:09.000Z",
       "contextWindow": {
@@ -32443,6 +32648,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Opus 4.1 is an updated version of Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains...",
       "releasedAt": "2025-08-05T16:33:11.000Z",
       "contextWindow": {
@@ -32566,6 +32772,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Opus 4.1 is an updated version of Anthropic’s flagship model, offering improved performance in coding, reasoning, and agentic tasks. It achieves 74.5% on SWE-bench Verified and shows notable gains...",
       "releasedAt": "2025-08-05T16:33:11.000Z",
       "contextWindow": {
@@ -32642,6 +32849,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral's cutting-edge language model for coding released end of July 2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle (FIM), code correction and test generation.\n\n[Blog Post](https://mistral.ai/news/codestral-25-08)",
       "releasedAt": "2025-08-01T20:20:30.000Z",
       "contextWindow": {
@@ -32718,6 +32926,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral's cutting-edge language model for coding released end of July 2025. Codestral specializes in low-latency, high-frequency tasks such as fill-in-the-middle (FIM), code correction and test generation.\n\n[Blog Post](https://mistral.ai/news/codestral-25-08)",
       "releasedAt": "2025-08-01T20:20:30.000Z",
       "contextWindow": {
@@ -32784,6 +32993,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-Coder-30B-A3B-Instruct is a 30.5B parameter Mixture-of-Experts (MoE) model with 128 experts (8 active per forward pass), designed for advanced code generation, repository-scale understanding, and agentic tool use. Built on the...",
       "releasedAt": "2025-07-31T14:32:59.000Z",
       "contextWindow": {
@@ -32850,6 +33060,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-30B-A3B-Instruct-2507 is a 30.5B-parameter mixture-of-experts language model from Qwen, with 3.3B active parameters per inference. It operates in non-thinking mode and is designed for high-quality instruction following, multilingual understanding, and...",
       "releasedAt": "2025-07-29T16:36:05.000Z",
       "contextWindow": {
@@ -32959,6 +33170,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-4.5 is our latest flagship foundation model, purpose-built for agent-based applications. It leverages a Mixture-of-Experts (MoE) architecture and supports a context length of up to 128k tokens. GLM-4.5 delivers significantly...",
       "releasedAt": "2025-07-25T19:22:27.000Z",
       "contextWindow": {
@@ -33068,6 +33280,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "z-ai",
       "description": "GLM-4.5-Air is the lightweight variant of our latest flagship model family, also purpose-built for agent-centric applications. Like GLM-4.5, it adopts the Mixture-of-Experts (MoE) architecture but with a more compact parameter...",
       "releasedAt": "2025-07-25T19:20:58.000Z",
       "contextWindow": {
@@ -33153,6 +33366,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-235B-A22B-Thinking-2507 is a high-performance, open-weight Mixture-of-Experts (MoE) language model optimized for complex reasoning tasks. It activates 22B of its 235B parameters per forward pass and natively supports up to 262,144...",
       "releasedAt": "2025-07-25T13:19:17.000Z",
       "contextWindow": {
@@ -33225,6 +33439,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over...",
       "releasedAt": "2025-07-23T00:29:06.000Z",
       "contextWindow": {
@@ -33301,6 +33516,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "bytedance",
       "description": "UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement...",
       "releasedAt": "2025-07-22T17:24:16.000Z",
       "contextWindow": {
@@ -33438,6 +33654,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance...",
       "releasedAt": "2025-07-22T16:04:36.000Z",
       "contextWindow": {
@@ -33569,6 +33786,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance...",
       "releasedAt": "2025-07-22T16:04:36.000Z",
       "contextWindow": {
@@ -33641,6 +33859,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
       "releasedAt": "2025-07-21T17:39:15.000Z",
       "contextWindow": {
@@ -33707,6 +33926,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "moonshotai",
       "description": "Kimi K2 Instruct is a large-scale Mixture-of-Experts (MoE) language model developed by Moonshot AI, featuring 1 trillion total parameters with 32 billion active per forward pass. It is optimized for...",
       "releasedAt": "2025-07-11T19:47:32.000Z",
       "contextWindow": {
@@ -33773,6 +33993,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "cognitivecomputations",
       "description": "Venice Uncensored Dolphin Mistral 24B Venice Edition is a fine-tuned variant of Mistral-Small-24B-Instruct-2501, developed by dphn.ai in collaboration with Venice.ai. This model is designed as an “uncensored” instruct-tuned LLM, preserving...",
       "releasedAt": "2025-07-09T21:02:46.000Z",
       "contextWindow": {
@@ -33876,6 +34097,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "tencent",
       "description": "Hunyuan-A13B is a 13B active parameter Mixture-of-Experts (MoE) language model developed by Tencent, with a total parameter count of 80B and support for reasoning via Chain-of-Thought. It offers competitive benchmark...",
       "releasedAt": "2025-07-08T15:14:24.000Z",
       "contextWindow": {
@@ -33942,6 +34164,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "morph",
       "description": "Morph's high-accuracy apply model for complex code edits. ~4,500 tokens/sec with 98% accuracy for precise code transformations. The model requires the prompt to be in the following format: <instruction>{instruction}</instruction> <code>{initial_code}</code>...",
       "releasedAt": "2025-07-07T17:54:18.000Z",
       "contextWindow": {
@@ -34008,6 +34231,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "morph",
       "description": "Morph's fastest apply model for code edits. ~10,500 tokens/sec with 96% accuracy for rapid code transformations. The model requires the prompt to be in the following format: <instruction>{instruction}</instruction> <code>{initial_code}</code> <update>{edit_snippet}</update>...",
       "releasedAt": "2025-07-07T17:40:02.000Z",
       "contextWindow": {
@@ -34115,6 +34339,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "baidu",
       "description": "ERNIE-4.5-VL-424B-A47B is a multimodal Mixture-of-Experts (MoE) model from Baidu’s ERNIE 4.5 series, featuring 424B total parameters with 47B active per token. It is trained jointly on text and image data...",
       "releasedAt": "2025-06-30T16:28:23.000Z",
       "contextWindow": {
@@ -34185,6 +34410,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral-Small-3.2-24B-Instruct-2506 is an updated 24B parameter model from Mistral optimized for instruction following, repetition reduction, and improved function calling. Compared to the 3.1 release, version 3.2 significantly improves accuracy on...",
       "releasedAt": "2025-06-20T18:10:16.000Z",
       "contextWindow": {
@@ -34288,6 +34514,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-M1 is a large-scale, open-weight reasoning model designed for extended context and high-efficiency inference. It leverages a hybrid Mixture-of-Experts (MoE) architecture paired with a custom \"lightning attention\" mechanism, allowing it...",
       "releasedAt": "2025-06-17T22:46:54.000Z",
       "contextWindow": {
@@ -34425,6 +34652,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
       "releasedAt": "2025-06-17T15:01:28.000Z",
       "contextWindow": {
@@ -34556,6 +34784,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater...",
       "releasedAt": "2025-06-17T15:01:28.000Z",
       "contextWindow": {
@@ -34675,6 +34904,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
       "releasedAt": "2025-06-17T14:12:24.000Z",
       "contextWindow": {
@@ -34788,6 +35018,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
       "releasedAt": "2025-06-17T14:12:24.000Z",
       "contextWindow": {
@@ -34899,6 +35130,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "The o-series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o3-pro model uses more compute to think harder and provide consistently...",
       "releasedAt": "2025-06-10T23:32:32.000Z",
       "contextWindow": {
@@ -35014,6 +35246,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
       "releasedAt": "2025-06-05T15:27:37.000Z",
       "contextWindow": {
@@ -35105,6 +35338,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "May 28th update to the [original DeepSeek R1](/deepseek/deepseek-r1) Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active...",
       "releasedAt": "2025-05-28T17:59:30.000Z",
       "contextWindow": {
@@ -35228,6 +35462,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Opus 4 is benchmarked as the world’s best coding model, at time of release, bringing sustained performance on complex, long-running tasks and agent workflows. It sets new benchmarks in...",
       "releasedAt": "2025-05-22T16:27:25.000Z",
       "contextWindow": {
@@ -35351,6 +35586,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude Sonnet 4 significantly enhances the capabilities of its predecessor, Sonnet 3.7, excelling in both coding and reasoning tasks with improved precision and controllability. Achieving state-of-the-art performance on SWE-bench (72.7%),...",
       "releasedAt": "2025-05-22T16:12:51.000Z",
       "contextWindow": {
@@ -35431,6 +35667,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Medium 3 is a high-performance enterprise-grade language model designed to deliver frontier-level capabilities at significantly reduced operational cost. It balances state-of-the-art reasoning and multimodal performance with 8× lower cost...",
       "releasedAt": "2025-05-07T14:15:41.000Z",
       "contextWindow": {
@@ -35550,6 +35787,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy...",
       "releasedAt": "2025-05-07T00:41:53.000Z",
       "contextWindow": {
@@ -35620,6 +35858,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "meta-llama",
       "description": "Llama Guard 4 is a Llama 4 Scout-derived multimodal pretrained model, fine-tuned for content safety classification. Similar to previous versions, it can be used to classify content in both LLM...",
       "releasedAt": "2025-04-30T01:06:33.000Z",
       "contextWindow": {
@@ -35724,6 +35963,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3, the latest generation in the Qwen large language model series, features both dense and mixture-of-experts (MoE) architectures to excel in reasoning, multilingual support, and advanced agent tasks. Its unique...",
       "releasedAt": "2025-04-28T22:16:44.000Z",
       "contextWindow": {
@@ -35828,6 +36068,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-8B is a dense 8.2B parameter causal language model from the Qwen3 series, designed for both reasoning-heavy tasks and efficient dialogue. It supports seamless switching between \"thinking\" mode for math,...",
       "releasedAt": "2025-04-28T21:43:52.000Z",
       "contextWindow": {
@@ -35931,6 +36172,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-14B is a dense 14.8B parameter causal language model from the Qwen3 series, designed for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
       "releasedAt": "2025-04-28T21:41:18.000Z",
       "contextWindow": {
@@ -36034,6 +36276,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-32B is a dense 32.8B parameter causal language model from the Qwen3 series, optimized for both complex reasoning and efficient dialogue. It supports seamless switching between a \"thinking\" mode for...",
       "releasedAt": "2025-04-28T21:32:25.000Z",
       "contextWindow": {
@@ -36137,6 +36380,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen3-235B-A22B is a 235B parameter mixture-of-experts (MoE) model developed by Qwen, activating 22B parameters per forward pass. It supports seamless switching between a \"thinking\" mode for complex reasoning, math, and...",
       "releasedAt": "2025-04-28T21:29:17.000Z",
       "contextWindow": {
@@ -36258,6 +36502,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "OpenAI o4-mini-high is the same model as [o4-mini](/openai/o4-mini) with reasoning_effort set to high. OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining...",
       "releasedAt": "2025-04-16T17:23:32.000Z",
       "contextWindow": {
@@ -36375,6 +36620,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "o3 is a well-rounded and powerful model across domains. It sets a new standard for math, science, coding, and visual reasoning tasks. It also excels at technical writing and instruction-following....",
       "releasedAt": "2025-04-16T17:10:57.000Z",
       "contextWindow": {
@@ -36492,6 +36738,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "OpenAI o4-mini is a compact reasoning model in the o-series, optimized for fast, cost-efficient performance while retaining strong multimodal and agentic capabilities. It supports tool use and demonstrates competitive reasoning...",
       "releasedAt": "2025-04-16T16:29:02.000Z",
       "contextWindow": {
@@ -36572,6 +36819,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-4.1 is a flagship large language model optimized for advanced instruction following, real-world software engineering, and long-context reasoning. It supports a 1 million token context window and outperforms GPT-4o and...",
       "releasedAt": "2025-04-14T17:23:05.000Z",
       "contextWindow": {
@@ -36652,6 +36900,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-4.1 Mini is a mid-sized model delivering performance competitive with GPT-4o at substantially lower latency and cost. It retains a 1 million token context window and scores 45.1% on hard...",
       "releasedAt": "2025-04-14T17:23:01.000Z",
       "contextWindow": {
@@ -36732,6 +36981,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "For tasks that demand low latency, GPT‑4.1 nano is the fastest and cheapest model in the GPT-4.1 series. It delivers exceptional performance at a small size with its 1 million...",
       "releasedAt": "2025-04-14T17:22:49.000Z",
       "contextWindow": {
@@ -36793,7 +37043,7 @@
         },
         {
           "unit": "output-token",
-          "usd": "0.0000008",
+          "usd": "0.000000696",
           "per": 1,
           "evidence": []
         }
@@ -36802,6 +37052,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "meta-llama",
       "description": "Llama 4 Maverick 17B Instruct (128E) is a high-capacity multimodal language model from Meta, built on a mixture-of-experts (MoE) architecture with 128 experts and 17 billion active parameters per forward...",
       "releasedAt": "2025-04-05T19:37:02.000Z",
       "contextWindow": {
@@ -36878,6 +37129,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "meta-llama",
       "description": "Llama 4 Scout 17B Instruct (16E) is a mixture-of-experts (MoE) language model developed by Meta, activating 17 billion parameters out of a total of 109B. It supports native multimodal input...",
       "releasedAt": "2025-04-05T19:31:59.000Z",
       "contextWindow": {
@@ -36944,6 +37196,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek V3, a 685B-parameter, mixture-of-experts model, is the latest iteration of the flagship chat model family from the DeepSeek team. It succeeds the [DeepSeek V3](/deepseek/deepseek-chat-v3) model and performs really well...",
       "releasedAt": "2025-03-24T13:59:15.000Z",
       "contextWindow": {
@@ -37055,6 +37308,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "The o1 series of models are trained with reinforcement learning to think before they answer and perform complex reasoning. The o1-pro model uses more compute to think harder and provide...",
       "releasedAt": "2025-03-19T22:26:51.000Z",
       "contextWindow": {
@@ -37125,6 +37379,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Small 3.1 24B Instruct is an upgraded variant of Mistral Small 3 (2501), featuring 24 billion parameters with advanced multimodal capabilities. It provides state-of-the-art performance in text-based reasoning and...",
       "releasedAt": "2025-03-17T19:15:37.000Z",
       "contextWindow": {
@@ -37195,6 +37450,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
       "releasedAt": "2025-03-13T22:38:30.000Z",
       "contextWindow": {
@@ -37265,6 +37521,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
       "releasedAt": "2025-03-13T21:50:25.000Z",
       "contextWindow": {
@@ -37331,6 +37588,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "cohere",
       "description": "Command A is an open-weights 111B parameter model with a 256k context window focused on delivering great performance across agentic, multilingual, and coding use cases. Compared to other leading proprietary...",
       "releasedAt": "2025-03-13T19:32:22.000Z",
       "contextWindow": {
@@ -37416,6 +37674,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "rekaai",
       "description": "Reka Flash 3 is a general-purpose, instruction-tuned large language model with 21 billion parameters, developed by Reka. It excels at general chat, coding tasks, instruction-following, and function calling. Featuring a...",
       "releasedAt": "2025-03-12T20:53:33.000Z",
       "contextWindow": {
@@ -37492,6 +37751,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
       "releasedAt": "2025-03-12T05:12:39.000Z",
       "contextWindow": {
@@ -37564,6 +37824,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "thedrummer",
       "description": "Skyfall 36B v2 is an enhanced iteration of Mistral Small 2501, specifically fine-tuned for improved creativity, nuanced writing, role-playing, and coherent storytelling.",
       "releasedAt": "2025-03-10T19:56:06.000Z",
       "contextWindow": {
@@ -37671,6 +37932,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "perplexity",
       "description": "Note: Sonar Pro pricing includes Perplexity search pricing. See [details here](https://docs.perplexity.ai/guides/pricing#detailed-pricing-breakdown-for-sonar-reasoning-pro-and-sonar-pro) Sonar Reasoning Pro is a premier reasoning model powered by DeepSeek R1 with Chain of Thought (CoT). Designed for...",
       "releasedAt": "2025-03-07T02:08:28.000Z",
       "contextWindow": {
@@ -37741,6 +38003,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "perplexity",
       "description": "Note: Sonar Pro pricing includes Perplexity search pricing. See [details here](https://docs.perplexity.ai/guides/pricing#detailed-pricing-breakdown-for-sonar-reasoning-pro-and-sonar-pro) For enterprises seeking more advanced capabilities, the Sonar Pro API can handle in-depth, multi-step queries with added extensibility, like...",
       "releasedAt": "2025-03-07T01:53:43.000Z",
       "contextWindow": {
@@ -37844,6 +38107,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "perplexity",
       "description": "Sonar Deep Research is a research-focused model designed for multi-step retrieval, synthesis, and reasoning across complex topics. It autonomously searches, reads, and evaluates sources, refining its approach as it gathers...",
       "releasedAt": "2025-03-07T01:34:06.000Z",
       "contextWindow": {
@@ -37920,6 +38184,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Saba is a 24B-parameter language model specifically designed for the Middle East and South Asia, delivering accurate and contextually relevant responses while maintaining efficient performance. Trained on curated regional...",
       "releasedAt": "2025-02-17T14:40:39.000Z",
       "contextWindow": {
@@ -38037,6 +38302,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "OpenAI o3-mini-high is the same model as [o3-mini](/openai/o3-mini) with reasoning_effort set to high. o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and...",
       "releasedAt": "2025-02-12T15:03:31.000Z",
       "contextWindow": {
@@ -38103,6 +38369,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "aion-labs",
       "description": "Aion-RP-Llama-3.1-8B ranks the highest in the character evaluation portion of the RPBench-Auto benchmark, a roleplaying-specific variant of Arena-Hard-Auto, where LLMs evaluate each other’s responses. It is a fine-tuned base model...",
       "releasedAt": "2025-02-04T19:18:38.000Z",
       "contextWindow": {
@@ -38173,6 +38440,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen2.5-VL is proficient in recognizing common objects such as flowers, birds, fish, and insects. It is also highly capable of analyzing texts, charts, icons, graphics, and layouts within images.",
       "releasedAt": "2025-02-01T11:45:11.000Z",
       "contextWindow": {
@@ -38251,6 +38519,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen-Plus, based on the Qwen2.5 foundation model, is a 131K context model with a balanced performance, speed, and cost combination.",
       "releasedAt": "2025-02-01T11:37:20.000Z",
       "contextWindow": {
@@ -38364,6 +38633,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "OpenAI o3-mini is a cost-efficient language model optimized for STEM reasoning tasks, particularly excelling in science, mathematics, and coding. This model supports the `reasoning_effort` parameter, which can be set to...",
       "releasedAt": "2025-01-31T19:28:41.000Z",
       "contextWindow": {
@@ -38430,6 +38700,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral Small 3 is a 24B-parameter language model optimized for low-latency performance across common AI tasks. Released under the Apache 2.0 license, it features both pre-trained and instruction-tuned versions designed...",
       "releasedAt": "2025-01-30T16:43:29.000Z",
       "contextWindow": {
@@ -38500,6 +38771,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "perplexity",
       "description": "Sonar is lightweight, affordable, fast, and simple to use — now featuring citations and the ability to customize sources. It is designed for companies seeking to integrate lightweight question-and-answer features...",
       "releasedAt": "2025-01-27T21:36:48.000Z",
       "contextWindow": {
@@ -38603,6 +38875,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek R1 Distill Llama 70B is a distilled large language model based on [Llama-3.3-70B-Instruct](/meta-llama/llama-3.3-70b-instruct), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). The model combines advanced distillation techniques to achieve high performance across...",
       "releasedAt": "2025-01-23T20:12:49.000Z",
       "contextWindow": {
@@ -38688,6 +38961,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek R1 is here: Performance on par with [OpenAI o1](/openai/o1), but open-sourced and with fully open reasoning tokens. It's 671B parameters in size, with 37B active in an inference pass....",
       "releasedAt": "2025-01-20T13:51:35.000Z",
       "contextWindow": {
@@ -38758,6 +39032,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "minimax",
       "description": "MiniMax-01 is a combines MiniMax-Text-01 for text generation and MiniMax-VL-01 for image understanding. It has 456 billion parameters, with 45.9 billion parameters activated per inference, and can handle a context...",
       "releasedAt": "2025-01-15T04:31:02.000Z",
       "contextWindow": {
@@ -38824,6 +39099,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "microsoft",
       "description": "[Microsoft Research](/microsoft) Phi-4 is designed to perform well in complex reasoning tasks and can operate efficiently in situations with limited memory or where quick responses are needed. At 14 billion...",
       "releasedAt": "2025-01-10T06:17:52.000Z",
       "contextWindow": {
@@ -38890,6 +39166,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "deepseek",
       "description": "DeepSeek-V3 is the latest model from the DeepSeek team, building upon the instruction following and coding abilities of the previous versions. Pre-trained on nearly 15 trillion tokens, the reported evaluations...",
       "releasedAt": "2024-12-26T19:28:40.000Z",
       "contextWindow": {
@@ -38956,6 +39233,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "sao10k",
       "description": "Euryale L3.3 70B is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.2](/models/sao10k/l3-euryale-70b).",
       "releasedAt": "2024-12-18T15:32:08.000Z",
       "contextWindow": {
@@ -39073,6 +39351,7 @@
       ],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "The latest and strongest model family from OpenAI, o1 is designed to spend more time thinking before responding. The o1 model series is trained with large-scale reinforcement learning to reason...",
       "releasedAt": "2024-12-17T18:26:39.000Z",
       "contextWindow": {
@@ -39139,6 +39418,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "cohere",
       "description": "Command R7B (12-2024) is a small, fast update of the Command R+ model, delivered in December 2024. It excels at RAG, tool use, agents, and similar tasks requiring complex reasoning...",
       "releasedAt": "2024-12-14T06:35:52.000Z",
       "contextWindow": {
@@ -39211,6 +39491,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "meta-llama",
       "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
       "releasedAt": "2024-12-06T17:28:57.000Z",
       "contextWindow": {
@@ -39281,6 +39562,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "amazon",
       "description": "Amazon Nova Lite 1.0 is a very low-cost multimodal model from Amazon that focused on fast processing of image, video, and text inputs to generate text output. Amazon Nova Lite...",
       "releasedAt": "2024-12-05T22:22:43.000Z",
       "contextWindow": {
@@ -39347,6 +39629,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "amazon",
       "description": "Amazon Nova Micro 1.0 is a text-only model that delivers the lowest latency responses in the Amazon Nova family of models at a very low cost. With a context length...",
       "releasedAt": "2024-12-05T22:20:37.000Z",
       "contextWindow": {
@@ -39417,6 +39700,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "amazon",
       "description": "Amazon Nova Pro 1.0 is a capable multimodal model from Amazon focused on providing a combination of accuracy, speed, and cost for a wide range of tasks. As of December...",
       "releasedAt": "2024-12-05T22:05:03.000Z",
       "contextWindow": {
@@ -39497,6 +39781,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "The 2024-11-20 version of GPT-4o offers a leveled-up creative writing ability with more natural, engaging, and tailored writing to improve relevance & readability. It’s also better at working with uploaded...",
       "releasedAt": "2024-11-20T18:33:14.000Z",
       "contextWindow": {
@@ -39573,6 +39858,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "This is Mistral AI's flagship model, Mistral Large 2 (version mistral-large-2407). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/)....",
       "releasedAt": "2024-11-19T01:06:55.000Z",
       "contextWindow": {
@@ -39639,6 +39925,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen). Qwen2.5-Coder brings the following improvements upon CodeQwen1.5: - Significantly improvements in **code generation**, **code reasoning**...",
       "releasedAt": "2024-11-11T23:40:00.000Z",
       "contextWindow": {
@@ -39705,6 +39992,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "thedrummer",
       "description": "UnslopNemo v4.1 is the latest addition from the creator of Rocinante, designed for adventure writing and role-play scenarios.",
       "releasedAt": "2024-11-08T22:04:08.000Z",
       "contextWindow": {
@@ -39771,6 +40059,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "anthracite-org",
       "description": "This is a series of models designed to replicate the prose quality of the Claude 3 models, specifically Sonnet(https://openrouter.ai/anthropic/claude-3.5-sonnet) and Opus(https://openrouter.ai/anthropic/claude-3-opus).\n\nThe model is fine-tuned on top of [Qwen2.5 72B](https://openrouter.ai/qwen/qwen-2.5-72b-instruct).",
       "releasedAt": "2024-10-22T00:00:00.000Z",
       "contextWindow": {
@@ -39837,6 +40126,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen2.5 7B is the latest series of Qwen large language models. Qwen2.5 brings the following improvements upon Qwen2: - Significantly more knowledge and has greatly improved capabilities in coding and...",
       "releasedAt": "2024-10-16T00:00:00.000Z",
       "contextWindow": {
@@ -39903,6 +40193,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "meta-llama",
       "description": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate...",
       "releasedAt": "2024-09-25T00:00:00.000Z",
       "contextWindow": {
@@ -39969,6 +40260,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "meta-llama",
       "description": "Llama 3.2 3B is a 3-billion-parameter multilingual large language model, optimized for advanced natural language processing tasks like dialogue generation, reasoning, and summarization. Designed with the latest transformer architecture, it...",
       "releasedAt": "2024-09-25T00:00:00.000Z",
       "contextWindow": {
@@ -40035,6 +40327,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "qwen",
       "description": "Qwen2.5 72B is the latest series of Qwen large language models. Qwen2.5 brings the following improvements upon Qwen2: - Significantly more knowledge and has greatly improved capabilities in coding and...",
       "releasedAt": "2024-09-19T00:00:00.000Z",
       "contextWindow": {
@@ -40101,6 +40394,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "cohere",
       "description": "command-r-08-2024 is an update of the [Command R](/models/cohere/command-r) with improved performance for multilingual retrieval-augmented generation (RAG) and tool use. More broadly, it is better at math, code and reasoning and...",
       "releasedAt": "2024-08-30T00:00:00.000Z",
       "contextWindow": {
@@ -40167,6 +40461,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "cohere",
       "description": "command-r-plus-08-2024 is an update of the [Command R+](/models/cohere/command-r-plus) with roughly 50% higher throughput and 25% lower latencies as compared to the previous Command R+ version, while keeping the hardware footprint...",
       "releasedAt": "2024-08-30T00:00:00.000Z",
       "contextWindow": {
@@ -40233,6 +40528,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "sao10k",
       "description": "Euryale L3.1 70B v2.2 is a model focused on creative roleplay from [Sao10k](https://ko-fi.com/sao10k). It is the successor of [Euryale L3 70B v2.1](/models/sao10k/l3-euryale-70b).",
       "releasedAt": "2024-08-28T00:00:00.000Z",
       "contextWindow": {
@@ -40299,6 +40595,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "nousresearch",
       "description": "Hermes 3 is a generalist language model with many improvements over [Hermes 2](/models/nousresearch/nous-hermes-2-mistral-7b-dpo), including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
       "releasedAt": "2024-08-18T00:00:00.000Z",
       "contextWindow": {
@@ -40365,6 +40662,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "nousresearch",
       "description": "Hermes 3 is a generalist language model with many improvements over Hermes 2, including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the...",
       "releasedAt": "2024-08-16T00:00:00.000Z",
       "contextWindow": {
@@ -40431,6 +40729,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "sao10k",
       "description": "Lunaris 8B is a versatile generalist and roleplaying model based on Llama 3. It's a strategic merge of multiple models, designed to balance creativity with improved logic and general knowledge....",
       "releasedAt": "2024-08-13T00:00:00.000Z",
       "contextWindow": {
@@ -40511,6 +40810,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "The 2024-08-06 version of GPT-4o offers improved performance in structured outputs, with the ability to supply a JSON schema in the respone_format. Read more [here](https://openai.com/index/introducing-structured-outputs-in-the-api/). GPT-4o (\"o\" for \"omni\") is...",
       "releasedAt": "2024-08-06T00:00:00.000Z",
       "contextWindow": {
@@ -40577,6 +40877,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "meta-llama",
       "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 70B instruct-tuned version is optimized for high quality dialogue usecases. It has demonstrated strong...",
       "releasedAt": "2024-07-23T00:00:00.000Z",
       "contextWindow": {
@@ -40649,6 +40950,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "meta-llama",
       "description": "Meta's latest class of model (Llama 3.1) launched with a variety of sizes & flavors. This 8B instruct-tuned version is fast and efficient. It has demonstrated strong performance compared to...",
       "releasedAt": "2024-07-23T00:00:00.000Z",
       "contextWindow": {
@@ -40715,6 +41017,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,...",
       "releasedAt": "2024-07-19T00:00:00.000Z",
       "contextWindow": {
@@ -40795,6 +41098,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
       "releasedAt": "2024-07-18T00:00:00.000Z",
       "contextWindow": {
@@ -40875,6 +41179,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-4o mini is OpenAI's newest model after [GPT-4 Omni](/models/openai/gpt-4o), supporting both text and image inputs with text outputs. As their most advanced small model, it is many multiples more affordable...",
       "releasedAt": "2024-07-18T00:00:00.000Z",
       "contextWindow": {
@@ -40941,6 +41246,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "google",
       "description": "Gemma 2 27B by Google is an open model built from the same research and technology used to create the [Gemini models](/models?q=gemini). Gemma models are well-suited for a variety of...",
       "releasedAt": "2024-07-13T00:00:00.000Z",
       "contextWindow": {
@@ -41021,6 +41327,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
       "releasedAt": "2024-05-13T00:00:00.000Z",
       "contextWindow": {
@@ -41095,6 +41402,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-4o (\"o\" for \"omni\") is OpenAI's latest AI model, supporting both text and image inputs with text outputs. It maintains the intelligence level of [GPT-4 Turbo](/models/openai/gpt-4-turbo) while being twice as...",
       "releasedAt": "2024-05-13T00:00:00.000Z",
       "contextWindow": {
@@ -41171,6 +41479,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "Mistral's official instruct fine-tuned version of [Mixtral 8x22B](/models/mistralai/mixtral-8x22b). It uses 39B active parameters out of 141B, offering unparalleled cost efficiency for its size. Its strengths include: - strong math, coding,...",
       "releasedAt": "2024-04-17T00:00:00.000Z",
       "contextWindow": {
@@ -41237,6 +41546,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "microsoft",
       "description": "WizardLM-2 8x22B is Microsoft AI's most advanced Wizard model. It demonstrates highly competitive performance compared to leading proprietary models, and it consistently outperforms all existing state-of-the-art opensource models. It is...",
       "releasedAt": "2024-04-16T00:00:00.000Z",
       "contextWindow": {
@@ -41307,6 +41617,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023.",
       "releasedAt": "2024-04-09T00:00:00.000Z",
       "contextWindow": {
@@ -41389,6 +41700,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "anthropic",
       "description": "Claude 3 Haiku is Anthropic's fastest and most compact model for\nnear-instant responsiveness. Quick and accurate targeted performance.\n\nSee the launch announcement and benchmark results [here](https://www.anthropic.com/news/claude-3-haiku)\n\n#multimodal",
       "releasedAt": "2024-03-13T00:00:00.000Z",
       "contextWindow": {
@@ -41465,6 +41777,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mistralai",
       "description": "This is Mistral AI's flagship model, Mistral Large 2 (version `mistral-large-2407`). It's a proprietary weights-available model and excels at reasoning, code, JSON, chat, and more. Read the launch announcement [here](https://mistral.ai/news/mistral-large-2407/)....",
       "releasedAt": "2024-02-26T00:00:00.000Z",
       "contextWindow": {
@@ -41531,6 +41844,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021.",
       "releasedAt": "2024-01-25T00:00:00.000Z",
       "contextWindow": {
@@ -41597,6 +41911,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "The preview GPT-4 model with improved instruction following, JSON mode, reproducible outputs, parallel function calling, and more. Training data: up to Dec 2023. **Note:** heavily rate limited by OpenAI while...",
       "releasedAt": "2024-01-25T00:00:00.000Z",
       "contextWindow": {
@@ -41670,6 +41985,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openrouter",
       "description": "The Auto Router automatically selects the best model for your prompt, powered by the wisdom of the market. It routes you based on what the OpenRouter community collectively spends on...",
       "releasedAt": "2023-11-08T00:00:00.000Z",
       "contextWindow": {
@@ -41736,6 +42052,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "This model is a variant of GPT-3.5 Turbo tuned for instructional prompts and omitting chat-related optimizations. Training data: up to Sep 2021.",
       "releasedAt": "2023-09-28T00:00:00.000Z",
       "contextWindow": {
@@ -41802,6 +42119,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "This model offers four times the context length of gpt-3.5-turbo, allowing it to support approximately 20 pages of text in a single request at a higher cost. Training data: up...",
       "releasedAt": "2023-08-28T00:00:00.000Z",
       "contextWindow": {
@@ -41868,6 +42186,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "mancer",
       "description": "An attempt to recreate Claude-style verbosity, but don't expect the same level of coherence or memory. Meant for use in roleplay/narrative situations.",
       "releasedAt": "2023-08-02T00:00:00.000Z",
       "contextWindow": {
@@ -41934,6 +42253,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "undi95",
       "description": "A recreation trial of the original MythoMax-L2-B13 but with updated models. #merge",
       "releasedAt": "2023-07-22T00:00:00.000Z",
       "contextWindow": {
@@ -42000,6 +42320,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "gryphe",
       "description": "One of the highest performing and most popular fine-tunes of Llama 2 13B, with rich descriptions and roleplay. #merge",
       "releasedAt": "2023-07-02T00:00:00.000Z",
       "contextWindow": {
@@ -42066,6 +42387,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "GPT-3.5 Turbo is OpenAI's fastest model. It can understand and generate natural language or code, and is optimized for chat and traditional completion tasks.\n\nTraining data up to Sep 2021.",
       "releasedAt": "2023-05-28T00:00:00.000Z",
       "contextWindow": {
@@ -42132,6 +42454,7 @@
       "options": [],
       "requirements": [],
       "sources": [],
+      "author": "openai",
       "description": "OpenAI's flagship model, GPT-4 is a large-scale multimodal language model capable of solving difficult problems with greater accuracy than previous models due to its broader general knowledge and advanced reasoning...",
       "releasedAt": "2023-05-28T00:00:00.000Z",
       "contextWindow": {

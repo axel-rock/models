@@ -12,11 +12,16 @@ import { elementStyles } from "./styles.ts";
 /** Option groups that a host can choose to show. */
 export type VisibleOptionGroup = OptionDefinition["group"];
 
+/** Layout of generated model options. */
+export type OptionsLayout = "inline" | "stacked";
+
 /** Framework-neutral controls generated from a model's option schema. */
 export class ModelsOptionsElement extends ModelsHTMLElement {
   #model: ModelDescriptor | undefined;
   #values: Readonly<Record<string, unknown>> = {};
   #groups: readonly VisibleOptionGroup[] = ["reasoning", "speed", "caching", "beta", "generation"];
+  #excludedKeys: readonly string[] = [];
+  #layout: OptionsLayout = "stacked";
   readonly #root: ShadowRoot;
 
   constructor() {
@@ -54,6 +59,26 @@ export class ModelsOptionsElement extends ModelsHTMLElement {
     this.render();
   }
 
+  /** Option keys omitted by this instance. Useful when quick controls render them elsewhere. */
+  get excludedKeys(): readonly string[] {
+    return this.#excludedKeys;
+  }
+
+  set excludedKeys(value: readonly string[]) {
+    this.#excludedKeys = value;
+    this.render();
+  }
+
+  /** Layout of the generated controls. Inline mode fits a chat composer. */
+  get layout(): OptionsLayout {
+    return this.#layout;
+  }
+
+  set layout(value: OptionsLayout) {
+    this.#layout = value;
+    this.render();
+  }
+
   connectedCallback(): void {
     this.render();
   }
@@ -65,25 +90,32 @@ export class ModelsOptionsElement extends ModelsHTMLElement {
         (option) =>
           option.support.status === "supported" &&
           this.#groups.includes(option.group) &&
-          (option.visibleWhen === undefined ||
-            this.#values[option.visibleWhen.key] === option.visibleWhen.equals),
+          !this.#excludedKeys.includes(option.key) &&
+          isOptionVisible(option, model.options, this.#values),
       ) ?? [];
     this.#root.innerHTML = `
       <style>
         ${elementStyles}
-        .options { display: grid; gap: 14px; }
+        .options { display: grid; gap: 10px; }
+        .options.inline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+        .inline .field { display: flex; align-items: center; gap: 2px; min-height: 32px; border: 1px solid var(--models-border, #b8b8b2); border-radius: var(--models-radius, 7px); background: var(--models-surface, #fff); }
+        .inline .field > .label { padding-left: 9px; color: var(--models-muted, #646464); font-size: 11px; font-weight: 550; white-space: nowrap; }
+        .inline .control { min-height: 30px; width: auto; max-width: 150px; border: 0; padding: 3px 25px 3px 5px; background: transparent; font-size: 12px; font-weight: 620; }
+        .option-shell { position: relative; display: flex; align-items: center; }
+        .inline .check { min-height: 32px; border: 1px solid var(--models-border, #b8b8b2); border-radius: var(--models-radius, 7px); padding: 4px 8px 4px 9px; font-size: 12px; }
+        .inline .check input { order: 2; margin: 0 0 0 4px; accent-color: var(--models-focus, #2563eb); }
         .empty { margin: 0; }
-        .check { display: flex; align-items: center; gap: 8px; }
-        .help { margin: 0; font-size: 12px; }
+        .check { display: flex; align-items: center; gap: 8px; min-height: 36px; }
+        .help { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
         .requirements { border-top: 1px solid var(--models-border, #d6d6d6); padding-top: 12px; }
-        .requirements h4 { margin: 0 0 6px; font-size: 12px; }
-        .requirements ul { margin: 0; padding-left: 18px; color: var(--models-muted, #646464); }
+        .requirements summary { cursor: pointer; color: var(--models-muted, #646464); font-size: 12px; font-weight: 650; }
+        .requirements ul { margin: 8px 0 0; padding-left: 18px; color: var(--models-muted, #646464); font-size: 12px; }
         .issues { margin: 0; padding: 10px 12px 10px 28px; border: 1px solid var(--models-warning-border, #e6c66a); border-radius: 6px; background: var(--models-warning-surface, #fff9e8); color: var(--models-warning-text, #684f00); font-size: 12px; }
       </style>
-      <div class="options" part="options">
-        ${options.length === 0 ? '<p class="empty muted">No selectable details for this view.</p>' : options.map((option) => renderOption(option, this.#values[option.key])).join("")}
+      <div class="options ${this.#layout}" part="options">
+        ${options.length === 0 ? '<p class="empty muted">No selectable details for this view.</p>' : options.map((option) => renderOption(option, this.#values[option.key], this.#layout)).join("")}
         ${renderIssues(model, this.#values)}
-        ${renderRequirements(model)}
+        ${this.#layout === "stacked" ? renderRequirements(model) : ""}
       </div>
     `;
     for (const control of this.#root.querySelectorAll<HTMLInputElement | HTMLSelectElement>(
@@ -140,25 +172,50 @@ function renderIssues(
     : `<ul class="issues" role="alert">${issues.map((issue) => `<li>${escapeHtml(issue.message)}</li>`).join("")}</ul>`;
 }
 
-function renderOption(option: OptionDefinition, value: unknown): string {
+function renderOption(option: OptionDefinition, value: unknown, layout: OptionsLayout): string {
   const id = `models-option-${safeId(option.key)}`;
   if (option.kind === "boolean") {
-    return `<label class="check" part="option"><input data-option="${escapeHtml(option.key)}" type="checkbox" ${value === true ? "checked" : ""}><span><strong>${escapeHtml(option.label)}</strong><br><span class="muted">${escapeHtml(option.description)}</span></span></label>`;
+    const input = `<input data-option="${escapeHtml(option.key)}" type="checkbox" ${value === true ? "checked" : ""}>`;
+    const text = `<span><strong>${escapeHtml(option.label)}</strong><span class="help">${escapeHtml(option.description)}</span></span>`;
+    return `<label class="check" part="option" title="${escapeHtml(option.description)}">${layout === "inline" ? `${text}${input}` : `${input}${text}`}</label>`;
   }
   const control =
     option.kind === "enum"
       ? `<select id="${id}" class="control" data-option="${escapeHtml(option.key)}"><option value="">Provider default</option>${option.values.map((candidate) => `<option value="${escapeHtml(candidate)}" ${candidate === value ? "selected" : ""}>${escapeHtml(candidate)}</option>`).join("")}</select>`
       : option.kind === "string-list"
-        ? `<input id="${id}" class="control" data-option="${escapeHtml(option.key)}" value="${escapeHtml(Array.isArray(value) ? value.join(", ") : "")}" placeholder="feature-one, feature-two">`
-        : `<input id="${id}" class="control" data-option="${escapeHtml(option.key)}" type="number" ${option.min === undefined ? "" : `min="${option.min}"`} ${option.max === undefined ? "" : `max="${option.max}"`} ${option.step === undefined ? "" : `step="${option.step}"`} value="${typeof value === "number" ? value : ""}">`;
-  return `<label class="field" part="option" for="${id}"><span class="label">${escapeHtml(option.label)}</span>${control}<span class="help muted">${escapeHtml(option.description)}</span></label>`;
+        ? `<input id="${id}" class="control" data-option="${escapeHtml(option.key)}" value="${escapeHtml(Array.isArray(value) ? value.join(", ") : "")}"${layout === "inline" ? "" : ` placeholder="${escapeHtml(option.label)}"`}>`
+        : `<input id="${id}" class="control" data-option="${escapeHtml(option.key)}" type="number" ${option.min === undefined ? "" : `min="${option.min}"`} ${option.max === undefined ? "" : `max="${option.max}"`} ${option.step === undefined ? "" : `step="${option.step}"`} value="${typeof value === "number" ? value : ""}"${layout === "inline" ? "" : ` placeholder="${escapeHtml(option.label)}"`}>`;
+  return `<label class="field" part="option" for="${id}" title="${escapeHtml(option.description)}"><span class="label">${escapeHtml(option.label)}</span><span class="option-shell">${control}</span><span class="help">${escapeHtml(option.description)}</span></label>`;
+}
+
+function isOptionVisible(
+  option: OptionDefinition,
+  options: readonly OptionDefinition[],
+  values: Readonly<Record<string, unknown>>,
+): boolean {
+  if (
+    option.visibleWhen !== undefined &&
+    values[option.visibleWhen.key] !== option.visibleWhen.equals
+  ) {
+    return false;
+  }
+  if (!option.key.endsWith("maxTokens")) {
+    return true;
+  }
+  const toggle = options.find(
+    (candidate) =>
+      candidate.group === option.group &&
+      candidate.kind === "boolean" &&
+      candidate.key.endsWith("enabled"),
+  );
+  return toggle === undefined || values[toggle.key] === true;
 }
 
 function renderRequirements(model: ModelDescriptor | undefined): string {
   if (model === undefined || model.requirements.length === 0) {
     return "";
   }
-  return `<section class="requirements" part="requirements"><h4>Integration notes</h4><ul>${model.requirements.map((requirement) => `<li><strong>${escapeHtml(requirement.title)}:</strong> ${escapeHtml(requirement.description)}</li>`).join("")}</ul></section>`;
+  return `<details class="requirements" part="requirements"><summary>Integration notes · ${model.requirements.length}</summary><ul>${model.requirements.map((requirement) => `<li><strong>${escapeHtml(requirement.title)}:</strong> ${escapeHtml(requirement.description)}</li>`).join("")}</ul></details>`;
 }
 
 function readControlValue(

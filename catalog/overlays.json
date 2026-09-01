@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-08-30T22:22:03.445Z",
+  "checkedAt": "2026-08-31T17:10:45.158Z",
   "sources": {
     "https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=en": {
       "digest": "last-updated:2026-08-17"
@@ -9,7 +9,7 @@
       "digest": "last-updated:2026-04-28"
     },
     "https://developers.openai.com/api/reference/resources/responses/methods/create": {
-      "digest": "c543564af45c0cfffe1e943663c8e58a3f08ab6dac54f1b0f94638f3402fbc55"
+      "digest": "dbe6ef598d8b80ef557c2e758ce3deb79e5b1e97c13cd1e778f30a3262db2022"
     },
     "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens": {
       "digest": "1056ae400bd20f8ddaee810a4e031efda535352c813f3d644233c8edb550a00c"
@@ -30,7 +30,7 @@
       "digest": "dab0bf35558b7160f608bfdc9fcc606de909288a6a420062e579b56ebef968ce"
     },
     "https://vercel.com/docs/ai-gateway/models-and-providers/provider-options": {
-      "digest": "e59a73ba3ec672492796e6a2e4f31c891e64d13da46cb2c08d72b8d3f704c2a2"
+      "digest": "d60dd46f99623298dd3c7034de5702516ee7a4e73afe57f3c1fc244c526a43eb"
     }
   }
 }

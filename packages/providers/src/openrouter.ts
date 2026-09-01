@@ -96,6 +96,7 @@ export const openRouterAdapter: ProviderAdapter<"openrouter"> = {
       const supports = (name: string) => supported.includes(name);
       return {
         ...model,
+        author: raw.id.split("/")[0] ?? "openrouter",
         ...(raw.description === undefined ? {} : { description: raw.description }),
         ...(raw.created === undefined
           ? {}

@@ -103,6 +103,43 @@ describe("public gateway adapters", () => {
       "Expected one of: low, high",
     );
   });
+
+  it("maps Anthropic controls exactly through Vercel", async () => {
+    const catalog = await vercelGatewayAdapter.discover({
+      fetch: jsonFetch({
+        data: [
+          {
+            id: "anthropic/claude-opus-5",
+            name: "Claude Opus 5",
+            type: "language",
+            reasoning_options: [{ type: "effort", values: ["low", "high"] }],
+          },
+        ],
+      }),
+    });
+    const model = catalog.models[0];
+    expect(model?.options.map((option) => option.key)).toEqual(
+      expect.arrayContaining(["reasoning.effort", "reasoning.mode", "caching.ttl", "speed.mode"]),
+    );
+    expect(model?.options.find((option) => option.key === "reasoning.effort")).toMatchObject({
+      values: ["low", "high"],
+    });
+    const mapped = vercelGatewayAdapter.mapOptions(model!, {
+      "reasoning.mode": "adaptive",
+      "caching.ttl": "1h",
+      "speed.mode": "fast",
+    });
+    expect(mapped.providerOptions).toMatchObject({
+      anthropic: {
+        thinking: { type: "adaptive" },
+        cacheControl: { type: "ephemeral", ttl: "1h" },
+        speed: "fast",
+        anthropicBeta: ["fast-mode-2026-02-01"],
+      },
+    });
+    expect(mapped.warnings).toEqual([]);
+    expect(model?.options.some((option) => option.key === "reasoning.enabled")).toBe(false);
+  });
 });
 
 describe("direct provider adapters", () => {
