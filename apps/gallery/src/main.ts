@@ -21,6 +21,7 @@ import {
   MODEL_CLEAR_EVENT,
   OPTIONS_CHANGE_EVENT,
   SELECTION_CHANGE_EVENT,
+  providerIcon,
   type ModelGrouping,
   type ModelIconMode,
   type VisibleOptionGroup,
@@ -41,6 +42,19 @@ interface ProviderView {
 
 type ExampleTab = "composer" | "inline" | "inspector" | "minimal";
 type SelectionOptions = OptionValues<ModelDescriptor["options"]>;
+
+interface GalleryState {
+  readonly approved: boolean;
+  readonly grouping: boolean;
+  readonly iconMode: boolean;
+  readonly modelKey: string | undefined;
+  readonly more: boolean;
+  readonly options: SelectionOptions;
+  readonly provider: string | undefined;
+  readonly reasoning: boolean;
+  readonly speed: boolean;
+  readonly tab: ExampleTab;
+}
 
 const COMPANY_MODEL_IDS = [
   "anthropic/claude-opus-5",
@@ -71,12 +85,14 @@ const liveCatalogs = publicResults.flatMap((result) =>
 );
 const catalogs: readonly ModelCatalog[] = [...liveCatalogs, ...directProviderExamples()];
 const providerViews = catalogs.map(providerView);
-let selectedProvider = providerViews.find((view) => view.id === "vercel") ?? providerViews[0];
+let selectedProvider: ProviderView | undefined;
 let selectedModel: ModelDescriptor | undefined;
 let selectedOptions: SelectionOptions = {};
 let draftOptions: SelectionOptions = {};
 let grouping: ModelGrouping = "author";
 let iconMode: ModelIconMode = "model-maker";
+let activeTab: ExampleTab = "composer";
+let isStateReady = false;
 let activeCatalog: ModelCatalog | undefined;
 let activePolicy: ResolvedModelPolicy | undefined;
 let activeModels = new Map<string, ModelDescriptor>();
@@ -117,12 +133,14 @@ for (const element of [advancedPicker, composerMenu]) {
 
 if (advancedPicker instanceof ModelsPickerElement) advancedPicker.optionsLayout = "inline";
 
-for (const control of document.querySelectorAll<HTMLInputElement>(".policy-controls input")) {
+for (const control of document.querySelectorAll<HTMLInputElement>(
+  '.policy-controls input[id^="policy-"]',
+)) {
   control.addEventListener("change", () => renderSelectedSource(false));
 }
 
 for (const tab of document.querySelectorAll<HTMLButtonElement>("button[data-tab]")) {
-  tab.addEventListener("click", () => setActiveTab(tab.dataset.tab as ExampleTab));
+  tab.addEventListener("click", () => setActiveTab(tab.dataset.tab as ExampleTab, true));
   tab.addEventListener("keydown", (event) => onTabKeydown(event, tab));
 }
 
@@ -137,9 +155,8 @@ document.querySelector("#show-icons")?.addEventListener("change", (event) => {
   renderSelectedSource(false);
 });
 
-renderSourceOptions();
-renderSelectedSource(true);
-setActiveTab("composer");
+restoreGalleryState();
+window.addEventListener("popstate", restoreGalleryState);
 
 function renderSourceOptions(): void {
   renderSourceGroup(
@@ -156,10 +173,10 @@ function renderSourceGroup(selector: string, views: readonly ProviderView[]): vo
   const options = document.querySelector(selector);
   if (options === null) return;
   options.innerHTML = views
-    .map(
-      (view) =>
-        `<button type="button" data-provider="${escapeHtml(view.id)}" aria-pressed="${view.id === selectedProvider?.id}">${escapeHtml(view.shortName)}</button>`,
-    )
+    .map((view) => {
+      const icon = providerIcon(view.id);
+      return `<button type="button" data-provider="${escapeHtml(view.id)}" aria-pressed="${view.id === selectedProvider?.id}" title="${escapeHtml(view.name)}">${icon === "" ? "" : `<span class="source-option-icon" aria-hidden="true">${icon}</span>`}<span class="source-option-label">${escapeHtml(view.shortName)}</span></button>`;
+    })
     .join("");
   for (const button of options.querySelectorAll<HTMLButtonElement>("button[data-provider]")) {
     button.addEventListener("click", () => {
@@ -176,6 +193,10 @@ function renderSourceGroup(selector: string, views: readonly ProviderView[]): vo
 function renderSelectedSource(chooseDefault: boolean): void {
   if (selectedProvider === undefined) return;
   const sourceCatalog = withSortedLanguageModels(selectedProvider.catalog);
+  const sourceMark = providerIcon(selectedProvider.id);
+  const triggerIcon = document.querySelector("#source-trigger-icon");
+  if (triggerIcon !== null) triggerIcon.innerHTML = sourceMark;
+  setText("#source-trigger-label", selectedProvider.shortName);
   const isApproved = isChecked("#policy-approved");
   const include = isApproved ? approvedIds(sourceCatalog) : undefined;
   const groups = selectedGroups();
@@ -303,8 +324,17 @@ function applySelection(): void {
     "#selection-output",
     selection === undefined
       ? "Choose a model or option to inspect the value."
-      : JSON.stringify({ model: selection.model.id, options: selection.options }, null, 2),
+      : JSON.stringify(
+          {
+            provider: selectedProvider?.id,
+            model: selection.model.id,
+            options: selection.options,
+          },
+          null,
+          2,
+        ),
   );
+  if (isStateReady) syncUrlState();
 }
 
 function clearSelection(): void {
@@ -404,7 +434,8 @@ function isChecked(selector: string): boolean {
   return document.querySelector<HTMLInputElement>(selector)?.checked ?? false;
 }
 
-function setActiveTab(active: ExampleTab): void {
+function setActiveTab(active: ExampleTab, isNavigation = false): void {
+  activeTab = active;
   for (const tab of document.querySelectorAll<HTMLButtonElement>("button[data-tab]")) {
     tab.setAttribute("aria-selected", String(tab.dataset.tab === active));
     tab.tabIndex = tab.dataset.tab === active ? 0 : -1;
@@ -412,6 +443,7 @@ function setActiveTab(active: ExampleTab): void {
   for (const panel of document.querySelectorAll<HTMLElement>("[data-panel]")) {
     panel.hidden = panel.dataset.panel !== active;
   }
+  if (isStateReady) syncUrlState(isNavigation ? "push" : "replace");
 }
 
 function onTabKeydown(event: KeyboardEvent, current: HTMLButtonElement): void {
@@ -422,9 +454,130 @@ function onTabKeydown(event: KeyboardEvent, current: HTMLButtonElement): void {
   const direction = event.key === "ArrowRight" ? 1 : -1;
   const next = tabs[(index + direction + tabs.length) % tabs.length];
   if (next !== undefined) {
-    setActiveTab(next.dataset.tab as ExampleTab);
+    setActiveTab(next.dataset.tab as ExampleTab, true);
     next.focus();
   }
+}
+
+function restoreGalleryState(): void {
+  const state = readGalleryState();
+  isStateReady = false;
+  selectedProvider =
+    providerViews.find((view) => view.id === state.provider) ??
+    providerViews.find((view) => view.id === "vercel") ??
+    providerViews[0];
+  grouping = state.grouping ? "author" : "none";
+  iconMode = state.iconMode ? "model-maker" : "none";
+  setChecked("#policy-approved", state.approved);
+  setChecked("#policy-reasoning", state.reasoning);
+  setChecked("#policy-speed", state.speed);
+  setChecked("#policy-more", state.more);
+  setChecked("#show-icons", state.iconMode);
+  setChecked("#group-models", state.grouping);
+  renderSourceOptions();
+  renderSelectedSource(true);
+  const restoredModel = state.modelKey === undefined ? undefined : activeModels.get(state.modelKey);
+  if (restoredModel !== undefined) {
+    selectedModel = restoredModel;
+    draftOptions = {
+      ...(activePolicy === undefined ? {} : resolvePolicyDefaults(restoredModel, activePolicy)),
+      ...state.options,
+    };
+    selectedOptions = retainValidOptions(restoredModel, draftOptions, selectedGroups());
+  }
+  setActiveTab(state.tab);
+  isStateReady = true;
+  applySelection();
+}
+
+function readGalleryState(): GalleryState {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    approved: readBoolean(params, "approved", true),
+    grouping: readBoolean(params, "groups", true),
+    iconMode: readBoolean(params, "logos", true),
+    modelKey: params.get("model") ?? undefined,
+    more: readBoolean(params, "more", false),
+    options: readOptions(params.get("options")),
+    provider: params.get("provider") ?? undefined,
+    reasoning: readBoolean(params, "reasoning", true),
+    speed: readBoolean(params, "speed", true),
+    tab: tabFromHash(window.location.hash),
+  };
+}
+
+function syncUrlState(mode: "push" | "replace" = "replace"): void {
+  const url = new URL(window.location.href);
+  const params = url.searchParams;
+  setParam(params, "provider", selectedProvider?.id);
+  setParam(params, "model", selectedModel?.key);
+  setParam(
+    params,
+    "options",
+    Object.keys(draftOptions).length === 0 ? undefined : JSON.stringify(draftOptions),
+  );
+  setBooleanParam(params, "approved", isChecked("#policy-approved"), true);
+  setBooleanParam(params, "reasoning", isChecked("#policy-reasoning"), true);
+  setBooleanParam(params, "speed", isChecked("#policy-speed"), true);
+  setBooleanParam(params, "more", isChecked("#policy-more"), false);
+  setBooleanParam(params, "logos", iconMode === "model-maker", true);
+  setBooleanParam(params, "groups", grouping === "author", true);
+  url.hash = `panel-${activeTab}`;
+  window.history[mode === "push" ? "pushState" : "replaceState"]({}, "", url);
+}
+
+function setParam(params: URLSearchParams, key: string, value: string | undefined): void {
+  if (value === undefined || value === "") params.delete(key);
+  else params.set(key, value);
+}
+
+function setBooleanParam(
+  params: URLSearchParams,
+  key: string,
+  value: boolean,
+  defaultValue: boolean,
+): void {
+  setParam(params, key, value === defaultValue ? undefined : value ? "1" : "0");
+}
+
+function readBoolean(params: URLSearchParams, key: string, defaultValue: boolean): boolean {
+  const value = params.get(key);
+  return value === null ? defaultValue : value !== "0";
+}
+
+function readOptions(value: string | null): SelectionOptions {
+  if (value === null) return {};
+  try {
+    const parsed: unknown = JSON.parse(value);
+    if (typeof parsed !== "object" || parsed === null || Array.isArray(parsed)) return {};
+    return Object.fromEntries(
+      Object.entries(parsed).filter(
+        (entry): entry is [string, string | number | boolean | string[]] => {
+          const candidate: unknown = entry[1];
+          return (
+            typeof candidate === "string" ||
+            typeof candidate === "number" ||
+            typeof candidate === "boolean" ||
+            (Array.isArray(candidate) && candidate.every((item) => typeof item === "string"))
+          );
+        },
+      ),
+    );
+  } catch {
+    return {};
+  }
+}
+
+function tabFromHash(hash: string): ExampleTab {
+  const candidate = hash.replace(/^#(?:panel-)?/, "");
+  return ["minimal", "inline", "composer", "inspector"].includes(candidate)
+    ? (candidate as ExampleTab)
+    : "composer";
+}
+
+function setChecked(selector: string, value: boolean): void {
+  const input = document.querySelector<HTMLInputElement>(selector);
+  if (input !== null) input.checked = value;
 }
 
 function providerView(catalog: ModelCatalog): ProviderView {

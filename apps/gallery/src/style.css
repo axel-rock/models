@@ -86,24 +86,18 @@ a:focus-visible {
   border-bottom: 1px solid var(--line);
 }
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   color: inherit;
   font-size: 14px;
   font-weight: 680;
   text-decoration: none;
 }
-.brand-mark {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border: 1px solid #aaa9a3;
-  border-radius: 6px;
-  font:
-    650 11px ui-monospace,
-    monospace;
+.repository-link {
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+.repository-link:hover {
+  color: inherit;
 }
 
 .source-menu {
@@ -113,11 +107,13 @@ a:focus-visible {
   display: flex;
   align-items: center;
   gap: 7px;
-  min-height: 30px;
-  border-radius: 6px;
-  padding: 4px 7px;
-  color: var(--muted);
+  min-height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 4px 8px;
+  background: var(--surface);
   font-size: 12px;
+  font-weight: 620;
   cursor: pointer;
   list-style: none;
 }
@@ -126,13 +122,38 @@ a:focus-visible {
 }
 .source-menu > summary:hover,
 .source-menu[open] > summary {
-  background: var(--soft);
-  color: inherit;
+  border-color: var(--models-border);
+}
+.source-trigger-icon,
+.source-option-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+}
+.source-trigger-icon svg,
+.source-option-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.source-trigger-kind {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+}
+.source-caret {
+  margin-left: 1px;
+  color: var(--muted);
+  line-height: 1;
 }
 .source-popover {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
+  left: 0;
+  z-index: 30;
   width: 340px;
   border: 1px solid var(--models-border);
   border-radius: 10px;
@@ -161,6 +182,11 @@ a:focus-visible {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .source-options button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 0;
   min-height: 32px;
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -169,6 +195,11 @@ a:focus-visible {
   color: var(--muted);
   font-size: 12px;
   cursor: pointer;
+}
+.source-option-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .source-options button:hover {
   border-color: var(--models-border);
@@ -179,22 +210,6 @@ a:focus-visible {
   background: var(--soft);
   color: inherit;
   font-weight: 630;
-}
-.source-preferences {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 14px;
-  margin-top: 14px;
-  border-top: 1px solid var(--line);
-  padding-top: 11px;
-}
-.source-preferences label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--muted);
-  font-size: 11px;
-  cursor: pointer;
 }
 .source-summary {
   margin: 11px 0 0;
@@ -255,19 +270,13 @@ main {
 }
 
 .showcase {
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--surface);
   overflow: visible;
 }
 .showcase-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
   gap: 10px;
-  flex-wrap: wrap;
   border-bottom: 1px solid var(--line);
-  padding: 10px;
+  padding-bottom: 14px;
 }
 .tabs {
   display: flex;
@@ -301,6 +310,12 @@ main {
   gap: 5px 12px;
   padding: 0 3px;
 }
+.settings-bar {
+  display: flex;
+  align-items: center;
+  gap: 9px 14px;
+  flex-wrap: wrap;
+}
 .policy-controls label {
   display: flex;
   align-items: center;
@@ -321,7 +336,7 @@ main {
   grid-template-columns: 210px minmax(0, 1fr);
   gap: 28px;
   min-height: 270px;
-  padding: 28px;
+  padding: 28px 0;
 }
 .panel-copy h3 {
   margin: 0;
@@ -361,23 +376,32 @@ models-picker {
   --models-list-height: 390px;
 }
 .output-panel {
-  grid-column: 2;
-  margin: -12px 0 0;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: var(--soft);
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 28px;
+  border-top: 1px solid var(--line);
+  padding: 18px 0 0;
 }
-.output-panel summary {
-  cursor: pointer;
-  padding: 8px 10px;
-  font-size: 11px;
-  font-weight: 620;
+.output-panel header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.output-panel h3 {
+  margin: 0;
+  font-size: 12px;
+}
+.output-panel code {
+  color: var(--muted);
+  font-size: 10px;
 }
 .output-panel pre {
   overflow: auto;
   margin: 0;
-  border-top: 1px solid var(--line);
-  padding: 12px;
+  border-radius: 7px;
+  padding: 10px 12px;
+  background: var(--soft);
   font-size: 11px;
 }
 
@@ -394,9 +418,6 @@ models-picker {
     --models-selected: #353532;
     --models-hover: #292927;
   }
-  .brand-mark {
-    border-color: #55554f;
-  }
   .source-popover {
     box-shadow: 0 18px 50px #0008;
   }
@@ -408,11 +429,9 @@ models-picker {
     width: min(100% - 36px, 920px);
   }
   .source-popover {
-    position: fixed;
-    top: 52px;
-    right: 18px;
-    left: 18px;
-    width: auto;
+    right: auto;
+    left: 0;
+    width: min(340px, calc(100vw - 36px));
   }
   .hero {
     padding: 38px 0 26px;
@@ -424,8 +443,7 @@ models-picker {
     font-size: 14px;
   }
   .showcase-heading {
-    align-items: flex-start;
-    padding: 8px;
+    padding-bottom: 12px;
   }
   .tabs {
     overflow-x: auto;
@@ -442,7 +460,7 @@ models-picker {
     grid-template-columns: 1fr;
     gap: 20px;
     min-height: 0;
-    padding: 20px 16px;
+    padding: 20px 0;
   }
   .compact-demo,
   .inline-demo,
@@ -458,8 +476,9 @@ models-picker {
     flex-wrap: nowrap;
   }
   .output-panel {
-    grid-column: 1;
-    margin-top: -8px;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-top: 14px;
   }
 }
 

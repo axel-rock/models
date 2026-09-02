@@ -249,6 +249,12 @@ describe("models elements", () => {
     picker.addEventListener(SELECTION_CHANGE_EVENT, (event) => {
       detail = (event as CustomEvent).detail;
     });
+    expect(
+      picker.shadowRoot?.querySelector<HTMLButtonElement>('button[data-key="openai:first"]')?.title,
+    ).toBe("first · first");
+    expect(picker.shadowRoot?.querySelector(".detail-name h3")?.getAttribute("title")).toBe(
+      "first",
+    );
     const second = picker.shadowRoot?.querySelectorAll<HTMLButtonElement>("button[data-key]")[1];
     second?.click();
     expect(detail).toMatchObject({ model: { key: "openai:second" }, options: {} });
@@ -354,6 +360,7 @@ describe("models elements", () => {
     document.body.append(select);
     expect(select.shadowRoot?.querySelector(".field")?.classList.contains("compact")).toBe(true);
     expect(select.shadowRoot?.querySelector(".search-icon svg")).not.toBeNull();
+    expect(select.shadowRoot?.querySelector<HTMLInputElement>("input")?.title).toBe("first");
 
     const model = value.models[0];
     if (model === undefined) {
@@ -399,6 +406,9 @@ describe("models elements", () => {
     expect(select.shadowRoot?.querySelector(".search-icon")).toBeNull();
     select.shadowRoot?.querySelector<HTMLInputElement>("input")?.click();
     expect(select.shadowRoot?.querySelector(".option-icon svg")).not.toBeNull();
+    expect(
+      select.shadowRoot?.querySelector<HTMLButtonElement>("[data-key='openai:first']")?.title,
+    ).toBe("first");
     select.shadowRoot?.querySelector<HTMLButtonElement>('[data-key="openai:first"]')?.click();
     expect(select.shadowRoot?.querySelector(".search-icon svg")).not.toBeNull();
   });
@@ -559,7 +569,11 @@ describe("models elements", () => {
     composer.recommendations = recommendation;
     document.body.append(composer);
     composer.shadowRoot?.querySelector<HTMLButtonElement>(".trigger")?.click();
+    expect(composer.shadowRoot?.querySelector<HTMLButtonElement>(".trigger")?.title).toBe("first");
     composer.shadowRoot?.querySelector<HTMLButtonElement>('[data-section="model"]')?.click();
+    expect(
+      composer.shadowRoot?.querySelector<HTMLButtonElement>('[data-model="openai:first"]')?.title,
+    ).toBe("first · first");
     expect(
       composer.shadowRoot?.querySelector('[data-model="openai:second"]')?.textContent,
     ).toContain("Recommended for this app");

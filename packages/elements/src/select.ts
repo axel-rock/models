@@ -174,7 +174,7 @@ export class ModelsSelectElement extends ModelsHTMLElement {
         <span class="label" part="label">${escapeHtml(this.getAttribute("label") ?? "Model")}</span>
         <span class="search-shell ${icon === "" ? "" : "has-icon"}">
           ${icon === "" ? "" : `<span class="search-icon" aria-hidden="true">${icon}</span>`}
-          <input class="control" part="input" type="search" role="combobox" aria-autocomplete="list" aria-controls="${this.#listId}" aria-expanded="${this.#isOpen}"${this.#activeKey === undefined ? "" : ` aria-activedescendant="${escapeHtml(suggestions.find((suggestion) => suggestion.model.key === this.#activeKey)?.optionId ?? "")}"`} autocomplete="off" placeholder="Search models" value="${escapeHtml(displayValue)}" />
+          <input class="control" part="input" type="search" role="combobox" aria-autocomplete="list" aria-controls="${this.#listId}" aria-expanded="${this.#isOpen}"${this.#activeKey === undefined ? "" : ` aria-activedescendant="${escapeHtml(suggestions.find((suggestion) => suggestion.model.key === this.#activeKey)?.optionId ?? "")}"`} autocomplete="off" placeholder="Search models" value="${escapeHtml(displayValue)}"${selected === undefined || this.#isOpen ? "" : ` title="${escapeHtml(selected.name)}"`} />
           <span class="caret ${this.#isOpen ? "open" : ""}" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m6 8 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </span>
       </label>
@@ -471,7 +471,7 @@ function renderSuggestion(
   const metadata = [suggestion.qualifier, ...suggestion.recommendationLabels].filter(
     (value): value is string => value !== undefined,
   );
-  return `<button class="option ${icon === "" ? "no-icon" : ""} ${suggestion.model.key === activeKey ? "active" : ""}" id="${escapeHtml(suggestion.optionId)}" type="button" role="option" aria-selected="${isSelected}" data-key="${escapeHtml(suggestion.model.key)}" data-search="${escapeHtml(`${suggestion.model.name} ${suggestion.model.id} ${suggestion.model.author ?? ""} ${suggestion.recommendationLabels.join(" ")}`.toLocaleLowerCase())}">${icon === "" ? "" : `<span class="option-icon" aria-hidden="true">${icon}</span>`}<span class="option-label">${escapeHtml(suggestion.model.name)}${metadata.length === 0 ? "" : `<span class="option-meta">· ${escapeHtml(metadata.join(" · "))}</span>`}</span><span class="check" aria-hidden="true">${isSelected ? "✓" : ""}</span></button>`;
+  return `<button class="option ${icon === "" ? "no-icon" : ""} ${suggestion.model.key === activeKey ? "active" : ""}" id="${escapeHtml(suggestion.optionId)}" type="button" role="option" aria-selected="${isSelected}" title="${escapeHtml(suggestion.value)}" data-key="${escapeHtml(suggestion.model.key)}" data-search="${escapeHtml(`${suggestion.model.name} ${suggestion.model.id} ${suggestion.model.author ?? ""} ${suggestion.recommendationLabels.join(" ")}`.toLocaleLowerCase())}">${icon === "" ? "" : `<span class="option-icon" aria-hidden="true">${icon}</span>`}<span class="option-label">${escapeHtml(suggestion.model.name)}${metadata.length === 0 ? "" : `<span class="option-meta">· ${escapeHtml(metadata.join(" · "))}</span>`}</span><span class="check" aria-hidden="true">${isSelected ? "✓" : ""}</span></button>`;
 }
 
 function escapeHtml(value: string): string {

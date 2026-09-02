@@ -12,45 +12,8 @@
   <body>
     <a class="skip-link" href="#showcase">Skip to examples</a>
     <header class="site-header">
-      <a class="brand" href="#top"><span class="brand-mark">M</span> Models</a>
-      <details class="source-menu" id="source-menu">
-        <summary>Data source</summary>
-        <div class="source-popover">
-          <div class="source-section">
-            <span class="source-kicker">Gateways</span>
-            <div
-              class="source-options"
-              id="gateway-options"
-              role="group"
-              aria-label="Gateway catalog"
-            ></div>
-          </div>
-          <div class="source-section">
-            <span class="source-kicker">Direct API examples</span>
-            <div
-              class="source-options"
-              id="direct-options"
-              role="group"
-              aria-label="Direct provider catalog"
-            ></div>
-          </div>
-          <div class="source-preferences">
-            <label title="Show model-maker logos in every selector">
-              <input id="show-icons" type="checkbox" checked />
-              <span>Model logos</span>
-            </label>
-            <label class="group-toggle" title="Group gateway models by their maker">
-              <input id="group-models" type="checkbox" checked />
-              <span>Group by maker</span>
-            </label>
-          </div>
-          <p class="source-summary" id="source-summary">Loading available models</p>
-          <details class="source-evidence">
-            <summary>Catalog details</summary>
-            <div id="freshness-grid"></div>
-          </details>
-        </div>
-      </details>
+      <a class="brand" href="#top">Models</a>
+      <a class="repository-link" href="https://github.com/axel-rock/models">GitHub</a>
     </header>
 
     <main id="top">
@@ -104,23 +67,70 @@
               Inspector
             </button>
           </div>
-          <div class="policy-controls" role="group" aria-label="Shared selector policy">
-            <label title="Limit every selector to this app's approved models">
-              <input id="policy-approved" type="checkbox" checked />
-              <span>Approved</span>
-            </label>
-            <label title="Show reasoning controls when the selected model supports them">
-              <input id="policy-reasoning" type="checkbox" checked />
-              <span>Reasoning</span>
-            </label>
-            <label title="Show true fast-mode controls when supported">
-              <input id="policy-speed" type="checkbox" checked />
-              <span>Speed</span>
-            </label>
-            <label title="Show routing, caching, beta, and generation controls when supported">
-              <input id="policy-more" type="checkbox" />
-              <span>More</span>
-            </label>
+          <div class="settings-bar">
+            <details class="source-menu" id="source-menu">
+              <summary title="Choose the catalog used by every selector">
+                <span
+                  class="source-trigger-icon"
+                  id="source-trigger-icon"
+                  aria-hidden="true"
+                ></span>
+                <span id="source-trigger-label">Choose catalog</span>
+                <span class="source-trigger-kind">Catalog</span>
+                <span class="source-caret" aria-hidden="true">⌄</span>
+              </summary>
+              <div class="source-popover">
+                <div class="source-section">
+                  <span class="source-kicker">Gateways</span>
+                  <div
+                    class="source-options"
+                    id="gateway-options"
+                    role="group"
+                    aria-label="Gateway catalog"
+                  ></div>
+                </div>
+                <div class="source-section">
+                  <span class="source-kicker">Direct API examples</span>
+                  <div
+                    class="source-options"
+                    id="direct-options"
+                    role="group"
+                    aria-label="Direct provider catalog"
+                  ></div>
+                </div>
+                <p class="source-summary" id="source-summary">Loading available models</p>
+                <details class="source-evidence">
+                  <summary>Catalog details</summary>
+                  <div id="freshness-grid"></div>
+                </details>
+              </div>
+            </details>
+            <div class="policy-controls" role="group" aria-label="Shared selector policy">
+              <label title="Limit every selector to this app's approved models">
+                <input id="policy-approved" type="checkbox" checked />
+                <span>Approved</span>
+              </label>
+              <label title="Show reasoning controls when the selected model supports them">
+                <input id="policy-reasoning" type="checkbox" checked />
+                <span>Reasoning</span>
+              </label>
+              <label title="Show true fast-mode controls when supported">
+                <input id="policy-speed" type="checkbox" checked />
+                <span>Speed</span>
+              </label>
+              <label title="Show routing, caching, beta, and generation controls when supported">
+                <input id="policy-more" type="checkbox" />
+                <span>More</span>
+              </label>
+              <label title="Show model-maker logos in every selector">
+                <input id="show-icons" type="checkbox" checked />
+                <span>Logos</span>
+              </label>
+              <label class="group-toggle" title="Group gateway models by their maker">
+                <input id="group-models" type="checkbox" checked />
+                <span>Groups</span>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -190,12 +200,15 @@
               <p>Search, pricing, evidence, and every enabled model option.</p>
             </div>
             <div class="demo wide-demo"><models-picker id="advanced-picker"></models-picker></div>
-            <details class="output-panel">
-              <summary>Typed value</summary>
-              <pre id="selection-output">Choose a model or option to inspect the value.</pre>
-            </details>
           </section>
         </div>
+        <section class="output-panel" aria-labelledby="output-title">
+          <header>
+            <h3 id="output-title">SDK selection</h3>
+            <code>ModelSelection</code>
+          </header>
+          <pre id="selection-output">Choose a model or option to inspect the value.</pre>
+        </section>
       </section>
     </main>
     <script type="module" src="/src/main.ts"></script>

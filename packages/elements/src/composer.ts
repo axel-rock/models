@@ -210,6 +210,7 @@ export class ModelsComposerElement extends ModelsHTMLElement {
         .choice:hover { background: var(--models-hover, #f5f5f5); }
         .choice-icon { width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .choice-icon svg { display: block; width: 100%; height: 100%; }
+        .choice-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .choice-meta { margin-left: 5px; color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; }
         .checkmark { color: var(--models-muted, #646464); }
         .group { padding: 10px 9px 3px; color: var(--models-muted, #646464); font-size: 10px; font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
@@ -217,7 +218,7 @@ export class ModelsComposerElement extends ModelsHTMLElement {
       </style>
       <div class="composer" part="composer">
         ${this.#isOpen ? `<div class="popover" part="popover" role="dialog" aria-label="Model settings">${this.#section === undefined ? renderMainPanel(selected, effort, speed, this.#options, this.#section, this.#groups) : renderSubmenu(this.#section, this.#catalogs, selected, effort, speed, this.#options, this.#query, this.#groupBy, this.#iconMode, this.#recommendations)}</div>` : ""}
-        <button class="trigger" part="trigger" type="button" aria-haspopup="dialog" aria-expanded="${this.#isOpen}">
+        <button class="trigger" part="trigger" type="button" aria-haspopup="dialog" aria-expanded="${this.#isOpen}"${selected === undefined ? "" : ` title="${escapeHtml(selected.name)}"`}>
           ${selected === undefined ? "" : renderModelIcon(selected, this.#iconMode, "trigger-icon")}
           <span class="summary">${renderSummary(selected, effort, speed, this.#options)}</span>
           <span class="chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m6 8 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -436,7 +437,7 @@ function renderRow(
   value: string,
   active: ComposerSection | undefined,
 ): string {
-  return `<button class="row ${section === "advanced" ? "advanced-row" : ""}" part="row" type="button" data-section="${section}" aria-expanded="${active === section}"><span>${escapeHtml(label)}</span><span class="row-value">${escapeHtml(value)}</span><span class="chevron" aria-hidden="true">›</span></button>`;
+  return `<button class="row ${section === "advanced" ? "advanced-row" : ""}" part="row" type="button" data-section="${section}" aria-expanded="${active === section}"${value === "" ? "" : ` title="${escapeHtml(value)}"`}><span>${escapeHtml(label)}</span><span class="row-value">${escapeHtml(value)}</span><span class="chevron" aria-hidden="true">›</span></button>`;
 }
 
 function renderSubmenu(
@@ -527,7 +528,7 @@ function renderModelChoice(
     )
     .map((recommendation) => recommendation.label)
     .join(" · ");
-  return `<button class="choice ${icon === "" ? "no-icon" : ""}" part="option" type="button" aria-pressed="${model.key === selectedKey}" data-model="${escapeHtml(model.key)}">${icon}<span>${escapeHtml(model.name)}${labels === "" ? "" : ` <span class="choice-meta">${escapeHtml(labels)}</span>`}</span><span class="checkmark">${model.key === selectedKey ? "✓" : ""}</span></button>`;
+  return `<button class="choice ${icon === "" ? "no-icon" : ""}" part="option" type="button" aria-pressed="${model.key === selectedKey}" title="${escapeHtml(`${model.name} · ${model.id}`)}" data-model="${escapeHtml(model.key)}">${icon}<span class="choice-label">${escapeHtml(model.name)}${labels === "" ? "" : ` <span class="choice-meta">${escapeHtml(labels)}</span>`}</span><span class="checkmark">${model.key === selectedKey ? "✓" : ""}</span></button>`;
 }
 
 function renderModelIcon(model: ModelDescriptor, mode: ModelIconMode, className: string): string {

@@ -142,16 +142,18 @@ export class ModelsPickerElement extends ModelsHTMLElement {
         .model { width: 100%; border: 0; border-radius: 6px; background: transparent; padding: 6px 8px; text-align: left; cursor: pointer; }
         .model:hover { background: var(--models-hover, #f5f5f5); }
         .model[aria-selected="true"] { background: var(--models-selected, #eef4ff); }
-        .model-name { display: flex; align-items: center; gap: 8px; min-width: 0; font-weight: 620; }
+        .model-name { display: flex; align-items: center; gap: 8px; min-width: 0; overflow: hidden; font-weight: 620; white-space: nowrap; }
         .model-icon { flex: 0 0 16px; width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .model-icon svg { display: block; width: 100%; height: 100%; }
+        .model-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .model-qualifier { overflow: hidden; color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; text-overflow: ellipsis; white-space: nowrap; }
         .model-recommendation { color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; }
         .no-results { margin: 16px 8px; color: var(--models-muted, #646464); font-size: 12px; text-align: center; }
         .detail { display: grid; align-content: start; gap: 14px; padding: 16px; min-width: 0; }
-        .detail h3 { margin: 0; font-size: 17px; }
+        .detail h3 { overflow: hidden; margin: 0; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; }
         .detail-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
-        .detail-name { display: grid; gap: 2px; min-width: 0; }
+        .detail-name { display: grid; gap: 2px; min-width: 0; overflow: hidden; }
+        .detail-name .muted { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .facts { position: relative; }
         .facts summary { list-style: none; cursor: help; color: var(--models-muted, #646464); }
         .facts summary::-webkit-details-marker { display: none; }
@@ -298,7 +300,7 @@ function renderModel(
     .filter((candidate) => candidate.model === model.key || candidate.model === model.id)
     .map((candidate) => candidate.label)
     .join(" · ");
-  return `<button class="model" part="model${selected ? " selected-model" : ""}" role="option" aria-selected="${selected}" tabindex="${selected ? "0" : "-1"}" data-key="${escapeHtml(model.key)}" data-search="${escapeHtml(`${search} ${recommendationLabels}`)}"><span class="model-name">${icon === "" ? "" : `<span class="model-icon">${icon}</span>`}<span>${escapeHtml(model.name)}</span>${recommendationLabels === "" ? "" : `<span class="model-recommendation">${escapeHtml(recommendationLabels)}</span>`}${isDuplicate ? `<span class="model-qualifier">· ${escapeHtml(model.id)}</span>` : ""}</span></button>`;
+  return `<button class="model" part="model${selected ? " selected-model" : ""}" role="option" aria-selected="${selected}" tabindex="${selected ? "0" : "-1"}" title="${escapeHtml(`${model.name} · ${model.id}`)}" data-key="${escapeHtml(model.key)}" data-search="${escapeHtml(`${search} ${recommendationLabels}`)}"><span class="model-name">${icon === "" ? "" : `<span class="model-icon">${icon}</span>`}<span class="model-label">${escapeHtml(model.name)}${recommendationLabels === "" ? "" : ` <span class="model-recommendation">${escapeHtml(recommendationLabels)}</span>`}${isDuplicate ? ` <span class="model-qualifier">· ${escapeHtml(model.id)}</span>` : ""}</span></span></button>`;
 }
 
 function renderModels(
@@ -344,7 +346,7 @@ function renderDetailHead(model: ModelDescriptor): string {
     source === undefined
       ? "No source is listed."
       : `${source.kind} · ${source.retrievedAt.slice(0, 10)} · ${source.scope ?? "provider"}`;
-  return `<header class="detail-head" part="detail-heading"><span class="detail-name"><h3>${escapeHtml(model.name)}</h3><span class="muted">${escapeHtml(model.id)}</span></span><details class="facts"><summary aria-label="Model evidence" title="Model evidence">ⓘ</summary><p>${escapeHtml(evidence)}</p></details></header>`;
+  return `<header class="detail-head" part="detail-heading"><span class="detail-name"><h3 title="${escapeHtml(model.name)}">${escapeHtml(model.name)}</h3><span class="muted" title="${escapeHtml(model.id)}">${escapeHtml(model.id)}</span></span><details class="facts"><summary aria-label="Model evidence" title="Model evidence">ⓘ</summary><p>${escapeHtml(evidence)}</p></details></header>`;
 }
 
 function escapeHtml(value: string): string {
