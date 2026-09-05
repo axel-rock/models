@@ -13,7 +13,7 @@ export function modelIcon(model: ModelDescriptor, mode: ModelIconMode): string {
   return slug === undefined ? "" : (brandIcons[slug] ?? "");
 }
 
-/** Return a reviewed provider mark that inherits the host text color. */
+/** Return a reviewed provider mark, using its brand colors when available. */
 export function providerIcon(provider: string): string {
   const slug = providerSlug(provider);
   return slug === undefined ? "" : (brandIcons[slug] ?? "");
@@ -92,3 +92,7 @@ function providerSlug(provider: string): string | undefined {
 function normalize(value: string): string {
   return value.toLocaleLowerCase().replaceAll(/[^a-z0-9]/g, "");
 }
+
+/** Shared disclosure chevron used by model controls and their hosts. */
+export const chevronIcon: string =
+  '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';

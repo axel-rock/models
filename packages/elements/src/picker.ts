@@ -138,26 +138,26 @@ export class ModelsPickerElement extends ModelsHTMLElement {
         .search { padding: 7px; border-bottom: 1px solid var(--models-border, #d6d6d6); }
         .search .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
         .list { max-height: var(--models-list-height, 390px); overflow: auto; padding: 5px; }
-        .group { padding: 10px 8px 4px; color: var(--models-muted, #646464); font-size: 10px; font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
+        .group { padding: 10px 8px 4px; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
         .model { width: 100%; border: 0; border-radius: 6px; background: transparent; padding: 6px 8px; text-align: left; cursor: pointer; }
         .model:hover { background: var(--models-hover, #f5f5f5); }
         .model[aria-selected="true"] { background: var(--models-selected, #eef4ff); }
-        .model-name { display: flex; align-items: center; gap: 8px; min-width: 0; overflow: hidden; font-weight: 620; white-space: nowrap; }
+        .model-name { display: flex; align-items: center; gap: 8px; min-width: 0; overflow: hidden; font-weight: 500; white-space: nowrap; }
         .model-icon { flex: 0 0 16px; width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .model-icon svg { display: block; width: 100%; height: 100%; }
         .model-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .model-qualifier { overflow: hidden; color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; text-overflow: ellipsis; white-space: nowrap; }
-        .model-recommendation { color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; }
-        .no-results { margin: 16px 8px; color: var(--models-muted, #646464); font-size: 12px; text-align: center; }
+        .model-qualifier { overflow: hidden; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+        .model-recommendation { color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); font-weight: 500; }
+        .no-results { margin: 16px 8px; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); text-align: center; }
         .detail { display: grid; align-content: start; gap: 14px; padding: 16px; min-width: 0; }
-        .detail h3 { overflow: hidden; margin: 0; font-size: 17px; text-overflow: ellipsis; white-space: nowrap; }
+        .detail h3 { overflow: hidden; margin: 0; font-size: var(--models-font-size, 13px); text-overflow: ellipsis; white-space: nowrap; }
         .detail-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
         .detail-name { display: grid; gap: 2px; min-width: 0; overflow: hidden; }
         .detail-name .muted { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .facts { position: relative; }
         .facts summary { list-style: none; cursor: help; color: var(--models-muted, #646464); }
         .facts summary::-webkit-details-marker { display: none; }
-        .facts p { position: absolute; right: 0; z-index: 2; width: min(260px, 70vw); margin: 8px 0 0; border: 1px solid var(--models-border, #d6d6d6); border-radius: 6px; padding: 9px; background: var(--models-surface, #fff); box-shadow: 0 8px 24px #0001; color: var(--models-muted, #646464); font-size: 11px; }
+        .facts p { position: absolute; right: 0; z-index: 2; width: min(260px, 70vw); margin: 8px 0 0; border: 1px solid var(--models-border, #d6d6d6); border-radius: 6px; padding: 9px; background: var(--models-surface, #fff); box-shadow: 0 8px 24px #0001; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); }
         @media (max-width: 640px) { .picker { grid-template-columns: 1fr; } .models { border-right: 0; border-bottom: 1px solid var(--models-border, #d6d6d6); } .list { max-height: 260px; } }
       </style>
       <div class="picker" part="picker">

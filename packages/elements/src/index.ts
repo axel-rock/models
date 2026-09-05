@@ -10,7 +10,7 @@ export {
 export { ModelsOptionsElement } from "./options.ts";
 export type { OptionsLayout, VisibleOptionGroup } from "./options.ts";
 export type { ModelGrouping } from "./grouping.ts";
-export { modelIcon, providerIcon } from "./icons.ts";
+export { chevronIcon, modelIcon, providerIcon } from "./icons.ts";
 export type { ModelIconMode } from "./icons.ts";
 export { ModelsComposerElement } from "./composer.ts";
 export { ModelsPickerElement } from "./picker.ts";

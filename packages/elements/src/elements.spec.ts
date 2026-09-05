@@ -23,6 +23,22 @@ describe("models elements", () => {
     expect(() => defineModelsElements()).not.toThrow();
   });
 
+  it("keeps keyboard focus after a host synchronizes a model selection", () => {
+    const select = document.createElement("models-select") as ModelsSelectElement;
+    select.catalogs = [composerCatalog()];
+    document.body.append(select);
+    select.addEventListener("models-model-change", (event) => {
+      select.value = (event as CustomEvent<ModelDescriptor>).detail.key;
+    });
+    select.shadowRoot?.querySelector<HTMLInputElement>("input")?.focus();
+    select.shadowRoot?.querySelector<HTMLButtonElement>("button[data-key]")?.click();
+    expect(select.value).not.toBe("");
+    expect(document.activeElement).toBe(select);
+    expect(select.shadowRoot?.activeElement).toBe(select.shadowRoot?.querySelector("input"));
+    expect(select.shadowRoot?.querySelector("input")?.getAttribute("aria-expanded")).toBe("false");
+    select.remove();
+  });
+
   it("opens a composer dialog and commits quick details", () => {
     const composer = document.createElement("models-composer") as ModelsComposerElement;
     composer.catalogs = [composerCatalog()];
@@ -51,7 +67,7 @@ describe("models elements", () => {
     expect(composer.shadowRoot?.querySelector('[role="option"]')).toBeNull();
   });
 
-  it("uses reviewed Claude and Qwen marks without fabricating unknown brands", () => {
+  it("uses colored brand marks without fabricating unknown brands", () => {
     const model = catalog("anthropic").models[0];
     if (model === undefined) {
       throw new TypeError("Expected a fixture model.");
@@ -60,6 +76,8 @@ describe("models elements", () => {
     expect(modelIcon({ ...model, name: "Qwen 3.5" }, "model-maker")).toContain(
       'viewBox="0 0 24 24"',
     );
+    expect(providerIcon("anthropic")).toMatch(/fill="#[0-9a-f]+"/i);
+    expect(providerIcon("google")).toMatch(/fill="#[0-9a-f]+"/i);
     expect(providerIcon("unknown-model-company")).toBe("");
   });
 
@@ -157,6 +175,24 @@ describe("models elements", () => {
     const popover = composer.shadowRoot?.querySelector<HTMLElement>(".popover");
     expect(popover?.dataset.horizontal).toBe("start");
     expect(popover?.dataset.vertical).toBe("below");
+  });
+
+  it("opens above the prompt when both sides have room", () => {
+    const previousHeight = window.innerHeight;
+    Object.defineProperty(window, "innerHeight", { configurable: true, value: 1200 });
+    const composer = document.createElement("models-composer") as ModelsComposerElement;
+    try {
+      composer.catalogs = [composerCatalog()];
+      composer.getBoundingClientRect = () => new DOMRect(200, 500, 160, 36);
+      document.body.append(composer);
+      composer.open = true;
+      expect(composer.shadowRoot?.querySelector<HTMLElement>(".popover")?.dataset.vertical).toBe(
+        "above",
+      );
+    } finally {
+      composer.remove();
+      Object.defineProperty(window, "innerHeight", { configurable: true, value: previousHeight });
+    }
   });
 
   it("uses the roomier side and caps a constrained composer submenu", () => {

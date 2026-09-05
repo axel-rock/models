@@ -2,7 +2,7 @@ import type { ModelCatalog, ModelDescriptor, ModelRecommendation } from "@models
 import { ModelsHTMLElement } from "./base.ts";
 import { emitModelChange, emitModelClear } from "./events.ts";
 import { modelGroup, type ModelGrouping } from "./grouping.ts";
-import { modelIcon, type ModelIconMode } from "./icons.ts";
+import { chevronIcon, modelIcon, type ModelIconMode } from "./icons.ts";
 import { elementStyles } from "./styles.ts";
 
 /** Visual density of the model control. */
@@ -140,6 +140,8 @@ export class ModelsSelectElement extends ModelsHTMLElement {
     );
     const displayValue = this.#isOpen ? this.#query : (selectedSuggestion?.value ?? "");
     const icon = selected === undefined || this.#isOpen ? "" : modelIcon(selected, this.#iconMode);
+    // Replacing the focused input can emit focusout before its replacement receives focus.
+    this.#root.removeEventListener("focusout", this.#onFocusOut);
     this.#root.innerHTML = `
       <style>${elementStyles}</style>
       <style>
@@ -151,35 +153,36 @@ export class ModelsSelectElement extends ModelsHTMLElement {
         .search-shell.has-icon .control { padding-left: 31px; }
         .control { padding-right: 30px; }
         .control::-webkit-search-cancel-button { display: none; appearance: none; }
-        .caret { position: absolute; right: 9px; display: grid; place-items: center; width: 14px; height: 14px; color: var(--models-muted, #646464); pointer-events: none; transition: transform 120ms ease; }
+        .caret { position: absolute; right: 9px; display: grid; place-items: center; width: 16px; height: 16px; color: var(--models-muted, #646464); pointer-events: none; transition: transform 120ms ease; }
         .caret.open { transform: rotate(180deg); }
         .caret svg { display: block; width: 100%; height: 100%; }
         .compact .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-        .compact .control { min-height: 32px; width: 100%; padding-top: 3px; padding-bottom: 3px; border-radius: 7px; font-size: 12px; font-weight: 580; }
+        .compact .control { min-height: var(--models-control-height, 36px); width: 100%; padding-top: 3px; padding-bottom: 3px; border-radius: 7px; font-size: var(--models-font-size, 13px); font-weight: 500; }
         .list { position: absolute; top: calc(100% + 6px); left: 0; z-index: 20; width: min(340px, calc(100vw - 32px)); max-height: min(360px, var(--models-list-space, 60vh)); overflow: auto; border: 1px solid var(--models-border, #d6d6d6); border-radius: 9px; padding: 5px; background: var(--models-surface, #fff); box-shadow: 0 14px 36px #0003; }
         .list.above { top: auto; bottom: calc(100% + 6px); }
-        .group { padding: 9px 8px 4px; color: var(--models-muted, #646464); font-size: 10px; font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
-        .option { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; width: 100%; min-height: 34px; border: 0; border-radius: 6px; padding: 5px 8px; background: transparent; font-size: 13px; text-align: left; cursor: pointer; }
+        .group { padding: 9px 8px 4px; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+        .option { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px; width: 100%; min-height: var(--models-control-height, 36px); border: 0; border-radius: 6px; padding: 5px 8px; background: transparent; font-size: var(--models-font-size, 13px); text-align: left; cursor: pointer; }
         .option.no-icon { grid-template-columns: minmax(0, 1fr) auto; }
         .option:hover, .option.active { background: var(--models-hover, #f5f5f5); }
         .option[aria-selected="true"] { background: var(--models-selected, #eef4ff); }
         .option-icon { width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .option-icon svg { display: block; width: 100%; height: 100%; }
         .option-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .option-meta { margin-left: 5px; color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; }
+        .option-meta { margin-left: 5px; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); font-weight: 500; }
         .check { color: var(--models-muted, #646464); }
-        .empty { margin: 18px 10px; color: var(--models-muted, #646464); font-size: 12px; text-align: center; }
+        .empty { margin: 18px 10px; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); text-align: center; }
       </style>
       <label class="field ${this.#density === "compact" ? "compact" : ""}" part="field">
         <span class="label" part="label">${escapeHtml(this.getAttribute("label") ?? "Model")}</span>
         <span class="search-shell ${icon === "" ? "" : "has-icon"}">
           ${icon === "" ? "" : `<span class="search-icon" aria-hidden="true">${icon}</span>`}
           <input class="control" part="input" type="search" role="combobox" aria-autocomplete="list" aria-controls="${this.#listId}" aria-expanded="${this.#isOpen}"${this.#activeKey === undefined ? "" : ` aria-activedescendant="${escapeHtml(suggestions.find((suggestion) => suggestion.model.key === this.#activeKey)?.optionId ?? "")}"`} autocomplete="off" placeholder="Search models" value="${escapeHtml(displayValue)}"${selected === undefined || this.#isOpen ? "" : ` title="${escapeHtml(selected.name)}"`} />
-          <span class="caret ${this.#isOpen ? "open" : ""}" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m6 8 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="caret ${this.#isOpen ? "open" : ""}" aria-hidden="true">${chevronIcon}</span>
         </span>
       </label>
       ${this.#isOpen ? `<div class="list" id="${this.#listId}" role="listbox" aria-label="Models">${renderSuggestions(suggestions, this.#value, this.#activeKey, this.#groupBy, this.#iconMode)}</div>` : ""}
     `;
+    this.#root.addEventListener("focusout", this.#onFocusOut);
     this.bindEvents(suggestions);
     this.placeList();
   }
@@ -246,10 +249,10 @@ export class ModelsSelectElement extends ModelsHTMLElement {
     this.#query = "";
     this.#activeKey = undefined;
     this.render();
-    this.focusClosedInput();
     if (hasChanged) {
       emitModelChange(this, suggestion.model);
     }
+    this.focusClosedInput();
   }
 
   private clear(): void {

@@ -7,6 +7,7 @@ import {
 } from "@models/core";
 import { ModelsHTMLElement } from "./base.ts";
 import { OPTIONS_CHANGE_EVENT } from "./events.ts";
+import { chevronIcon } from "./icons.ts";
 import { elementStyles } from "./styles.ts";
 
 /** Option groups that a host can choose to show. */
@@ -111,19 +112,26 @@ export class ModelsOptionsElement extends ModelsHTMLElement {
         ${elementStyles}
         .options { display: grid; gap: 10px; }
         .options.inline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-        .inline .field { display: flex; align-items: center; gap: 2px; min-height: 32px; border: 1px solid var(--models-border, #b8b8b2); border-radius: var(--models-radius, 7px); background: var(--models-surface, #fff); }
-        .inline .field > .label { padding-left: 9px; color: var(--models-muted, #646464); font-size: 11px; font-weight: 550; white-space: nowrap; }
-        .inline .control { min-height: 30px; width: auto; max-width: 150px; border: 0; padding: 3px 25px 3px 5px; background: transparent; font-size: 12px; font-weight: 620; }
+        .inline .field { display: flex; align-items: center; gap: 8px; min-height: var(--models-control-height, 36px); border: 1px solid var(--models-border, #b8b8b2); border-radius: var(--models-radius, 7px); background: var(--models-surface, #fff); }
+        .inline .field > .label { padding-left: 9px; color: var(--models-muted, #646464); font-size: var(--models-font-size, 13px); font-weight: 400; white-space: nowrap; }
+        .inline .control { height: calc(var(--models-control-height, 36px) - 2px); min-height: 0; width: auto; max-width: 170px; border: 0; padding: 0 30px 0 0; background: transparent; font-size: var(--models-font-size, 13px); font-weight: 500; }
+        select.control { appearance: none; padding-right: 30px; }
+        .select-caret { position: absolute; right: 9px; width: 16px; height: 16px; color: var(--models-muted, #646464); pointer-events: none; }
+        .select-caret svg { display: block; width: 100%; height: 100%; }
         .option-shell { position: relative; display: flex; align-items: center; }
-        .inline .check { min-height: 32px; border: 1px solid var(--models-border, #b8b8b2); border-radius: var(--models-radius, 7px); padding: 4px 8px 4px 9px; font-size: 12px; }
+        .inline .check { min-height: var(--models-control-height, 36px); border: 1px solid var(--models-border, #b8b8b2); border-radius: var(--models-radius, 7px); padding: 4px 8px 4px 9px; font-size: var(--models-font-size, 13px); }
+        .inline .check strong { font-weight: 500; }
         .inline .check input { order: 2; margin: 0 0 0 4px; accent-color: var(--models-focus, #2563eb); }
         .empty { margin: 0; }
-        .check { display: flex; align-items: center; gap: 8px; min-height: 36px; }
+        .check { display: flex; align-items: center; gap: 8px; min-height: var(--models-control-height, 36px); }
         .help { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
         .requirements { border-top: 1px solid var(--models-border, #d6d6d6); padding-top: 12px; }
-        .requirements summary { cursor: pointer; color: var(--models-muted, #646464); font-size: 12px; font-weight: 650; }
-        .requirements ul { margin: 8px 0 0; padding-left: 18px; color: var(--models-muted, #646464); font-size: 12px; }
-        .issues { margin: 0; padding: 10px 12px 10px 28px; border: 1px solid var(--models-warning-border, #e6c66a); border-radius: 6px; background: var(--models-warning-surface, #fff9e8); color: var(--models-warning-text, #684f00); font-size: 12px; }
+        .requirements summary { display: flex; align-items: center; gap: 6px; list-style: none; cursor: pointer; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); font-weight: 500; }
+        .requirements summary::-webkit-details-marker { display: none; }
+        .requirements summary svg { width: 16px; height: 16px; }
+        .requirements[open] summary svg { transform: rotate(180deg); }
+        .requirements ul { margin: 8px 0 0; padding-left: 18px; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); }
+        .issues { margin: 0; padding: 10px 12px 10px 28px; border: 1px solid var(--models-warning-border, #e6c66a); border-radius: 6px; background: var(--models-warning-surface, #fff9e8); color: var(--models-warning-text, #684f00); font-size: var(--models-font-small, 12px); }
       </style>
       <div class="options ${this.#layout}" part="options">
         ${options.length === 0 ? '<p class="empty muted">No selectable details for this view.</p>' : options.map((option) => renderOption(option, this.#values[option.key], this.#layout)).join("")}
@@ -198,7 +206,7 @@ function renderOption(option: OptionDefinition, value: unknown, layout: OptionsL
       : option.kind === "string-list"
         ? `<input id="${id}" class="control" data-option="${escapeHtml(option.key)}" value="${escapeHtml(Array.isArray(value) ? value.join(", ") : "")}"${layout === "inline" ? "" : ` placeholder="${escapeHtml(option.label)}"`}>`
         : `<input id="${id}" class="control" data-option="${escapeHtml(option.key)}" type="number" ${option.min === undefined ? "" : `min="${option.min}"`} ${option.max === undefined ? "" : `max="${option.max}"`} ${option.step === undefined ? "" : `step="${option.step}"`} value="${typeof value === "number" ? value : ""}"${layout === "inline" ? "" : ` placeholder="${escapeHtml(option.label)}"`}>`;
-  return `<label class="field" part="option" for="${id}" title="${escapeHtml(option.description)}"><span class="label">${escapeHtml(option.label)}</span><span class="option-shell">${control}</span><span class="help">${escapeHtml(option.description)}</span></label>`;
+  return `<label class="field" part="option" for="${id}" title="${escapeHtml(option.description)}"><span class="label">${escapeHtml(option.label)}</span><span class="option-shell">${control}${option.kind === "enum" ? `<span class="select-caret">${chevronIcon}</span>` : ""}</span><span class="help">${escapeHtml(option.description)}</span></label>`;
 }
 
 function isOptionVisible(
@@ -228,7 +236,7 @@ function renderRequirements(model: ModelDescriptor | undefined): string {
   if (model === undefined || model.requirements.length === 0) {
     return "";
   }
-  return `<details class="requirements" part="requirements"><summary>Integration notes · ${model.requirements.length}</summary><ul>${model.requirements.map((requirement) => `<li><strong>${escapeHtml(requirement.title)}:</strong> ${escapeHtml(requirement.description)}</li>`).join("")}</ul></details>`;
+  return `<details class="requirements" part="requirements"><summary>Integration notes · ${model.requirements.length}${chevronIcon}</summary><ul>${model.requirements.map((requirement) => `<li><strong>${escapeHtml(requirement.title)}:</strong> ${escapeHtml(requirement.description)}</li>`).join("")}</ul></details>`;
 }
 
 function readControlValue(

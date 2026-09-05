@@ -13,13 +13,12 @@ import {
   type ResolvedModelPolicy,
 } from "@models/core";
 import {
+  chevronIcon,
   defineModelsElements,
   ModelsComposerElement,
-  ModelsOptionsElement,
   ModelsPickerElement,
   ModelsSelectElement,
   MODEL_CLEAR_EVENT,
-  OPTIONS_CHANGE_EVENT,
   SELECTION_CHANGE_EVENT,
   providerIcon,
   type ModelGrouping,
@@ -31,6 +30,7 @@ import { directProviderExamples } from "./demoCatalogs.ts";
 import "./style.css";
 
 defineModelsElements();
+for (const caret of document.querySelectorAll(".source-caret")) caret.innerHTML = chevronIcon;
 
 interface ProviderView {
   readonly id: ProviderId;
@@ -40,7 +40,7 @@ interface ProviderView {
   readonly category: "direct" | "gateway";
 }
 
-type ExampleTab = "composer" | "inline" | "inspector" | "minimal";
+type ExampleTab = "composer" | "standalone" | "inspector" | "minimal";
 type SelectionOptions = OptionValues<ModelDescriptor["options"]>;
 
 interface GalleryState {
@@ -98,13 +98,12 @@ let activePolicy: ResolvedModelPolicy | undefined;
 let activeModels = new Map<string, ModelDescriptor>();
 
 const minimalSelect = document.querySelector("#simple-select");
-const inlineSelect = document.querySelector("#inline-select");
-const inlineOptions = document.querySelector("#inline-options");
+const standaloneComposer = document.querySelector("#standalone-composer");
 const advancedPicker = document.querySelector("#advanced-picker");
 const composerMenu = document.querySelector("#composer-menu");
 
-for (const select of [minimalSelect, inlineSelect]) {
-  if (!(select instanceof ModelsSelectElement)) continue;
+if (minimalSelect instanceof ModelsSelectElement) {
+  const select = minimalSelect;
   select.density = "compact";
   select.addEventListener("models-model-change", (event) => {
     syncSelection((event as CustomEvent<ModelDescriptor>).detail, draftOptions);
@@ -112,16 +111,7 @@ for (const select of [minimalSelect, inlineSelect]) {
   select.addEventListener(MODEL_CLEAR_EVENT, clearSelection);
 }
 
-if (inlineOptions instanceof ModelsOptionsElement) {
-  inlineOptions.layout = "inline";
-  inlineOptions.addEventListener(OPTIONS_CHANGE_EVENT, (event) => {
-    if (selectedModel !== undefined) {
-      syncSelection(selectedModel, (event as CustomEvent<SelectionOptions>).detail);
-    }
-  });
-}
-
-for (const element of [advancedPicker, composerMenu]) {
+for (const element of [advancedPicker, composerMenu, standaloneComposer]) {
   element?.addEventListener(SELECTION_CHANGE_EVENT, (event) => {
     const selection = (event as CustomEvent<ModelSelection>).detail;
     syncSelection(
@@ -155,6 +145,69 @@ document.querySelector("#show-icons")?.addEventListener("change", (event) => {
   renderSelectedSource(false);
 });
 
+const sourceMenu = document.querySelector<HTMLDetailsElement>("#source-menu");
+const customizeMenu = document.querySelector<HTMLDetailsElement>("#customize-menu");
+for (const menu of [sourceMenu, customizeMenu]) {
+  menu?.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    menu.open = false;
+    menu.querySelector("summary")?.focus();
+  });
+  document.addEventListener("pointerdown", (event) => {
+    if (menu?.open && !event.composedPath().includes(menu)) menu.open = false;
+  });
+}
+
+const promptDraft = document.querySelector<HTMLTextAreaElement>("#prompt-draft");
+const copyDraft = document.querySelector<HTMLButtonElement>("#copy-draft");
+promptDraft?.addEventListener("input", () => {
+  updateDraftControl();
+  promptDraft.style.height = "auto";
+  promptDraft.style.height = `${Math.min(promptDraft.scrollHeight, 160)}px`;
+});
+copyDraft?.addEventListener("click", async () => {
+  if (selectedModel === undefined || !promptDraft?.value.trim()) return;
+  const draft = JSON.stringify(
+    {
+      prompt: promptDraft.value,
+      provider: selectedProvider?.id,
+      model: selectedModel.id,
+      options: selectedOptions,
+    },
+    null,
+    2,
+  );
+  try {
+    await navigator.clipboard.writeText(draft);
+    setText("#prompt-status", "Prompt and selection copied.");
+  } catch {
+    setText("#prompt-status", "Copy unavailable. Your prompt is still here to select and copy.");
+    promptDraft.focus();
+    promptDraft.select();
+  }
+});
+
+function updateDraftControl(): void {
+  if (copyDraft !== null)
+    copyDraft.disabled = selectedModel === undefined || !promptDraft?.value.trim();
+  setText("#prompt-status", "Local draft · Copy the prompt and selection when ready");
+}
+
+const copyButton = document.querySelector<HTMLButtonElement>("#copy-selection");
+copyButton?.addEventListener("click", async () => {
+  const output = document.querySelector("#selection-output")?.textContent;
+  if (selectedModel === undefined || output === undefined || output === null) return;
+  try {
+    await navigator.clipboard.writeText(output);
+    setText("#copy-status", "Selection copied to clipboard.");
+    copyButton.textContent = "Copied";
+  } catch {
+    setText("#copy-status", "Copy unavailable. Select and copy the JSON below.");
+    copyButton.textContent = "Select JSON below";
+    document.querySelector<HTMLElement>("#selection-output")?.focus();
+  }
+});
+
 restoreGalleryState();
 window.addEventListener("popstate", restoreGalleryState);
 
@@ -186,6 +239,7 @@ function renderSourceGroup(selector: string, views: readonly ProviderView[]): vo
       renderSourceOptions();
       renderSelectedSource(true);
       document.querySelector<HTMLDetailsElement>("#source-menu")?.removeAttribute("open");
+      sourceMenu?.querySelector("summary")?.focus();
     });
   }
 }
@@ -246,9 +300,7 @@ function renderSelectedSource(chooseDefault: boolean): void {
   const grouped: ModelGrouping =
     isChecked("#policy-approved") || !isGateway(sourceCatalog) ? "none" : grouping;
   configureSelect(minimalSelect, activeCatalog, grouped, recommendations);
-  configureSelect(inlineSelect, activeCatalog, grouped, recommendations);
 
-  if (inlineOptions instanceof ModelsOptionsElement) inlineOptions.groups = groups;
   if (advancedPicker instanceof ModelsPickerElement) {
     advancedPicker.groupBy = grouped;
     advancedPicker.iconMode = iconMode;
@@ -256,12 +308,13 @@ function renderSelectedSource(chooseDefault: boolean): void {
     advancedPicker.recommendations = recommendations;
     advancedPicker.catalogs = [activeCatalog];
   }
-  if (composerMenu instanceof ModelsComposerElement) {
-    composerMenu.groupBy = grouped;
-    composerMenu.iconMode = iconMode;
-    composerMenu.groups = groups;
-    composerMenu.recommendations = recommendations;
-    composerMenu.catalogs = [activeCatalog];
+  for (const composer of [composerMenu, standaloneComposer]) {
+    if (!(composer instanceof ModelsComposerElement)) continue;
+    composer.groupBy = grouped;
+    composer.iconMode = iconMode;
+    composer.groups = groups;
+    composer.recommendations = recommendations;
+    composer.catalogs = [activeCatalog];
   }
   applySelection();
 
@@ -273,6 +326,7 @@ function renderSelectedSource(chooseDefault: boolean): void {
     "#source-summary",
     `${shown}${shown === total ? "" : ` of ${total}`} model${shown === 1 ? "" : "s"} · ${sourceKind}`,
   );
+  setText("#catalog-status", `${shown} ${shown === 1 ? "model" : "models"} · ${sourceKind}`);
   const toggle = document.querySelector<HTMLElement>(".group-toggle");
   if (toggle !== null) toggle.hidden = !isGateway(sourceCatalog);
   renderFreshness(sourceCatalog);
@@ -311,15 +365,11 @@ function applySelection(): void {
     selectedModel === undefined
       ? undefined
       : ({ model: selectedModel, options: selectedOptions } satisfies ModelSelection);
-  for (const select of [minimalSelect, inlineSelect]) {
-    if (select instanceof ModelsSelectElement) select.value = selectedModel?.key ?? "";
-  }
-  if (inlineOptions instanceof ModelsOptionsElement) {
-    inlineOptions.model = selectedModel;
-    inlineOptions.value = selectedOptions;
-  }
+  if (minimalSelect instanceof ModelsSelectElement) minimalSelect.value = selectedModel?.key ?? "";
   if (advancedPicker instanceof ModelsPickerElement) advancedPicker.value = selection;
-  if (composerMenu instanceof ModelsComposerElement) composerMenu.value = selection;
+  for (const composer of [composerMenu, standaloneComposer]) {
+    if (composer instanceof ModelsComposerElement) composer.value = selection;
+  }
   setText(
     "#selection-output",
     selection === undefined
@@ -334,6 +384,12 @@ function applySelection(): void {
           2,
         ),
   );
+  if (copyButton !== null) {
+    copyButton.disabled = selection === undefined;
+    copyButton.textContent = "Copy JSON";
+  }
+  setText("#copy-status", "");
+  updateDraftControl();
   if (isStateReady) syncUrlState();
 }
 
@@ -447,12 +503,19 @@ function setActiveTab(active: ExampleTab, isNavigation = false): void {
 }
 
 function onTabKeydown(event: KeyboardEvent, current: HTMLButtonElement): void {
-  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+  if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
   event.preventDefault();
   const tabs = [...document.querySelectorAll<HTMLButtonElement>("button[data-tab]")];
   const index = tabs.indexOf(current);
   const direction = event.key === "ArrowRight" ? 1 : -1;
-  const next = tabs[(index + direction + tabs.length) % tabs.length];
+  const next =
+    tabs[
+      event.key === "Home"
+        ? 0
+        : event.key === "End"
+          ? tabs.length - 1
+          : (index + direction + tabs.length) % tabs.length
+    ];
   if (next !== undefined) {
     setActiveTab(next.dataset.tab as ExampleTab, true);
     next.focus();
@@ -570,7 +633,8 @@ function readOptions(value: string | null): SelectionOptions {
 
 function tabFromHash(hash: string): ExampleTab {
   const candidate = hash.replace(/^#(?:panel-)?/, "");
-  return ["minimal", "inline", "composer", "inspector"].includes(candidate)
+  if (candidate === "inline") return "standalone";
+  return ["minimal", "standalone", "composer", "inspector"].includes(candidate)
     ? (candidate as ExampleTab)
     : "composer";
 }

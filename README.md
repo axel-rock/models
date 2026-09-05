@@ -216,7 +216,7 @@ pnpm install
 pnpm dev
 ```
 
-The gallery presents Minimal, Inline, Composer, and Inspector shapes in one
+The gallery presents Minimal, Standalone, Chat, and Inspector shapes in one
 tabbed surface. A shared policy controls approved models and optional detail
 groups across every shape. Catalog-source controls and evidence stay in a
 separate developer disclosure. The page loads public gateway catalogs live and

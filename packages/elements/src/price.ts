@@ -45,9 +45,9 @@ export class ModelsPriceElement extends ModelsHTMLElement {
         ${elementStyles}
         dl { display: flex; flex-wrap: wrap; gap: 7px 14px; margin: 0; }
         div { display: flex; gap: 4px; min-width: 0; }
-        dt { color: var(--models-muted, #646464); font-size: 11px; }
-        dd { margin: 0; font-size: 11px; font-weight: 650; }
-        p { margin: 0; color: var(--models-muted, #646464); font-size: 11px; }
+        dt { color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); }
+        dd { margin: 0; font-size: var(--models-font-small, 12px); font-weight: 500; }
+        p { margin: 0; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); }
       </style>
       ${listed.length === 0 ? '<p part="prices">No public token price</p>' : `<dl part="prices">${listed.map(({ label, value }) => priceItem(label, value)).join("")}</dl>`}
     `;

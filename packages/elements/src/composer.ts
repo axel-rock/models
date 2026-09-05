@@ -12,7 +12,7 @@ import { ModelsHTMLElement } from "./base.ts";
 import { emitSelectionChange, OPTIONS_CHANGE_EVENT } from "./events.ts";
 import { modelGroup } from "./grouping.ts";
 import type { ModelGrouping } from "./grouping.ts";
-import { modelIcon, type ModelIconMode } from "./icons.ts";
+import { chevronIcon, modelIcon, type ModelIconMode } from "./icons.ts";
 import { ModelsOptionsElement, type VisibleOptionGroup } from "./options.ts";
 import { elementStyles } from "./styles.ts";
 
@@ -179,41 +179,43 @@ export class ModelsComposerElement extends ModelsHTMLElement {
         :host { display: inline-block; max-width: 100%; }
         button { border: 0; }
         .composer { position: relative; width: max-content; max-width: 100%; }
-        .trigger { display: flex; align-items: center; justify-content: center; gap: 6px; width: max-content; max-width: 100%; min-height: 32px; border: 1px solid var(--models-border, #b8b8b2); border-radius: var(--models-radius, 7px); padding: 4px 8px; background: var(--models-surface, #fff); font-size: 12px; font-weight: 590; cursor: pointer; }
+        .trigger { display: flex; align-items: center; justify-content: center; gap: 6px; width: max-content; max-width: 100%; min-height: var(--models-control-height, 36px); border: 1px solid var(--models-border, #b8b8b2); border-radius: var(--models-radius, 7px); padding: 4px 8px; background: var(--models-surface, #fff); font-size: var(--models-font-size, 13px); font-weight: 500; cursor: pointer; }
         .trigger:hover { background: var(--models-hover, #f5f5f5); }
-        .trigger-icon { width: 15px; height: 15px; color: var(--models-muted, #646464); }
+        .trigger-icon { width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .trigger-icon svg { display: block; width: 100%; height: 100%; }
         .summary { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .summary-detail { color: var(--models-muted, #646464); }
-        .chevron { display: grid; place-items: center; align-self: center; flex: 0 0 14px; width: 14px; height: 14px; margin-left: 1px; color: var(--models-muted, #646464); }
+        .chevron { display: grid; place-items: center; align-self: center; flex: 0 0 16px; width: 16px; height: 16px; margin-left: 1px; color: var(--models-muted, #646464); }
+        .forward { transform: rotate(-90deg); }
+        .backward { transform: rotate(90deg); margin: auto; }
         .chevron svg { display: block; width: 100%; height: 100%; }
         .popover { position: absolute; right: 0; bottom: calc(100% + 8px); z-index: 10; width: min(340px, calc(100vw - 32px)); }
         .popover[data-horizontal="start"] { right: auto; left: 0; }
         .popover[data-vertical="below"] { top: calc(100% + 8px); bottom: auto; }
         .popover[data-horizontal="overlay"] { right: auto; width: min(340px, calc(100vw - 32px)); }
-        .panel { width: 100%; border: 1px solid var(--models-border, #d6d6d6); border-radius: 8px; padding: 5px; background: var(--models-surface, #fff); box-shadow: 0 12px 30px #0003; font-size: 13px; }
-        .row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 7px; width: 100%; min-height: 34px; border-radius: 6px; padding: 4px 7px; background: transparent; text-align: left; cursor: pointer; }
+        .panel { width: 100%; border: 1px solid var(--models-border, #d6d6d6); border-radius: 8px; padding: 5px; background: var(--models-surface, #fff); box-shadow: 0 12px 30px #0003; font-size: var(--models-font-size, 13px); }
+        .row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 7px; width: 100%; min-height: var(--models-control-height, 36px); border-radius: 6px; padding: 4px 7px; background: transparent; text-align: left; cursor: pointer; }
         .row:hover, .row[aria-expanded="true"] { background: var(--models-hover, #f5f5f5); }
         .row-value { max-width: 170px; overflow: hidden; color: var(--models-muted, #646464); text-overflow: ellipsis; white-space: nowrap; }
         .advanced-row { margin-top: 4px; border-top: 1px solid var(--models-border, #d6d6d6); border-radius: 0 0 7px 7px; color: var(--models-muted, #646464); }
         .advanced-options { display: block; padding: 3px 5px; }
-        .submenu { display: flex; flex-direction: column; width: 100%; max-height: min(440px, var(--models-popover-space, 70vh)); overflow: hidden; border: 1px solid var(--models-border, #d6d6d6); border-radius: 8px; padding: 5px; background: var(--models-surface, #fff); box-shadow: 0 12px 30px #0003; font-size: 13px; }
-        .submenu-title { margin: 5px 8px 7px; color: var(--models-muted, #646464); font-size: 12px; font-weight: 650; }
+        .submenu { display: flex; flex-direction: column; width: 100%; max-height: min(440px, var(--models-popover-space, 70vh)); overflow: hidden; border: 1px solid var(--models-border, #d6d6d6); border-radius: 8px; padding: 5px; background: var(--models-surface, #fff); box-shadow: 0 12px 30px #0003; font-size: var(--models-font-size, 13px); }
+        .submenu-title { margin: 5px 8px 7px; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); font-weight: 500; }
         .submenu-head { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
-        .back { flex: 0 0 32px; width: 32px; height: 32px; border-radius: 6px; background: transparent; cursor: pointer; }
+        .back { flex: 0 0 var(--models-control-height, 36px); width: var(--models-control-height, 36px); height: var(--models-control-height, 36px); border-radius: 6px; background: transparent; cursor: pointer; }
         .back:hover { background: var(--models-hover, #f5f5f5); }
         .submenu-head .search { flex: 1; margin: 0; }
         .submenu-list { min-height: 0; overflow: auto; overscroll-behavior: contain; }
         .search { margin-bottom: 6px; }
-        .choice { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 7px; width: 100%; min-height: 36px; border-radius: 7px; padding: 5px 8px; background: transparent; text-align: left; cursor: pointer; }
+        .choice { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 7px; width: 100%; min-height: var(--models-control-height, 36px); border-radius: 7px; padding: 5px 8px; background: transparent; text-align: left; cursor: pointer; }
         .choice.no-icon { grid-template-columns: minmax(0, 1fr) auto; }
         .choice:hover { background: var(--models-hover, #f5f5f5); }
         .choice-icon { width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .choice-icon svg { display: block; width: 100%; height: 100%; }
         .choice-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .choice-meta { margin-left: 5px; color: var(--models-muted, #646464); font-size: 11px; font-weight: 450; }
+        .choice-meta { margin-left: 5px; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); font-weight: 500; }
         .checkmark { color: var(--models-muted, #646464); }
-        .group { padding: 10px 9px 3px; color: var(--models-muted, #646464); font-size: 10px; font-weight: 720; letter-spacing: .08em; text-transform: uppercase; }
+        .group { padding: 10px 9px 3px; color: var(--models-muted, #646464); font-size: var(--models-font-small, 12px); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
         .empty { margin: 18px 10px; color: var(--models-muted, #646464); text-align: center; }
       </style>
       <div class="composer" part="composer">
@@ -221,7 +223,7 @@ export class ModelsComposerElement extends ModelsHTMLElement {
         <button class="trigger" part="trigger" type="button" aria-haspopup="dialog" aria-expanded="${this.#isOpen}"${selected === undefined ? "" : ` title="${escapeHtml(selected.name)}"`}>
           ${selected === undefined ? "" : renderModelIcon(selected, this.#iconMode, "trigger-icon")}
           <span class="summary">${renderSummary(selected, effort, speed, this.#options)}</span>
-          <span class="chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="m6 8 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="chevron" aria-hidden="true">${chevronIcon}</span>
         </button>
       </div>
     `;
@@ -388,10 +390,10 @@ export class ModelsComposerElement extends ModelsHTMLElement {
     const spaceAbove = Math.max(0, bounds.top - margin - gap);
     const spaceBelow = Math.max(0, window.innerHeight - bounds.bottom - margin - gap);
     const vertical =
-      desiredHeight <= spaceBelow
-        ? "below"
-        : desiredHeight <= spaceAbove
-          ? "above"
+      desiredHeight <= spaceAbove
+        ? "above"
+        : desiredHeight <= spaceBelow
+          ? "below"
           : spaceAbove >= spaceBelow
             ? "above"
             : "below";
@@ -437,7 +439,7 @@ function renderRow(
   value: string,
   active: ComposerSection | undefined,
 ): string {
-  return `<button class="row ${section === "advanced" ? "advanced-row" : ""}" part="row" type="button" data-section="${section}" aria-expanded="${active === section}"${value === "" ? "" : ` title="${escapeHtml(value)}"`}><span>${escapeHtml(label)}</span><span class="row-value">${escapeHtml(value)}</span><span class="chevron" aria-hidden="true">›</span></button>`;
+  return `<button class="row ${section === "advanced" ? "advanced-row" : ""}" part="row" type="button" data-section="${section}" aria-expanded="${active === section}"${value === "" ? "" : ` title="${escapeHtml(value)}"`}><span>${escapeHtml(label)}</span><span class="row-value">${escapeHtml(value)}</span><span class="chevron forward" aria-hidden="true">${chevronIcon}</span></button>`;
 }
 
 function renderSubmenu(
@@ -456,7 +458,7 @@ function renderSubmenu(
     return "";
   }
   if (section === "advanced") {
-    return '<div class="submenu" part="submenu"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings">‹</button><p class="submenu-title">Advanced</p></div><models-options class="advanced-options"></models-options></div>';
+    return '<div class="submenu" part="submenu"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings"><span class="chevron backward">${chevronIcon}</span></button><p class="submenu-title">Advanced</p></div><models-options class="advanced-options"></models-options></div>';
   }
   if (section === "model") {
     const words = query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
@@ -472,7 +474,7 @@ function renderSubmenu(
         `${model.name} ${model.id} ${model.author ?? ""} ${labels}`.toLocaleLowerCase();
       return words.every((word) => search.includes(word));
     });
-    return `<div class="submenu" part="submenu"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings">‹</button><input class="control search" part="search" type="search" aria-label="Search models" placeholder="Search models" value="${escapeHtml(query)}"></div><div class="submenu-list">${models.length === 0 ? '<p class="empty">No matching models</p>' : renderModelChoices(models, selected?.key, grouping, iconMode, recommendations)}</div></div>`;
+    return `<div class="submenu" part="submenu"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings"><span class="chevron backward">${chevronIcon}</span></button><input class="control search" part="search" type="search" aria-label="Search models" placeholder="Search models" value="${escapeHtml(query)}"></div><div class="submenu-list">${models.length === 0 ? '<p class="empty">No matching models</p>' : renderModelChoices(models, selected?.key, grouping, iconMode, recommendations)}</div></div>`;
   }
   const option = section === "effort" ? effort : speed;
   if (option === undefined || (option.kind !== "boolean" && option.kind !== "enum")) {
@@ -485,7 +487,7 @@ function renderSubmenu(
       : option.values
           .map((value) => renderOptionChoice(option, value, titleCase(value), current))
           .join("");
-  return `<div class="submenu" part="submenu" aria-label="${escapeHtml(option.label)}"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings">‹</button><p class="submenu-title">${escapeHtml(option.label)}</p></div>${renderOptionChoice(option, "", "Provider default", current)}${choices}</div>`;
+  return `<div class="submenu" part="submenu" aria-label="${escapeHtml(option.label)}"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings"><span class="chevron backward">${chevronIcon}</span></button><p class="submenu-title">${escapeHtml(option.label)}</p></div>${renderOptionChoice(option, "", "Provider default", current)}${choices}</div>`;
 }
 
 function renderModelChoices(

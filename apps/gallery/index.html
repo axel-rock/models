@@ -13,13 +13,15 @@
     <a class="skip-link" href="#showcase">Skip to examples</a>
     <header class="site-header">
       <a class="brand" href="#top">Models</a>
-      <a class="repository-link" href="https://github.com/axel-rock/models">GitHub</a>
+      <a class="repository-link" href="https://github.com/axel-rock/models"
+        >View on GitHub <span aria-hidden="true">↗</span></a
+      >
     </header>
 
     <main id="top">
       <section class="hero">
         <h1>Model selectors</h1>
-        <p>Pick a model. Show only the controls it supports.</p>
+        <p>Explore model selection, from a simple dropdown to a prompt bar.</p>
       </section>
 
       <section class="showcase" id="showcase" aria-labelledby="showcase-title">
@@ -40,11 +42,11 @@
               type="button"
               role="tab"
               aria-selected="false"
-              aria-controls="panel-inline"
-              id="tab-inline"
-              data-tab="inline"
+              aria-controls="panel-standalone"
+              id="tab-standalone"
+              data-tab="standalone"
             >
-              Inline
+              Standalone
             </button>
             <button
               type="button"
@@ -54,7 +56,7 @@
               id="tab-composer"
               data-tab="composer"
             >
-              Composer
+              Chat
             </button>
             <button
               type="button"
@@ -77,7 +79,7 @@
                 ></span>
                 <span id="source-trigger-label">Choose catalog</span>
                 <span class="source-trigger-kind">Catalog</span>
-                <span class="source-caret" aria-hidden="true">⌄</span>
+                <span class="source-caret" aria-hidden="true"></span>
               </summary>
               <div class="source-popover">
                 <div class="source-section">
@@ -100,37 +102,43 @@
                 </div>
                 <p class="source-summary" id="source-summary">Loading available models</p>
                 <details class="source-evidence">
-                  <summary>Catalog details</summary>
+                  <summary>
+                    Catalog details <span class="source-caret" aria-hidden="true"></span>
+                  </summary>
                   <div id="freshness-grid"></div>
                 </details>
               </div>
             </details>
-            <div class="policy-controls" role="group" aria-label="Shared selector policy">
-              <label title="Limit every selector to this app's approved models">
-                <input id="policy-approved" type="checkbox" checked />
-                <span>Approved</span>
-              </label>
-              <label title="Show reasoning controls when the selected model supports them">
-                <input id="policy-reasoning" type="checkbox" checked />
-                <span>Reasoning</span>
-              </label>
-              <label title="Show true fast-mode controls when supported">
-                <input id="policy-speed" type="checkbox" checked />
-                <span>Speed</span>
-              </label>
-              <label title="Show routing, caching, beta, and generation controls when supported">
-                <input id="policy-more" type="checkbox" />
-                <span>More</span>
-              </label>
-              <label title="Show model-maker logos in every selector">
-                <input id="show-icons" type="checkbox" checked />
-                <span>Logos</span>
-              </label>
-              <label class="group-toggle" title="Group gateway models by their maker">
-                <input id="group-models" type="checkbox" checked />
-                <span>Groups</span>
-              </label>
-            </div>
+            <p class="catalog-status" id="catalog-status" role="status">Loading catalogs…</p>
+            <details class="customize-menu" id="customize-menu">
+              <summary>Customize <span class="source-caret" aria-hidden="true"></span></summary>
+              <div class="policy-controls" role="group" aria-label="Shared selector policy">
+                <label title="Limit every selector to this app's approved models">
+                  <input id="policy-approved" type="checkbox" checked />
+                  <span>Approved models</span>
+                </label>
+                <label title="Show reasoning controls when the selected model supports them">
+                  <input id="policy-reasoning" type="checkbox" checked />
+                  <span>Reasoning</span>
+                </label>
+                <label title="Show true fast-mode controls when supported">
+                  <input id="policy-speed" type="checkbox" checked />
+                  <span>Speed</span>
+                </label>
+                <label title="Show routing, caching, beta, and generation controls when supported">
+                  <input id="policy-more" type="checkbox" />
+                  <span>Advanced</span>
+                </label>
+                <label title="Show model-maker logos in every selector">
+                  <input id="show-icons" type="checkbox" checked />
+                  <span>Brand logos</span>
+                </label>
+                <label class="group-toggle" title="Group gateway models by their maker">
+                  <input id="group-models" type="checkbox" checked />
+                  <span>Groups</span>
+                </label>
+              </div>
+            </details>
           </div>
         </div>
 
@@ -145,7 +153,7 @@
           >
             <div class="panel-copy">
               <h3>Model only</h3>
-              <p>A compact searchable combobox with model-maker grouping and logos.</p>
+              <p>Just the model. Search by name and pick from your available catalog.</p>
             </div>
             <div class="demo compact-demo">
               <models-select id="simple-select" label="Model"></models-select>
@@ -155,18 +163,17 @@
           <section
             class="panel"
             role="tabpanel"
-            id="panel-inline"
-            aria-labelledby="tab-inline"
-            data-panel="inline"
+            id="panel-standalone"
+            aria-labelledby="tab-standalone"
+            data-panel="standalone"
             hidden
           >
             <div class="panel-copy">
-              <h3>Inline details</h3>
-              <p>The same model list, plus the enabled settings this model supports.</p>
+              <h3>Standalone composer</h3>
+              <p>A compact model control with its settings in one menu.</p>
             </div>
-            <div class="demo inline-demo">
-              <models-select id="inline-select" label="Model"></models-select>
-              <models-options id="inline-options"></models-options>
+            <div class="demo standalone-demo">
+              <models-composer id="standalone-composer"></models-composer>
             </div>
           </section>
 
@@ -179,11 +186,51 @@
             hidden
           >
             <div class="panel-copy">
-              <h3>Composer</h3>
-              <p>One quiet summary. Model and supported details open in a single surface.</p>
+              <h3>Chat composer</h3>
+              <p>Write a prompt. Set the model and its options in one place.</p>
             </div>
             <div class="demo composer-demo">
-              <models-composer id="composer-menu"></models-composer>
+              <div class="prompt-example">
+                <div class="prompt-bar">
+                  <textarea
+                    id="prompt-draft"
+                    aria-label="Prompt"
+                    placeholder="Ask anything…"
+                    rows="1"
+                  ></textarea>
+                  <div class="prompt-actions">
+                    <models-composer id="composer-menu"></models-composer>
+                    <button
+                      type="button"
+                      class="copy-draft"
+                      id="copy-draft"
+                      aria-label="Copy prompt and selection"
+                      title="Copy prompt and selection"
+                      disabled
+                    >
+                      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                        <rect
+                          x="7"
+                          y="7"
+                          width="9"
+                          height="10"
+                          rx="2"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                        />
+                        <path
+                          d="M12 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h2"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <p class="prompt-note" id="prompt-status" role="status">
+                  Local draft · Copy the prompt and selection when ready
+                </p>
+              </div>
             </div>
           </section>
 
@@ -197,19 +244,30 @@
           >
             <div class="panel-copy">
               <h3>Inspector</h3>
-              <p>Search, pricing, evidence, and every enabled model option.</p>
+              <p>Explore the catalog with model details, listed prices, and source evidence.</p>
             </div>
             <div class="demo wide-demo"><models-picker id="advanced-picker"></models-picker></div>
           </section>
         </div>
         <section class="output-panel" aria-labelledby="output-title">
           <header>
-            <h3 id="output-title">SDK selection</h3>
-            <code>ModelSelection</code>
+            <div>
+              <h3 id="output-title">Your selection</h3>
+              <p>Changes here follow you across all four examples.</p>
+            </div>
+            <div class="output-actions">
+              <code>JSON</code><button type="button" id="copy-selection" disabled>Copy JSON</button>
+            </div>
           </header>
-          <pre id="selection-output">Choose a model or option to inspect the value.</pre>
+          <p class="visually-hidden" id="copy-status" role="status"></p>
+          <pre id="selection-output" tabindex="0" aria-label="SDK selection JSON">
+Choose a model or option to inspect the value.</pre>
         </section>
       </section>
+      <footer class="page-footer">
+        <span>Native web components. Any framework.</span
+        ><span>Selections only. No model requests are sent.</span>
+      </footer>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

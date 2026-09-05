@@ -55,7 +55,12 @@ const slugs = [
 
 const entries = await Promise.all(
   slugs.map(async (slug) => {
-    const source = await readFile(resolve(packageRoot, `${slug}.svg`), "utf8");
+    const source = await readFile(resolve(packageRoot, `${slug}-color.svg`), "utf8").catch(
+      (error: NodeJS.ErrnoException) => {
+        if (error.code !== "ENOENT") throw error;
+        return readFile(resolve(packageRoot, `${slug}.svg`), "utf8");
+      },
+    );
     const svg = source
       .replace(/<title>.*?<\/title>/u, "")
       .replace(
