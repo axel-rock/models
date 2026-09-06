@@ -3,13 +3,15 @@
 ## Report a vulnerability
 
 Please report vulnerabilities privately through GitHub's private vulnerability
-reporting for this repository. Do not open a public issue with exploit details,
+reporting at https://github.com/axel-rock/models/security/advisories/new.
+Do not open a public issue with exploit details,
 credentials, or account-scoped provider data.
 
 ## Supported versions
 
-The project is not published yet. Security fixes currently target the latest
-commit on `main`.
+Security fixes target the latest published version of `@axelrock/models` and
+the latest commit on `main`. Upgrade to the latest release to receive fixes.
+Older releases do not receive separate security backports.
 
 ## Credential boundary
 
