@@ -91,7 +91,13 @@ export const vercelGatewayAdapter: ProviderAdapter<"vercel"> = {
       const upstreamId = modelParts.join("/");
       const liveReasoningOptions = vercelReasoningOptions(raw.reasoning_options, source);
       const options = mergeOptions(
-        [...vercelGatewayOptions(), ...upstreamOptions(upstream, upstreamId)],
+        [
+          ...vercelGatewayOptions(),
+          ...upstreamOptions(upstream, upstreamId).filter(
+            (option) => !["speed.mode", "service.tier"].includes(option.key),
+          ),
+          ...vercelSpeedOptions(raw, source),
+        ],
         liveReasoningOptions,
       );
       const model = baseModel({
@@ -179,11 +185,16 @@ export const vercelGatewayAdapter: ProviderAdapter<"vercel"> = {
   mapOptions(model, values) {
     const mapped = mapModelOptions(model, values);
     const autoCaching = values["caching.auto"];
+    const gateway = { ...(mapped.providerOptions.gateway as Record<string, unknown> | undefined) };
+    const speed = values["speed.mode"];
+    if (speed === "standard" || speed === "flex" || speed === "priority") {
+      delete gateway.speed;
+      if (speed !== "standard") gateway.serviceTier = speed;
+    }
+    const normalized = { ...mapped.providerOptions, gateway };
     const upstream = model.id.split("/")[0];
     const providerOptions =
-      upstream === "anthropic"
-        ? mapAnthropicOptions(mapped.providerOptions, values)
-        : mapped.providerOptions;
+      upstream === "anthropic" ? mapAnthropicOptions(normalized, values) : normalized;
     return {
       ...mapped,
       providerOptions:
@@ -202,6 +213,40 @@ export const vercelGatewayAdapter: ProviderAdapter<"vercel"> = {
     } satisfies MappedModelOptions;
   },
 };
+
+function vercelSpeedOptions(
+  raw: {
+    type?: string | undefined;
+    tags?: string[] | undefined;
+    pricing?: Record<string, unknown> | undefined;
+  },
+  source: ReturnType<typeof liveApiSource>,
+): readonly OptionDefinition[] {
+  if (raw.type !== "language") return [];
+  const tiers = raw.pricing?.service_tiers;
+  const values = ["standard"];
+  if (typeof tiers === "object" && tiers !== null && !Array.isArray(tiers)) {
+    for (const tier of ["flex", "priority"]) {
+      if (Object.hasOwn(tiers, tier)) values.push(tier);
+    }
+  }
+  if (raw.tags?.includes("fast")) values.push("fast");
+  if (values.length === 1) return [];
+  return [
+    {
+      key: "speed.mode",
+      kind: "enum",
+      label: "Speed",
+      group: "speed",
+      description:
+        "Flex trades latency for lower cost; priority and fast cost more. Requested tiers depend on provider capacity.",
+      support: capability("supported", [source]),
+      values,
+      defaultValue: "standard",
+      target: { kind: "provider-option", namespace: "gateway", path: ["speed"] },
+    },
+  ];
+}
 
 function mergeOptions(
   documented: readonly OptionDefinition[],
@@ -241,12 +286,6 @@ function mapAnthropicOptions(
   }
   if (typeof values["caching.ttl"] === "string") {
     anthropic.cacheControl = { type: "ephemeral", ttl: values["caching.ttl"] };
-  }
-  if (values["speed.mode"] === "fast") {
-    const betaFeatures = Array.isArray(anthropic.anthropicBeta)
-      ? anthropic.anthropicBeta.filter((value): value is string => typeof value === "string")
-      : [];
-    anthropic.anthropicBeta = [...new Set([...betaFeatures, "fast-mode-2026-02-01"])];
   }
   return { ...providerOptions, anthropic };
 }

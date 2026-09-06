@@ -7,6 +7,53 @@ import { ProviderDiscoveryError } from "./shared.ts";
 import { vercelGatewayAdapter } from "./vercel.ts";
 
 describe("public gateway adapters", () => {
+  it("discovers speed tiers for new models and maps them to Gateway requests", async () => {
+    // Astra was missing flex because the adapter recognized only older model names.
+    const catalog = await vercelGatewayAdapter.discover({
+      fetch: async () =>
+        Response.json({
+          data: [
+            {
+              id: "openai/gpt-6-astra",
+              type: "language",
+              tags: ["fast"],
+              pricing: { service_tiers: { flex: {}, priority: {}, invented: {} } },
+            },
+            {
+              id: "google/future-model",
+              type: "language",
+              pricing: { service_tiers: { flex: {} } },
+            },
+            { id: "anthropic/claude-opus-5", type: "language", tags: ["fast"] },
+            { id: "openai/gpt-5", type: "language" },
+          ],
+        }),
+    });
+    const [astra, google, opus, unsupported] = catalog.models;
+    expect(astra!.options.find((option) => option.key === "speed.mode")).toMatchObject({
+      values: ["standard", "flex", "priority", "fast"],
+    });
+    for (const tier of ["flex", "priority"]) {
+      expect(
+        vercelGatewayAdapter.mapOptions(astra!, { "speed.mode": tier }).providerOptions.gateway,
+      ).toEqual({ serviceTier: tier });
+    }
+    expect(
+      vercelGatewayAdapter.mapOptions(astra!, { "speed.mode": "standard" }).providerOptions.gateway,
+    ).toEqual({});
+    expect(
+      vercelGatewayAdapter.mapOptions(opus!, { "speed.mode": "fast" }).providerOptions,
+    ).toEqual({ gateway: { speed: "fast" }, anthropic: {} });
+    expect(google!.options.find((option) => option.key === "speed.mode")).toMatchObject({
+      values: ["standard", "flex"],
+    });
+    expect(
+      unsupported!.options.some((option) => ["speed.mode", "service.tier"].includes(option.key)),
+    ).toBe(false);
+    expect(() => vercelGatewayAdapter.mapOptions(opus!, { "speed.mode": "flex" })).toThrow();
+    expect(() => vercelGatewayAdapter.mapOptions(astra!, { "speed.mode": "batch" })).toThrow();
+  });
+
   it("normalizes OpenRouter capabilities, prices, and reasoning options", async () => {
     let requestedUrl = "";
     const catalog = await openRouterAdapter.discover({
@@ -93,7 +140,7 @@ describe("public gateway adapters", () => {
     });
     const model = catalog.models[0];
     expect(model?.options.map((option) => option.key)).toEqual(
-      expect.arrayContaining(["caching.auto", "reasoning.effort", "service.tier"]),
+      expect.arrayContaining(["caching.auto", "reasoning.effort"]),
     );
     expect(model?.options.find((option) => option.key === "reasoning.effort")).toMatchObject({
       values: ["low", "high"],
@@ -127,6 +174,7 @@ describe("public gateway adapters", () => {
           {
             id: "anthropic/claude-opus-5",
             name: "Claude Opus 5",
+            tags: ["fast"],
             type: "language",
             reasoning_options: [{ type: "effort", values: ["low", "high"] }],
           },
@@ -149,10 +197,9 @@ describe("public gateway adapters", () => {
       anthropic: {
         thinking: { type: "adaptive" },
         cacheControl: { type: "ephemeral", ttl: "1h" },
-        speed: "fast",
-        anthropicBeta: ["fast-mode-2026-02-01"],
       },
     });
+    expect(mapped.providerOptions.gateway).toEqual({ speed: "fast" });
     expect(mapped.warnings).toEqual([]);
     expect(model?.options.some((option) => option.key === "reasoning.enabled")).toBe(false);
   });
@@ -252,10 +299,7 @@ describe("direct provider adapters", () => {
     expect(
       anthropicAdapter.mapOptions(model!, { "speed.mode": "fast" }).providerOptions,
     ).toMatchObject({
-      anthropic: {
-        speed: "fast",
-        anthropicBeta: ["fast-mode-2026-02-01"],
-      },
+      anthropic: {},
     });
   });
 
