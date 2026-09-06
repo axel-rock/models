@@ -9,7 +9,7 @@ import {
 } from "@models/core";
 import { ModelsHTMLElement } from "./base.ts";
 import { emitSelectionChange, OPTIONS_CHANGE_EVENT } from "./events.ts";
-import { modelGroup, type ModelGrouping } from "./grouping.ts";
+import { modelGroups, type ModelGrouping } from "./grouping.ts";
 import { modelIcon, type ModelIconMode } from "./icons.ts";
 import type { OptionsLayout, VisibleOptionGroup } from "./options.ts";
 import { ModelsOptionsElement } from "./options.ts";
@@ -322,20 +322,11 @@ function renderModels(
       iconMode,
       recommendations,
     );
-  if (grouping === "none") {
-    return models.map(render).join("");
-  }
-  const groups = new Map<string, ModelDescriptor[]>();
-  for (const model of models) {
-    const group = modelGroup(model, grouping) ?? "Other";
-    const values = groups.get(group) ?? [];
-    values.push(model);
-    groups.set(group, values);
-  }
+  const groups = modelGroups(models, grouping, recommendations);
   return [...groups]
     .map(
       ([group, values]) =>
-        `<div data-model-group role="group" aria-label="${escapeHtml(group)}"><div class="group" role="presentation">${escapeHtml(group)}</div>${values.map(render).join("")}</div>`,
+        `<div data-model-group role="group" aria-label="${escapeHtml(group)}">${group === "" ? "" : `<div class="group" role="presentation">${escapeHtml(group)}</div>`}${values.map(render).join("")}</div>`,
     )
     .join("");
 }

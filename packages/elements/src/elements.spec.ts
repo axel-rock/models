@@ -600,7 +600,7 @@ describe("models elements", () => {
     expect(select.shadowRoot?.querySelectorAll('[data-key="openai:second"]')).toHaveLength(1);
   });
 
-  it("shows shared recommendation labels in composer and inspector model lists", () => {
+  it("puts recommended models first without duplicating them in composer and inspector lists", () => {
     const recommendation = [
       { model: "openai:second", label: "Recommended for this app" },
       { model: "second", label: "Lowest input price" },
@@ -621,6 +621,11 @@ describe("models elements", () => {
     expect(
       composer.shadowRoot?.querySelector('[data-model="openai:second"]')?.textContent,
     ).toContain("Lowest input price");
+    expect(composer.shadowRoot?.querySelector(".group")?.textContent).toBe("Recommended");
+    expect(composer.shadowRoot?.querySelector("[data-model]")?.getAttribute("data-model")).toBe(
+      "openai:second",
+    );
+    expect(composer.shadowRoot?.querySelectorAll('[data-model="openai:second"]')).toHaveLength(1);
     const search = composer.shadowRoot?.querySelector<HTMLInputElement>(".search");
     if (search === undefined || search === null) {
       throw new TypeError("Expected a composer search input.");
@@ -639,6 +644,15 @@ describe("models elements", () => {
     expect(picker.shadowRoot?.querySelector('[data-key="openai:second"]')?.textContent).toContain(
       "Lowest input price",
     );
+    expect(picker.shadowRoot?.querySelector(".group")?.textContent).toBe("Recommended");
+    expect(picker.shadowRoot?.querySelector("[data-key]")?.getAttribute("data-key")).toBe(
+      "openai:second",
+    );
+    expect(picker.shadowRoot?.querySelectorAll('[data-key="openai:second"]')).toHaveLength(1);
+    composer.recommendations = [{ model: "missing", label: "Recommended" }];
+    expect(composer.shadowRoot?.textContent).not.toContain("Recommended");
+    picker.recommendations = [];
+    expect(picker.shadowRoot?.textContent).not.toContain("Recommended");
   });
 
   it("groups non-adjacent picker models into one author section", () => {

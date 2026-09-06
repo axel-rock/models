@@ -10,7 +10,7 @@ import {
 } from "@models/core";
 import { ModelsHTMLElement } from "./base.ts";
 import { emitSelectionChange, OPTIONS_CHANGE_EVENT } from "./events.ts";
-import { modelGroup } from "./grouping.ts";
+import { modelGroups } from "./grouping.ts";
 import type { ModelGrouping } from "./grouping.ts";
 import { chevronIcon, modelIcon, type ModelIconMode } from "./icons.ts";
 import { ModelsOptionsElement, type VisibleOptionGroup } from "./options.ts";
@@ -497,22 +497,11 @@ function renderModelChoices(
   iconMode: ModelIconMode,
   recommendations: readonly ModelRecommendation[],
 ): string {
-  if (grouping === "none") {
-    return models
-      .map((model) => renderModelChoice(model, selectedKey, iconMode, recommendations))
-      .join("");
-  }
-  const groups = new Map<string, ModelDescriptor[]>();
-  for (const model of models) {
-    const group = modelGroup(model, grouping) ?? "Other";
-    const values = groups.get(group) ?? [];
-    values.push(model);
-    groups.set(group, values);
-  }
+  const groups = modelGroups(models, grouping, recommendations);
   return [...groups]
     .map(
       ([group, values]) =>
-        `<div class="group">${escapeHtml(group)}</div>${values.map((model) => renderModelChoice(model, selectedKey, iconMode, recommendations)).join("")}`,
+        `${group === "" ? "" : `<div class="group">${escapeHtml(group)}</div>`}${values.map((model) => renderModelChoice(model, selectedKey, iconMode, recommendations)).join("")}`,
     )
     .join("");
 }
