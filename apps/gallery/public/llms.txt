@@ -32,3 +32,11 @@ Icon coverage does not imply a first-party provider integration. Unknown capabil
 
 ## Scope
 The gallery has Minimal, Standalone, Chat and Inspector examples. Follow the selected example and the user's existing application structure. Do not change provider credentials, publish, or deploy as part of copying this UI.
+
+## Runnable starters and guides
+- guides/: integration guide index.
+- guides/sveltekit-model-selector/: SSR-safe SvelteKit composer.
+- guides/openrouter-model-selector/: plain JavaScript OpenRouter composer.
+- guides/ai-sdk-model-settings/: credential-free mapping example for AI SDK 7.
+- guides/ai-provider-icons/: crawlable index of all 46 brand marks.
+- distribution/starters/sveltekit.json, vanilla.json, ai-sdk.json: complete starter files. Preserve paths. The corresponding .tar.gz files are ready to extract.

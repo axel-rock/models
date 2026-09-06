@@ -5,16 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Model selectors, provider catalogs, and brand icons. Copy the code or give your agent a prompt. Built for any framework."
+      content="AI model selectors with live OpenRouter and Vercel catalogs, validated provider settings, and copyable UI. One TypeScript package. MIT licensed."
     />
-    <title>Models · Model selectors for AI apps</title>
+    <title>AI model selector &amp; live provider catalogs | Models</title>
+    <link rel="canonical" href="https://axel-rock.github.io/models/" />
+    <link rel="alternate" type="text/plain" title="Agent instructions" href="./llms.txt" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Models" />
+    <meta property="og:url" content="https://axel-rock.github.io/models/" />
+    <meta property="og:title" content="AI model selectors with live provider catalogs" />
+    <meta
+      property="og:description"
+      content="Discover models, validate provider settings, and copy the UI. One TypeScript package. Your framework, your interface."
+    />
+    <meta
+      property="og:image"
+      content="https://axel-rock.github.io/models/distribution/composer.png"
+    />
+    <meta
+      property="og:image:alt"
+      content="Models chat composer with reasoning and speed settings, and the resulting selection JSON."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Models: AI model selectors with live catalogs" />
+    <meta
+      name="twitter:description"
+      content="Live model discovery, validated provider settings, and copyable UI. TypeScript. MIT."
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": "Models",
+        "description": "AI model selectors with live provider catalogs and validated settings.",
+        "url": "https://axel-rock.github.io/models/",
+        "codeRepository": "https://github.com/axel-rock/models",
+        "programmingLanguage": "TypeScript",
+        "license": "https://github.com/axel-rock/models/blob/main/LICENSE",
+        "runtimePlatform": "Node.js >=22",
+        "sameAs": "https://www.npmjs.com/package/@axelrock/models"
+      }
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#showcase">Skip to examples</a>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Models home">Models</a>
       <nav aria-label="Main navigation">
-        <a href="#showcase">Playground</a><a href="#icons">Icons</a
+        <a href="./guides/">Guides</a><a href="#showcase">Playground</a><a href="#icons">Icons</a
         ><a href="./llms.txt">For agents</a>
       </nav>
       <a
@@ -33,8 +71,8 @@
       <section class="hero" aria-labelledby="hero-title">
         <h1 id="hero-title">Model selectors for AI apps</h1>
         <p>
-          Search models, choose options, and copy the code into your app.<br />Install the model
-          tools. Copy the interface.
+          Live model catalogs. Validated provider settings.<br />Install the model tools. Copy the
+          interface.
         </p>
         <button class="primary-action" type="button" data-copy-prompt>Copy agent prompt</button>
         <p class="action-status" id="product-status" role="status"></p>
@@ -294,6 +332,11 @@ Choose a model or option to inspect the value.</pre>
         </section>
         <section class="package-section" aria-labelledby="packages-title">
           <h2 id="packages-title">Model tools</h2>
+          <p>
+            <a href="./guides/sveltekit-model-selector/">SvelteKit starter</a> ·
+            <a href="./guides/openrouter-model-selector/">JavaScript starter</a> ·
+            <a href="./guides/ai-sdk-model-settings/">AI SDK example</a>
+          </p>
           <p>
             One package, <code>@axelrock/models</code>. Import the parts you need. The UI stays in
             your codebase.

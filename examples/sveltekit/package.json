@@ -1,0 +1,26 @@
+{
+  "name": "models-example-sveltekit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+  },
+  "dependencies": {
+    "@axelrock/models": "0.1.0"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "7.0.1",
+    "@sveltejs/kit": "2.70.3",
+    "@sveltejs/vite-plugin-svelte": "7.3.0",
+    "@types/node": "^24.0.0",
+    "svelte": "5.57.0",
+    "svelte-check": "^4.0.0",
+    "typescript": "6.0.3",
+    "vite": "8.2.2"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}

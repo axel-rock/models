@@ -19,7 +19,8 @@
     "test": "vitest run",
     "typecheck": "pnpm -r typecheck",
     "check:site": "node scripts/checkSite.ts",
-    "prepare:packages": "node scripts/packageArtifacts.ts"
+    "prepare:packages": "node scripts/packageArtifacts.ts",
+    "check:starters": "node scripts/checkStarters.ts"
   },
   "devDependencies": {
     "@ai-sdk/anthropic": "^4.0.46",

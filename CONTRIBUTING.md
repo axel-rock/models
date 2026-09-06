@@ -20,6 +20,9 @@ pnpm install
 pnpm check
 ```
 
+For starter or guide changes, also run `pnpm check:starters` after `pnpm build`.
+This installs the downloaded starters in clean folders and verifies them against npm.
+
 Tests are colocated as `*.spec.ts`. Add a fixture for network-shape changes and
 a compile-time assertion when a public type changes.
 

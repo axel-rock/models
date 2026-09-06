@@ -66,3 +66,26 @@ try {
 console.log(
   `Verified independent browser module, ${files.length} source files, ${icons.length * 2} SVG assets, licenses, and four copyable examples.`,
 );
+
+const siteRoot = resolve(output, "..");
+const guidePaths = [
+  "guides/",
+  "guides/sveltekit-model-selector/",
+  "guides/openrouter-model-selector/",
+  "guides/ai-sdk-model-settings/",
+  "guides/ai-provider-icons/",
+];
+for (const path of guidePaths) {
+  const html = await readFile(resolve(siteRoot, path, "index.html"), "utf8");
+  const url = new URL(path, "https://axel-rock.github.io/models/");
+  assert.ok(html.includes(`rel="canonical" href="${url.href}"`));
+  for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+    const target = new URL(match[1]!, url);
+    if (target.origin !== url.origin || !target.pathname.startsWith("/models/")) continue;
+    const localPath = target.pathname.slice("/models/".length);
+    await readFile(
+      resolve(siteRoot, localPath, target.pathname.endsWith("/") ? "index.html" : "."),
+    );
+  }
+}
+console.log("Verified guide canonicals, navigation, source indexes, and starter download paths.");

@@ -1,13 +1,38 @@
 # Models
 
-Models is a framework-neutral TypeScript library for discovering AI models,
-showing what each model supports, selecting its options, and turning the
-selection into an exact provider request.
+AI model selectors with live provider catalogs and validated settings.
+Install the TypeScript library. Copy the UI into your app.
 
-It starts with OpenRouter, Vercel AI Gateway, OpenAI, Anthropic, and Google AI.
-Groq is intentionally not included.
+[Try the playground](https://axel-rock.github.io/models/) ·
+[npm](https://www.npmjs.com/package/@axelrock/models) ·
+[Runnable starters](https://axel-rock.github.io/models/guides/) ·
+[Copy a composer](https://axel-rock.github.io/models/#panel-composer) ·
+[Provider icons](https://axel-rock.github.io/models/#icons) ·
+[Agent instructions](https://axel-rock.github.io/models/llms.txt)
 
-The public API is in its initial 0.1 release.
+```sh
+npm install @axelrock/models
+```
+
+Discover a live catalog without an API key:
+
+```ts
+import { vercelGatewayAdapter } from "@axelrock/models/providers";
+
+const catalog = await vercelGatewayAdapter.discover({
+  signal: AbortSignal.timeout(10_000),
+});
+console.log(catalog.models.map(({ id, name }) => ({ id, name })));
+```
+
+Models supports OpenRouter, Vercel AI Gateway, OpenAI, Anthropic, and Google AI.
+Use the core with your own UI, or copy the native web components. An optional
+AI SDK 7 bridge maps validated selections into call options. Your app owns
+credentials and sending requests.
+
+The public API is in its initial 0.1 release. Node.js 22 or newer is required.
+
+[![Models composer with live catalog and selected settings](docs/media/composer.png)](https://axel-rock.github.io/models/#panel-composer)
 
 ## Why this exists
 
@@ -65,9 +90,7 @@ icon files. `pnpm prepare:packages` prepares archives only; it never publishes.
 | ---------------------------- | ------------------------------------------------------------------- |
 | `@axelrock/models/core`      | Catalog, evidence, option, validation, price, and drift primitives  |
 | `@axelrock/models/providers` | Five first-party discovery adapters and generated gateway model IDs |
-| `@models/elements`           | Explicitly registered native custom elements                        |
 | `@axelrock/models/ai-sdk`    | Optional bridge for AI SDK model factories and provider options     |
-| `@models/gallery`            | The example browser, not a published package                        |
 
 ## Discover models
 

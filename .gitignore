@@ -7,3 +7,6 @@ coverage/
 *.tsbuildinfo
 
 apps/gallery/public/distribution/
+
+apps/gallery/public/guides/
+.svelte-kit/

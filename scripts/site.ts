@@ -1,3 +1,4 @@
+import { buildGuides } from "./guides.ts";
 import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
 import { resolve, relative, dirname } from "node:path";
 import { createHash } from "node:crypto";
@@ -173,3 +174,9 @@ await writeFile(
     'import { vercelGatewayAdapter } from "@axelrock/models/providers";\nimport { defineModelsElements } from "./ui/index.ts";',
   ),
 );
+
+await writeFile(
+  resolve(output, "composer.png"),
+  await readFile(resolve(root, "docs/media/composer.png")),
+);
+await buildGuides();
