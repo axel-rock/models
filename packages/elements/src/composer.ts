@@ -1,4 +1,5 @@
 import {
+  recommendedSelection,
   validateConstraints,
   validateOptions,
   type ModelCatalog,
@@ -280,8 +281,8 @@ export class ModelsComposerElement extends ModelsHTMLElement {
         if (model === undefined) {
           return;
         }
+        this.#options = recommendedSelection(model, this.#recommendations).options;
         this.#selected = model;
-        this.#options = {};
         const section = this.#section;
         this.#section = undefined;
         this.#query = "";

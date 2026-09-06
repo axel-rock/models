@@ -1,4 +1,5 @@
 import {
+  recommendedSelection,
   validateConstraints,
   validateOptions,
   type ModelCatalog,
@@ -188,8 +189,8 @@ export class ModelsPickerElement extends ModelsHTMLElement {
       button.addEventListener("click", () => {
         const model = models.find((candidate) => candidate.key === button.dataset.key);
         if (model !== undefined) {
+          this.#options = recommendedSelection(model, this.#recommendations).options;
           this.#selected = model;
-          this.#options = {};
           this.render();
           this.#root
             .querySelector<HTMLButtonElement>(`button[data-key="${CSS.escape(model.key)}"]`)

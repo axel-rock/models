@@ -2,6 +2,7 @@ export { diffCatalogs, isCatalogStale, liveApiSource } from "./catalog.ts";
 export type { CatalogDrift, ModelChange } from "./catalog.ts";
 export {
   curateCatalogs,
+  recommendedSelection,
   defineModelPolicy,
   defineModelPolicyFor,
   findLowestPricedModel,

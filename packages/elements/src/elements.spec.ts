@@ -2,6 +2,7 @@
 
 import {
   capability,
+  recommendedSelection,
   unknownCapabilities,
   type ModelCatalog,
   type ModelDescriptor,
@@ -18,6 +19,46 @@ import { ModelsSelectElement } from "./select.ts";
 defineModelsElements();
 
 describe("models elements", () => {
+  it.each(["composer", "picker", "select"] as const)(
+    "applies recommendation options in the %s selector",
+    (kind) => {
+      // Recommendation labels previously reset options to {}, losing the low-cost preset.
+      const element = document.createElement(`models-${kind}`) as
+        | ModelsComposerElement
+        | ModelsPickerElement
+        | ModelsSelectElement;
+      const models = composerCatalog();
+      element.catalogs = [models];
+      element.recommendations = [
+        { model: "openai:first", label: "Fast preset", options: { "speed.mode": "fast" } },
+      ];
+      const changes: ModelSelection[] = [];
+      element.addEventListener(SELECTION_CHANGE_EVENT, (event) =>
+        changes.push((event as CustomEvent<ModelSelection>).detail),
+      );
+      document.body.append(element);
+      if (kind === "composer") {
+        element.shadowRoot?.querySelector<HTMLButtonElement>(".trigger")?.click();
+        element.shadowRoot?.querySelector<HTMLButtonElement>('[data-section="model"]')?.click();
+      } else if (kind === "select") {
+        element.shadowRoot?.querySelector<HTMLInputElement>("input")?.focus();
+      }
+      element.shadowRoot
+        ?.querySelector<HTMLButtonElement>(
+          kind === "composer" ? '[data-model="openai:first"]' : '[data-key="openai:first"]',
+        )
+        ?.click();
+      expect(changes.at(-1)?.options).toEqual({ "speed.mode": "fast" });
+      expect(recommendedSelection(models.models[1]!, element.recommendations).options).toEqual({});
+      expect(() =>
+        recommendedSelection(models.models[0]!, [
+          { model: "openai:first", label: "Invalid", options: { "speed.mode": "invented" } },
+        ]),
+      ).toThrow();
+      element.remove();
+    },
+  );
+
   it("registers explicitly and tolerates duplicate registration", () => {
     expect(customElements.get("models-picker")).toBe(ModelsPickerElement);
     expect(() => defineModelsElements()).not.toThrow();

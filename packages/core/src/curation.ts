@@ -8,7 +8,7 @@ import type {
   PriceRate,
   PriceUnit,
 } from "./types.ts";
-import { validateOptions } from "./options.ts";
+import { selectModel, validateOptions } from "./options.ts";
 
 /** A model label owned by the consuming application. */
 export interface ModelRecommendation {
@@ -18,6 +18,19 @@ export interface ModelRecommendation {
   readonly label: string;
   /** Optional longer explanation for richer interfaces. */
   readonly description?: string;
+  /** Initial options applied when this model is chosen; users can still change them. */
+  readonly options?: OptionValues<ModelDescriptor["options"]>;
+}
+
+/** Resolve an app recommendation without accepting settings the model cannot use. */
+export function recommendedSelection(
+  model: ModelDescriptor,
+  recommendations: readonly ModelRecommendation[],
+) {
+  const recommendation = recommendations.find(
+    (item) => item.model === model.key || item.model === model.id,
+  );
+  return selectModel(model, recommendation?.options ?? {});
 }
 
 /** Rules that narrow a catalog without changing its provider evidence. */
