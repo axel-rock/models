@@ -1,8 +1,8 @@
 import type { ModelDescriptor } from "@models/core";
-import { brandIcons } from "./generated/brandIcons.ts";
+import { brandIcons, monochromeBrandIcons } from "./generated/brandIcons.ts";
 
 /** Which identity a model control uses for its optional brand mark. */
-export type ModelIconMode = "model-maker" | "none";
+export type ModelIconMode = "model-maker" | "monochrome" | "none";
 
 /** Return a reviewed brand mark for a model maker or serving gateway. */
 export function modelIcon(model: ModelDescriptor, mode: ModelIconMode): string {
@@ -10,13 +10,18 @@ export function modelIcon(model: ModelDescriptor, mode: ModelIconMode): string {
     return "";
   }
   const slug = modelMakerSlug(model);
-  return slug === undefined ? "" : (brandIcons[slug] ?? "");
+  return slug === undefined
+    ? ""
+    : ((mode === "monochrome" ? monochromeBrandIcons : brandIcons)[slug] ?? "");
 }
 
 /** Return a reviewed provider mark, using its brand colors when available. */
-export function providerIcon(provider: string): string {
+export function providerIcon(provider: string, mode: ModelIconMode = "model-maker"): string {
+  if (mode === "none") return "";
   const slug = providerSlug(provider);
-  return slug === undefined ? "" : (brandIcons[slug] ?? "");
+  return slug === undefined
+    ? ""
+    : ((mode === "monochrome" ? monochromeBrandIcons : brandIcons)[slug] ?? "");
 }
 
 function modelMakerSlug(model: ModelDescriptor): string | undefined {

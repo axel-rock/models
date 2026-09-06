@@ -1,0 +1,27 @@
+# Models
+
+Framework-neutral model selection UI and provider catalog tools. Copy the code into your project; no Models package installation is needed.
+
+## Files (resolve links relative to this document)
+- distribution/manifest.json: runtime path, SHA-256, source and icon indexes.
+- distribution/models.js: readable, self-contained ES module. Includes validation, icons and licenses. No external imports or runtime dependencies.
+- distribution/source.json: all original TypeScript source files and contents. Preserve their relative paths. TypeScript provider sources depend on Zod; the browser module already bundles Zod.
+- distribution/icons.json: every bundled brand icon, stable ID, display name, color SVG and monochrome SVG paths. Resolve asset paths relative to this index.
+- distribution/minimal.html, distribution/standalone.html, distribution/composer.html, distribution/inspector.html: complete runnable examples. Save one next to models.js as index.html and serve the folder with your existing local web server.
+- distribution/LICENSES.txt: licenses and trademark attribution. Preserve notices when copying.
+
+## Integrate
+1. Inspect the existing application and preserve its framework and styling.
+2. Fetch distribution/models.js and save it locally. Import from the local file, never from this website at runtime. Do not install an unpublished @models package.
+3. In browser code, import defineModelsElements and vercelGatewayAdapter (or openRouterAdapter). Call defineModelsElements(), render a models-composer, models-select or models-picker element, and set its catalogs property to the discovered catalogs. Use a timeout, visible error and retry for discovery.
+4. models-composer and models-picker emit models-selection-change; event.detail contains provider, model and validated options. models-select emits models-model-change with the model descriptor. Listen for models-model-clear if your app allows clearing.
+5. iconMode accepts model-maker (color), monochrome, or none. groupBy accepts author or none. groups controls which option groups are shown.
+6. Test keyboard navigation, mobile width, empty catalogs, and discovery failure. This library selects models; your application owns sending prompts.
+
+## Provider boundaries
+Live public discovery: OpenRouter and Vercel AI Gateway.
+Authenticated discovery: OpenAI, Anthropic, Google AI. Keep their credentials on the server and pass a safe catalog to the browser.
+Icon coverage does not imply a first-party provider integration. Unknown capability data is not evidence of support. Prices retain source and time.
+
+## Scope
+The gallery has Minimal, Standalone, Chat and Inspector examples. Follow the selected example and the user's existing application structure. Do not change provider credentials, publish, or deploy as part of copying this UI.

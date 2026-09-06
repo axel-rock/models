@@ -27,6 +27,24 @@ Models keeps those facts explicit:
 - native custom elements, with no React dependency;
 - deterministic snapshots and a scheduled drift check.
 
+## Copy into your app
+
+The product page offers two files: a readable, self-contained `models.js` ES
+module and an `index.html` example. Save both in the same folder and serve them
+with your local web server. No Models package install is needed. The browser
+module includes validation, icons, and license notices. Keep those notices when
+copying or modifying it.
+
+The page also provides a copyable integration prompt. Its `llms.txt` links to a
+file manifest, complete examples, the original TypeScript source, and an icon
+index. All links work under the configured site base path. Agents can copy the
+browser module directly. If using the original TypeScript provider sources,
+retain their Zod dependency and the source folder structure.
+
+`pnpm dev` and `pnpm build` generate these artifacts from this repository.
+`pnpm check:site`, after a build, checks the standalone module, source imports,
+licenses, examples, and every icon asset. Generated site files are not committed.
+
 ## Packages
 
 | Package             | Purpose                                                             |

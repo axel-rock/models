@@ -27,9 +27,12 @@ import {
 } from "@models/elements";
 import { openRouterAdapter, vercelGatewayAdapter } from "@models/providers";
 import { directProviderExamples } from "./demoCatalogs.ts";
+import { initProduct, setProductExample } from "./product.ts";
+
 import "./style.css";
 
 defineModelsElements();
+initProduct();
 for (const caret of document.querySelectorAll(".source-caret")) caret.innerHTML = chevronIcon;
 
 interface ProviderView {
@@ -46,7 +49,7 @@ type SelectionOptions = OptionValues<ModelDescriptor["options"]>;
 interface GalleryState {
   readonly approved: boolean;
   readonly grouping: boolean;
-  readonly iconMode: boolean;
+  readonly iconMode: ModelIconMode;
   readonly modelKey: string | undefined;
   readonly more: boolean;
   readonly options: SelectionOptions;
@@ -77,8 +80,8 @@ const ALL_OPTION_GROUPS: readonly VisibleOptionGroup[] = [
 ];
 
 const publicResults = await Promise.allSettled([
-  vercelGatewayAdapter.discover(),
-  openRouterAdapter.discover(),
+  vercelGatewayAdapter.discover({ signal: AbortSignal.timeout(10000) }),
+  openRouterAdapter.discover({ signal: AbortSignal.timeout(10000) }),
 ]);
 const liveCatalogs = publicResults.flatMap((result) =>
   result.status === "fulfilled" ? [result.value] : [],
@@ -139,11 +142,14 @@ document.querySelector("#group-models")?.addEventListener("change", (event) => {
   renderSelectedSource(false);
 });
 
-document.querySelector("#show-icons")?.addEventListener("change", (event) => {
-  iconMode =
-    event.target instanceof HTMLInputElement && event.target.checked ? "model-maker" : "none";
-  renderSelectedSource(false);
-});
+for (const radio of document.querySelectorAll<HTMLInputElement>('input[name="logo-style"]')) {
+  radio.addEventListener("change", () => {
+    iconMode = radio.value as ModelIconMode;
+    renderSourceOptions();
+    renderSelectedSource(false);
+    setActiveTab(activeTab);
+  });
+}
 
 const sourceMenu = document.querySelector<HTMLDetailsElement>("#source-menu");
 const customizeMenu = document.querySelector<HTMLDetailsElement>("#customize-menu");
@@ -209,7 +215,10 @@ copyButton?.addEventListener("click", async () => {
 });
 
 restoreGalleryState();
-window.addEventListener("popstate", restoreGalleryState);
+window.addEventListener("popstate", () => {
+  if (!["#top", "#showcase", "#icons", "#agents"].includes(window.location.hash))
+    restoreGalleryState();
+});
 
 function renderSourceOptions(): void {
   renderSourceGroup(
@@ -227,7 +236,7 @@ function renderSourceGroup(selector: string, views: readonly ProviderView[]): vo
   if (options === null) return;
   options.innerHTML = views
     .map((view) => {
-      const icon = providerIcon(view.id);
+      const icon = providerIcon(view.id, iconMode);
       return `<button type="button" data-provider="${escapeHtml(view.id)}" aria-pressed="${view.id === selectedProvider?.id}" title="${escapeHtml(view.name)}">${icon === "" ? "" : `<span class="source-option-icon" aria-hidden="true">${icon}</span>`}<span class="source-option-label">${escapeHtml(view.shortName)}</span></button>`;
     })
     .join("");
@@ -247,7 +256,7 @@ function renderSourceGroup(selector: string, views: readonly ProviderView[]): vo
 function renderSelectedSource(chooseDefault: boolean): void {
   if (selectedProvider === undefined) return;
   const sourceCatalog = withSortedLanguageModels(selectedProvider.catalog);
-  const sourceMark = providerIcon(selectedProvider.id);
+  const sourceMark = providerIcon(selectedProvider.id, iconMode);
   const triggerIcon = document.querySelector("#source-trigger-icon");
   if (triggerIcon !== null) triggerIcon.innerHTML = sourceMark;
   setText("#source-trigger-label", selectedProvider.shortName);
@@ -492,6 +501,7 @@ function isChecked(selector: string): boolean {
 
 function setActiveTab(active: ExampleTab, isNavigation = false): void {
   activeTab = active;
+  setProductExample(active, iconMode);
   for (const tab of document.querySelectorAll<HTMLButtonElement>("button[data-tab]")) {
     tab.setAttribute("aria-selected", String(tab.dataset.tab === active));
     tab.tabIndex = tab.dataset.tab === active ? 0 : -1;
@@ -530,12 +540,14 @@ function restoreGalleryState(): void {
     providerViews.find((view) => view.id === "vercel") ??
     providerViews[0];
   grouping = state.grouping ? "author" : "none";
-  iconMode = state.iconMode ? "model-maker" : "none";
+  iconMode = state.iconMode;
   setChecked("#policy-approved", state.approved);
   setChecked("#policy-reasoning", state.reasoning);
   setChecked("#policy-speed", state.speed);
   setChecked("#policy-more", state.more);
-  setChecked("#show-icons", state.iconMode);
+  for (const radio of document.querySelectorAll<HTMLInputElement>('input[name="logo-style"]')) {
+    radio.checked = radio.value === iconMode;
+  }
   setChecked("#group-models", state.grouping);
   renderSourceOptions();
   renderSelectedSource(true);
@@ -558,7 +570,12 @@ function readGalleryState(): GalleryState {
   return {
     approved: readBoolean(params, "approved", true),
     grouping: readBoolean(params, "groups", true),
-    iconMode: readBoolean(params, "logos", true),
+    iconMode:
+      params.get("logos") === "monochrome"
+        ? "monochrome"
+        : readBoolean(params, "logos", true)
+          ? "model-maker"
+          : "none",
     modelKey: params.get("model") ?? undefined,
     more: readBoolean(params, "more", false),
     options: readOptions(params.get("options")),
@@ -583,7 +600,11 @@ function syncUrlState(mode: "push" | "replace" = "replace"): void {
   setBooleanParam(params, "reasoning", isChecked("#policy-reasoning"), true);
   setBooleanParam(params, "speed", isChecked("#policy-speed"), true);
   setBooleanParam(params, "more", isChecked("#policy-more"), false);
-  setBooleanParam(params, "logos", iconMode === "model-maker", true);
+  setParam(
+    params,
+    "logos",
+    iconMode === "model-maker" ? undefined : iconMode === "none" ? "0" : "monochrome",
+  );
   setBooleanParam(params, "groups", grouping === "author", true);
   url.hash = `panel-${activeTab}`;
   window.history[mode === "push" ? "pushState" : "replaceState"]({}, "", url);

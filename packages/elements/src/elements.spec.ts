@@ -79,6 +79,11 @@ describe("models elements", () => {
     expect(providerIcon("anthropic")).toMatch(/fill="#[0-9a-f]+"/i);
     expect(providerIcon("google")).toMatch(/fill="#[0-9a-f]+"/i);
     expect(providerIcon("unknown-model-company")).toBe("");
+    expect(providerIcon("google", "monochrome")).toContain('fill="currentColor"');
+    expect(providerIcon("google", "monochrome")).not.toMatch(/fill="#/);
+    expect(providerIcon("google", "none")).toBe("");
+    expect(modelIcon(model, "monochrome")).not.toMatch(/fill="#/);
+    expect(modelIcon(model, "none")).toBe("");
   });
 
   it("searches models inside the composer without empty groups", () => {

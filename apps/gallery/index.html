@@ -5,25 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Framework-neutral model selectors backed by provider catalogs."
+      content="Model selectors, provider catalogs, and brand icons. Copy the code or give your agent a prompt. Built for any framework."
     />
-    <title>Models gallery</title>
+    <title>Models · Model selectors for AI apps</title>
   </head>
   <body>
     <a class="skip-link" href="#showcase">Skip to examples</a>
     <header class="site-header">
-      <a class="brand" href="#top">Models</a>
-      <a class="repository-link" href="https://github.com/axel-rock/models"
-        >View on GitHub <span aria-hidden="true">↗</span></a
-      >
+      <a class="brand" href="#top" aria-label="Models home">Models</a>
+      <nav aria-label="Main navigation">
+        <a href="#showcase">Playground</a><a href="#icons">Icons</a
+        ><a href="./llms.txt">For agents</a>
+      </nav>
+      <a
+        class="repository-link"
+        href="https://github.com/axel-rock/models"
+        aria-label="View Models on GitHub"
+        title="View Models on GitHub"
+        ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.03-.71.08-.7.08-.7 1.13.08 1.73 1.16 1.73 1.16 1.01 1.72 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.63 0c2.15-1.46 3.09-1.15 3.09-1.15.61 1.55.23 2.7.11 2.98.73.79 1.16 1.79 1.16 3.02 0 4.33-2.63 5.29-5.14 5.57.4.35.76 1.04.76 2.1v3.09c0 .3.2.65.77.54A11.25 11.25 0 0 0 12 .75Z"
+          /></svg
+      ></a>
     </header>
 
     <main id="top">
-      <section class="hero">
-        <h1>Model selectors</h1>
-        <p>Explore model selection, from a simple dropdown to a prompt bar.</p>
+      <section class="hero" aria-labelledby="hero-title">
+        <h1 id="hero-title">Model selectors for AI apps</h1>
+        <p>
+          Search models, choose options, and copy the code into your app.<br />Native web
+          components. No Models package install.
+        </p>
+        <button class="primary-action" type="button" data-copy-prompt>Copy agent prompt</button>
+        <p class="action-status" id="product-status" role="status"></p>
       </section>
-
       <section class="showcase" id="showcase" aria-labelledby="showcase-title">
         <div class="showcase-heading">
           <h2 class="visually-hidden" id="showcase-title">Selector examples</h2>
@@ -129,10 +144,24 @@
                   <input id="policy-more" type="checkbox" />
                   <span>Advanced</span>
                 </label>
-                <label title="Show model-maker logos in every selector">
-                  <input id="show-icons" type="checkbox" checked />
-                  <span>Brand logos</span>
-                </label>
+                <fieldset class="logo-styles">
+                  <legend>Logos</legend>
+                  <div>
+                    <label
+                      ><input type="radio" name="logo-style" value="model-maker" checked /><span
+                        >Color</span
+                      ></label
+                    >
+                    <label
+                      ><input type="radio" name="logo-style" value="monochrome" /><span
+                        >B&amp;W</span
+                      ></label
+                    >
+                    <label
+                      ><input type="radio" name="logo-style" value="none" /><span>None</span></label
+                    >
+                  </div>
+                </fieldset>
                 <label class="group-toggle" title="Group gateway models by their maker">
                   <input id="group-models" type="checkbox" checked />
                   <span>Groups</span>
@@ -263,10 +292,101 @@
           <pre id="selection-output" tabindex="0" aria-label="SDK selection JSON">
 Choose a model or option to inspect the value.</pre>
         </section>
+        <section class="code-example" id="code-example" aria-labelledby="code-title">
+          <header class="source-heading">
+            <h2 id="code-title">Code</h2>
+            <button type="button" data-copy-prompt>Copy agent prompt</button>
+          </header>
+          <p class="source-help">
+            Save both files in the same folder and serve it locally. No package install.
+          </p>
+          <div class="source-viewer">
+            <div class="source-toolbar">
+              <div role="tablist" aria-label="Source files">
+                <button
+                  type="button"
+                  role="tab"
+                  id="source-index"
+                  aria-controls="source-panel"
+                  aria-selected="true"
+                  data-source="index.html"
+                >
+                  index.html
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  id="source-library"
+                  aria-controls="source-panel"
+                  aria-selected="false"
+                  tabindex="-1"
+                  data-source="models.js"
+                >
+                  models.js
+                </button>
+              </div>
+              <button type="button" id="copy-source" aria-label="Copy index.html">Copy</button>
+            </div>
+            <div id="source-panel" role="tabpanel" aria-labelledby="source-index" tabindex="0">
+              <pre class="source-lines" aria-hidden="true" id="source-lines"></pre>
+              <pre class="source-code"><code id="source-code"></code></pre>
+            </div>
+          </div>
+          <div class="source-footer">
+            <p id="code-copy-status" role="status"></p>
+            <button type="button" id="retry-source" hidden>Retry</button
+            ><a href="./distribution/models.js" download>Download models.js ↗</a
+            ><a href="./distribution/source.json">TypeScript source ↗</a>
+          </div>
+        </section>
+      </section>
+      <section class="provider-section" aria-labelledby="providers-title">
+        <h2 id="providers-title">Providers</h2>
+        <p>
+          OpenRouter and Vercel AI Gateway offer public live catalogs. OpenAI, Anthropic, and Google
+          AI require server-side credentials.
+        </p>
+        <p class="section-note">
+          Keep keys on your server. Models handles selection; your app sends the requests.
+        </p>
+      </section>
+      <section class="icon-section" id="icons" aria-labelledby="icons-title">
+        <h2 id="icons-title">Provider &amp; model icons</h2>
+        <p class="section-note">
+          46 brand marks. Choose a style, then click an icon to copy its SVG.
+        </p>
+        <div class="icon-toolbar">
+          <label class="icon-search"
+            ><span class="visually-hidden">Search icons</span
+            ><input id="icon-search" type="search" placeholder="Find a provider or model maker…"
+          /></label>
+          <fieldset class="icon-variants">
+            <legend class="visually-hidden">Icon catalog style</legend>
+            <label><input type="radio" name="icon-variant" value="color" checked /> Color</label
+            ><label><input type="radio" name="icon-variant" value="monochrome" /> B&amp;W</label>
+          </fieldset>
+          <a href="./distribution/icons.json">JSON index ↗</a>
+        </div>
+        <p id="icon-count" class="section-note" role="status">Loading icons…</p>
+        <div class="icon-grid" id="icon-grid"></div>
+        <p class="section-note" id="icon-status" role="status">Choose an icon to copy its SVG.</p>
+        <p class="section-note">
+          Icon coverage does not imply an adapter integration. Brand artwork from LobeHub.
+          <a href="./distribution/LICENSES.txt">Licenses and attribution ↗</a>
+        </p>
+      </section>
+      <section class="agent-section" id="agents" aria-labelledby="agents-title">
+        <h2 id="agents-title">Give it to your agent</h2>
+        <pre id="agent-prompt" tabindex="0" aria-label="Integration prompt"></pre>
+        <button type="button" class="primary-action" data-copy-prompt>Copy agent prompt</button>
+        <div class="agent-links">
+          <a href="./llms.txt">Agent instructions ↗</a
+          ><a href="./distribution/manifest.json">File index ↗</a
+          ><a href="./distribution/source.json">TypeScript source ↗</a>
+        </div>
       </section>
       <footer class="page-footer">
-        <span>Native web components. Any framework.</span
-        ><span>Selections only. No model requests are sent.</span>
+        <span>Models</span><a href="./distribution/LICENSES.txt">MIT license · Icon attribution</a>
       </footer>
     </main>
     <script type="module" src="/src/main.ts"></script>

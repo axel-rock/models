@@ -42,3 +42,14 @@ function defineIfMissing(
     registry.define(name, constructor);
   }
 }
+
+declare global {
+  /** Native tag names resolve to their Models element types in TypeScript. */
+  interface HTMLElementTagNameMap {
+    "models-select": ModelsSelectElement;
+    "models-options": ModelsOptionsElement;
+    "models-composer": ModelsComposerElement;
+    "models-picker": ModelsPickerElement;
+    "models-price": ModelsPriceElement;
+  }
+}
