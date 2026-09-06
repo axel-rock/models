@@ -93,6 +93,25 @@ importers:
         specifier: workspace:*
         version: link:../core
 
+  packages/models:
+    dependencies:
+      ai:
+        specifier: '>=7 <8'
+        version: 7.0.85(zod@4.5.4)
+      zod:
+        specifier: ^4.3.6
+        version: 4.5.4
+    devDependencies:
+      '@models/ai-sdk':
+        specifier: workspace:*
+        version: link:../ai-sdk
+      '@models/core':
+        specifier: workspace:*
+        version: link:../core
+      '@models/providers':
+        specifier: workspace:*
+        version: link:../providers
+
   packages/providers:
     dependencies:
       '@models/core':

@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
 import { resolve, relative, dirname } from "node:path";
 import { createHash } from "node:crypto";
 import { build } from "vite";
+import { packageArtifacts } from "./packageArtifacts.ts";
 import { exampleDocument } from "../apps/gallery/src/examples.ts";
 import { brandIcons, monochromeBrandIcons } from "../packages/elements/src/generated/brandIcons.ts";
 
@@ -123,6 +124,8 @@ await writeFile(
         inspector: "inspector.html",
       },
       source: "source.json",
+      uiSource: "ui-source.json",
+      packages: "packages/index.json",
       icons: "icons.json",
       license: "LICENSES.txt",
     },
@@ -138,3 +141,35 @@ for (const tab of ["minimal", "standalone", "composer", "inspector"] as const) {
 function standaloneSvg(svg: string): string {
   return svg.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" ');
 }
+
+await packageArtifacts(resolve(output, "packages"));
+const uiFiles = files
+  .filter((file) => file.path.startsWith("source/packages/elements/src/"))
+  .map((file) => ({
+    path: file.path.replace("source/packages/elements/src/", "ui/"),
+    content: file.content.replaceAll(
+      /"(?:\.\.\/)+core\/src\/index\.ts"/g,
+      '"@axelrock/models/core"',
+    ),
+  }));
+for (const file of uiFiles) {
+  await mkdir(dirname(resolve(output, file.path)), { recursive: true });
+  await writeFile(resolve(output, file.path), file.content);
+}
+await writeFile(
+  resolve(output, "ui-source.json"),
+  JSON.stringify({
+    description:
+      "Copy these UI source files, preserving paths. They import @axelrock/models/core. Use a TypeScript-capable bundler. Keep the license notices.",
+    license: "LICENSES.txt",
+    files: uiFiles,
+  }),
+);
+
+await writeFile(
+  resolve(output, "package-example.html"),
+  exampleDocument("composer").replace(
+    'import { defineModelsElements, vercelGatewayAdapter } from "./models.js";',
+    'import { vercelGatewayAdapter } from "@axelrock/models/providers";\nimport { defineModelsElements } from "./ui/index.ts";',
+  ),
+);

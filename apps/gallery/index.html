@@ -33,8 +33,8 @@
       <section class="hero" aria-labelledby="hero-title">
         <h1 id="hero-title">Model selectors for AI apps</h1>
         <p>
-          Search models, choose options, and copy the code into your app.<br />Native web
-          components. No Models package install.
+          Search models, choose options, and copy the code into your app.<br />Install the model
+          tools. Copy the interface.
         </p>
         <button class="primary-action" type="button" data-copy-prompt>Copy agent prompt</button>
         <p class="action-status" id="product-status" role="status"></p>
@@ -292,13 +292,45 @@
           <pre id="selection-output" tabindex="0" aria-label="SDK selection JSON">
 Choose a model or option to inspect the value.</pre>
         </section>
+        <section class="package-section" aria-labelledby="packages-title">
+          <h2 id="packages-title">Model tools</h2>
+          <p>
+            One package, <code>@axelrock/models</code>. Import the parts you need. The UI stays in
+            your codebase.
+          </p>
+          <dl class="package-list">
+            <div>
+              <dt><code>@axelrock/models/core</code></dt>
+              <dd>Types, policies, options, and pricing.</dd>
+            </div>
+            <div>
+              <dt><code>@axelrock/models/providers</code></dt>
+              <dd>Live catalogs and provider-specific mappings.</dd>
+            </div>
+            <div>
+              <dt><code>@axelrock/models/ai-sdk</code></dt>
+              <dd>Optional AI SDK integration.</dd>
+            </div>
+          </dl>
+          <p class="section-note">Install once, then use the imports above:</p>
+          <pre class="package-command" tabindex="0">npm install @axelrock/models</pre>
+          <div class="agent-links">
+            <a href="https://www.npmjs.com/package/@axelrock/models">View on npm ↗</a>
+          </div>
+          <p class="section-note">
+            Copy the <a href="./distribution/ui-source.json">UI source folder</a> into your
+            TypeScript app. It imports <code>@axelrock/models/core</code>, so provider updates do
+            not replace your UI customizations.
+            <a href="./distribution/package-example.html" download>Package example ↗</a>
+          </p>
+        </section>
         <section class="code-example" id="code-example" aria-labelledby="code-title">
           <header class="source-heading">
-            <h2 id="code-title">Code</h2>
+            <h2 id="code-title">Standalone example</h2>
             <button type="button" data-copy-prompt>Copy agent prompt</button>
           </header>
           <p class="source-help">
-            Save both files in the same folder and serve it locally. No package install.
+            For a quick start without packages, save both files together and serve them locally.
           </p>
           <div class="source-viewer">
             <div class="source-toolbar">

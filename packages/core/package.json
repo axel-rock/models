@@ -1,6 +1,7 @@
 {
   "name": "@models/core",
   "version": "0.1.0",
+  "private": true,
   "description": "Provider-neutral model catalogs, capabilities, options, pricing, and drift detection.",
   "keywords": [
     "ai",
@@ -26,10 +27,6 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     }
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
   },
   "scripts": {
     "build": "tsdown",

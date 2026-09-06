@@ -15,7 +15,7 @@ const base = new URL(import.meta.env.BASE_URL, window.location.origin);
 const asset = (path: string) => new URL(path, base).href;
 
 function prompt(): string {
-  return `Add the Models ${activeExample === "composer" ? "chat composer" : activeExample} to my app. Read ${asset("llms.txt")} for source files and integration instructions. Copy the library locally; do not install a Models package. Use ${activeIconMode === "model-maker" ? "color" : activeIconMode === "none" ? "no" : "monochrome"} logos. Keep my framework and visual style. Include loading, retry, and keyboard behavior. Keep provider keys on the server.`;
+  return `Add the Models ${activeExample === "composer" ? "chat composer" : activeExample} to my app. Read ${asset("llms.txt")} for source files and integration instructions. Use @axelrock/models with subpath imports (/core, /providers, /ai-sdk) and copy the UI source locally. Install it with npm install @axelrock/models. Install ai@^7 only if using the AI SDK bridge. Keep models.js as an optional standalone alternative. Use ${activeIconMode === "model-maker" ? "color" : activeIconMode === "none" ? "no" : "monochrome"} logos. Keep my framework and visual style. Include loading, retry, and keyboard behavior. Keep provider keys on the server.`;
 }
 
 /** Keep the copyable handoff in sync with the visible component. */

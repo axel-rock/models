@@ -1,6 +1,7 @@
 {
   "name": "@models/ai-sdk",
   "version": "0.1.0",
+  "private": true,
   "description": "A small bridge from Models selections to AI SDK calls.",
   "keywords": [
     "ai",
@@ -26,10 +27,6 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     }
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
   },
   "scripts": {
     "build": "tsdown",

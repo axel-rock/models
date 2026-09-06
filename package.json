@@ -9,7 +9,7 @@
     "catalog:check": "pnpm build && node scripts/catalog.ts && node scripts/overlays.ts && node scripts/audit.ts",
     "catalog:refresh": "pnpm build && node scripts/catalog.ts --write && node scripts/overlays.ts --write && node scripts/audit.ts --write && oxfmt catalog/schema-inventory.json",
     "check": "pnpm format:check && pnpm icons:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm check:packages && pnpm check:site",
-    "check:packages": "publint packages/core --strict && publint packages/providers --strict && publint packages/elements --strict && publint packages/ai-sdk --strict && node scripts/checkPackages.ts",
+    "check:packages": "publint packages/models --strict && node scripts/checkPackages.ts",
     "dev": "pnpm --filter @models/gallery dev",
     "format": "oxfmt .",
     "format:check": "oxfmt --check .",
@@ -18,7 +18,8 @@
     "lint": "oxlint --type-aware --deny-warnings .",
     "test": "vitest run",
     "typecheck": "pnpm -r typecheck",
-    "check:site": "node scripts/checkSite.ts"
+    "check:site": "node scripts/checkSite.ts",
+    "prepare:packages": "node scripts/packageArtifacts.ts"
   },
   "devDependencies": {
     "@ai-sdk/anthropic": "^4.0.46",

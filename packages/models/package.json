@@ -1,0 +1,69 @@
+{
+  "name": "@axelrock/models",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Provider-neutral model catalogs, discovery, validation, and optional AI SDK integration.",
+  "keywords": [
+    "ai",
+    "catalog",
+    "models",
+    "typescript"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axel-rock/models.git",
+    "directory": "packages/models"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/core.d.mts",
+      "import": "./dist/core.mjs"
+    },
+    "./core": {
+      "types": "./dist/core.d.mts",
+      "import": "./dist/core.mjs"
+    },
+    "./providers": {
+      "types": "./dist/providers.d.mts",
+      "import": "./dist/providers.mjs"
+    },
+    "./ai-sdk": {
+      "types": "./dist/ai-sdk.d.mts",
+      "import": "./dist/ai-sdk.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsdown"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@models/ai-sdk": "workspace:*",
+    "@models/core": "workspace:*",
+    "@models/providers": "workspace:*"
+  },
+  "peerDependencies": {
+    "ai": ">=7 <8"
+  },
+  "peerDependenciesMeta": {
+    "ai": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

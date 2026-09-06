@@ -1,6 +1,7 @@
 {
   "name": "@models/elements",
   "version": "0.1.0",
+  "private": true,
   "description": "Framework-neutral custom elements for model selection and options.",
   "keywords": [
     "ai",
@@ -27,10 +28,6 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     }
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
   },
   "scripts": {
     "build": "tsdown",

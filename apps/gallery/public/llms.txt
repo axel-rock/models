@@ -1,6 +1,6 @@
 # Models
 
-Framework-neutral model selection UI and provider catalog tools. Copy the code into your project; no Models package installation is needed.
+Framework-neutral model selection UI and provider catalog tools. Install @axelrock/models and copy the UI. Run npm install @axelrock/models.
 
 ## Files (resolve links relative to this document)
 - distribution/manifest.json: runtime path, SHA-256, source and icon indexes.
@@ -10,9 +10,16 @@ Framework-neutral model selection UI and provider catalog tools. Copy the code i
 - distribution/minimal.html, distribution/standalone.html, distribution/composer.html, distribution/inspector.html: complete runnable examples. Save one next to models.js as index.html and serve the folder with your existing local web server.
 - distribution/LICENSES.txt: licenses and trademark attribution. Preserve notices when copying.
 
-## Integrate
+## Recommended package integration
+- distribution/packages/index.json lists the single @axelrock/models package archive. Resolve its URL relative to that index. For normal integration, run npm install @axelrock/models. The archive is available for local testing. Import @axelrock/models/core, @axelrock/models/providers, or @axelrock/models/ai-sdk as needed. The root import is equivalent to /core.
+- distribution/ui-source.json lists the complete UI folder. Copy every file and preserve paths. These files import @axelrock/models/core; use a TypeScript-capable bundler. They do not embed model logic.
+- distribution/package-example.html demonstrates imports from @axelrock/models/providers and local ui/index.ts. Save it with the UI folder in a bundler project.
+- AI SDK bridge consumers supply AI SDK >=7 <8 and their chosen provider adapters.
+- Preserve LICENSES.txt. Do not publish or change registry credentials as part of integration.
+
+## Standalone alternative
 1. Inspect the existing application and preserve its framework and styling.
-2. Fetch distribution/models.js and save it locally. Import from the local file, never from this website at runtime. Do not install an unpublished @models package.
+2. Fetch distribution/models.js and save it locally. Import from the local file, never from this website at runtime. The standalone file needs no package installation.
 3. In browser code, import defineModelsElements and vercelGatewayAdapter (or openRouterAdapter). Call defineModelsElements(), render a models-composer, models-select or models-picker element, and set its catalogs property to the discovered catalogs. Use a timeout, visible error and retry for discovery.
 4. models-composer and models-picker emit models-selection-change; event.detail contains provider, model and validated options. models-select emits models-model-change with the model descriptor. Listen for models-model-clear if your app allows clearing.
 5. iconMode accepts model-maker (color), monochrome, or none. groupBy accepts author or none. groups controls which option groups are shown.

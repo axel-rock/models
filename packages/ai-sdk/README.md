@@ -1,4 +1,4 @@
-# @models/ai-sdk
+# @axelrock/models/ai-sdk
 
 A small optional bridge from a validated Models selection to call options that
 can be spread into AI SDK `generateText` or `streamText`. See the

@@ -2,13 +2,16 @@
 
 Models has four layers.
 
-1. `@models/core` owns provider-neutral data and validation. It has no network,
+The public release is one package, `@axelrock/models`, with subpath exports.
+The source workspaces remain private implementation boundaries.
+
+1. `@axelrock/models/core` owns provider-neutral data and validation. It has no network,
    DOM, framework, or AI SDK dependency.
-2. `@models/providers` translates provider model-list responses into the core
+2. `@axelrock/models/providers` translates provider model-list responses into the core
    catalog and maps selected options back to exact request paths.
 3. `@models/elements` renders core data with native custom elements. Element
    registration is explicit and safe to call more than once.
-4. Integration packages such as `@models/ai-sdk` adapt a validated selection to
+4. Optional integrations such as `@axelrock/models/ai-sdk` adapt a validated selection to
    another library without changing the core.
 
 ## Two kinds of type safety

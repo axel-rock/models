@@ -7,8 +7,7 @@ selection into an exact provider request.
 It starts with OpenRouter, Vercel AI Gateway, OpenAI, Anthropic, and Google AI.
 Groq is intentionally not included.
 
-The repository is private while its public API settles. The packages have not
-been published.
+The public API is in its initial 0.1 release.
 
 ## Why this exists
 
@@ -27,40 +26,55 @@ Models keeps those facts explicit:
 - native custom elements, with no React dependency;
 - deterministic snapshots and a scheduled drift check.
 
-## Copy into your app
+## Install the model tools. Copy the interface.
 
-The product page offers two files: a readable, self-contained `models.js` ES
-module and an `index.html` example. Save both in the same folder and serve them
-with your local web server. No Models package install is needed. The browser
-module includes validation, icons, and license notices. Keep those notices when
-copying or modifying it.
+Use `@axelrock/models/core` for types, validation, policies, and prices, plus
+`@axelrock/models/providers` for provider discovery and request mappings.
+`@axelrock/models/ai-sdk` is an optional bridge for AI SDK 7 applications.
+These are subpath imports from one package, `@axelrock/models`, with one version.
+The root import also exports core. Provider code is loaded only through `/providers`.
+AI SDK is an optional peer dependency, required only when using `/ai-sdk`.
+The package contains no UI or bundled brand icons.
 
-The page also provides a copyable integration prompt. Its `llms.txt` links to a
-file manifest, complete examples, the original TypeScript source, and an icon
-index. All links work under the configured site base path. Agents can copy the
-browser module directly. If using the original TypeScript provider sources,
-retain their Zod dependency and the source folder structure.
+Install the package:
 
-`pnpm dev` and `pnpm build` generate these artifacts from this repository.
-`pnpm check:site`, after a build, checks the standalone module, source imports,
-licenses, examples, and every icon asset. Generated site files are not committed.
+```sh
+npm install @axelrock/models
+```
 
-## Packages
+The gallery's `distribution/ui-source.json` provides the UI source files with
+imports from `@axelrock/models/core`. Copy all files, preserve their paths, and use a
+TypeScript-capable bundler. Import `defineModelsElements` from your local
+`ui/index.ts`. Import provider adapters from `@axelrock/models/providers`.
+Keep the license notices. The internal `@models/elements` workspace package is
+private and is not part of the release set.
 
-| Package             | Purpose                                                             |
-| ------------------- | ------------------------------------------------------------------- |
-| `@models/core`      | Catalog, evidence, option, validation, price, and drift primitives  |
-| `@models/providers` | Five first-party discovery adapters and generated gateway model IDs |
-| `@models/elements`  | Explicitly registered native custom elements                        |
-| `@models/ai-sdk`    | Optional bridge for AI SDK model factories and provider options     |
-| `@models/gallery`   | The example browser, not a published package                        |
+For a no-install experiment, the gallery still offers `models.js` and a complete
+HTML example. That standalone file includes logic, UI, icons, and dependencies;
+replace it as a whole to update it. The package path lets you update logic
+without overwriting customized UI source. Review package changes and test your
+integration when updating.
+
+`pnpm check` packs and installs the release package in a temporary consumer,
+checks exports and real discovery parsing, and verifies the site's source and
+icon files. `pnpm prepare:packages` prepares archives only; it never publishes.
+
+## Imports
+
+| Import                       | Purpose                                                             |
+| ---------------------------- | ------------------------------------------------------------------- |
+| `@axelrock/models/core`      | Catalog, evidence, option, validation, price, and drift primitives  |
+| `@axelrock/models/providers` | Five first-party discovery adapters and generated gateway model IDs |
+| `@models/elements`           | Explicitly registered native custom elements                        |
+| `@axelrock/models/ai-sdk`    | Optional bridge for AI SDK model factories and provider options     |
+| `@models/gallery`            | The example browser, not a published package                        |
 
 ## Discover models
 
 Gateway discovery needs no key:
 
 ```ts
-import { openRouterAdapter, vercelGatewayAdapter } from "@models/providers";
+import { openRouterAdapter, vercelGatewayAdapter } from "@axelrock/models/providers";
 
 const [openRouter, gateway] = await Promise.all([
   openRouterAdapter.discover(),
@@ -72,7 +86,7 @@ Direct providers need server-side credentials because their list endpoints are
 authenticated:
 
 ```ts
-import { anthropicAdapter } from "@models/providers";
+import { anthropicAdapter } from "@axelrock/models/providers";
 
 const catalog = await anthropicAdapter.discover({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -85,8 +99,8 @@ then send only the catalog fields your browser needs.
 ## Select and map options
 
 ```ts
-import { selectModel } from "@models/core";
-import { openAiAdapter } from "@models/providers";
+import { selectModel } from "@axelrock/models/core";
+import { openAiAdapter } from "@axelrock/models/providers";
 
 const catalog = await openAiAdapter.discover({ apiKey: process.env.OPENAI_API_KEY });
 const model = catalog.models.find((item) => item.id === "gpt-5.6-luna");
@@ -158,7 +172,7 @@ import {
   findLowestPricedModel,
   resolveModelPolicy,
   resolvePolicyDefaults,
-} from "@models/core";
+} from "@axelrock/models/core";
 
 const policy = defineModelPolicy({
   models: {

@@ -1053,3 +1053,40 @@ h2 {
     display: none;
   }
 }
+
+.package-section {
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.package-section > p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+.package-list {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+.package-list > div {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.package-list dt {
+  min-width: 240px;
+  font-size: 12px;
+}
+.package-list dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.package-command {
+  overflow: auto;
+  padding: 16px;
+  background: var(--preview);
+  font:
+    12px/1.7 ui-monospace,
+    monospace;
+  border-radius: 6px;
+}
