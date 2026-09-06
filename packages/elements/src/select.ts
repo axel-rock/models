@@ -1,6 +1,11 @@
-import type { ModelCatalog, ModelDescriptor, ModelRecommendation } from "@models/core";
+import {
+  recommendedSelection,
+  type ModelCatalog,
+  type ModelDescriptor,
+  type ModelRecommendation,
+} from "@models/core";
 import { ModelsHTMLElement } from "./base.ts";
-import { emitModelChange, emitModelClear } from "./events.ts";
+import { emitModelChange, emitModelClear, emitSelectionChange } from "./events.ts";
 import { modelGroup, type ModelGrouping } from "./grouping.ts";
 import { chevronIcon, modelIcon, type ModelIconMode } from "./icons.ts";
 import { elementStyles } from "./styles.ts";
@@ -243,6 +248,7 @@ export class ModelsSelectElement extends ModelsHTMLElement {
   }
 
   private select(suggestion: ModelSuggestion): void {
+    const selection = recommendedSelection(suggestion.model, this.#recommendations);
     const hasChanged = this.#value !== suggestion.model.key;
     this.#value = suggestion.model.key;
     this.#isOpen = false;
@@ -252,6 +258,7 @@ export class ModelsSelectElement extends ModelsHTMLElement {
     if (hasChanged) {
       emitModelChange(this, suggestion.model);
     }
+    emitSelectionChange(this, selection);
     this.focusClosedInput();
   }
 
