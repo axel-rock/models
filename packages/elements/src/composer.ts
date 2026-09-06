@@ -180,7 +180,7 @@ export class ModelsComposerElement extends ModelsHTMLElement {
         :host { display: inline-block; max-width: 100%; }
         button { border: 0; }
         .composer { position: relative; width: max-content; max-width: 100%; }
-        .trigger { display: flex; align-items: center; justify-content: center; gap: 6px; width: max-content; max-width: 100%; min-height: var(--models-control-height, 36px); border: 1px solid var(--models-border, #b8b8b2); border-radius: var(--models-radius, 7px); padding: 4px 8px; background: var(--models-surface, #fff); font-size: var(--models-font-size, 13px); font-weight: 500; cursor: pointer; }
+        .trigger { display: flex; align-items: center; justify-content: center; gap: 6px; width: max-content; max-width: 100%; min-height: var(--models-control-height, 36px); border: 1px solid transparent; border-radius: var(--models-radius, 7px); padding: 4px 8px; background: transparent; font-size: var(--models-font-size, 13px); font-weight: 500; cursor: pointer; }
         .trigger:hover { background: var(--models-hover, #f5f5f5); }
         .trigger-icon { width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .trigger-icon svg { display: block; width: 100%; height: 100%; }
