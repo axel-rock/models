@@ -48,7 +48,7 @@
     "build": "tsdown"
   },
   "dependencies": {
-    "zod": "^4.3.6"
+    "zod": "^4.6.2"
   },
   "devDependencies": {
     "@models/ai-sdk": "workspace:*",
