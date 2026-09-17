@@ -108,6 +108,92 @@ describe("models elements", () => {
     expect(composer.shadowRoot?.querySelector('[role="option"]')).toBeNull();
   });
 
+  it("offers a region row with the zone's price change and maps the pick into the selection", () => {
+    const base = composerCatalog();
+    const [primary] = base.models;
+    const source = base.source;
+    const composer = document.createElement("models-composer") as ModelsComposerElement;
+    composer.catalogs = [
+      {
+        ...base,
+        models: [
+          {
+            ...primary!,
+            prices: [{ unit: "input-token", usd: "0.000005", per: 1, evidence: [source] }],
+            routes: [
+              {
+                id: "region:eu",
+                region: "eu",
+                prices: [{ unit: "input-token", usd: "0.0000055", per: 1, evidence: [source] }],
+                sources: [source],
+              },
+              { id: "region:us", region: "us", prices: [], sources: [source] },
+            ],
+            options: [
+              ...primary!.options,
+              {
+                key: "routing.region",
+                kind: "enum",
+                label: "Region",
+                description: "Keep the call inside one zone.",
+                group: "routing",
+                support: capability("supported", [source]),
+                values: ["eu", "us"],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    document.body.append(composer);
+    composer.shadowRoot?.querySelector<HTMLButtonElement>(".trigger")?.click();
+    const row = composer.shadowRoot?.querySelector<HTMLButtonElement>('[data-section="region"]');
+    expect(row?.textContent).toContain("Region");
+    row?.click();
+    const eu = composer.shadowRoot?.querySelector<HTMLButtonElement>(
+      '[data-option="routing.region"][data-value="eu"]',
+    );
+    expect(eu?.textContent).toContain("EU");
+    expect(eu?.textContent).toContain("+10%");
+    expect(
+      composer.shadowRoot?.querySelector('[data-option="routing.region"][data-value="us"]')
+        ?.textContent,
+    ).not.toContain("%");
+    eu?.click();
+    expect(composer.value?.options).toEqual({ "routing.region": "eu" });
+    expect(composer.shadowRoot?.querySelector(".summary")?.textContent).toContain("EU");
+    composer.groups = ["reasoning", "speed"];
+    composer.shadowRoot?.querySelector<HTMLButtonElement>(".trigger")?.click();
+    expect(composer.shadowRoot?.querySelector('[data-section="region"]')).toBeNull();
+    composer.remove();
+  });
+
+  it("lists unavailable models last with their reason and keeps them out of reach", () => {
+    const base = composerCatalog();
+    const composer = document.createElement("models-composer") as ModelsComposerElement;
+    composer.catalogs = [{ ...base, models: [base.models[0]!] }];
+    composer.unavailable = [{ model: base.models[1]!, reason: "Not offered in the EU" }];
+    document.body.append(composer);
+    composer.shadowRoot?.querySelector<HTMLButtonElement>(".trigger")?.click();
+    composer.shadowRoot?.querySelector<HTMLButtonElement>('[data-section="model"]')?.click();
+    const groups = [...(composer.shadowRoot?.querySelectorAll(".group") ?? [])].map(
+      (group) => group.textContent,
+    );
+    expect(groups.at(-1)).toBe("Unavailable");
+    const choice = composer.shadowRoot?.querySelector<HTMLButtonElement>(".choice.unavailable");
+    expect(choice?.textContent).toContain("Not offered in the EU");
+    expect(choice?.disabled).toBe(true);
+    expect(choice?.dataset.model).toBeUndefined();
+    const search = composer.shadowRoot?.querySelector<HTMLInputElement>(".search");
+    search!.value = base.models[1]!.name.toLocaleLowerCase();
+    search!.dispatchEvent(new Event("input"));
+    expect(composer.shadowRoot?.querySelector('[data-model="openai:first"]')).toBeNull();
+    expect(composer.shadowRoot?.querySelector(".choice.unavailable")).not.toBeNull();
+    expect(composer.shadowRoot?.querySelector(".empty")).toBeNull();
+    expect(composer.value?.model.key).toBe("openai:first");
+    composer.remove();
+  });
+
   it("uses colored brand marks without fabricating unknown brands", () => {
     const model = catalog("anthropic").models[0];
     if (model === undefined) {

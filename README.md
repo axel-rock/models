@@ -146,6 +146,13 @@ A catalog entry whose provider ID includes `fast` is a distinct model or route.
 A `speed.mode` or `service.tier` control is a runtime option on one model. The
 library preserves that difference and never invents one from the other.
 
+Where AI Gateway can pin a model to a zone, the model carries a `routing.region`
+option (`eu`, `us`) and one route per zone with the zone's prices. The composer
+shows it as a "Region" row with the price change; a host that does not want
+the choice leaves `routing` out of `groups`. Models without a zone, including
+every embedding and image model, get no option, because the gateway would
+refuse the pin rather than reroute.
+
 The optional AI SDK bridge returns `callOptions` that can be spread directly:
 
 ```ts
@@ -176,6 +183,14 @@ picker.addEventListener("models-selection-change", (event) => {
 `models-options-change` emits every option draft so a host can save work in
 progress. `models-selection-change` emits only after all option and cross-field
 rules pass.
+
+A host that withholds some models can still explain them. `composer.unavailable`
+takes `{ model, reason }` pairs; the composer lists them last, greyed and
+unselectable, and a search for one shows the reason instead of an empty list:
+
+```ts
+composer.unavailable = excluded.map((model) => ({ model, reason: "Not available in the EU" }));
+```
 
 Use `<models-select>` for a compact branded combobox, `<models-options>` for a
 detail panel, `<models-composer>` for progressive disclosure, `<models-price>`

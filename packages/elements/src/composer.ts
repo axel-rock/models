@@ -1,4 +1,5 @@
 import {
+  pricePerMillion,
   recommendedSelection,
   validateConstraints,
   validateOptions,
@@ -17,7 +18,13 @@ import { chevronIcon, modelIcon, type ModelIconMode } from "./icons.ts";
 import { ModelsOptionsElement, type VisibleOptionGroup } from "./options.ts";
 import { elementStyles } from "./styles.ts";
 
-type ComposerSection = "advanced" | "effort" | "model" | "speed";
+type ComposerSection = "advanced" | "effort" | "model" | "region" | "speed";
+
+/** A model the host chose not to offer, listed last with the reason. */
+export interface UnavailableModel {
+  readonly model: ModelDescriptor;
+  readonly reason: string;
+}
 
 /** A compact composer control that reveals model details only when opened. */
 export class ModelsComposerElement extends ModelsHTMLElement {
@@ -30,6 +37,7 @@ export class ModelsComposerElement extends ModelsHTMLElement {
   #groupBy: ModelGrouping = "author";
   #iconMode: ModelIconMode = "none";
   #recommendations: readonly ModelRecommendation[] = [];
+  #unavailable: readonly UnavailableModel[] = [];
   #groups: readonly VisibleOptionGroup[] = [
     "reasoning",
     "speed",
@@ -142,6 +150,19 @@ export class ModelsComposerElement extends ModelsHTMLElement {
     this.render();
   }
 
+  /**
+   * Models that cannot be chosen right now, shown after the catalog with a
+   * short reason so a search for one explains itself instead of coming up empty.
+   */
+  get unavailable(): readonly UnavailableModel[] {
+    return this.#unavailable;
+  }
+
+  set unavailable(value: readonly UnavailableModel[]) {
+    this.#unavailable = value;
+    this.render();
+  }
+
   /** Option groups available inside the composer. Use an empty list for model-only mode. */
   get groups(): readonly VisibleOptionGroup[] {
     return this.#groups;
@@ -174,6 +195,10 @@ export class ModelsComposerElement extends ModelsHTMLElement {
       selected === undefined || !this.#groups.includes("speed")
         ? undefined
         : findOption(selected, ["speed.mode", "service.tier"]);
+    const region =
+      selected === undefined || !this.#groups.includes("routing")
+        ? undefined
+        : findOption(selected, ["routing.region"]);
     this.#root.innerHTML = `
       <style>${elementStyles}</style>
       <style>
@@ -211,6 +236,8 @@ export class ModelsComposerElement extends ModelsHTMLElement {
         .choice { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 7px; width: 100%; min-height: var(--models-control-height, 36px); border-radius: 7px; padding: 5px 8px; background: transparent; text-align: left; cursor: pointer; }
         .choice.no-icon { grid-template-columns: minmax(0, 1fr) auto; }
         .choice:hover { background: var(--models-hover, #f5f5f5); }
+        .choice.unavailable { color: var(--models-muted, #646464); cursor: default; }
+        .choice.unavailable:hover { background: transparent; }
         .choice-icon { width: 16px; height: 16px; color: var(--models-muted, #646464); }
         .choice-icon svg { display: block; width: 100%; height: 100%; }
         .choice-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -220,10 +247,10 @@ export class ModelsComposerElement extends ModelsHTMLElement {
         .empty { margin: 18px 10px; color: var(--models-muted, #646464); text-align: center; }
       </style>
       <div class="composer" part="composer">
-        ${this.#isOpen ? `<div class="popover" part="popover" role="dialog" aria-label="Model settings">${this.#section === undefined ? renderMainPanel(selected, effort, speed, this.#options, this.#section, this.#groups) : renderSubmenu(this.#section, this.#catalogs, selected, effort, speed, this.#options, this.#query, this.#groupBy, this.#iconMode, this.#recommendations)}</div>` : ""}
+        ${this.#isOpen ? `<div class="popover" part="popover" role="dialog" aria-label="Model settings">${this.#section === undefined ? renderMainPanel(selected, effort, speed, region, this.#options, this.#section, this.#groups) : renderSubmenu(this.#section, this.#catalogs, this.#unavailable, selected, effort, speed, region, this.#options, this.#query, this.#groupBy, this.#iconMode, this.#recommendations)}</div>` : ""}
         <button class="trigger" part="trigger" type="button" aria-haspopup="dialog" aria-expanded="${this.#isOpen}"${selected === undefined ? "" : ` title="${escapeHtml(selected.name)}"`}>
           ${selected === undefined ? "" : renderModelIcon(selected, this.#iconMode, "trigger-icon")}
-          <span class="summary">${renderSummary(selected, effort, speed, this.#options)}</span>
+          <span class="summary">${renderSummary(selected, effort, speed, region, this.#options)}</span>
           <span class="chevron" aria-hidden="true">${chevronIcon}</span>
         </button>
       </div>
@@ -231,7 +258,7 @@ export class ModelsComposerElement extends ModelsHTMLElement {
     this.bindEvents();
     this.bindAdvancedOptions(
       selected,
-      [effort?.key, speed?.key].filter((key): key is string => key !== undefined),
+      [effort?.key, speed?.key, region?.key].filter((key): key is string => key !== undefined),
     );
     this.placePopover();
   }
@@ -422,6 +449,7 @@ function renderMainPanel(
   model: ModelDescriptor | undefined,
   effort: OptionDefinition | undefined,
   speed: OptionDefinition | undefined,
+  region: OptionDefinition | undefined,
   values: Readonly<Record<string, unknown>>,
   section: ComposerSection | undefined,
   groups: readonly VisibleOptionGroup[],
@@ -430,7 +458,8 @@ function renderMainPanel(
     ${renderRow("model", "Model", model?.name ?? "Choose", section)}
     ${effort === undefined ? "" : renderRow("effort", quickOptionLabel(effort, "Reasoning"), optionValue(effort, values), section)}
     ${speed === undefined ? "" : renderRow("speed", quickOptionLabel(speed, "Run speed"), optionValue(speed, values), section)}
-    ${model === undefined || !hasAdvancedOptions(model, [effort?.key, speed?.key], groups) ? "" : renderRow("advanced", "Advanced", "", section)}
+    ${region === undefined ? "" : renderRow("region", quickOptionLabel(region, "Region"), optionValue(region, values), section)}
+    ${model === undefined || !hasAdvancedOptions(model, [effort?.key, speed?.key, region?.key], groups) ? "" : renderRow("advanced", "Advanced", "", section)}
   </div>`;
 }
 
@@ -446,9 +475,11 @@ function renderRow(
 function renderSubmenu(
   section: ComposerSection | undefined,
   catalogs: readonly ModelCatalog[],
+  unavailable: readonly UnavailableModel[],
   selected: ModelDescriptor | undefined,
   effort: OptionDefinition | undefined,
   speed: OptionDefinition | undefined,
+  region: OptionDefinition | undefined,
   values: Readonly<Record<string, unknown>>,
   query: string,
   grouping: ModelGrouping,
@@ -463,6 +494,7 @@ function renderSubmenu(
   }
   if (section === "model") {
     const words = query.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+    const matches = (text: string) => words.every((word) => text.includes(word));
     const models = languageModels(catalogs).filter((model) => {
       const labels = recommendations
         .filter(
@@ -471,13 +503,20 @@ function renderSubmenu(
         )
         .map((recommendation) => recommendation.label)
         .join(" ");
-      const search =
-        `${model.name} ${model.id} ${model.author ?? ""} ${labels}`.toLocaleLowerCase();
-      return words.every((word) => search.includes(word));
+      return matches(
+        `${model.name} ${model.id} ${model.author ?? ""} ${labels}`.toLocaleLowerCase(),
+      );
     });
-    return `<div class="submenu" part="submenu"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings"><span class="chevron backward">${chevronIcon}</span></button><input class="control search" part="search" type="search" aria-label="Search models" placeholder="Search models" value="${escapeHtml(query)}"></div><div class="submenu-list">${models.length === 0 ? '<p class="empty">No matching models</p>' : renderModelChoices(models, selected?.key, grouping, iconMode, recommendations)}</div></div>`;
+    const listed = new Set(models.map((model) => model.key));
+    const excluded = unavailable.filter(
+      ({ model, reason }) =>
+        !listed.has(model.key) &&
+        matches(`${model.name} ${model.id} ${model.author ?? ""} ${reason}`.toLocaleLowerCase()),
+    );
+    const empty = models.length === 0 && excluded.length === 0;
+    return `<div class="submenu" part="submenu"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings"><span class="chevron backward">${chevronIcon}</span></button><input class="control search" part="search" type="search" aria-label="Search models" placeholder="Search models" value="${escapeHtml(query)}"></div><div class="submenu-list">${empty ? '<p class="empty">No matching models</p>' : `${renderModelChoices(models, selected?.key, grouping, iconMode, recommendations)}${renderUnavailableChoices(excluded, iconMode)}`}</div></div>`;
   }
-  const option = section === "effort" ? effort : speed;
+  const option = section === "effort" ? effort : section === "region" ? region : speed;
   if (option === undefined || (option.kind !== "boolean" && option.kind !== "enum")) {
     return "";
   }
@@ -486,7 +525,17 @@ function renderSubmenu(
     option.kind === "boolean"
       ? `${renderOptionChoice(option, "true", "On", current)}${renderOptionChoice(option, "false", "Off", current)}`
       : option.values
-          .map((value) => renderOptionChoice(option, value, titleCase(value), current))
+          .map((value) =>
+            renderOptionChoice(
+              option,
+              value,
+              optionChoiceLabel(option, value),
+              current,
+              section === "region" && selected !== undefined
+                ? regionPriceChange(selected, value)
+                : undefined,
+            ),
+          )
           .join("");
   return `<div class="submenu" part="submenu" aria-label="${escapeHtml(option.label)}"><div class="submenu-head"><button class="back" part="back" type="button" data-back aria-label="Back to model settings"><span class="chevron backward">${chevronIcon}</span></button><p class="submenu-title">${escapeHtml(option.label)}</p></div>${renderOptionChoice(option, "", "Provider default", current)}${choices}</div>`;
 }
@@ -523,6 +572,21 @@ function renderModelChoice(
   return `<button class="choice ${icon === "" ? "no-icon" : ""}" part="option" type="button" aria-pressed="${model.key === selectedKey}" title="${escapeHtml(`${model.name} · ${model.id}`)}" data-model="${escapeHtml(model.key)}">${icon}<span class="choice-label">${escapeHtml(model.name)}${labels === "" ? "" : ` <span class="choice-meta">${escapeHtml(labels)}</span>`}</span><span class="checkmark">${model.key === selectedKey ? "✓" : ""}</span></button>`;
 }
 
+function renderUnavailableChoices(
+  excluded: readonly UnavailableModel[],
+  iconMode: ModelIconMode,
+): string {
+  if (excluded.length === 0) {
+    return "";
+  }
+  return `<div class="group">Unavailable</div>${excluded
+    .map(({ model, reason }) => {
+      const icon = renderModelIcon(model, iconMode, "choice-icon");
+      return `<button class="choice unavailable ${icon === "" ? "no-icon" : ""}" part="option" type="button" disabled aria-disabled="true" title="${escapeHtml(`${model.name} · ${reason}`)}">${icon}<span class="choice-label">${escapeHtml(model.name)} <span class="choice-meta">${escapeHtml(reason)}</span></span><span class="checkmark"></span></button>`;
+    })
+    .join("")}`;
+}
+
 function renderModelIcon(model: ModelDescriptor, mode: ModelIconMode, className: string): string {
   const icon = modelIcon(model, mode);
   return icon === "" ? "" : `<span class="${className}">${icon}</span>`;
@@ -533,22 +597,47 @@ function renderOptionChoice(
   value: string,
   label: string,
   current: unknown,
+  meta?: string,
 ): string {
   const candidate = option.kind === "boolean" && value !== "" ? value === "true" : value;
   const isSelected = (current ?? "") === candidate;
-  return `<button class="choice" type="button" aria-pressed="${isSelected}" data-option="${escapeHtml(option.key)}" data-value="${escapeHtml(value)}"><span></span><span>${escapeHtml(label)}</span><span class="checkmark">${isSelected ? "✓" : ""}</span></button>`;
+  return `<button class="choice" type="button" aria-pressed="${isSelected}" data-option="${escapeHtml(option.key)}" data-value="${escapeHtml(value)}"><span></span><span>${escapeHtml(label)}${meta === undefined ? "" : ` <span class="choice-meta">${escapeHtml(meta)}</span>`}</span><span class="checkmark">${isSelected ? "✓" : ""}</span></button>`;
+}
+
+/**
+ * How a zone's input price compares with the model's base price, from the
+ * region route the adapter attached. Undefined when either price is unknown,
+ * so the choice shows no number rather than a guessed one.
+ */
+function regionPriceChange(model: ModelDescriptor, region: string): string | undefined {
+  const route = model.routes.find((candidate) => candidate.region === region);
+  const base = pricePerMillion(model.prices, "input-token");
+  const zone = route === undefined ? undefined : pricePerMillion(route.prices, "input-token");
+  if (base === undefined || zone === undefined || Number(base) === 0) {
+    return undefined;
+  }
+  const change = Math.round(((Number(zone) - Number(base)) / Number(base)) * 100);
+  return change === 0 ? "same price" : `${change > 0 ? "+" : ""}${change}%`;
+}
+
+/** Zone codes read as codes; every other enum value keeps the title-cased label. */
+function optionChoiceLabel(option: OptionDefinition, value: string): string {
+  return option.key === "routing.region" && /^[a-z]{2}$/.test(value)
+    ? value.toUpperCase()
+    : titleCase(value);
 }
 
 function renderSummary(
   model: ModelDescriptor | undefined,
   effort: OptionDefinition | undefined,
   speed: OptionDefinition | undefined,
+  region: OptionDefinition | undefined,
   values: Readonly<Record<string, unknown>>,
 ): string {
   if (model === undefined) {
     return "Choose a model";
   }
-  const details = [effort, speed]
+  const details = [effort, speed, region]
     .filter((option): option is OptionDefinition => option !== undefined)
     .map((option) => selectedOptionSummary(option, values[option.key]))
     .filter((value): value is string => value !== undefined);
@@ -599,6 +688,9 @@ function quickOptionLabel(option: OptionDefinition, fallback: string): string {
   if (option.key === "speed.mode") {
     return "Run speed";
   }
+  if (option.key === "routing.region") {
+    return "Region";
+  }
   return option.label || fallback;
 }
 
@@ -606,7 +698,7 @@ function selectedOptionSummary(option: OptionDefinition, value: unknown): string
   if (option.kind === "boolean" && typeof value === "boolean") {
     return value ? "On" : "Off";
   }
-  return typeof value === "string" && value !== "" ? titleCase(value) : undefined;
+  return typeof value === "string" && value !== "" ? optionChoiceLabel(option, value) : undefined;
 }
 
 function preferredModel(models: readonly ModelDescriptor[]): ModelDescriptor | undefined {

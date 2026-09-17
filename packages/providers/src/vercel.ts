@@ -5,6 +5,7 @@ import {
   type MappedModelOptions,
   type ModelCatalog,
   type ModelDescriptor,
+  type ModelRoute,
   type OptionDefinition,
   type PriceRate,
   type ProviderAdapter,
@@ -37,6 +38,7 @@ const responseSchema = z.object({
         type: z.string().optional(),
         tags: z.array(z.string()).optional(),
         supported_parameters: z.array(z.string()).optional(),
+        regions: z.array(z.string()).optional(),
         modalities: z
           .object({
             input: z.array(z.string()).optional(),
@@ -97,6 +99,7 @@ export const vercelGatewayAdapter: ProviderAdapter<"vercel"> = {
             (option) => !["speed.mode", "service.tier"].includes(option.key),
           ),
           ...vercelSpeedOptions(raw, source),
+          ...vercelRegionOptions(raw, source),
         ],
         liveReasoningOptions,
       );
@@ -162,13 +165,16 @@ export const vercelGatewayAdapter: ProviderAdapter<"vercel"> = {
         interfaces:
           model.kind === "language" ? ["openai-chat-completions", "openai-responses"] : [],
         prices,
-        routes: (raw.endpoints ?? []).map((route) => ({
-          id: route.name,
-          ...(route.provider_name === undefined ? {} : { provider: route.provider_name }),
-          prices: vercelPrices(route.pricing, source),
-          sources: [source],
-          raw: route,
-        })),
+        routes: [
+          ...(raw.endpoints ?? []).map((route) => ({
+            id: route.name,
+            ...(route.provider_name === undefined ? {} : { provider: route.provider_name }),
+            prices: vercelPrices(route.pricing, source),
+            sources: [source],
+            raw: route,
+          })),
+          ...vercelRegionRoutes(raw, source),
+        ],
         ...(upstreamConstraints(upstream, upstreamId).length === 0
           ? {}
           : { constraints: upstreamConstraints(upstream, upstreamId) }),
@@ -190,6 +196,12 @@ export const vercelGatewayAdapter: ProviderAdapter<"vercel"> = {
     if (speed === "standard" || speed === "flex" || speed === "priority") {
       delete gateway.speed;
       if (speed !== "standard") gateway.serviceTier = speed;
+    }
+    // The gateway pins a call with a structured value; the option carries the
+    // zone alone so a selection stays a flat, serializable record.
+    const region = values["routing.region"];
+    if (typeof region === "string") {
+      gateway.inferenceRegion = { scope: "zone", geoRegion: region };
     }
     const normalized = { ...mapped.providerOptions, gateway };
     const upstream = model.id.split("/")[0];
@@ -246,6 +258,58 @@ function vercelSpeedOptions(
       target: { kind: "provider-option", namespace: "gateway", path: ["speed"] },
     },
   ];
+}
+
+/**
+ * Zones the gateway can pin this model to. Absent on most models, including
+ * every embedding and image model, which is exactly the set that cannot be
+ * kept inside a region: the option only exists where the pin can succeed.
+ */
+function vercelRegionOptions(
+  raw: { type?: string | undefined; regions?: string[] | undefined },
+  source: ReturnType<typeof liveApiSource>,
+): readonly OptionDefinition[] {
+  if (raw.type !== "language" || (raw.regions?.length ?? 0) === 0) return [];
+  return [
+    {
+      key: "routing.region",
+      kind: "enum",
+      label: "Region",
+      group: "routing",
+      description:
+        "Keeps the call inside one zone. AI Gateway refuses rather than reroutes when no provider in the zone serves the model. Zone prices are listed on the model's routes.",
+      support: capability("supported", [source]),
+      values: raw.regions ?? [],
+      target: { kind: "provider-option", namespace: "gateway", path: ["inferenceRegion"] },
+    },
+  ];
+}
+
+/** One route per zone, carrying the gateway's regional prices when published. */
+function vercelRegionRoutes(
+  raw: { regions?: string[] | undefined; pricing?: Record<string, unknown> | undefined },
+  source: ReturnType<typeof liveApiSource>,
+): readonly ModelRoute[] {
+  const regional = raw.pricing?.regional;
+  const priced =
+    typeof regional === "object" && regional !== null && !Array.isArray(regional)
+      ? (regional as Record<string, unknown>)
+      : {};
+  return (raw.regions ?? []).map((region) => {
+    const pricing = priced[region];
+    return {
+      id: `region:${region}`,
+      region,
+      prices: vercelPrices(
+        typeof pricing === "object" && pricing !== null && !Array.isArray(pricing)
+          ? (pricing as Record<string, unknown>)
+          : undefined,
+        source,
+      ),
+      sources: [source],
+      raw: { region, pricing },
+    };
+  });
 }
 
 function mergeOptions(
