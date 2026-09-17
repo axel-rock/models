@@ -54,6 +54,52 @@ describe("public gateway adapters", () => {
     expect(() => vercelGatewayAdapter.mapOptions(astra!, { "speed.mode": "batch" })).toThrow();
   });
 
+  it("offers a region only where Gateway can pin the model, with zone prices as routes", async () => {
+    const catalog = await vercelGatewayAdapter.discover({
+      fetch: async () =>
+        Response.json({
+          data: [
+            {
+              id: "anthropic/claude-opus-5",
+              type: "language",
+              regions: ["eu", "us"],
+              pricing: {
+                input: "0.000005",
+                output: "0.000025",
+                regional: { eu: { input: "0.0000055", output: "0.0000275" } },
+              },
+            },
+            { id: "openai/gpt-5.6-sol", type: "language", regions: ["us"] },
+            { id: "voyage/voyage-4", type: "embedding" },
+            { id: "zai/glm-5", type: "language" },
+          ],
+        }),
+    });
+    const [opus, sol, voyage, glm] = catalog.models;
+    expect(opus!.options.find((option) => option.key === "routing.region")).toMatchObject({
+      group: "routing",
+      values: ["eu", "us"],
+    });
+    expect(sol!.options.find((option) => option.key === "routing.region")).toMatchObject({
+      values: ["us"],
+    });
+    expect(voyage!.options.some((option) => option.key === "routing.region")).toBe(false);
+    expect(glm!.options.some((option) => option.key === "routing.region")).toBe(false);
+    expect(opus!.routes.map((route) => [route.id, route.region])).toEqual([
+      ["region:eu", "eu"],
+      ["region:us", "us"],
+    ]);
+    expect(opus!.routes[0]?.prices.find((rate) => rate.unit === "input-token")?.usd).toBe(
+      "0.0000055",
+    );
+    expect(opus!.routes[1]?.prices).toEqual([]);
+    expect(
+      vercelGatewayAdapter.mapOptions(opus!, { "routing.region": "eu" }).providerOptions.gateway,
+    ).toEqual({ inferenceRegion: { scope: "zone", geoRegion: "eu" } });
+    expect(vercelGatewayAdapter.mapOptions(opus!, {}).providerOptions.gateway).toEqual({});
+    expect(() => vercelGatewayAdapter.mapOptions(sol!, { "routing.region": "eu" })).toThrow();
+  });
+
   it("normalizes OpenRouter capabilities, prices, and reasoning options", async () => {
     let requestedUrl = "";
     const catalog = await openRouterAdapter.discover({

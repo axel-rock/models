@@ -13,6 +13,7 @@ export type { ModelGrouping } from "./grouping.ts";
 export { chevronIcon, modelIcon, providerIcon } from "./icons.ts";
 export type { ModelIconMode } from "./icons.ts";
 export { ModelsComposerElement } from "./composer.ts";
+export type { UnavailableModel } from "./composer.ts";
 export { ModelsPickerElement } from "./picker.ts";
 export { ModelsPriceElement } from "./price.ts";
 export { ModelsSelectElement } from "./select.ts";
