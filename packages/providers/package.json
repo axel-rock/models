@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@models/core": "workspace:*",
-    "zod": "^4.3.6"
+    "zod": "^4.6.5"
   },
   "engines": {
     "node": ">=22"
