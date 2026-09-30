@@ -1,4 +1,4 @@
-import type { ModelDescriptor, ModelRecommendation } from "@models/core";
+import { sortModels, type ModelDescriptor, type ModelRecommendation } from "@models/core";
 
 /** Optional model-list grouping for gateway catalogs. */
 export type ModelGrouping = "none" | "author" | ((model: ModelDescriptor) => string | undefined);
@@ -27,7 +27,10 @@ function titleCase(value: string): string {
   return value.replaceAll("-", " ").replace(/\b\w/g, (character) => character.toLocaleUpperCase());
 }
 
-/** Recommended models lead the list once, followed by the remaining model groups. */
+/**
+ * Recommended models lead the list once, in the order the app gave them,
+ * followed by the remaining model groups with the newest of each tier on top.
+ */
 export function modelGroups(
   models: readonly ModelDescriptor[],
   grouping: ModelGrouping,
@@ -40,7 +43,7 @@ export function modelGroups(
   const groups = new Map<string, ModelDescriptor[]>();
   if (recommended.length > 0) groups.set("Recommended", recommended);
   const selected = new Set(recommended);
-  for (const model of models) {
+  for (const model of sortModels(models)) {
     if (selected.has(model)) continue;
     const group =
       grouping === "none"

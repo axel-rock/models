@@ -27,5 +27,7 @@ export {
   validateConstraints,
   validateOptions,
 } from "./options.ts";
+export { sortModels } from "./ordering.ts";
+export type { OrderableModel } from "./ordering.ts";
 export { formatUsd, pricePerMillion } from "./pricing.ts";
 export type * from "./types.ts";
