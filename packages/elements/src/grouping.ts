@@ -28,8 +28,8 @@ function titleCase(value: string): string {
 }
 
 /**
- * Recommended models lead the list once, in the order the app gave them,
- * followed by the remaining model groups with the newest of each tier on top.
+ * Recommended models lead the list once, followed by the remaining model
+ * groups. Both are sorted with the newest of each tier on top.
  */
 export function modelGroups(
   models: readonly ModelDescriptor[],
@@ -37,13 +37,14 @@ export function modelGroups(
   recommendations: readonly ModelRecommendation[],
 ): Map<string, ModelDescriptor[]> {
   const recommendedKeys = new Set(recommendations.map((item) => item.model));
-  const recommended = models.filter(
+  const sorted = sortModels(models);
+  const recommended = sorted.filter(
     (model) => recommendedKeys.has(model.key) || recommendedKeys.has(model.id),
   );
   const groups = new Map<string, ModelDescriptor[]>();
   if (recommended.length > 0) groups.set("Recommended", recommended);
   const selected = new Set(recommended);
-  for (const model of sortModels(models)) {
+  for (const model of sorted) {
     if (selected.has(model)) continue;
     const group =
       grouping === "none"
